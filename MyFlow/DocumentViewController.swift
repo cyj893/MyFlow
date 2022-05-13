@@ -22,7 +22,6 @@ class DocumentViewController: UIViewController {
         document?.open(completionHandler: { (success) in
             if success {
                 print("success")
-                print(self.document!.fileURL)
                 self.pdfView.document = PDFDocument(url: self.document!.fileURL)
             }
             else {
@@ -73,6 +72,10 @@ extension DocumentViewController {
     }
     
     @objc func toggleMyNavigationwView(_ recognizer: UITapGestureRecognizer) {
+        if myNavigationView.isSomeOptionTrue {
+            print("Option")
+            return
+        }
         if isShowingMyNavigationView {
             hide()
             isShowingMyNavigationView = false
