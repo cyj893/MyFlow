@@ -34,7 +34,6 @@ class MyNavigationView: UIView {
             $0.leading.equalToSuperview()
             $0.top.equalTo(optionsView.snp.top).offset(30)
         }
-        backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {

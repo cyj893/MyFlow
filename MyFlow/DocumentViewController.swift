@@ -50,9 +50,13 @@ class DocumentViewController: UIViewController {
             $0.height.equalTo(100)
         }
         
+        myNavigationView.backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
         
     }
     
+    @objc func backButtonAction() {
+        dismiss(animated: true, completion: nil)
+    }
     
     // MARK: MyNavigationView show and hide
     
