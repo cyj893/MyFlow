@@ -14,21 +14,24 @@ class DocumentViewController: UIViewController {
     let myNavigationView = MyNavigationView.singletonView
     var pdfView = PDFView()
     var document: UIDocument?
+    var isShowingMyNavigationView: Bool = true
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Access the document
         document?.open(completionHandler: { (success) in
             if success {
-                // Display the content of the document, e.g.:
+                print("success")
+                print(self.document!.fileURL)
                 self.pdfView.document = PDFDocument(url: self.document!.fileURL)
-            } else {
-                // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
+            }
+            else {
+                print("error")
+                // TODO: presenting an error message to the user.
             }
         })
     }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
                 
@@ -43,6 +46,7 @@ class DocumentViewController: UIViewController {
         
         pdfView.backgroundColor = .black
         
+        addTapGesture()
         
         view.addSubview(myNavigationView)
         myNavigationView.snp.makeConstraints {
@@ -57,28 +61,50 @@ class DocumentViewController: UIViewController {
     @objc func backButtonAction() {
         dismiss(animated: true, completion: nil)
     }
+
+}
+
+// MARK: Toggle MyNavigationView
+extension DocumentViewController {
     
-    // MARK: MyNavigationView show and hide
+    fileprivate func addTapGesture() {
+        let taps = UITapGestureRecognizer(target: self, action: #selector(toggleMyNavigationwView))
+        pdfView.addGestureRecognizer(taps)
+    }
     
-    func show() {
+    @objc func toggleMyNavigationwView(_ recognizer: UITapGestureRecognizer) {
+        if isShowingMyNavigationView {
+            hide()
+            isShowingMyNavigationView = false
+        }
+        else {
+            show()
+            isShowingMyNavigationView = true
+        }
+    }
+    
+    fileprivate func show() {
+        print("show myNavigationView")
         myNavigationView.snp.remakeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(100)
         }
         
-        UIView.animate(
-            withDuration: 0.5,
-            animations: self.view.layoutIfNeeded
-        )
+        animateIt()
     }
     
-    func hide() {
+    fileprivate func hide() {
+        print("hide myNavigationView")
         myNavigationView.snp.remakeConstraints {
             $0.top.equalToSuperview().offset(-100)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(0)
         }
         
+        animateIt()
+    }
+    
+    fileprivate func animateIt() {
         UIView.animate(
             withDuration: 0.5,
             animations: self.view.layoutIfNeeded
