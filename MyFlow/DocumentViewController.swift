@@ -15,6 +15,7 @@ class DocumentViewController: UIViewController {
     var pdfView = PDFView()
     var document: UIDocument?
     var isShowingMyNavigationView: Bool = true
+    var points:[(PDFPage, CGPoint)] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -55,12 +56,22 @@ class DocumentViewController: UIViewController {
         
         myNavigationView.backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
         
+        myNavigationView.playButton.addTarget(self, action: #selector(playButtonAction), for: .touchUpInside)
     }
     
     @objc func backButtonAction() {
         dismiss(animated: true, completion: nil)
     }
-
+    
+    var idx:Int = 0
+    @objc func playButtonAction() {
+        print("play")
+        let now = points[idx]
+        print(now)
+        pdfView.go(to: CGRect(x: now.1.x, y: now.1.y, width: 1, height: 1), on: now.0)
+        idx += 1
+        idx %= points.count
+    }
 }
 
 // MARK: Toggle MyNavigationView
@@ -73,7 +84,11 @@ extension DocumentViewController {
     
     @objc func toggleMyNavigationwView(_ recognizer: UITapGestureRecognizer) {
         if myNavigationView.isSomeOptionTrue {
-            print("Option")
+            let location = recognizer.location(in: pdfView)
+            guard let page = pdfView.page(for: location, nearest: true) else { return }
+            let convertedPoint = pdfView.convert(location, to: page)
+            print(convertedPoint)
+            points.append((page, convertedPoint))
             return
         }
         if isShowingMyNavigationView {
