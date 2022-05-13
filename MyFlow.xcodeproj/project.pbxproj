@@ -16,6 +16,7 @@
 		AF8EDF8A282E3F7B00CCFF19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8EDF89282E3F7B00CCFF19 /* Assets.xcassets */; };
 		AF8EDF8D282E3F7B00CCFF19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8EDF8B282E3F7B00CCFF19 /* LaunchScreen.storyboard */; };
 		AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */; };
+		AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		AF8EDF8C282E3F7B00CCFF19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF8EDF8E282E3F7B00CCFF19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationView.swift; sourceTree = "<group>"; };
+		AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGestureRecognizer.swift; sourceTree = "<group>"; };
 		F29E0F658105FB87AA1F90FB /* Pods_MyFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -76,6 +78,7 @@
 				AF8EDF8B282E3F7B00CCFF19 /* LaunchScreen.storyboard */,
 				AF8EDF8E282E3F7B00CCFF19 /* Info.plist */,
 				AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */,
+				AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */,
 			);
 			path = MyFlow;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				AF8EDF85282E3F7A00CCFF19 /* Document.swift in Sources */,
 				AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */,
 				AF8EDF83282E3F7A00CCFF19 /* DocumentViewController.swift in Sources */,
+				AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */,
 				AF8EDF81282E3F7A00CCFF19 /* DocumentBrowserViewController.swift in Sources */,
 				AF8EDF7F282E3F7A00CCFF19 /* AppDelegate.swift in Sources */,
 			);
