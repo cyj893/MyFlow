@@ -15,7 +15,6 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     var pdfView = PDFView()
     var document: UIDocument?
     var isShowingMyNavigationView: Bool = true
-    var isHandling: Bool = false
     var points:[(PDFPage, CGPoint)] = []
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,8 +51,6 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
 
         myNavigationView.prevPointButton.addTarget(self, action: #selector(prevPointButtonAction), for: .touchUpInside)
         myNavigationView.nextPointButton.addTarget(self, action: #selector(nextPointButtonAction), for: .touchUpInside)
-        myNavigationView.handlePointButton.addTarget(self, action: #selector(handlePointButtonAction), for: .touchUpInside)
-        
         
         view.addSubview(pdfView)
         pdfView.snp.makeConstraints {
@@ -93,9 +90,6 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         pdfView.go(to: CGRect(origin: now.1, size: CGSize(width: 1, height: -view.frame.height)), on: now.0)
     }
     
-    @objc func handlePointButtonAction() {
-        isHandling = !isHandling
-    }
 }
 
 // MARK: Toggle MyNavigationView
@@ -129,7 +123,7 @@ extension DocumentViewController {
     }
     
     @objc func setTapGesture(_ recognizer: UITapGestureRecognizer) {
-        if isHandling {
+        if myNavigationView.getIsHandlingPoints() {
             let location = recognizer.location(in: pdfView)
             guard let page = pdfView.page(for: location, nearest: true) else { return }
             let convertedLocation = pdfView.convert(location, to: page)
