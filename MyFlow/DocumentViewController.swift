@@ -69,7 +69,7 @@ class DocumentViewController: UIViewController {
     
     var idx:Int = 0
     @objc func prevPointButtonAction() {
-        print("play")
+        print("prevPointButtonAction")
         idx += -1 + points.count
         idx %= points.count
         let now = points[idx]
@@ -77,7 +77,7 @@ class DocumentViewController: UIViewController {
         pdfView.go(to: CGRect(x: now.1.x, y: now.1.y, width: 1, height: 1), on: now.0)
     }
     @objc func nextPointButtonAction() {
-        print("play")
+        print("nextPointButtonAction")
         idx += 1
         idx %= points.count
         let now = points[idx]
@@ -95,7 +95,7 @@ extension DocumentViewController {
     }
     
     @objc func toggleMyNavigationwView(_ recognizer: UITapGestureRecognizer) {
-        if myNavigationView.isAddingPoints {
+        if myNavigationView.getIsAddingPoints() {
             let location = recognizer.location(in: pdfView)
             guard let page = pdfView.page(for: location, nearest: true) else { return }
             let convertedPoint = pdfView.convert(location, to: page)
