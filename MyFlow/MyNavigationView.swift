@@ -17,6 +17,7 @@ class MyNavigationView: UIView {
     let backButton = UIButton()
     
     
+    let handlePointButton = UIButton()
     let prevPointButton = UIButton()
     let addPointsButton = UIButton()
     let nextPointButton = UIButton()
@@ -50,7 +51,7 @@ class MyNavigationView: UIView {
         setBackButton()
         setPlayButton()
         setPointsButtons()
-        [backButton, playButton, prevPointButton, addPointsButton, nextPointButton].forEach {
+        [backButton, playButton, prevPointButton, addPointsButton, nextPointButton, handlePointButton].forEach {
             $0.snp.makeConstraints { make in
                 make.centerY.equalToSuperview()
             }
@@ -79,6 +80,7 @@ class MyNavigationView: UIView {
         setNextPointButton()
         setAddPointsButton()
         setPrevPointButton()
+        setHandlePointButton()
     }
     
     fileprivate func setNextPointButton() {
@@ -107,6 +109,15 @@ class MyNavigationView: UIView {
             $0.setIconStyle(systemName: "backward.frame")
         }.snp.makeConstraints {
             $0.trailing.equalTo(addPointsButton.snp.leading).offset(-MyOffset.betweenIcon)
+        }
+    }
+    
+    fileprivate func setHandlePointButton() {
+        self.addSubview(handlePointButton)
+        handlePointButton.then {
+            $0.setIconStyle(systemName: "hand.raised")
+        }.snp.makeConstraints {
+            $0.trailing.equalTo(prevPointButton.snp.leading).offset(-MyOffset.betweenIcon)
         }
     }
     

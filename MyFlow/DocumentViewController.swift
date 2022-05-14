@@ -15,6 +15,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     var pdfView = PDFView()
     var document: UIDocument?
     var isShowingMyNavigationView: Bool = true
+    var isHandling: Bool = false
     var points:[(PDFPage, CGPoint)] = []
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +52,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
 
         myNavigationView.prevPointButton.addTarget(self, action: #selector(prevPointButtonAction), for: .touchUpInside)
         myNavigationView.nextPointButton.addTarget(self, action: #selector(nextPointButtonAction), for: .touchUpInside)
+        myNavigationView.handlePointButton.addTarget(self, action: #selector(handlePointButtonAction), for: .touchUpInside)
         
         
         view.addSubview(pdfView)
@@ -80,7 +82,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         idx %= points.count
         let now = points[idx]
         print(idx)
-        pdfView.go(to: CGRect(origin: now.1, size: CGSize(width: 1, height: -view.frame.height*0.8)), on: now.0)
+        pdfView.go(to: CGRect(origin: now.1, size: CGSize(width: 1, height: -view.frame.height)), on: now.0)
     }
     @objc func nextPointButtonAction() {
         print("nextPointButtonAction")
@@ -88,7 +90,11 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         idx %= points.count
         let now = points[idx]
         print(idx)
-        pdfView.go(to: CGRect(origin: now.1, size: CGSize(width: 1, height: -view.frame.height*0.8)), on: now.0)
+        pdfView.go(to: CGRect(origin: now.1, size: CGSize(width: 1, height: -view.frame.height)), on: now.0)
+    }
+    
+    @objc func handlePointButtonAction() {
+        isHandling = !isHandling
     }
 }
 
@@ -96,7 +102,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
 extension DocumentViewController {
     
     fileprivate func addTapGesture() {
-        let taps = UITapGestureRecognizer(target: self, action: #selector(toggleMyNavigationwView))
+        let taps = UITapGestureRecognizer(target: self, action: #selector(setTapGesture))
         pdfView.addGestureRecognizer(taps)
     }
     
@@ -109,14 +115,28 @@ extension DocumentViewController {
         let border = PDFBorder()
         border.lineWidth = 10.0
         
-        let inkAnnotation = PDFAnnotation(bounds: page.bounds(for: pdfView.displayBox), forType: .ink, withProperties: nil)
+        let bounds = CGRect(x: path.bounds.origin.x - 5,
+                            y: path.bounds.origin.y - 5,
+                        width: path.bounds.size.width + 10,
+                       height: path.bounds.size.height + 10)
+        path.moveCenter(to: bounds.center)
+        
+        let inkAnnotation = PDFAnnotation(bounds: bounds, forType: .ink, withProperties: nil)
         inkAnnotation.add(path)
         inkAnnotation.border = border
         inkAnnotation.color = .blue
         page.addAnnotation(inkAnnotation)
     }
     
-    @objc func toggleMyNavigationwView(_ recognizer: UITapGestureRecognizer) {
+    @objc func setTapGesture(_ recognizer: UITapGestureRecognizer) {
+        if isHandling {
+            let location = recognizer.location(in: pdfView)
+            guard let page = pdfView.page(for: location, nearest: true) else { return }
+            let convertedLocation = pdfView.convert(location, to: page)
+            guard let annotation = page.annotation(at: convertedLocation) else { return }
+            print(annotation)
+            return
+        }
         if myNavigationView.getIsAddingPoints() {
             let location = recognizer.location(in: pdfView)
             guard let page = pdfView.page(for: location, nearest: true) else { return }
