@@ -43,7 +43,8 @@ class DocumentViewController: UIViewController {
         
         myNavigationView.backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
         
-        myNavigationView.playButton.addTarget(self, action: #selector(playButtonAction), for: .touchUpInside)
+        myNavigationView.prevPointButton.addTarget(self, action: #selector(prevPointButtonAction), for: .touchUpInside)
+        myNavigationView.nextPointButton.addTarget(self, action: #selector(nextPointButtonAction), for: .touchUpInside)
         
         
         view.addSubview(pdfView)
@@ -67,13 +68,21 @@ class DocumentViewController: UIViewController {
     }
     
     var idx:Int = 0
-    @objc func playButtonAction() {
-        print("play")
+    @objc func prevPointButtonAction() {
+        print("prevPointButtonAction")
+        idx += -1 + points.count
+        idx %= points.count
         let now = points[idx]
         print(now)
         pdfView.go(to: CGRect(x: now.1.x, y: now.1.y, width: 1, height: 1), on: now.0)
+    }
+    @objc func nextPointButtonAction() {
+        print("nextPointButtonAction")
         idx += 1
         idx %= points.count
+        let now = points[idx]
+        print(now)
+        pdfView.go(to: CGRect(x: now.1.x, y: now.1.y, width: 1, height: 1), on: now.0)
     }
 }
 
@@ -86,7 +95,7 @@ extension DocumentViewController {
     }
     
     @objc func toggleMyNavigationwView(_ recognizer: UITapGestureRecognizer) {
-        if myNavigationView.isSomeOptionTrue {
+        if myNavigationView.getIsAddingPoints() {
             let location = recognizer.location(in: pdfView)
             guard let page = pdfView.page(for: location, nearest: true) else { return }
             let convertedPoint = pdfView.convert(location, to: page)

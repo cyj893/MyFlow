@@ -16,57 +16,106 @@ class MyNavigationView: UIView {
     let optionsView = UIView()
     let backButton = UIButton()
     
-    let someOptionButton = UIButton()
-    var isSomeOptionTrue: Bool = false
+    
+    let prevPointButton = UIButton()
+    let addPointsButton = UIButton()
+    let nextPointButton = UIButton()
     
     let playButton = UIButton()
+    
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
         self.addSubview(optionsView)
-        optionsView.backgroundColor = .blue
+        optionsView.backgroundColor = UIColor(named: "navigationBackgroundColor")
         optionsView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(100)
         }
         
-        self.addSubview(backButton)
-        backButton.then {
-            $0.setTitle("뒤로", for: .normal)
-            $0.backgroundColor = .cyan
-        }.snp.makeConstraints {
-            $0.leading.equalToSuperview()
-            $0.top.equalTo(optionsView.snp.top).offset(30)
-        }
-        
-        self.addSubview(someOptionButton)
-        someOptionButton.then {
-            $0.setTitle("옵션", for: .normal)
-            $0.backgroundColor = .cyan
-        }.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(30)
-            $0.top.equalTo(optionsView.snp.top).offset(30)
-        }
-        someOptionButton.addTarget(self, action: #selector(setSomeOption), for: .touchUpInside)
-        
-        self.addSubview(playButton)
-        playButton.then {
-            $0.setTitle("플레이", for: .normal)
-            $0.backgroundColor = .cyan
-        }.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(60)
-            $0.top.equalTo(optionsView.snp.top).offset(30)
-        }
+        setButtons()
     }
     
     required init?(coder: NSCoder) {
         fatalError("storyboard only DocumentBrowserViewController")
     }
     
-    @objc func setSomeOption() {
-        print("옵션")
-        isSomeOptionTrue = !isSomeOptionTrue
+    // MARK: Getter, Setter
+    func getIsAddingPoints() -> Bool { addPointsButton.isSelected }
+    
+    
+    // MARK: Setting Buttons
+    fileprivate func setButtons() {
+        setBackButton()
+        setPlayButton()
+        setPointsButtons()
+        [backButton, playButton, prevPointButton, addPointsButton, nextPointButton].forEach {
+            $0.snp.makeConstraints { make in
+                make.centerY.equalToSuperview()
+            }
+        }
+    }
+    
+    fileprivate func setBackButton() {
+        self.addSubview(backButton)
+        backButton.then {
+            $0.setIconStyle(systemName: "chevron.left")
+        }.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(MyOffset.betweenIcon)
+        }
+    }
+    
+    fileprivate func setPlayButton() {
+        self.addSubview(playButton)
+        playButton.then {
+            $0.setIconStyle(systemName: "play.fill", tintColor: .green)
+        }.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(-MyOffset.betweenIcon)
+        }
+    }
+    
+    fileprivate func setPointsButtons() {
+        setNextPointButton()
+        setAddPointsButton()
+        setPrevPointButton()
+    }
+    
+    fileprivate func setNextPointButton() {
+        self.addSubview(nextPointButton)
+        nextPointButton.then {
+            $0.setIconStyle(systemName: "forward.frame")
+        }.snp.makeConstraints {
+            $0.trailing.equalTo(playButton.snp.leading).offset(-MyOffset.betweenIconGroup)
+        }
+    }
+    
+    fileprivate func setAddPointsButton() {
+        self.addSubview(addPointsButton)
+        addPointsButton.then {
+            $0.setIconStyle(systemName: "rectangle.stack.badge.plus")
+            $0.setIconStyle(systemName: "rectangle.stack.fill.badge.plus", tintColor: .orange, forState: .selected)
+        }.snp.makeConstraints {
+            $0.trailing.equalTo(nextPointButton.snp.leading).offset(-MyOffset.betweenIcon)
+        }
+        addPointsButton.addTarget(self, action: #selector(toggleAddingPointsMode), for: .touchUpInside)
+    }
+    
+    fileprivate func setPrevPointButton() {
+        self.addSubview(prevPointButton)
+        prevPointButton.then {
+            $0.setIconStyle(systemName: "backward.frame")
+        }.snp.makeConstraints {
+            $0.trailing.equalTo(addPointsButton.snp.leading).offset(-MyOffset.betweenIcon)
+        }
+    }
+    
+    
+    // MARK: Button Actions
+    @objc func toggleAddingPointsMode() {
+        addPointsButton.toggleIconWithTransition()
+        if getIsAddingPoints() { print("포인트 추가") }
+        else { print("포인트 추가 끝") }
     }
     
 }
