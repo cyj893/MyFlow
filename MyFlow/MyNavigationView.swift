@@ -16,8 +16,13 @@ class MyNavigationView: UIView {
     let optionsView = UIView()
     let backButton = UIButton()
     
+    
+    let prevPointButton = UIButton()
+    
     let addPointsButton = UIButton()
     var isAddingPoints: Bool = false
+    
+    let nextPointButton = UIButton()
     
     let playButton = UIButton()
     
@@ -47,15 +52,32 @@ class MyNavigationView: UIView {
             $0.centerY.equalToSuperview()
         }
         
+        self.addSubview(nextPointButton)
+        nextPointButton.then {
+            $0.setIconStyle(systemName: "forward.frame")
+        }.snp.makeConstraints {
+            $0.trailing.equalTo(playButton.snp.leading).offset(-MyOffset.betweenIconGroup)
+            $0.centerY.equalToSuperview()
+        }
+        
         self.addSubview(addPointsButton)
         addPointsButton.then {
             $0.setIconStyle(systemName: "rectangle.stack.badge.plus")
             $0.setIconStyle(systemName: "rectangle.stack.fill.badge.plus", tintColor: .orange, forState: .selected)
         }.snp.makeConstraints {
-            $0.trailing.equalTo(playButton.snp.leading).offset(-MyOffset.betweenIcon)
+            $0.trailing.equalTo(nextPointButton.snp.leading).offset(-MyOffset.betweenIcon)
             $0.centerY.equalToSuperview()
         }
         addPointsButton.addTarget(self, action: #selector(toggleAddingPointsMode), for: .touchUpInside)
+        
+        self.addSubview(prevPointButton)
+        prevPointButton.then {
+            $0.setIconStyle(systemName: "backward.frame")
+        }.snp.makeConstraints {
+            $0.trailing.equalTo(addPointsButton.snp.leading).offset(-MyOffset.betweenIcon)
+            $0.centerY.equalToSuperview()
+        }
+        
     }
     
     required init?(coder: NSCoder) {

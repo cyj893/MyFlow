@@ -8,6 +8,7 @@
 import UIKit
 
 struct MyOffset {
+    static let betweenIconGroup:Double = 30.0
     static let betweenIcon:Double = 15.0
 }
 
