@@ -25,7 +25,7 @@ class MyNavigationView: UIView {
         super.init(frame: .zero)
         
         self.addSubview(optionsView)
-        optionsView.backgroundColor = .blue
+        optionsView.backgroundColor = UIColor(named: "navigationBackgroundColor")
         optionsView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(100)
@@ -33,40 +33,40 @@ class MyNavigationView: UIView {
         
         self.addSubview(backButton)
         backButton.then {
-            $0.setTitle("뒤로", for: .normal)
-            $0.backgroundColor = .cyan
+            $0.setIconStyle(systemName: "chevron.left")
         }.snp.makeConstraints {
-            $0.leading.equalToSuperview()
-            $0.top.equalTo(optionsView.snp.top).offset(30)
+            $0.leading.equalToSuperview().offset(MyOffset.betweenIcon)
+            $0.centerY.equalToSuperview()
+        }
+        
+        self.addSubview(playButton)
+        playButton.then {
+            $0.setIconStyle(systemName: "play.fill", tintColor: .green)
+        }.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(-MyOffset.betweenIcon)
+            $0.centerY.equalToSuperview()
         }
         
         self.addSubview(someOptionButton)
         someOptionButton.then {
-            $0.setTitle("옵션", for: .normal)
-            $0.backgroundColor = .cyan
+            $0.setIconStyle(systemName: "rectangle.stack.badge.plus")
+            $0.setIconStyle(systemName: "rectangle.stack.fill.badge.plus", tintColor: .orange, forState: .selected)
         }.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(30)
-            $0.top.equalTo(optionsView.snp.top).offset(30)
+            $0.trailing.equalTo(playButton.snp.leading).offset(-MyOffset.betweenIcon)
+            $0.centerY.equalToSuperview()
         }
         someOptionButton.addTarget(self, action: #selector(setSomeOption), for: .touchUpInside)
-        
-        self.addSubview(playButton)
-        playButton.then {
-            $0.setTitle("플레이", for: .normal)
-            $0.backgroundColor = .cyan
-        }.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(60)
-            $0.top.equalTo(optionsView.snp.top).offset(30)
-        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("storyboard only DocumentBrowserViewController")
     }
     
+    
     @objc func setSomeOption() {
         print("옵션")
-        isSomeOptionTrue = !isSomeOptionTrue
+        someOptionButton.toggleIconWithTransition()
+        isSomeOptionTrue = someOptionButton.isSelected
     }
     
 }
