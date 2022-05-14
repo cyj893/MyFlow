@@ -10,7 +10,7 @@ import SnapKit
 
 import PDFKit
 
-class DocumentViewController: UIViewController {
+class DocumentViewController: UIViewController, PDFDocumentDelegate {
     let myNavigationView = MyNavigationView.singletonView
     var pdfView = PDFView()
     var document: UIDocument?
@@ -23,7 +23,9 @@ class DocumentViewController: UIViewController {
         document?.open(completionHandler: { (success) in
             if success {
                 print("success")
-                self.pdfView.document = PDFDocument(url: self.document!.fileURL)
+                let pdfDocument = PDFDocument(url: self.document!.fileURL)!
+                pdfDocument.delegate = self
+                self.pdfView.document = pdfDocument
             }
             else {
                 print("error")
@@ -74,7 +76,7 @@ class DocumentViewController: UIViewController {
         idx %= points.count
         let now = points[idx]
         print(now)
-        pdfView.go(to: CGRect(x: now.1.x, y: now.1.y, width: 1, height: 1), on: now.0)
+        pdfView.go(to: CGRect(origin: now.1, size: CGSize(width: 1, height: -view.frame.height*0.8)), on: now.0)
     }
     @objc func nextPointButtonAction() {
         print("nextPointButtonAction")
@@ -82,7 +84,7 @@ class DocumentViewController: UIViewController {
         idx %= points.count
         let now = points[idx]
         print(now)
-        pdfView.go(to: CGRect(x: now.1.x, y: now.1.y, width: 1, height: 1), on: now.0)
+        pdfView.go(to: CGRect(origin: now.1, size: CGSize(width: 1, height: -view.frame.height*0.8)), on: now.0)
     }
 }
 
@@ -101,6 +103,12 @@ extension DocumentViewController {
             let convertedPoint = pdfView.convert(location, to: page)
             print(convertedPoint)
             points.append((page, convertedPoint))
+            
+            
+            let radioButton = PDFAnnotation(bounds: CGRect(origin: convertedPoint, size: CGSize(width: self.view.frame.size.width, height: 10)), forType: .widget, withProperties: nil)
+            radioButton.widgetFieldType = .button
+            radioButton.backgroundColor = UIColor.blue
+            page.addAnnotation(radioButton)
             return
         }
         if isShowingMyNavigationView {
