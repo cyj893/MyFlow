@@ -26,6 +26,10 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
                 let pdfDocument = PDFDocument(url: self.document!.fileURL)!
                 pdfDocument.delegate = self
                 self.pdfView.document = pdfDocument
+                if pdfDocument.allowsCommenting == false {
+                    // TODO: presenting an message to the user.
+                    print("This file cannot be commented")
+                }
             }
             else {
                 print("error")
@@ -44,7 +48,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         }
         
         myNavigationView.backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        
+
         myNavigationView.prevPointButton.addTarget(self, action: #selector(prevPointButtonAction), for: .touchUpInside)
         myNavigationView.nextPointButton.addTarget(self, action: #selector(nextPointButtonAction), for: .touchUpInside)
         
@@ -75,7 +79,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         idx += -1 + points.count
         idx %= points.count
         let now = points[idx]
-        print(now)
+        print(idx)
         pdfView.go(to: CGRect(origin: now.1, size: CGSize(width: 1, height: -view.frame.height*0.8)), on: now.0)
     }
     @objc func nextPointButtonAction() {
@@ -83,7 +87,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         idx += 1
         idx %= points.count
         let now = points[idx]
-        print(now)
+        print(idx)
         pdfView.go(to: CGRect(origin: now.1, size: CGSize(width: 1, height: -view.frame.height*0.8)), on: now.0)
     }
 }
@@ -96,19 +100,31 @@ extension DocumentViewController {
         pdfView.addGestureRecognizer(taps)
     }
     
+    fileprivate func addPointLine(_ heightPoint: CGPoint, _ page: PDFPage) {
+        let path = UIBezierPath()
+        path.move(to: heightPoint)
+        path.addLine(to: CGPoint(x: self.view.frame.size.width, y: heightPoint.y))
+        path.close()
+        
+        let border = PDFBorder()
+        border.lineWidth = 10.0
+        
+        let inkAnnotation = PDFAnnotation(bounds: page.bounds(for: pdfView.displayBox), forType: .ink, withProperties: nil)
+        inkAnnotation.add(path)
+        inkAnnotation.border = border
+        inkAnnotation.color = .blue
+        page.addAnnotation(inkAnnotation)
+    }
+    
     @objc func toggleMyNavigationwView(_ recognizer: UITapGestureRecognizer) {
         if myNavigationView.getIsAddingPoints() {
             let location = recognizer.location(in: pdfView)
             guard let page = pdfView.page(for: location, nearest: true) else { return }
-            let convertedPoint = pdfView.convert(location, to: page)
-            print(convertedPoint)
-            points.append((page, convertedPoint))
+            let heightPoint = CGPoint(x: 0, y: pdfView.convert(location, to: page).y)
+            print(heightPoint)
+            points.append((page, heightPoint))
             
-            
-            let radioButton = PDFAnnotation(bounds: CGRect(origin: convertedPoint, size: CGSize(width: self.view.frame.size.width, height: 10)), forType: .widget, withProperties: nil)
-            radioButton.widgetFieldType = .button
-            radioButton.backgroundColor = UIColor.blue
-            page.addAnnotation(radioButton)
+            addPointLine(heightPoint, page)
             return
         }
         if isShowingMyNavigationView {
