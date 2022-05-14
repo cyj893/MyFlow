@@ -16,8 +16,8 @@ class MyNavigationView: UIView {
     let optionsView = UIView()
     let backButton = UIButton()
     
-    let someOptionButton = UIButton()
-    var isSomeOptionTrue: Bool = false
+    let addPointsButton = UIButton()
+    var isAddingPoints: Bool = false
     
     let playButton = UIButton()
     
@@ -47,26 +47,26 @@ class MyNavigationView: UIView {
             $0.centerY.equalToSuperview()
         }
         
-        self.addSubview(someOptionButton)
-        someOptionButton.then {
+        self.addSubview(addPointsButton)
+        addPointsButton.then {
             $0.setIconStyle(systemName: "rectangle.stack.badge.plus")
             $0.setIconStyle(systemName: "rectangle.stack.fill.badge.plus", tintColor: .orange, forState: .selected)
         }.snp.makeConstraints {
             $0.trailing.equalTo(playButton.snp.leading).offset(-MyOffset.betweenIcon)
             $0.centerY.equalToSuperview()
         }
-        someOptionButton.addTarget(self, action: #selector(setSomeOption), for: .touchUpInside)
+        addPointsButton.addTarget(self, action: #selector(toggleAddingPointsMode), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("storyboard only DocumentBrowserViewController")
     }
     
-    
-    @objc func setSomeOption() {
-        print("옵션")
-        someOptionButton.toggleIconWithTransition()
-        isSomeOptionTrue = someOptionButton.isSelected
+    @objc func toggleAddingPointsMode() {
+        addPointsButton.toggleIconWithTransition()
+        isAddingPoints = addPointsButton.isSelected
+        if isAddingPoints { print("포인트 추가") }
+        else { print("포인트 추가 끝") }
     }
     
 }

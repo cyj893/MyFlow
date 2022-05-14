@@ -86,7 +86,7 @@ extension DocumentViewController {
     }
     
     @objc func toggleMyNavigationwView(_ recognizer: UITapGestureRecognizer) {
-        if myNavigationView.isSomeOptionTrue {
+        if myNavigationView.isAddingPoints {
             let location = recognizer.location(in: pdfView)
             guard let page = pdfView.page(for: location, nearest: true) else { return }
             let convertedPoint = pdfView.convert(location, to: page)
