@@ -17,6 +17,7 @@ class MyNavigationView: UIView {
     let backButton = UIButton()
     
     
+    let handlePointButton = UIButton()
     let prevPointButton = UIButton()
     let addPointsButton = UIButton()
     let nextPointButton = UIButton()
@@ -43,6 +44,7 @@ class MyNavigationView: UIView {
     
     // MARK: Getter, Setter
     func getIsAddingPoints() -> Bool { addPointsButton.isSelected }
+    func getIsHandlingPoints() -> Bool { handlePointButton.isSelected }
     
     
     // MARK: Setting Buttons
@@ -50,7 +52,7 @@ class MyNavigationView: UIView {
         setBackButton()
         setPlayButton()
         setPointsButtons()
-        [backButton, playButton, prevPointButton, addPointsButton, nextPointButton].forEach {
+        [backButton, playButton, prevPointButton, addPointsButton, nextPointButton, handlePointButton].forEach {
             $0.snp.makeConstraints { make in
                 make.centerY.equalToSuperview()
             }
@@ -79,6 +81,7 @@ class MyNavigationView: UIView {
         setNextPointButton()
         setAddPointsButton()
         setPrevPointButton()
+        setHandlePointButton()
     }
     
     fileprivate func setNextPointButton() {
@@ -110,12 +113,30 @@ class MyNavigationView: UIView {
         }
     }
     
+    fileprivate func setHandlePointButton() {
+        self.addSubview(handlePointButton)
+        handlePointButton.then {
+            $0.setIconStyle(systemName: "hand.tap")
+            $0.setIconStyle(systemName: "hand.tap.fill", forState: .selected)
+        }.snp.makeConstraints {
+            $0.trailing.equalTo(prevPointButton.snp.leading).offset(-MyOffset.betweenIcon)
+        }
+        handlePointButton.addTarget(self, action: #selector(toggleHandlingPointsMode), for: .touchUpInside)
+    }
+    
     
     // MARK: Button Actions
     @objc func toggleAddingPointsMode() {
         addPointsButton.toggleIconWithTransition()
         if getIsAddingPoints() { print("포인트 추가") }
         else { print("포인트 추가 끝") }
+        if getIsHandlingPoints() { handlePointButton.toggleIconWithTransition() }
     }
     
+    @objc func toggleHandlingPointsMode() {
+        handlePointButton.toggleIconWithTransition()
+        if getIsHandlingPoints() { print("포인트 핸들링") }
+        else { print("포인트 핸들링 끝") }
+        if getIsAddingPoints() { addPointsButton.toggleIconWithTransition() }
+    }
 }

@@ -10,7 +10,7 @@ import SnapKit
 
 import PDFKit
 
-class DocumentViewController: UIViewController {
+class DocumentViewController: UIViewController, PDFDocumentDelegate {
     let myNavigationView = MyNavigationView.singletonView
     var pdfView = PDFView()
     var document: UIDocument?
@@ -23,7 +23,13 @@ class DocumentViewController: UIViewController {
         document?.open(completionHandler: { (success) in
             if success {
                 print("success")
-                self.pdfView.document = PDFDocument(url: self.document!.fileURL)
+                let pdfDocument = PDFDocument(url: self.document!.fileURL)!
+                pdfDocument.delegate = self
+                self.pdfView.document = pdfDocument
+                if pdfDocument.allowsCommenting == false {
+                    // TODO: presenting an message to the user.
+                    print("This file cannot be commented")
+                }
             }
             else {
                 print("error")
@@ -42,10 +48,9 @@ class DocumentViewController: UIViewController {
         }
         
         myNavigationView.backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        
+
         myNavigationView.prevPointButton.addTarget(self, action: #selector(prevPointButtonAction), for: .touchUpInside)
         myNavigationView.nextPointButton.addTarget(self, action: #selector(nextPointButtonAction), for: .touchUpInside)
-        
         
         view.addSubview(pdfView)
         pdfView.snp.makeConstraints {
@@ -73,34 +78,68 @@ class DocumentViewController: UIViewController {
         idx += -1 + points.count
         idx %= points.count
         let now = points[idx]
-        print(now)
-        pdfView.go(to: CGRect(x: now.1.x, y: now.1.y, width: 1, height: 1), on: now.0)
+        print(idx)
+        pdfView.go(to: CGRect(origin: now.1, size: CGSize(width: 1, height: -view.frame.height)), on: now.0)
     }
     @objc func nextPointButtonAction() {
         print("nextPointButtonAction")
         idx += 1
         idx %= points.count
         let now = points[idx]
-        print(now)
-        pdfView.go(to: CGRect(x: now.1.x, y: now.1.y, width: 1, height: 1), on: now.0)
+        print(idx)
+        pdfView.go(to: CGRect(origin: now.1, size: CGSize(width: 1, height: -view.frame.height)), on: now.0)
     }
+    
 }
 
 // MARK: Toggle MyNavigationView
 extension DocumentViewController {
     
     fileprivate func addTapGesture() {
-        let taps = UITapGestureRecognizer(target: self, action: #selector(toggleMyNavigationwView))
+        let taps = UITapGestureRecognizer(target: self, action: #selector(setTapGesture))
         pdfView.addGestureRecognizer(taps)
     }
     
-    @objc func toggleMyNavigationwView(_ recognizer: UITapGestureRecognizer) {
+    fileprivate func addPointLine(_ heightPoint: CGPoint, _ page: PDFPage) {
+        let path = UIBezierPath()
+        path.move(to: heightPoint)
+        path.addLine(to: CGPoint(x: self.view.frame.size.width, y: heightPoint.y))
+        path.close()
+        
+        let border = PDFBorder()
+        border.lineWidth = 10.0
+        
+        let bounds = CGRect(x: path.bounds.origin.x - 5,
+                            y: path.bounds.origin.y - 5,
+                        width: path.bounds.size.width + 10,
+                       height: path.bounds.size.height + 10)
+        path.moveCenter(to: bounds.center)
+        
+        let inkAnnotation = PDFAnnotation(bounds: bounds, forType: .ink, withProperties: ["isPoint": true])
+        inkAnnotation.add(path)
+        inkAnnotation.border = border
+        inkAnnotation.color = .blue
+        page.addAnnotation(inkAnnotation)
+    }
+    
+    @objc func setTapGesture(_ recognizer: UITapGestureRecognizer) {
+        if myNavigationView.getIsHandlingPoints() {
+            let location = recognizer.location(in: pdfView)
+            guard let page = pdfView.page(for: location, nearest: true) else { return }
+            let convertedLocation = pdfView.convert(location, to: page)
+            guard let annotation = page.annotation(at: convertedLocation) else { return }
+            guard let _ = annotation.annotationKeyValues["/isPoint"] else { return }
+            print(annotation)
+            return
+        }
         if myNavigationView.getIsAddingPoints() {
             let location = recognizer.location(in: pdfView)
             guard let page = pdfView.page(for: location, nearest: true) else { return }
-            let convertedPoint = pdfView.convert(location, to: page)
-            print(convertedPoint)
-            points.append((page, convertedPoint))
+            let heightPoint = CGPoint(x: 0, y: pdfView.convert(location, to: page).y)
+            print(heightPoint)
+            points.append((page, heightPoint))
+            
+            addPointLine(heightPoint, page)
             return
         }
         if isShowingMyNavigationView {
