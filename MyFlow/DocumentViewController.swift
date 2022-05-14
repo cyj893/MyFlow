@@ -115,7 +115,7 @@ extension DocumentViewController {
                        height: path.bounds.size.height + 10)
         path.moveCenter(to: bounds.center)
         
-        let inkAnnotation = PDFAnnotation(bounds: bounds, forType: .ink, withProperties: nil)
+        let inkAnnotation = PDFAnnotation(bounds: bounds, forType: .ink, withProperties: ["isPoint": true])
         inkAnnotation.add(path)
         inkAnnotation.border = border
         inkAnnotation.color = .blue
@@ -128,6 +128,7 @@ extension DocumentViewController {
             guard let page = pdfView.page(for: location, nearest: true) else { return }
             let convertedLocation = pdfView.convert(location, to: page)
             guard let annotation = page.annotation(at: convertedLocation) else { return }
+            guard let _ = annotation.annotationKeyValues["/isPoint"] else { return }
             print(annotation)
             return
         }
