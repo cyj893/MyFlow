@@ -11,15 +11,16 @@ import SnapKit
 import PDFKit
 
 class DocumentViewController: UIViewController, PDFDocumentDelegate {
-    let myNavigationView = MyNavigationView.singletonView
-    var pdfView = PDFView()
     var document: UIDocument?
-    var isShowingMyNavigationView: Bool = true
-    var points:[(PDFPage, CGFloat)] = []
     
-    var idx:Int = 0
+    let myNavigationView = MyNavigationView.singletonView
+    private var pdfView = PDFView()
+    private var isShowingMyNavigationView: Bool = true
+    private var points:[(PDFPage, CGFloat)] = []
     
-    let gradientColors:[UIColor] = [UIColor(rgb: 0x769FCD, alpha: 0.5),
+    private var idx:Int = 0
+    
+    private let gradientColors:[UIColor] = [UIColor(rgb: 0x769FCD, alpha: 0.5),
                                     UIColor(rgb: 0xB9D7EA, alpha: 0.5),
                                     UIColor(rgb: 0xD6E6F2, alpha: 0.5),
                                     UIColor(rgb: 0xF7FBFC, alpha: 0.5)]
@@ -46,17 +47,16 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         })
     }
         
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    fileprivate func setMyNavigationView() {
         myNavigationView.setCurrentVC(vc: self)
         view.addSubview(myNavigationView)
         myNavigationView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(100)
         }
-        
-        
+    }
+    
+    fileprivate func setPdfView() {
         view.addSubview(pdfView)
         pdfView.snp.makeConstraints {
             $0.top.equalTo(myNavigationView.snp.bottom)
@@ -68,9 +68,15 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         pdfView.autoScales = true
         
         pdfView.backgroundColor = .black
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setMyNavigationView()
+        setPdfView()
         
         addTapGesture()
-        
     }
         
     func prevPointButtonAction() {
@@ -81,6 +87,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         print(idx)
         pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: now.1), size: CGSize(width: 1, height: -view.frame.height)), on: now.0)
     }
+    
     func nextPointButtonAction() {
         print("nextPointButtonAction")
         idx += 1
@@ -92,7 +99,9 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     
 }
 
+
 // MARK: Define Tap Gesture
+
 extension DocumentViewController {
     
     fileprivate func addTapGesture() {
@@ -125,7 +134,9 @@ extension DocumentViewController {
     
 }
 
+
 // MARK: Toggle NavigationView
+
 extension DocumentViewController {
     
     fileprivate func showNavigationView() {
@@ -187,11 +198,11 @@ extension DocumentViewController {
         addPointLineGradient(height, page)
     }
     
-    fileprivate func addPointLine(_ heightPoint: CGPoint, _ page: PDFPage, color: UIColor = .blue) {
+    fileprivate func addPointLine(_ height: CGFloat, _ page: PDFPage, color: UIColor = .blue) {
         let path = UIBezierPath()
-        path.move(to: heightPoint)
+        path.move(to: CGPoint(x: 0.0, y: height))
         let pageSize = page.bounds(for: PDFDisplayBox.mediaBox).size
-        path.addLine(to: CGPoint(x: pageSize.width, y: heightPoint.y))
+        path.addLine(to: CGPoint(x: pageSize.width, y: height))
         path.close()
         
         let border = PDFBorder()
@@ -212,7 +223,7 @@ extension DocumentViewController {
     
     fileprivate func addPointLineGradient(_ height: CGFloat, _ page: PDFPage) {
         for i in 0...3 {
-            addPointLine(CGPoint(x: 0.0, y: height - CGFloat(i)), page, color: gradientColors[i])
+            addPointLine(height - CGFloat(i), page, color: gradientColors[i])
         }
         addNumber(height, page)
     }
