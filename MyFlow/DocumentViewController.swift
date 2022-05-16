@@ -100,14 +100,15 @@ extension DocumentViewController {
         pdfView.addGestureRecognizer(taps)
     }
     
-    fileprivate func addPointLine(_ heightPoint: CGPoint, _ page: PDFPage) {
+    fileprivate func addPointLine(_ heightPoint: CGPoint, _ page: PDFPage, color: UIColor = .blue) {
         let path = UIBezierPath()
         path.move(to: heightPoint)
-        path.addLine(to: CGPoint(x: self.view.frame.size.width, y: heightPoint.y))
+        let pageSize = page.bounds(for: PDFDisplayBox.mediaBox).size
+        path.addLine(to: CGPoint(x: pageSize.width, y: heightPoint.y))
         path.close()
         
         let border = PDFBorder()
-        border.lineWidth = 10.0
+        border.lineWidth = 1.0
         
         let bounds = CGRect(x: path.bounds.origin.x - 5,
                             y: path.bounds.origin.y - 5,
@@ -118,8 +119,31 @@ extension DocumentViewController {
         let inkAnnotation = PDFAnnotation(bounds: bounds, forType: .ink, withProperties: ["isPoint": true])
         inkAnnotation.add(path)
         inkAnnotation.border = border
-        inkAnnotation.color = .blue
+        inkAnnotation.color = color
         page.addAnnotation(inkAnnotation)
+    }
+    
+    fileprivate func addPointLineGradient(_ heightPoint: CGPoint, _ page: PDFPage) {
+        let gradientColors:[UIColor] = [UIColor(rgb: 0x769FCD, alpha: 0.5), UIColor(rgb: 0xB9D7EA, alpha: 0.5), UIColor(rgb: 0xD6E6F2, alpha: 0.5), UIColor(rgb: 0xF7FBFC, alpha: 0.5)]
+        for i in 0...3 {
+            addPointLine(CGPoint(x: 0.0, y: heightPoint.y - CGFloat(i)), page, color: gradientColors[i])
+        }
+        addNumber(heightPoint, page)
+    }
+    
+    fileprivate func addNumber(_ heightPoint: CGPoint, _ page: PDFPage) {
+        let str = "123"
+        let font = UIFont.Fonarto(size: 20)
+        let size = str.sizeOfString(font: font!)
+        let pointNumText = PDFAnnotation(bounds: CGRect(origin: CGPoint(x: 10.0, y: heightPoint.y - size.height), size: size), forType: .widget, withProperties: nil)
+        pointNumText.widgetStringValue = "123"
+        pointNumText.widgetFieldType = .text
+        pointNumText.alignment = .center
+        pointNumText.font = UIFont.Fonarto(size: 20)
+        pointNumText.fontColor = .systemPink
+        pointNumText.color = .clear
+        pointNumText.backgroundColor = .clear
+        page.addAnnotation(pointNumText)
     }
     
     @objc func setTapGesture(_ recognizer: UITapGestureRecognizer) {
@@ -139,7 +163,7 @@ extension DocumentViewController {
             print(heightPoint)
             points.append((page, heightPoint))
             
-            addPointLine(heightPoint, page)
+            addPointLineGradient(heightPoint, page)
             return
         }
         if isShowingMyNavigationView {

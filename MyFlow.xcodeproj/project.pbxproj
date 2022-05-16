@@ -15,6 +15,12 @@
 		AF8EDF88282E3F7A00CCFF19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8EDF86282E3F7A00CCFF19 /* Main.storyboard */; };
 		AF8EDF8A282E3F7B00CCFF19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8EDF89282E3F7B00CCFF19 /* Assets.xcassets */; };
 		AF8EDF8D282E3F7B00CCFF19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8EDF8B282E3F7B00CCFF19 /* LaunchScreen.storyboard */; };
+		AF98A383283291560035601D /* comic_andy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF98A382283291560035601D /* comic_andy.ttf */; };
+		AF98A385283291620035601D /* Fonarto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF98A384283291620035601D /* Fonarto.ttf */; };
+		AF98A387283297810035601D /* Fonarto XT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF98A386283297810035601D /* Fonarto XT.ttf */; };
+		AF98A38A2832A6380035601D /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF98A3892832A6380035601D /* StringExtension.swift */; };
+		AF98A38C2832A6590035601D /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF98A38B2832A6590035601D /* UIFontExtension.swift */; };
+		AF98A38E2832A6760035601D /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF98A38D2832A6760035601D /* UIColorExtension.swift */; };
 		AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */; };
 		AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */; };
 		AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */; };
@@ -34,6 +40,12 @@
 		AF8EDF89282E3F7B00CCFF19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF8EDF8C282E3F7B00CCFF19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF8EDF8E282E3F7B00CCFF19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF98A382283291560035601D /* comic_andy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = comic_andy.ttf; sourceTree = "<group>"; };
+		AF98A384283291620035601D /* Fonarto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fonarto.ttf; sourceTree = "<group>"; };
+		AF98A386283297810035601D /* Fonarto XT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fonarto XT.ttf"; sourceTree = "<group>"; };
+		AF98A3892832A6380035601D /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		AF98A38B2832A6590035601D /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
+		AF98A38D2832A6760035601D /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationView.swift; sourceTree = "<group>"; };
 		AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGestureRecognizer.swift; sourceTree = "<group>"; };
 		AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -57,6 +69,7 @@
 		AF8EDF72282E3F7A00CCFF19 = {
 			isa = PBXGroup;
 			children = (
+				AF98A381283291310035601D /* Fonts */,
 				AF8EDF7D282E3F7A00CCFF19 /* MyFlow */,
 				AF8EDF7C282E3F7A00CCFF19 /* Products */,
 				FD7F7BE189D70E1DACD3E0C3 /* Pods */,
@@ -75,6 +88,7 @@
 		AF8EDF7D282E3F7A00CCFF19 /* MyFlow */ = {
 			isa = PBXGroup;
 			children = (
+				AF98A3882832A6140035601D /* MyExtensions */,
 				AF8EDF7E282E3F7A00CCFF19 /* AppDelegate.swift */,
 				AF8EDF80282E3F7A00CCFF19 /* DocumentBrowserViewController.swift */,
 				AF8EDF82282E3F7A00CCFF19 /* DocumentViewController.swift */,
@@ -85,11 +99,31 @@
 				AF8EDF8E282E3F7B00CCFF19 /* Info.plist */,
 				AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */,
 				AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */,
-				AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */,
 				AFF8DA7F282F65F8005F0DED /* MyConstants.swift */,
 				AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */,
 			);
 			path = MyFlow;
+			sourceTree = "<group>";
+		};
+		AF98A381283291310035601D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				AF98A382283291560035601D /* comic_andy.ttf */,
+				AF98A384283291620035601D /* Fonarto.ttf */,
+				AF98A386283297810035601D /* Fonarto XT.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		AF98A3882832A6140035601D /* MyExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */,
+				AF98A3892832A6380035601D /* StringExtension.swift */,
+				AF98A38B2832A6590035601D /* UIFontExtension.swift */,
+				AF98A38D2832A6760035601D /* UIColorExtension.swift */,
+			);
+			path = MyExtensions;
 			sourceTree = "<group>";
 		};
 		F01107C7CE67F05F784421B8 /* Frameworks */ = {
@@ -169,9 +203,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF98A383283291560035601D /* comic_andy.ttf in Resources */,
 				AF8EDF8D282E3F7B00CCFF19 /* LaunchScreen.storyboard in Resources */,
+				AF98A385283291620035601D /* Fonarto.ttf in Resources */,
 				AF8EDF8A282E3F7B00CCFF19 /* Assets.xcassets in Resources */,
 				AF8EDF88282E3F7A00CCFF19 /* Main.storyboard in Resources */,
+				AF98A387283297810035601D /* Fonarto XT.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +263,7 @@
 			files = (
 				AF8EDF85282E3F7A00CCFF19 /* Document.swift in Sources */,
 				AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */,
+				AF98A38A2832A6380035601D /* StringExtension.swift in Sources */,
 				AF8EDF83282E3F7A00CCFF19 /* DocumentViewController.swift in Sources */,
 				AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */,
 				AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */,
@@ -233,6 +271,8 @@
 				AFF8DA82282FDE20005F0DED /* UIBezierPathExtension.swift in Sources */,
 				AF8EDF7F282E3F7A00CCFF19 /* AppDelegate.swift in Sources */,
 				AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */,
+				AF98A38C2832A6590035601D /* UIFontExtension.swift in Sources */,
+				AF98A38E2832A6760035601D /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
