@@ -13,16 +13,18 @@ import PDFKit
 class MyNavigationView: UIView {
     static let singletonView = MyNavigationView()
     
-    let optionsView = UIView()
-    let backButton = UIButton()
+    private var currentVC:DocumentViewController?
+    
+    private let optionsView = UIView()
+    private let backButton = UIButton()
     
     
-    let handlePointButton = UIButton()
-    let prevPointButton = UIButton()
-    let addPointsButton = UIButton()
-    let nextPointButton = UIButton()
+    private let handlePointButton = UIButton()
+    private let prevPointButton = UIButton()
+    private let addPointsButton = UIButton()
+    private let nextPointButton = UIButton()
     
-    let playButton = UIButton()
+    private let playButton = UIButton()
     
     
     override init(frame: CGRect) {
@@ -42,12 +44,17 @@ class MyNavigationView: UIView {
         fatalError("storyboard only DocumentBrowserViewController")
     }
     
+    
     // MARK: Getter, Setter
+    
     func getIsAddingPoints() -> Bool { addPointsButton.isSelected }
     func getIsHandlingPoints() -> Bool { handlePointButton.isSelected }
     
+    func setCurrentVC(vc: DocumentViewController) { currentVC = vc }
+    
     
     // MARK: Setting Buttons
+    
     fileprivate func setButtons() {
         setBackButton()
         setPlayButton()
@@ -66,6 +73,7 @@ class MyNavigationView: UIView {
         }.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(MyOffset.betweenIcon)
         }
+        backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
     }
     
     fileprivate func setPlayButton() {
@@ -91,6 +99,7 @@ class MyNavigationView: UIView {
         }.snp.makeConstraints {
             $0.trailing.equalTo(playButton.snp.leading).offset(-MyOffset.betweenIconGroup)
         }
+        nextPointButton.addTarget(self, action: #selector(nextPointButtonAction), for: .touchUpInside)
     }
     
     fileprivate func setAddPointsButton() {
@@ -111,6 +120,7 @@ class MyNavigationView: UIView {
         }.snp.makeConstraints {
             $0.trailing.equalTo(addPointsButton.snp.leading).offset(-MyOffset.betweenIcon)
         }
+        prevPointButton.addTarget(self, action: #selector(prevPointButtonAction), for: .touchUpInside)
     }
     
     fileprivate func setHandlePointButton() {
@@ -126,17 +136,35 @@ class MyNavigationView: UIView {
     
     
     // MARK: Button Actions
-    @objc func toggleAddingPointsMode() {
+    
+    @objc fileprivate func backButtonAction() {
+        guard let currentVC = currentVC else { return }
+        currentVC.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc fileprivate func toggleAddingPointsMode() {
         addPointsButton.toggleIconWithTransition()
         if getIsAddingPoints() { print("포인트 추가") }
         else { print("포인트 추가 끝") }
         if getIsHandlingPoints() { handlePointButton.toggleIconWithTransition() }
     }
     
-    @objc func toggleHandlingPointsMode() {
+    @objc fileprivate func toggleHandlingPointsMode() {
         handlePointButton.toggleIconWithTransition()
         if getIsHandlingPoints() { print("포인트 핸들링") }
         else { print("포인트 핸들링 끝") }
         if getIsAddingPoints() { addPointsButton.toggleIconWithTransition() }
     }
+    
+    @objc fileprivate func prevPointButtonAction() {
+        guard let currentVC = currentVC else { return }
+        currentVC.prevPointButtonAction()
+    }
+    
+    @objc fileprivate func nextPointButtonAction() {
+        guard let currentVC = currentVC else { return }
+        currentVC.nextPointButtonAction()
+    }
+    
+    
 }
