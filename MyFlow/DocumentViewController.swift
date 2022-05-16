@@ -100,7 +100,7 @@ extension DocumentViewController {
         pdfView.addGestureRecognizer(taps)
     }
     
-    fileprivate func addPointLine(_ heightPoint: CGPoint, _ page: PDFPage) {
+    fileprivate func addPointLine(_ heightPoint: CGPoint, _ page: PDFPage, color: UIColor = .blue) {
         let path = UIBezierPath()
         path.move(to: heightPoint)
         let pageSize = page.bounds(for: PDFDisplayBox.mediaBox).size
@@ -108,7 +108,7 @@ extension DocumentViewController {
         path.close()
         
         let border = PDFBorder()
-        border.lineWidth = 10.0
+        border.lineWidth = 1.0
         
         let bounds = CGRect(x: path.bounds.origin.x - 5,
                             y: path.bounds.origin.y - 5,
@@ -119,8 +119,25 @@ extension DocumentViewController {
         let inkAnnotation = PDFAnnotation(bounds: bounds, forType: .ink, withProperties: ["isPoint": true])
         inkAnnotation.add(path)
         inkAnnotation.border = border
-        inkAnnotation.color = .blue
+        inkAnnotation.color = color
         page.addAnnotation(inkAnnotation)
+    }
+    
+    fileprivate func addPointLineGradient(_ heightPoint: CGPoint, _ page: PDFPage) {
+        let gradientColors:[UIColor] = [UIColor(rgb: 0x769FCD, alpha: 0.5), UIColor(rgb: 0xB9D7EA, alpha: 0.5), UIColor(rgb: 0xD6E6F2, alpha: 0.5), UIColor(rgb: 0xF7FBFC, alpha: 0.5)]
+        for i in 0...3 {
+            addPointLine(CGPoint(x: 0.0, y: heightPoint.y - CGFloat(i)), page, color: gradientColors[i])
+        }
+        addNumber(heightPoint, page)
+    }
+    
+    fileprivate func addNumber(_ heightPoint: CGPoint, _ page: PDFPage) {
+        let pointNumText = PDFAnnotation(bounds: CGRect(x: 20, y: heightPoint.y - 10.0, width: 24, height: 24), forType: .widget, withProperties: nil)
+        pointNumText.widgetStringValue = "ASD"
+        pointNumText.widgetFieldType = .text
+        pointNumText.backgroundColor = .systemPink
+        pointNumText.alignment = .center
+        page.addAnnotation(pointNumText)
     }
     
     @objc func setTapGesture(_ recognizer: UITapGestureRecognizer) {
@@ -140,7 +157,7 @@ extension DocumentViewController {
             print(heightPoint)
             points.append((page, heightPoint))
             
-            addPointLine(heightPoint, page)
+            addPointLineGradient(heightPoint, page)
             return
         }
         if isShowingMyNavigationView {
@@ -187,4 +204,23 @@ extension DocumentViewController {
             animations: self.view.layoutIfNeeded
         )
     }
+}
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int, alpha: Double) {
+       assert(red >= 0 && red <= 255, "Invalid red component")
+       assert(green >= 0 && green <= 255, "Invalid green component")
+       assert(blue >= 0 && blue <= 255, "Invalid blue component")
+
+       self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: alpha)
+   }
+
+    convenience init(rgb: Int, alpha: Double = 1.0) {
+       self.init(
+           red: (rgb >> 16) & 0xFF,
+           green: (rgb >> 8) & 0xFF,
+           blue: rgb & 0xFF,
+           alpha: alpha
+       )
+   }
 }
