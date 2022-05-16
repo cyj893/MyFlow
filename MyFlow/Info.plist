@@ -4,6 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Fonarto XT.ttf</string>
 		<string>comic_andy.ttf</string>
 		<string>Fonarto.ttf</string>
 	</array>

@@ -132,11 +132,17 @@ extension DocumentViewController {
     }
     
     fileprivate func addNumber(_ heightPoint: CGPoint, _ page: PDFPage) {
-        let pointNumText = PDFAnnotation(bounds: CGRect(x: 20, y: heightPoint.y - 10.0, width: 24, height: 24), forType: .widget, withProperties: nil)
-        pointNumText.widgetStringValue = "ASD"
+        let str = "123"
+        let font = UIFont.Fonarto(size: 20)
+        let size = str.sizeOfString(font: font!)
+        let pointNumText = PDFAnnotation(bounds: CGRect(origin: CGPoint(x: 10.0, y: heightPoint.y - size.height), size: size), forType: .widget, withProperties: nil)
+        pointNumText.widgetStringValue = "123"
         pointNumText.widgetFieldType = .text
-        pointNumText.backgroundColor = .systemPink
         pointNumText.alignment = .center
+        pointNumText.font = UIFont.Fonarto(size: 20)
+        pointNumText.fontColor = .systemPink
+        pointNumText.color = .clear
+        pointNumText.backgroundColor = .clear
         page.addAnnotation(pointNumText)
     }
     
@@ -223,4 +229,33 @@ extension UIColor {
            alpha: alpha
        )
    }
+}
+
+extension UIFont {
+    class func Fonarto(size: CGFloat) -> UIFont! {
+        guard let font = UIFont(name: "Fonarto", size: size) else {
+            return nil
+        }
+        return font
+    }
+    class func FonartoXT(size: CGFloat) -> UIFont! {
+        guard let font = UIFont(name: "FonartoXT", size: size) else {
+            return nil
+        }
+        return font
+    }
+    class func ComicAndy(size: CGFloat) -> UIFont! {
+        guard let font = UIFont(name: "comicandy", size: size) else {
+            return nil
+        }
+        return font
+    }
+}
+
+extension String {
+    func sizeOfString( font: UIFont) -> CGSize {
+        let fontAttribute = [NSAttributedString.Key.font: font]
+        let size = self.size(withAttributes: fontAttribute)
+        return size;
+    }
 }
