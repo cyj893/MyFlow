@@ -103,7 +103,8 @@ extension DocumentViewController {
     fileprivate func addPointLine(_ heightPoint: CGPoint, _ page: PDFPage) {
         let path = UIBezierPath()
         path.move(to: heightPoint)
-        path.addLine(to: CGPoint(x: self.view.frame.size.width, y: heightPoint.y))
+        let pageSize = page.bounds(for: PDFDisplayBox.mediaBox).size
+        path.addLine(to: CGPoint(x: pageSize.width, y: heightPoint.y))
         path.close()
         
         let border = PDFBorder()
