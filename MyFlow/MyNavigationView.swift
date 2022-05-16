@@ -13,18 +13,18 @@ import PDFKit
 class MyNavigationView: UIView {
     static let singletonView = MyNavigationView()
     
-    var currentVC:DocumentViewController?
+    private var currentVC:DocumentViewController?
     
-    let optionsView = UIView()
-    let backButton = UIButton()
+    private let optionsView = UIView()
+    private let backButton = UIButton()
     
     
-    let handlePointButton = UIButton()
-    let prevPointButton = UIButton()
-    let addPointsButton = UIButton()
-    let nextPointButton = UIButton()
+    private let handlePointButton = UIButton()
+    private let prevPointButton = UIButton()
+    private let addPointsButton = UIButton()
+    private let nextPointButton = UIButton()
     
-    let playButton = UIButton()
+    private let playButton = UIButton()
     
     
     override init(frame: CGRect) {
@@ -137,31 +137,31 @@ class MyNavigationView: UIView {
     
     // MARK: Button Actions
     
-    @objc func backButtonAction() {
+    @objc fileprivate func backButtonAction() {
         guard let currentVC = currentVC else { return }
         currentVC.dismiss(animated: true, completion: nil)
     }
     
-    @objc func toggleAddingPointsMode() {
+    @objc fileprivate func toggleAddingPointsMode() {
         addPointsButton.toggleIconWithTransition()
         if getIsAddingPoints() { print("포인트 추가") }
         else { print("포인트 추가 끝") }
         if getIsHandlingPoints() { handlePointButton.toggleIconWithTransition() }
     }
     
-    @objc func toggleHandlingPointsMode() {
+    @objc fileprivate func toggleHandlingPointsMode() {
         handlePointButton.toggleIconWithTransition()
         if getIsHandlingPoints() { print("포인트 핸들링") }
         else { print("포인트 핸들링 끝") }
         if getIsAddingPoints() { addPointsButton.toggleIconWithTransition() }
     }
     
-    @objc func prevPointButtonAction() {
+    @objc fileprivate func prevPointButtonAction() {
         guard let currentVC = currentVC else { return }
         currentVC.prevPointButtonAction()
     }
     
-    @objc func nextPointButtonAction() {
+    @objc fileprivate func nextPointButtonAction() {
         guard let currentVC = currentVC else { return }
         currentVC.nextPointButtonAction()
     }
