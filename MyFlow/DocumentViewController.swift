@@ -17,6 +17,8 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     var isShowingMyNavigationView: Bool = true
     var points:[(PDFPage, CGPoint)] = []
     
+    var idx:Int = 0
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -41,16 +43,13 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        myNavigationView.setCurrentVC(vc: self)
         view.addSubview(myNavigationView)
         myNavigationView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(100)
         }
         
-        myNavigationView.backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-
-        myNavigationView.prevPointButton.addTarget(self, action: #selector(prevPointButtonAction), for: .touchUpInside)
-        myNavigationView.nextPointButton.addTarget(self, action: #selector(nextPointButtonAction), for: .touchUpInside)
         
         view.addSubview(pdfView)
         pdfView.snp.makeConstraints {
@@ -67,13 +66,8 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         addTapGesture()
         
     }
-    
-    @objc func backButtonAction() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    var idx:Int = 0
-    @objc func prevPointButtonAction() {
+        
+    func prevPointButtonAction() {
         print("prevPointButtonAction")
         idx += -1 + points.count
         idx %= points.count
@@ -81,7 +75,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         print(idx)
         pdfView.go(to: CGRect(origin: now.1, size: CGSize(width: 1, height: -view.frame.height)), on: now.0)
     }
-    @objc func nextPointButtonAction() {
+    func nextPointButtonAction() {
         print("nextPointButtonAction")
         idx += 1
         idx %= points.count
