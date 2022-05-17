@@ -93,7 +93,19 @@ class PointHelper {
     
     func movePoint(_ height: Int, _ page: PDFPage) {
         guard let nowSelectedPoint = nowSelectedPoint else { return }
-
+        
+        if height < 0 {
+            return
+        }
+        // set height bound
+        if page.pageRef?.pageNumber == 1 {
+            let pageSize = page.bounds(for: PDFDisplayBox.mediaBox).size
+            print(pageSize.height)
+            if height > Int(pageSize.height) {
+                return
+            }
+        }
+        
         if let beforePage = nowSelectedPoint.page, beforePage != page {
             beforePage.removeAnnotation(nowSelectedPoint)
             nowSelectedPoint.page = page
