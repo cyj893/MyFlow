@@ -71,6 +71,15 @@ class PointHelper {
     var nowSelectedPointLines:[PDFAnnotation] = []
     
     func selectPoint(_ annotation: PDFAnnotation) {
+        if nowSelectedPoint != nil {
+            if nowSelectedPoint == annotation {
+                endMovePoint()
+                return
+            }
+            else {
+                endMovePoint()
+            }
+        }
         nowSelectedPoint = annotation
         guard let str:String = annotation.widgetStringValue else { return }
         let number = Int(str)!
