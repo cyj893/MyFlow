@@ -137,7 +137,7 @@ extension DocumentViewController {
         case .changed:
             guard let _ = pointHelper.getNowSelectedPoint() else { return }
             print("move to \(convertedLocation)")
-            pointHelper.movePoint(Int(convertedLocation.y))
+            pointHelper.movePoint(Int(convertedLocation.y), page)
 
         case .ended, .cancelled, .failed:
             guard let _ = pointHelper.getNowSelectedPoint() else { return }

@@ -91,9 +91,20 @@ class PointHelper {
         }
     }
     
-    func movePoint(_ height: Int) {
+    func movePoint(_ height: Int, _ page: PDFPage) {
         guard let nowSelectedPoint = nowSelectedPoint else { return }
 
+        if let beforePage = nowSelectedPoint.page, beforePage != page {
+            beforePage.removeAnnotation(nowSelectedPoint)
+            nowSelectedPoint.page = page
+            page.addAnnotation(nowSelectedPoint)
+            for i in 0...3 {
+                beforePage.removeAnnotation(nowSelectedPointLines[i])
+                nowSelectedPointLines[i].page = page
+                page.addAnnotation(nowSelectedPointLines[i])
+            }
+        }
+        
         nowSelectedPoint.bounds = CGRect(origin: CGPoint(x: 10, y: height - pointNumberHeight), size: nowSelectedPoint.bounds.size)
         for i in 0...3 {
             nowSelectedPointLines[i].bounds = CGRect(origin: CGPoint(x: 0, y: height - i), size: nowSelectedPointLines[i].bounds.size)
