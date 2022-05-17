@@ -94,6 +94,12 @@ extension DocumentViewController {
     fileprivate func addTapGesture() {
         let taps = UITapGestureRecognizer(target: self, action: #selector(setTapGesture))
         pdfView.addGestureRecognizer(taps)
+        addPanGesture()
+    }
+    
+    fileprivate func addPanGesture() {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(setPanGesture))
+        pdfView.addGestureRecognizer(pan)
     }
     
     @objc func setTapGesture(_ recognizer: UITapGestureRecognizer) {
@@ -116,6 +122,28 @@ extension DocumentViewController {
         else {
             showNavigationView()
             isShowingMyNavigationView = true
+        }
+    }
+    
+    @objc func setPanGesture(_ recognizer: UIPanGestureRecognizer) {
+        let location = recognizer.location(in: pdfView)
+        guard let page = pdfView.page(for: location, nearest: true) else { return }
+        let convertedLocation = pdfView.convert(location, to: page)
+        
+        switch recognizer.state {
+        case .began:
+            print(convertedLocation)
+            
+        case .changed:
+            guard let _ = pointHelper.getNowSelectedPoint() else { return }
+            print("move to \(convertedLocation)")
+            pointHelper.movePoint(Int(convertedLocation.y))
+
+        case .ended, .cancelled, .failed:
+            guard let _ = pointHelper.getNowSelectedPoint() else { return }
+            pointHelper.endMovePoint()
+        default:
+            break
         }
     }
     

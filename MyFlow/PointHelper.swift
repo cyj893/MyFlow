@@ -11,6 +11,7 @@ import PDFKit
 class PointHelper {
     
     private var points:[(PDFPage, Int)] = []
+    private var linesDict:[Int:[PDFAnnotation]] = [:]
     
     private var idx:Int = 0
     
@@ -34,15 +35,19 @@ class PointHelper {
         return border
     }()
     
+    let font = UIFont.Fonarto(size: 20)
+    var pointNumberHeight: Int = 0
+    
     
     init() {
-        
+        pointNumberHeight = Int("012345678".sizeOfString(font: font!).height)
     }
     
     
     // MARK: Getter, Setter
     
     func getPointsCount() -> Int { points.count }
+    func getNowSelectedPoint() -> PDFAnnotation? { nowSelectedPoint }
     
     
     // MARK: Moving Point
@@ -62,21 +67,36 @@ class PointHelper {
     
     // MARK: Select Point
     
+    var nowSelectedPoint:PDFAnnotation?
+    var nowSelectedPointLines:[PDFAnnotation] = []
+    
     func selectPoint(_ annotation: PDFAnnotation) {
+        nowSelectedPoint = annotation
         guard let str:String = annotation.widgetStringValue else { return }
         let number = Int(str)!
         print(number)
         
-        let height = points[number-1].1
-        let page = points[number-1].0
-        
+        nowSelectedPointLines = linesDict[number]!
         for i in 0...3 {
-            guard let lineAnnotation = page.annotation(at: CGPoint(x: 50, y: height - i - 1)) else { return }
-            guard let _ = lineAnnotation.annotationKeyValues["/isPointLine"] else { return }
-            print(lineAnnotation)
-            lineAnnotation.color = selectedGradientColors[i]
+            nowSelectedPointLines[i].color = selectedGradientColors[i]
         }
-        
+    }
+    
+    func movePoint(_ height: Int) {
+        guard let nowSelectedPoint = nowSelectedPoint else { return }
+
+        nowSelectedPoint.bounds = CGRect(origin: CGPoint(x: 10, y: height - pointNumberHeight), size: nowSelectedPoint.bounds.size)
+        for i in 0...3 {
+            nowSelectedPointLines[i].bounds = CGRect(origin: CGPoint(x: 0, y: height - i), size: nowSelectedPointLines[i].bounds.size)
+        }
+    }
+    
+    func endMovePoint() {
+        for i in 0...3 {
+            nowSelectedPointLines[i].color = gradientColors[i]
+        }
+        nowSelectedPoint = nil
+        nowSelectedPointLines = []
     }
     
     
@@ -88,17 +108,19 @@ class PointHelper {
     }
     
     fileprivate func addAnnotation(_ height: Int, _ page: PDFPage, _ number: Int) {
-        addPointLineGradient(height, page)
+        addPointLineGradient(height, page, number)
         addNumber(height, page, number)
     }
     
-    fileprivate func addPointLineGradient(_ height: Int, _ page: PDFPage) {
+    fileprivate func addPointLineGradient(_ height: Int, _ page: PDFPage, _ number: Int) {
+        linesDict[number] = []
         for i in 0...3 {
-            addPointLine(height - i, page, color: gradientColors[i])
+            let lineAnnotation = addPointLine(height - i, page, color: gradientColors[i])
+            linesDict[number]?.append(lineAnnotation)
         }
     }
     
-    fileprivate func addPointLine(_ height: Int, _ page: PDFPage, color: UIColor = .blue) {
+    fileprivate func addPointLine(_ height: Int, _ page: PDFPage, color: UIColor = .blue) -> PDFAnnotation {
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0, y: height))
         let pageSize = page.bounds(for: PDFDisplayBox.mediaBox).size
@@ -113,18 +135,17 @@ class PointHelper {
         inkAnnotation.border = border
         inkAnnotation.color = color
         page.addAnnotation(inkAnnotation)
+        return inkAnnotation
     }
     
     fileprivate func addNumber(_ height: Int, _ page: PDFPage, _ number: Int) {
         let str = String(number)
-        let font = UIFont.Fonarto(size: 20)
-        let size = str.sizeOfString(font: font!)
-        let pointNumText = PDFAnnotation(bounds: CGRect(origin: CGPoint(x: 10, y: height - Int(size.height)), size: size), forType: .widget, withProperties: ["isPoint": true])
+        let pointNumText = PDFAnnotation(bounds: CGRect(origin: CGPoint(x: 10, y: height - pointNumberHeight), size: CGSize(width: 50, height: pointNumberHeight)), forType: .widget, withProperties: ["isPoint": true])
         
         pointNumText.widgetStringValue = str
         pointNumText.widgetFieldType = .text
         
-        pointNumText.alignment = .center
+        // pointNumText.alignment = .center
         pointNumText.font = font
         pointNumText.fontColor = .systemPink
         pointNumText.color = .clear
