@@ -16,15 +16,8 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     let myNavigationView = MyNavigationView.singletonView
     private var pdfView = PDFView()
     private var isShowingMyNavigationView: Bool = true
-    private var points:[(PDFPage, CGFloat)] = []
     
-    private var idx:Int = 0
-    
-    private let gradientColors:[UIColor] = [UIColor(rgb: 0x769FCD, alpha: 0.5),
-                                    UIColor(rgb: 0xB9D7EA, alpha: 0.5),
-                                    UIColor(rgb: 0xD6E6F2, alpha: 0.5),
-                                    UIColor(rgb: 0xF7FBFC, alpha: 0.5)]
-    
+    private var pointHelper = PointHelper()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -81,20 +74,14 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         
     func prevPointButtonAction() {
         print("prevPointButtonAction")
-        idx += -1 + points.count
-        idx %= points.count
-        let now = points[idx]
-        print(idx)
-        pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: now.1), size: CGSize(width: 1, height: -view.frame.height)), on: now.0)
+        let prev:PDFAnnotation = pointHelper.movePrev()
+        pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: prev.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: prev.page!)
     }
     
     func nextPointButtonAction() {
         print("nextPointButtonAction")
-        idx += 1
-        idx %= points.count
-        let now = points[idx]
-        print(idx)
-        pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: now.1), size: CGSize(width: 1, height: -view.frame.height)), on: now.0)
+        let next:PDFAnnotation = pointHelper.moveNext()
+        pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: next.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: next.page!)
     }
     
 }
@@ -107,6 +94,12 @@ extension DocumentViewController {
     fileprivate func addTapGesture() {
         let taps = UITapGestureRecognizer(target: self, action: #selector(setTapGesture))
         pdfView.addGestureRecognizer(taps)
+        addPanGesture()
+    }
+    
+    fileprivate func addPanGesture() {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(setPanGesture))
+        pdfView.addGestureRecognizer(pan)
     }
     
     @objc func setTapGesture(_ recognizer: UITapGestureRecognizer) {
@@ -119,7 +112,7 @@ extension DocumentViewController {
             return
         }
         if myNavigationView.getIsAddingPoints() {
-            addPoint(convertedLocation.y, page)
+            pointHelper.addPoint(Int(convertedLocation.y), page)
             return
         }
         if isShowingMyNavigationView {
@@ -129,6 +122,28 @@ extension DocumentViewController {
         else {
             showNavigationView()
             isShowingMyNavigationView = true
+        }
+    }
+    
+    @objc func setPanGesture(_ recognizer: UIPanGestureRecognizer) {
+        let location = recognizer.location(in: pdfView)
+        guard let page = pdfView.page(for: location, nearest: true) else { return }
+        let convertedLocation = pdfView.convert(location, to: page)
+        
+        switch recognizer.state {
+        case .began:
+            print(convertedLocation)
+            
+        case .changed:
+            guard let _ = pointHelper.getNowSelectedPoint() else { return }
+            print("move to \(convertedLocation)")
+            pointHelper.movePoint(Int(convertedLocation.y), page)
+
+        case .ended, .cancelled, .failed:
+            guard let _ = pointHelper.getNowSelectedPoint() else { return }
+            pointHelper.endMovePoint()
+        default:
+            break
         }
     }
     
@@ -181,69 +196,11 @@ extension DocumentViewController {
 extension DocumentViewController {
     
     fileprivate func handlePoints(_ convertedLocation: CGPoint, _ page: PDFPage) {
+        print(convertedLocation)
         guard let annotation = page.annotation(at: convertedLocation) else { return }
-        guard let _ = annotation.annotationKeyValues["/isPoint"] else { return }
         print(annotation)
-    }
-    
-}
-
-
-// MARK: Add the Point
-
-extension DocumentViewController {
-    
-    fileprivate func addPoint(_ height: CGFloat, _ page: PDFPage) {
-        points.append((page, height))
-        addPointLineGradient(height, page)
-    }
-    
-    fileprivate func addPointLine(_ height: CGFloat, _ page: PDFPage, color: UIColor = .blue) {
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0.0, y: height))
-        let pageSize = page.bounds(for: PDFDisplayBox.mediaBox).size
-        path.addLine(to: CGPoint(x: pageSize.width, y: height))
-        path.close()
-        
-        let border = PDFBorder()
-        border.lineWidth = 1.0
-        
-        let bounds = CGRect(x: path.bounds.origin.x - 5,
-                            y: path.bounds.origin.y - 5,
-                        width: path.bounds.size.width + 10,
-                       height: path.bounds.size.height + 10)
-        path.moveCenter(to: bounds.center)
-        
-        let inkAnnotation = PDFAnnotation(bounds: bounds, forType: .ink, withProperties: ["isPoint": true])
-        inkAnnotation.add(path)
-        inkAnnotation.border = border
-        inkAnnotation.color = color
-        page.addAnnotation(inkAnnotation)
-    }
-    
-    fileprivate func addPointLineGradient(_ height: CGFloat, _ page: PDFPage) {
-        for i in 0...3 {
-            addPointLine(height - CGFloat(i), page, color: gradientColors[i])
-        }
-        addNumber(height, page)
-    }
-    
-    fileprivate func addNumber(_ height: CGFloat, _ page: PDFPage) {
-        let str = "123"
-        let font = UIFont.Fonarto(size: 20)
-        let size = str.sizeOfString(font: font!)
-        let pointNumText = PDFAnnotation(bounds: CGRect(origin: CGPoint(x: 10.0, y: height - size.height), size: size), forType: .widget, withProperties: nil)
-        
-        pointNumText.widgetStringValue = str
-        pointNumText.widgetFieldType = .text
-        
-        pointNumText.alignment = .center
-        pointNumText.font = font
-        pointNumText.fontColor = .systemPink
-        pointNumText.color = .clear
-        pointNumText.backgroundColor = .clear
-        
-        page.addAnnotation(pointNumText)
+        guard let _ = annotation.annotationKeyValues["/isPoint"] else { return }
+        pointHelper.selectPoint(annotation)
     }
     
 }

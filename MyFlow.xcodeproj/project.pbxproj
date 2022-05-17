@@ -24,6 +24,7 @@
 		AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */; };
 		AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */; };
 		AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */; };
+		AFD6DE322833B99800E9FA5E /* PointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD6DE312833B99800E9FA5E /* PointHelper.swift */; };
 		AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8DA7F282F65F8005F0DED /* MyConstants.swift */; };
 		AFF8DA82282FDE20005F0DED /* UIBezierPathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */; };
 /* End PBXBuildFile section */
@@ -49,6 +50,7 @@
 		AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationView.swift; sourceTree = "<group>"; };
 		AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGestureRecognizer.swift; sourceTree = "<group>"; };
 		AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		AFD6DE312833B99800E9FA5E /* PointHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelper.swift; sourceTree = "<group>"; };
 		AFF8DA7F282F65F8005F0DED /* MyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyConstants.swift; sourceTree = "<group>"; };
 		AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtension.swift; sourceTree = "<group>"; };
 		F29E0F658105FB87AA1F90FB /* Pods_MyFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +103,7 @@
 				AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */,
 				AFF8DA7F282F65F8005F0DED /* MyConstants.swift */,
 				AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */,
+				AFD6DE312833B99800E9FA5E /* PointHelper.swift */,
 			);
 			path = MyFlow;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */,
 				AF8EDF81282E3F7A00CCFF19 /* DocumentBrowserViewController.swift in Sources */,
 				AFF8DA82282FDE20005F0DED /* UIBezierPathExtension.swift in Sources */,
+				AFD6DE322833B99800E9FA5E /* PointHelper.swift in Sources */,
 				AF8EDF7F282E3F7A00CCFF19 /* AppDelegate.swift in Sources */,
 				AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */,
 				AF98A38C2832A6590035601D /* UIFontExtension.swift in Sources */,
