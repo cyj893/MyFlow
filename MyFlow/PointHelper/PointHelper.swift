@@ -15,6 +15,9 @@ class PointHelper {
     
     private var idx:Int = 0
     
+    var nowSelectedPoint:PDFAnnotation?
+    var nowSelectedPointLines:[PDFAnnotation] = []
+    
     private let gradientColors:[UIColor] = [
         UIColor(rgb: 0x769FCD, alpha: 0.5),
         UIColor(rgb: 0xB9D7EA, alpha: 0.5),
@@ -49,26 +52,31 @@ class PointHelper {
     func getPointsCount() -> Int { points.count }
     func getNowSelectedPoint() -> PDFAnnotation? { nowSelectedPoint }
     
+}
+
+
+// MARK: Move to Point
+
+extension PointHelper {
     
-    // MARK: Moving Point
-    
-    func movePrev() -> PDFAnnotation {
+    func moveToPrev() -> PDFAnnotation {
         idx -= 1
         if idx < 0 { idx += getPointsCount() }
         return points[idx]
     }
     
-    func moveNext() -> PDFAnnotation {
+    func moveToNext() -> PDFAnnotation {
         idx += 1
         idx %= getPointsCount()
         return points[idx]
     }
     
-    
-    // MARK: Select Point
-    
-    var nowSelectedPoint:PDFAnnotation?
-    var nowSelectedPointLines:[PDFAnnotation] = []
+}
+
+
+// MARK: Select and Move Point
+
+extension PointHelper {
     
     func selectPoint(_ annotation: PDFAnnotation) {
         if nowSelectedPoint != nil {
@@ -131,8 +139,12 @@ class PointHelper {
         nowSelectedPointLines = []
     }
     
-    
-    // MARK: Adding Point
+}
+
+
+// MARK: Add Point
+
+extension PointHelper {
     
     func addPoint(_ height: Int, _ page: PDFPage) {
         let number:Int = getPointsCount() + 1
