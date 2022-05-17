@@ -10,7 +10,7 @@ import PDFKit
 
 class PointHelper {
     
-    private var points:[(PDFPage, Int)] = []
+    private var points:[PDFAnnotation] = []
     private var linesDict:[Int:[PDFAnnotation]] = [:]
     
     private var idx:Int = 0
@@ -52,13 +52,13 @@ class PointHelper {
     
     // MARK: Moving Point
     
-    func movePrev() -> (PDFPage, Int) {
+    func movePrev() -> PDFAnnotation {
         idx -= 1
         if idx < 0 { idx += getPointsCount() }
         return points[idx]
     }
     
-    func moveNext() -> (PDFPage, Int) {
+    func moveNext() -> PDFAnnotation {
         idx += 1
         idx %= getPointsCount()
         return points[idx]
@@ -112,13 +112,10 @@ class PointHelper {
     // MARK: Adding Point
     
     func addPoint(_ height: Int, _ page: PDFPage) {
-        points.append((page, height))
-        addAnnotation(height, page, getPointsCount())
-    }
-    
-    fileprivate func addAnnotation(_ height: Int, _ page: PDFPage, _ number: Int) {
+        let number:Int = getPointsCount() + 1
         addPointLineGradient(height, page, number)
-        addNumber(height, page, number)
+        let pointNum = addPointNumber(height, page, number)
+        points.append(pointNum)
     }
     
     fileprivate func addPointLineGradient(_ height: Int, _ page: PDFPage, _ number: Int) {
@@ -147,7 +144,7 @@ class PointHelper {
         return inkAnnotation
     }
     
-    fileprivate func addNumber(_ height: Int, _ page: PDFPage, _ number: Int) {
+    fileprivate func addPointNumber(_ height: Int, _ page: PDFPage, _ number: Int) -> PDFAnnotation {
         let str = String(number)
         let pointNumText = PDFAnnotation(bounds: CGRect(origin: CGPoint(x: 10, y: height - pointNumberHeight), size: CGSize(width: 50, height: pointNumberHeight)), forType: .widget, withProperties: ["isPoint": true])
         
@@ -161,6 +158,8 @@ class PointHelper {
         pointNumText.backgroundColor = .clear
         
         page.addAnnotation(pointNumText)
+        
+        return pointNumText
     }
     
 }

@@ -74,14 +74,14 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         
     func prevPointButtonAction() {
         print("prevPointButtonAction")
-        let prev = pointHelper.movePrev()
-        pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: prev.1), size: CGSize(width: 1, height: -view.frame.height)), on: prev.0)
+        let prev:PDFAnnotation = pointHelper.movePrev()
+        pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: prev.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: prev.page!)
     }
     
     func nextPointButtonAction() {
         print("nextPointButtonAction")
-        let next = pointHelper.moveNext()
-        pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: next.1), size: CGSize(width: 1, height: -view.frame.height)), on: next.0)
+        let next:PDFAnnotation = pointHelper.moveNext()
+        pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: next.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: next.page!)
     }
     
 }
