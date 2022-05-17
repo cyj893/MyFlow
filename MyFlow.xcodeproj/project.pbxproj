@@ -90,20 +90,18 @@
 		AF8EDF7D282E3F7A00CCFF19 /* MyFlow */ = {
 			isa = PBXGroup;
 			children = (
+				AFD6DE352834000B00E9FA5E /* DocumentHelper */,
+				AFD6DE342833FFFF00E9FA5E /* PointHelper */,
+				AFD6DE332833FFDC00E9FA5E /* MyNavigationView */,
 				AF98A3882832A6140035601D /* MyExtensions */,
 				AF8EDF7E282E3F7A00CCFF19 /* AppDelegate.swift */,
-				AF8EDF80282E3F7A00CCFF19 /* DocumentBrowserViewController.swift */,
 				AF8EDF82282E3F7A00CCFF19 /* DocumentViewController.swift */,
-				AF8EDF84282E3F7A00CCFF19 /* Document.swift */,
+				AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */,
+				AFF8DA7F282F65F8005F0DED /* MyConstants.swift */,
 				AF8EDF86282E3F7A00CCFF19 /* Main.storyboard */,
 				AF8EDF89282E3F7B00CCFF19 /* Assets.xcassets */,
 				AF8EDF8B282E3F7B00CCFF19 /* LaunchScreen.storyboard */,
 				AF8EDF8E282E3F7B00CCFF19 /* Info.plist */,
-				AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */,
-				AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */,
-				AFF8DA7F282F65F8005F0DED /* MyConstants.swift */,
-				AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */,
-				AFD6DE312833B99800E9FA5E /* PointHelper.swift */,
 			);
 			path = MyFlow;
 			sourceTree = "<group>";
@@ -125,8 +123,34 @@
 				AF98A3892832A6380035601D /* StringExtension.swift */,
 				AF98A38B2832A6590035601D /* UIFontExtension.swift */,
 				AF98A38D2832A6760035601D /* UIColorExtension.swift */,
+				AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */,
 			);
 			path = MyExtensions;
+			sourceTree = "<group>";
+		};
+		AFD6DE332833FFDC00E9FA5E /* MyNavigationView */ = {
+			isa = PBXGroup;
+			children = (
+				AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */,
+			);
+			path = MyNavigationView;
+			sourceTree = "<group>";
+		};
+		AFD6DE342833FFFF00E9FA5E /* PointHelper */ = {
+			isa = PBXGroup;
+			children = (
+				AFD6DE312833B99800E9FA5E /* PointHelper.swift */,
+			);
+			path = PointHelper;
+			sourceTree = "<group>";
+		};
+		AFD6DE352834000B00E9FA5E /* DocumentHelper */ = {
+			isa = PBXGroup;
+			children = (
+				AF8EDF80282E3F7A00CCFF19 /* DocumentBrowserViewController.swift */,
+				AF8EDF84282E3F7A00CCFF19 /* Document.swift */,
+			);
+			path = DocumentHelper;
 			sourceTree = "<group>";
 		};
 		F01107C7CE67F05F784421B8 /* Frameworks */ = {
