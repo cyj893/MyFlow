@@ -106,7 +106,7 @@ extension DocumentViewController {
             return
         }
         if myNavigationView.getIsAddingPoints() {
-            pointHelper.addPoint(convertedLocation.y, page)
+            pointHelper.addPoint(Int(convertedLocation.y), page)
             return
         }
         if isShowingMyNavigationView {
@@ -168,16 +168,11 @@ extension DocumentViewController {
 extension DocumentViewController {
     
     fileprivate func handlePoints(_ convertedLocation: CGPoint, _ page: PDFPage) {
+        print(convertedLocation)
         guard let annotation = page.annotation(at: convertedLocation) else { return }
-        guard let _ = annotation.annotationKeyValues["/isPoint"] else { return }
         print(annotation)
+        guard let _ = annotation.annotationKeyValues["/isPoint"] else { return }
+        pointHelper.selectPoint(annotation)
     }
-    
-}
-
-
-// MARK: Add the Point
-
-extension DocumentViewController {
     
 }
