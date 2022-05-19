@@ -177,7 +177,7 @@ class MyNavigationView: UIView {
     
     fileprivate func clearSelectedPoint() {
         guard let currentPH = currentPH else { return }
-        currentPH.endSelectPoint()
+        currentPH.clearSelectedPoint()
     }
     
     
