@@ -142,7 +142,7 @@ extension DocumentViewController {
 
         case .ended, .cancelled, .failed:
             guard let _ = pointHelper.getNowSelectedPoint() else { return }
-            pointHelper.endSelectPoint()
+            pointHelper.clearSelectedPoint()
         default:
             break
         }
