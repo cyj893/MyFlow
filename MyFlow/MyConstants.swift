@@ -16,3 +16,19 @@ struct AnimateDuration {
     static let fast:TimeInterval = 0.2
     static let normal:TimeInterval = 0.4
 }
+
+struct GradientColor {
+    static let normal:[UIColor] = [
+        UIColor(rgb: 0x769FCD, alpha: 0.5),
+        UIColor(rgb: 0xB9D7EA, alpha: 0.5),
+        UIColor(rgb: 0xD6E6F2, alpha: 0.5),
+        UIColor(rgb: 0xF7FBFC, alpha: 0.5)
+    ]
+
+    static let selected:[UIColor] = [
+        UIColor(rgb: 0xc9184a, alpha: 0.5),
+        UIColor(rgb: 0xff758f, alpha: 0.5),
+        UIColor(rgb: 0xffb3c1, alpha: 0.5),
+        UIColor(rgb: 0xffccd5, alpha: 0.5)
+    ]
+}
