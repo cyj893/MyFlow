@@ -32,13 +32,19 @@ class PointHelper {
 
 extension PointHelper {
     
-    func moveToPrev() -> PDFAnnotation {
+    func moveToPrev() throws -> PDFAnnotation {
+        guard getPointsCount() > 0 else {
+            throw PointError.emptyPoints
+        }
         idx -= 1
         if idx < 0 { idx += getPointsCount() }
         return points[idx]
     }
     
-    func moveToNext() -> PDFAnnotation {
+    func moveToNext() throws -> PDFAnnotation {
+        guard getPointsCount() > 0 else {
+            throw PointError.emptyPoints
+        }
         idx += 1
         idx %= getPointsCount()
         return points[idx]

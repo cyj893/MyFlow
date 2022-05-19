@@ -75,14 +75,26 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         
     func prevPointButtonAction() {
         print("prevPointButtonAction")
-        let prev:PDFAnnotation = pointHelper.moveToPrev()
-        pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: prev.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: prev.page!)
+        do {
+            let prev:PDFAnnotation = try pointHelper.moveToPrev()
+            pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: prev.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: prev.page!)
+        } catch {
+            notificateEmptyPoints()
+        }
     }
     
     func nextPointButtonAction() {
         print("nextPointButtonAction")
-        let next:PDFAnnotation = pointHelper.moveToNext()
-        pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: next.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: next.page!)
+        do {
+            let next:PDFAnnotation = try pointHelper.moveToNext()
+            pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: next.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: next.page!)
+        } catch {
+            notificateEmptyPoints()
+        }
+    }
+    
+    func notificateEmptyPoints() {
+        
     }
     
 }
