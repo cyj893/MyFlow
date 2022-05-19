@@ -41,7 +41,8 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     }
         
     fileprivate func setMyNavigationView() {
-        myNavigationView.setCurrentVC(vc: self)
+        myNavigationView.setCurrentVC(viewController: self)
+        myNavigationView.setCurrentPH(pointHelper: pointHelper)
         view.addSubview(myNavigationView)
         myNavigationView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
@@ -141,7 +142,7 @@ extension DocumentViewController {
 
         case .ended, .cancelled, .failed:
             guard let _ = pointHelper.getNowSelectedPoint() else { return }
-            pointHelper.endMovePoint()
+            pointHelper.endSelectPoint()
         default:
             break
         }

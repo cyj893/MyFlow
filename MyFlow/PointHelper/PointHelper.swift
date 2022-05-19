@@ -81,11 +81,11 @@ extension PointHelper {
     func selectPoint(_ annotation: PDFAnnotation) {
         if nowSelectedPoint != nil {
             if nowSelectedPoint == annotation {
-                endMovePoint()
+                endSelectPoint()
                 return
             }
             else {
-                endMovePoint()
+                endSelectPoint()
             }
         }
         nowSelectedPoint = annotation
@@ -131,7 +131,8 @@ extension PointHelper {
         }
     }
     
-    func endMovePoint() {
+    func endSelectPoint() {
+        if nowSelectedPoint == nil { return }
         for i in 0...3 {
             nowSelectedPointLines[i].color = gradientColors[i]
         }
