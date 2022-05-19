@@ -14,6 +14,7 @@ class MyNavigationView: UIView {
     static let singletonView = MyNavigationView()
     
     private var currentVC:DocumentViewController?
+    private var currentPH:PointHelper?
     
     private let optionsView = UIView()
     private let backButton = UIButton()
@@ -50,7 +51,8 @@ class MyNavigationView: UIView {
     func getIsAddingPoints() -> Bool { addPointsButton.isSelected }
     func getIsHandlingPoints() -> Bool { handlePointButton.isSelected }
     
-    func setCurrentVC(vc: DocumentViewController) { currentVC = vc }
+    func setCurrentVC(viewController: DocumentViewController) { currentVC = viewController }
+    func setCurrentPH(pointHelper: PointHelper) { currentPH = pointHelper }
     
     
     // MARK: Setting Buttons
@@ -146,13 +148,19 @@ class MyNavigationView: UIView {
         addPointsButton.toggleIconWithTransition()
         if getIsAddingPoints() { print("포인트 추가") }
         else { print("포인트 추가 끝") }
-        if getIsHandlingPoints() { handlePointButton.toggleIconWithTransition() }
+        if getIsHandlingPoints() {
+            handlePointButton.toggleIconWithTransition()
+            clearSelectedPoint()
+        }
     }
     
     @objc fileprivate func toggleHandlingPointsMode() {
         handlePointButton.toggleIconWithTransition()
         if getIsHandlingPoints() { print("포인트 핸들링") }
-        else { print("포인트 핸들링 끝") }
+        else {
+            print("포인트 핸들링 끝")
+            clearSelectedPoint()
+        }
         if getIsAddingPoints() { addPointsButton.toggleIconWithTransition() }
     }
     
@@ -164,6 +172,12 @@ class MyNavigationView: UIView {
     @objc fileprivate func nextPointButtonAction() {
         guard let currentVC = currentVC else { return }
         currentVC.nextPointButtonAction()
+    }
+    
+    
+    fileprivate func clearSelectedPoint() {
+        guard let currentPH = currentPH else { return }
+        currentPH.endSelectPoint()
     }
     
     
