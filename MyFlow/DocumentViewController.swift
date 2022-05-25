@@ -12,6 +12,7 @@ import PDFKit
 
 class DocumentViewController: UIViewController, PDFDocumentDelegate {
     var document: UIDocument?
+    var pdfDocument: PDFDocument?
     
     let myNavigationView = MyNavigationView.singletonView
     private var pdfView = PDFView()
@@ -22,10 +23,13 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        document?.open(completionHandler: { (success) in
+        document?.open(completionHandler: { [self] (success) in
             if success {
                 print("success")
-                let pdfDocument = PDFDocument(url: self.document!.fileURL)!
+                self.pdfDocument = PDFDocument(url: self.document!.fileURL)
+                guard let pdfDocument = self.pdfDocument else {
+                    return
+                }
                 pdfDocument.delegate = self
                 self.pdfView.document = pdfDocument
                 if pdfDocument.allowsCommenting == false {
@@ -96,6 +100,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     func showAddPointsModalView() {
         let viewController = AddPointsModalViewController()
         viewController.pointHelper = pointHelper
+        viewController.pdfDocument = pdfDocument!
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.modalPresentationStyle = .pageSheet
 
