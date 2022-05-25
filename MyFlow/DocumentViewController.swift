@@ -79,7 +79,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
             let prev:PDFAnnotation = try pointHelper.moveToPrev()
             pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: prev.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: prev.page!)
         } catch {
-            notificateEmptyPoints()
+            showAddPointsModalView()
         }
     }
     
@@ -89,12 +89,24 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
             let next:PDFAnnotation = try pointHelper.moveToNext()
             pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: next.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: next.page!)
         } catch {
-            notificateEmptyPoints()
+            showAddPointsModalView()
         }
     }
     
-    func notificateEmptyPoints() {
-        
+    func showAddPointsModalView() {
+        let viewController = AddPointsModalViewController()
+        viewController.pointHelper = pointHelper
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.modalPresentationStyle = .pageSheet
+
+        if #available(iOS 15.0, *) {
+            if let sheet = navigationController.sheetPresentationController {
+                sheet.detents = [.medium()]
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+        present(navigationController, animated: true, completion: nil)
     }
     
 }
