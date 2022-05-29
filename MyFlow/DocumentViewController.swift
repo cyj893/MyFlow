@@ -16,9 +16,15 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     
     let myNavigationView = MyNavigationView.singletonView
     private var pdfView = PDFView()
-    private var isShowingMyNavigationView: Bool = true
+    private var nowState: PdfViewState?
     
     private var pointHelper = PointHelper()
+    
+    
+    // MARK: Getter
+    func getPointHelper() -> PointHelper { return pointHelper }
+    func getPdfView() -> PDFView { return pdfView }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -71,12 +77,18 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        nowState = NormalState(vc: self)
+        
         setMyNavigationView()
         setPdfView()
         
         addTapGesture()
     }
         
+    func changeState(state: PdfViewState) {
+        nowState = state
+    }
+    
     func prevPointButtonAction() {
         print("prevPointButtonAction")
         do {
@@ -117,7 +129,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
 }
 
 
-// MARK: Define Tap Gesture
+// MARK: Define Gestures
 
 extension DocumentViewController {
     
@@ -137,22 +149,7 @@ extension DocumentViewController {
         guard let page = pdfView.page(for: location, nearest: true) else { return }
         let convertedLocation = pdfView.convert(location, to: page)
         
-        if myNavigationView.getIsHandlingPoints() {
-            handlePoints(convertedLocation, page)
-            return
-        }
-        if myNavigationView.getIsAddingPoints() {
-            pointHelper.addPoint(Int(convertedLocation.y), page)
-            return
-        }
-        if isShowingMyNavigationView {
-            hideNavigationView()
-            isShowingMyNavigationView = false
-        }
-        else {
-            showNavigationView()
-            isShowingMyNavigationView = true
-        }
+        nowState?.tapProcess(location: convertedLocation, page: page)
     }
     
     @objc func setPanGesture(_ recognizer: UIPanGestureRecognizer) {
@@ -175,62 +172,6 @@ extension DocumentViewController {
         default:
             break
         }
-    }
-    
-}
-
-
-// MARK: Toggle NavigationView
-
-extension DocumentViewController {
-    
-    fileprivate func showNavigationView() {
-        print("show myNavigationView")
-        myNavigationView.snp.remakeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(100)
-        }
-        pdfView.snp.remakeConstraints {
-            $0.top.equalTo(myNavigationView.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
-        
-        animateIt()
-    }
-    
-    fileprivate func hideNavigationView() {
-        print("hide myNavigationView")
-        myNavigationView.snp.remakeConstraints {
-            $0.top.equalToSuperview().offset(-100)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(0)
-        }
-        pdfView.snp.remakeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        animateIt()
-    }
-    
-    fileprivate func animateIt() {
-        UIView.animate(
-            withDuration: 0.5,
-            animations: self.view.layoutIfNeeded
-        )
-    }
-}
-
-
-// MARK: Handle Points
-
-extension DocumentViewController {
-    
-    fileprivate func handlePoints(_ convertedLocation: CGPoint, _ page: PDFPage) {
-        print(convertedLocation)
-        guard let annotation = page.annotation(at: convertedLocation) else { return }
-        print(annotation)
-        guard let _ = annotation.annotationKeyValues["/isPoint"] else { return }
-        pointHelper.selectPoint(annotation)
     }
     
 }

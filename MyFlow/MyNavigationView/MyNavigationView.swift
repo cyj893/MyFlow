@@ -159,8 +159,14 @@ class MyNavigationView: UIView {
     
     @objc fileprivate func toggleAddingPointsMode() {
         addPointsButton.toggleIconWithTransition()
-        if getIsAddingPoints() { print("포인트 추가") }
-        else { print("포인트 추가 끝") }
+        if getIsAddingPoints() {
+            print("포인트 추가")
+            currentVC?.changeState(state: AddPointsState(vc: currentVC))
+        }
+        else {
+            print("포인트 추가 끝")
+            currentVC?.changeState(state: NormalState(vc: currentVC))
+        }
         if getIsHandlingPoints() {
             handlePointButton.toggleIconWithTransition()
             clearSelectedPoint()
@@ -169,9 +175,13 @@ class MyNavigationView: UIView {
     
     @objc fileprivate func toggleHandlingPointsMode() {
         handlePointButton.toggleIconWithTransition()
-        if getIsHandlingPoints() { print("포인트 핸들링") }
+        if getIsHandlingPoints() {
+            print("포인트 핸들링")
+            currentVC?.changeState(state: HandlePointsState(vc: currentVC))
+        }
         else {
             print("포인트 핸들링 끝")
+            currentVC?.changeState(state: NormalState(vc: currentVC))
             clearSelectedPoint()
         }
         if getIsAddingPoints() { addPointsButton.toggleIconWithTransition() }
