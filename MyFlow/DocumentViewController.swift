@@ -12,6 +12,7 @@ import PDFKit
 
 class DocumentViewController: UIViewController, PDFDocumentDelegate {
     var document: UIDocument?
+    var pdfDocument: PDFDocument?
     
     let myNavigationView = MyNavigationView.singletonView
     private var pdfView = PDFView()
@@ -22,10 +23,13 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        document?.open(completionHandler: { (success) in
+        document?.open(completionHandler: { [self] (success) in
             if success {
                 print("success")
-                let pdfDocument = PDFDocument(url: self.document!.fileURL)!
+                self.pdfDocument = PDFDocument(url: self.document!.fileURL)
+                guard let pdfDocument = self.pdfDocument else {
+                    return
+                }
                 pdfDocument.delegate = self
                 self.pdfView.document = pdfDocument
                 if pdfDocument.allowsCommenting == false {
@@ -75,14 +79,39 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         
     func prevPointButtonAction() {
         print("prevPointButtonAction")
-        let prev:PDFAnnotation = pointHelper.moveToPrev()
-        pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: prev.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: prev.page!)
+        do {
+            let prev:PDFAnnotation = try pointHelper.moveToPrev()
+            pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: prev.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: prev.page!)
+        } catch {
+            showAddPointsModalView()
+        }
     }
     
     func nextPointButtonAction() {
         print("nextPointButtonAction")
-        let next:PDFAnnotation = pointHelper.moveToNext()
-        pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: next.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: next.page!)
+        do {
+            let next:PDFAnnotation = try pointHelper.moveToNext()
+            pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: next.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: next.page!)
+        } catch {
+            showAddPointsModalView()
+        }
+    }
+    
+    func showAddPointsModalView() {
+        let viewController = AddPointsModalViewController()
+        viewController.pointHelper = pointHelper
+        viewController.pdfDocument = pdfDocument!
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.modalPresentationStyle = .pageSheet
+
+        if #available(iOS 15.0, *) {
+            if let sheet = navigationController.sheetPresentationController {
+                sheet.detents = [.medium()]
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+        present(navigationController, animated: true, completion: nil)
     }
     
 }

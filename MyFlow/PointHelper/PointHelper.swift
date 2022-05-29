@@ -32,13 +32,19 @@ class PointHelper {
 
 extension PointHelper {
     
-    func moveToPrev() -> PDFAnnotation {
+    func moveToPrev() throws -> PDFAnnotation {
+        guard getPointsCount() > 0 else {
+            throw PointError.emptyPoints
+        }
         idx -= 1
         if idx < 0 { idx += getPointsCount() }
         return points[idx]
     }
     
-    func moveToNext() -> PDFAnnotation {
+    func moveToNext() throws -> PDFAnnotation {
+        guard getPointsCount() > 0 else {
+            throw PointError.emptyPoints
+        }
         idx += 1
         idx %= getPointsCount()
         return points[idx]
@@ -102,7 +108,7 @@ extension PointHelper {
         extractedFunc(nowSelectedPoint, page)
         
         nowSelectedPoint.bounds = CGRect(
-            origin: CGPoint(x: 10, y: height - pointBuilder.getPointNumberHeight()),
+            origin: CGPoint(x: 10, y: height - Int(MyFont.sizePointNum.height)),
             size: nowSelectedPoint.bounds.size)
         for i in 0...3 {
             nowSelectedPointLines[i].bounds = CGRect(

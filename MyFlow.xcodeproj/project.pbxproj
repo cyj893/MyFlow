@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A64057F6052DD8B2D450EEF /* Pods_MyFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F29E0F658105FB87AA1F90FB /* Pods_MyFlow.framework */; };
 		73894CB62959C9438C6F0780 /* Pods_MyFlowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12557F259FCE95C3D038CFF7 /* Pods_MyFlowTests.framework */; };
+		5A64057F6052DD8B2D450EEF /* Pods_MyFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F29E0F658105FB87AA1F90FB /* Pods_MyFlow.framework */; };
+		AF255AA1283E809E00747FF3 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF255AA0283E809E00747FF3 /* UIDeviceExtension.swift */; };
+		AF255AA3283E843A00747FF3 /* AddPointsModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF255AA2283E843A00747FF3 /* AddPointsModalViewController.swift */; };
+		AF255AA5283E95C900747FF3 /* ThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF255AA4283E95C900747FF3 /* ThumbnailCell.swift */; };
 		AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8936B92836655C001031FC /* PointBuilder.swift */; };
+		AF8936BC28367FD2001031FC /* MyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8936BB28367FD2001031FC /* MyError.swift */; };
 		AF8EDF7F282E3F7A00CCFF19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8EDF7E282E3F7A00CCFF19 /* AppDelegate.swift */; };
 		AF8EDF81282E3F7A00CCFF19 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8EDF80282E3F7A00CCFF19 /* DocumentBrowserViewController.swift */; };
 		AF8EDF83282E3F7A00CCFF19 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8EDF82282E3F7A00CCFF19 /* DocumentViewController.swift */; };
@@ -47,7 +51,11 @@
 		72830817BE64C5FD7A97FEFE /* Pods-MyFlow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFlow.debug.xcconfig"; path = "Target Support Files/Pods-MyFlow/Pods-MyFlow.debug.xcconfig"; sourceTree = "<group>"; };
 		8C90261A3B6F029D0A3C9123 /* Pods-MyFlow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFlow.release.xcconfig"; path = "Target Support Files/Pods-MyFlow/Pods-MyFlow.release.xcconfig"; sourceTree = "<group>"; };
 		AE5AF18F3489F07A8DE9ECAF /* Pods-MyFlowTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFlowTests.debug.xcconfig"; path = "Target Support Files/Pods-MyFlowTests/Pods-MyFlowTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AF255AA0283E809E00747FF3 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
+		AF255AA2283E843A00747FF3 /* AddPointsModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointsModalViewController.swift; sourceTree = "<group>"; };
+		AF255AA4283E95C900747FF3 /* ThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCell.swift; sourceTree = "<group>"; };
 		AF8936B92836655C001031FC /* PointBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointBuilder.swift; sourceTree = "<group>"; };
+		AF8936BB28367FD2001031FC /* MyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyError.swift; sourceTree = "<group>"; };
 		AF8EDF7B282E3F7A00CCFF19 /* MyFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF8EDF7E282E3F7A00CCFF19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF8EDF80282E3F7A00CCFF19 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +139,9 @@
 				AF8EDF89282E3F7B00CCFF19 /* Assets.xcassets */,
 				AF8EDF8B282E3F7B00CCFF19 /* LaunchScreen.storyboard */,
 				AF8EDF8E282E3F7B00CCFF19 /* Info.plist */,
+				AF8936BB28367FD2001031FC /* MyError.swift */,
+				AF255AA2283E843A00747FF3 /* AddPointsModalViewController.swift */,
+				AF255AA4283E95C900747FF3 /* ThumbnailCell.swift */,
 			);
 			path = MyFlow;
 			sourceTree = "<group>";
@@ -153,6 +164,7 @@
 				AF98A38B2832A6590035601D /* UIFontExtension.swift */,
 				AF98A38D2832A6760035601D /* UIColorExtension.swift */,
 				AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */,
+				AF255AA0283E809E00747FF3 /* UIDeviceExtension.swift */,
 			);
 			path = MyExtensions;
 			sourceTree = "<group>";
@@ -400,9 +412,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF255AA5283E95C900747FF3 /* ThumbnailCell.swift in Sources */,
 				AF8EDF85282E3F7A00CCFF19 /* Document.swift in Sources */,
 				AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */,
 				AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */,
+				AF255AA3283E843A00747FF3 /* AddPointsModalViewController.swift in Sources */,
+				AF8936BC28367FD2001031FC /* MyError.swift in Sources */,
 				AF98A38A2832A6380035601D /* StringExtension.swift in Sources */,
 				AF8EDF83282E3F7A00CCFF19 /* DocumentViewController.swift in Sources */,
 				AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */,
@@ -412,6 +427,7 @@
 				AFD6DE322833B99800E9FA5E /* PointHelper.swift in Sources */,
 				AF8EDF7F282E3F7A00CCFF19 /* AppDelegate.swift in Sources */,
 				AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */,
+				AF255AA1283E809E00747FF3 /* UIDeviceExtension.swift in Sources */,
 				AF98A38C2832A6590035601D /* UIFontExtension.swift in Sources */,
 				AF98A38E2832A6760035601D /* UIColorExtension.swift in Sources */,
 			);

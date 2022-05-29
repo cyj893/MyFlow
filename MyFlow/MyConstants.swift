@@ -32,3 +32,19 @@ struct GradientColor {
         UIColor(rgb: 0xffccd5, alpha: 0.5)
     ]
 }
+
+struct MyColor {
+    static let navigationBackgroundColor = UIColor(named: "navigationBackgroundColor")
+    static let borderColor = UIColor(named: "borderColor")
+    static let pageSheetBackgroundColor = UIColor(named: "pageSheetBackgroundColor")
+    static let thumbnailViewBackgroundColor = UIColor(named: "thumbnailViewBackgroundColor")
+}
+
+struct MyFont {
+    static let middle = UIFont.Fonarto(size: 25)
+    static let pointNum = UIFont.Fonarto(size: 20)
+    
+    static let sizeMiddle = "00".sizeOfString(font: middle!)
+    static let sizePointNum = "012345678".sizeOfString(font: MyFont.pointNum!)
+}
+
