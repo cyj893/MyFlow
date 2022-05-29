@@ -20,6 +20,7 @@ class MyNavigationView: UIView {
     private let backButton = UIButton()
     
     
+    private let addPointsPagesButton = UIButton()
     private let handlePointButton = UIButton()
     private let prevPointButton = UIButton()
     private let addPointsButton = UIButton()
@@ -61,7 +62,7 @@ class MyNavigationView: UIView {
         setBackButton()
         setPlayButton()
         setPointsButtons()
-        [backButton, playButton, prevPointButton, addPointsButton, nextPointButton, handlePointButton].forEach {
+        [backButton, playButton, addPointsPagesButton, prevPointButton, addPointsButton, nextPointButton, handlePointButton].forEach {
             $0.snp.makeConstraints { make in
                 make.centerY.equalToSuperview()
             }
@@ -92,6 +93,7 @@ class MyNavigationView: UIView {
         setAddPointsButton()
         setPrevPointButton()
         setHandlePointButton()
+        setAddPointsPagesButton()
     }
     
     fileprivate func setNextPointButton() {
@@ -107,8 +109,8 @@ class MyNavigationView: UIView {
     fileprivate func setAddPointsButton() {
         self.addSubview(addPointsButton)
         addPointsButton.then {
-            $0.setIconStyle(systemName: "rectangle.stack.badge.plus")
-            $0.setIconStyle(systemName: "rectangle.stack.fill.badge.plus", tintColor: .orange, forState: .selected)
+            $0.setIconStyle(systemName: "plus.app")
+            $0.setIconStyle(systemName: "plus.app.fill", tintColor: .orange, forState: .selected)
         }.snp.makeConstraints {
             $0.trailing.equalTo(nextPointButton.snp.leading).offset(-MyOffset.betweenIcon)
         }
@@ -134,6 +136,17 @@ class MyNavigationView: UIView {
             $0.trailing.equalTo(prevPointButton.snp.leading).offset(-MyOffset.betweenIcon)
         }
         handlePointButton.addTarget(self, action: #selector(toggleHandlingPointsMode), for: .touchUpInside)
+    }
+    
+    fileprivate func setAddPointsPagesButton() {
+        self.addSubview(addPointsPagesButton)
+        addPointsPagesButton.then {
+            $0.setIconStyle(systemName: "plus.square.on.square")
+            $0.setIconStyle(systemName: "plus.square.on.square.fill", forState: .selected)
+        }.snp.makeConstraints {
+            $0.trailing.equalTo(handlePointButton.snp.leading).offset(-MyOffset.betweenIcon)
+        }
+        addPointsPagesButton.addTarget(self, action: #selector(addPointsPagesButtonAction), for: .touchUpInside)
     }
     
     
@@ -172,6 +185,11 @@ class MyNavigationView: UIView {
     @objc fileprivate func nextPointButtonAction() {
         guard let currentVC = currentVC else { return }
         currentVC.nextPointButtonAction()
+    }
+    
+    @objc fileprivate func addPointsPagesButtonAction() {
+        guard let currentVC = currentVC else { return }
+        currentVC.showAddPointsModalView()
     }
     
     
