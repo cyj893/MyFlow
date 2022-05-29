@@ -36,6 +36,8 @@ struct GradientColor {
 struct MyColor {
     static let navigationBackgroundColor = UIColor(named: "navigationBackgroundColor")
     static let borderColor = UIColor(named: "borderColor")
+    static let pageSheetBackgroundColor = UIColor(named: "pageSheetBackgroundColor")
+    static let thumbnailViewBackgroundColor = UIColor(named: "thumbnailViewBackgroundColor")
 }
 
 struct MyFont {

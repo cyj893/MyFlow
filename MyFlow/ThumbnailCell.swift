@@ -42,6 +42,7 @@ class ThumbnailCell: UICollectionViewCell {
             $0.text = " "
             $0.font = MyFont.middle
             $0.textAlignment = .center
+            $0.textColor = .white
             $0.backgroundColor = .gray.withAlphaComponent(0.5)
             $0.layer.cornerRadius = MyFont.sizeMiddle.height/2
             $0.layer.masksToBounds = true
