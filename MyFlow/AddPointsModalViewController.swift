@@ -15,6 +15,8 @@ class AddPointsModalViewController: UIViewController {
     var thumbnails: [UIImage] = []
     var maxHeight:Int = 0
     
+    var orders: [Int] = []
+        
     lazy var thumbnailCollectionView:UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout.init()
         flowLayout.scrollDirection = .horizontal
@@ -34,7 +36,7 @@ class AddPointsModalViewController: UIViewController {
         setThumbnailCollectionView()
     }
     
-    fileprivate func generatePdfThumbnail(at pageIndex: Int, width: CGFloat = 100) -> UIImage? {
+    fileprivate func generatePdfThumbnail(at pageIndex: Int, width: CGFloat = 150) -> UIImage? {
         guard let page = pdfDocument?.page(at: pageIndex) else {
             return nil
         }
@@ -63,7 +65,6 @@ class AddPointsModalViewController: UIViewController {
         
         thumbnailCollectionView.backgroundColor = .gray
         
-        thumbnailCollectionView.allowsMultipleSelection = true
         thumbnailCollectionView.showsHorizontalScrollIndicator = true
         thumbnailCollectionView.register(ThumbnailCell.classForCoder(), forCellWithReuseIdentifier: "ThumbnailCell")
         
@@ -92,6 +93,37 @@ extension AddPointsModalViewController: UICollectionViewDelegate, UICollectionVi
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: "ThumbnailCell", for: indexPath) as! ThumbnailCell
         cell.thumbnailView.image = thumbnails[index]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let index = indexPath.item
+        if let nowIndex = orders.firstIndex(of: index) {
+            orders.remove(at: nowIndex)
+            updateOrder(pageIdx: index, order: nil, collectionView)
+            for i in nowIndex..<orders.count {
+                updateOrder(pageIdx: orders[i], order: i+1, collectionView)
+            }
+        }
+        else {
+            orders.append(index)
+            updateOrder(pageIdx: index, order: orders.count, collectionView)
+        }
+    }
+    
+    func updateOrder(pageIdx: Int, order: Int?, _ collectionView: UICollectionView) {
+        let indexPath = IndexPath(item: pageIdx, section: 0)
+        if let cell = collectionView.cellForItem(at: indexPath) as? ThumbnailCell {
+            if let order = order {
+                cell.orderLabel.text = String(order)
+                cell.orderLabel.backgroundColor = MyColor.borderColor
+                cell.thumbnailView.layer.borderWidth = 5
+            }
+            else {
+                cell.orderLabel.text = " "
+                cell.orderLabel.backgroundColor = .gray.withAlphaComponent(0.5)
+                cell.thumbnailView.layer.borderWidth = 0
+            }
+        }
     }
     
 }

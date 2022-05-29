@@ -108,7 +108,7 @@ extension PointHelper {
         extractedFunc(nowSelectedPoint, page)
         
         nowSelectedPoint.bounds = CGRect(
-            origin: CGPoint(x: 10, y: height - pointBuilder.getPointNumberHeight()),
+            origin: CGPoint(x: 10, y: height - Int(MyFont.sizePointNum.height)),
             size: nowSelectedPoint.bounds.size)
         for i in 0...3 {
             nowSelectedPointLines[i].bounds = CGRect(

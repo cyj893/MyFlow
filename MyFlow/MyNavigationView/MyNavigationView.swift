@@ -32,7 +32,7 @@ class MyNavigationView: UIView {
         super.init(frame: .zero)
         
         self.addSubview(optionsView)
-        optionsView.backgroundColor = UIColor(named: "navigationBackgroundColor")
+        optionsView.backgroundColor = MyColor.navigationBackgroundColor
         optionsView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(100)

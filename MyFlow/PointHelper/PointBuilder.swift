@@ -10,21 +10,12 @@ import PDFKit
 
 class PointBuilder {
     
-    let font = UIFont.Fonarto(size: 20)
-    
     private var border = PDFBorder()
-    private var pointNumberHeight: Int = 30
-    
+    private var pointNumberHeight = Int(MyFont.sizePointNum.height)
     
     init() {
         border.lineWidth = 1.0
-        pointNumberHeight = Int("012345678".sizeOfString(font: font!).height)
     }
-    
-    
-    // MARK: Getter
-    
-    func getPointNumberHeight() -> Int { return pointNumberHeight }
     
     
     // MARK: Build Point Line, Number
@@ -75,7 +66,7 @@ class PointBuilder {
         pointNumText.widgetFieldType = .text
         
         // pointNumText.alignment = .center
-        pointNumText.font = font
+        pointNumText.font = MyFont.pointNum
         pointNumText.fontColor = .systemPink
         pointNumText.color = .clear
         pointNumText.backgroundColor = .clear
