@@ -10,3 +10,10 @@ import Foundation
 enum PointError: Error {
     case emptyPoints
 }
+
+enum PdfError: Error {
+    case cannotFindDocument
+    case cannotFindScrollView
+    case cannotFindPage
+    case cannotGetScaleFactor
+}
