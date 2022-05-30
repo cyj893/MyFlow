@@ -10,3 +10,8 @@ import Foundation
 enum PointError: Error {
     case emptyPoints
 }
+
+enum PdfError: Error {
+    case emptyDocument
+    case cannotFindScrollView
+}

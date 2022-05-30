@@ -19,16 +19,14 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     private var nowState: PdfViewState?
     
     private var pointHelper = PointHelper()
-    
+    private var moveStrategy: MoveToPoint?
     
     // MARK: Getter
     func getPointHelper() -> PointHelper { return pointHelper }
     func getPdfView() -> PDFView { return pdfView }
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    func openDocument() {
         document?.open(completionHandler: { [self] (success) in
             if success {
                 print("success")
@@ -42,6 +40,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
                     // TODO: presenting an message to the user.
                     print("This file cannot be commented")
                 }
+                setMoveStrategy()
             }
             else {
                 print("error")
@@ -74,6 +73,15 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         pdfView.backgroundColor = .black
     }
     
+    fileprivate func setMoveStrategy() {
+        do {
+            moveStrategy = try UseScrollView(pdfView: pdfView)
+        } catch {
+            // TODO: Aleart Cannot Find ScrollView
+            moveStrategy = UseGo(vc: self)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,6 +91,8 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         setPdfView()
         
         addTapGesture()
+        
+        openDocument()
     }
         
     func changeState(state: PdfViewState) {
@@ -93,7 +103,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         print("prevPointButtonAction")
         do {
             let prev:PDFAnnotation = try pointHelper.moveToPrev()
-            pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: prev.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: prev.page!)
+            moveStrategy?.move(to: prev)
         } catch {
             showAddPointsModalView()
         }
@@ -103,7 +113,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         print("nextPointButtonAction")
         do {
             let next:PDFAnnotation = try pointHelper.moveToNext()
-            pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: next.bounds.maxY), size: CGSize(width: 1, height: -view.frame.height)), on: next.page!)
+            moveStrategy?.move(to: next)
         } catch {
             showAddPointsModalView()
         }
