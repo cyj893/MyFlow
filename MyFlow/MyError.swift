@@ -12,6 +12,8 @@ enum PointError: Error {
 }
 
 enum PdfError: Error {
-    case emptyDocument
+    case cannotFindDocument
     case cannotFindScrollView
+    case cannotFindPage
+    case cannotGetScaleFactor
 }

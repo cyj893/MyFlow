@@ -76,8 +76,11 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     fileprivate func setMoveStrategy() {
         do {
             moveStrategy = try UseScrollView(pdfView: pdfView)
+        } catch let e as PdfError {
+            // TODO: Aleart Error
+            moveStrategy = UseGo(vc: self)
         } catch {
-            // TODO: Aleart Cannot Find ScrollView
+            // TODO: Aleart Unexpected Error
             moveStrategy = UseGo(vc: self)
         }
     }

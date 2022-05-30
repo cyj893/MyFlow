@@ -24,24 +24,24 @@ struct UseGo: MoveToPoint {
 
 struct UseScrollView: MoveToPoint {
     private weak var pdfView: PDFView?
-    private var pdfScrollView: UIScrollView?
+    private var pdfScrollView: UIScrollView
+    private var pdfDocument: PDFDocument
     private var pageHeights: [CGFloat] = []
     private var pageHeightsPrefixSum: [CGFloat] = []
     
-    public init (pdfView: PDFView) {
+    public init (pdfView: PDFView) throws {
         self.pdfView = pdfView
-        if let pdfScrollView = pdfView.subviews.first as? UIScrollView {
-            self.pdfScrollView = pdfScrollView
+        guard let pdfScrollView = pdfView.subviews.first as? UIScrollView else {
+            throw PdfError.cannotFindScrollView
         }
-        else {
-            return
-        }
+        self.pdfScrollView = pdfScrollView
         guard let pdfDocument = pdfView.document else {
-            return
+            throw PdfError.cannotFindDocument
         }
+        self.pdfDocument = pdfDocument
         for i in 0..<pdfDocument.pageCount {
             guard let page = pdfDocument.page(at: i) else {
-                return
+                throw PdfError.cannotFindPage
             }
             let pageSize = page.bounds(for: .mediaBox)
             pageHeights.append(pageSize.height)
@@ -55,17 +55,20 @@ struct UseScrollView: MoveToPoint {
     }
     
     func move(to point: PDFAnnotation) {
-        guard let pdfScrollView = pdfScrollView else { return }
-        guard let pdfDocument = pdfView?.document else {
-            return
+        do {
+            try tryMove(to: point)
+        } catch {
+            // TODO: log
         }
-        
+    }
+    
+    func tryMove(to point: PDFAnnotation) throws {
         // Actual scrollView's height(pdfScrollView?.contentSize.height)
         // keeps changing depending on whether user zoom or not.
         // So get scaleFactor from pdfView and multiply scrollView's height by it
         // to get the converted height of the current scrollview.
         guard let scaleFactor = pdfView?.scaleFactor else {
-            return
+            throw PdfError.cannotGetScaleFactor
         }
         let pageIndex: Int = pdfDocument.index(for: point.page!)
         let height = pageHeightsPrefixSum[pageIndex] + pageHeights[pageIndex] - point.bounds.maxY
