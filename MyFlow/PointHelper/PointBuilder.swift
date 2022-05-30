@@ -8,9 +8,12 @@
 import UIKit
 import PDFKit
 
+/// Builds the point annotaion group at specific height.
 class PointBuilder {
     
+    /// line annotation's border.
     private var border = PDFBorder()
+    /// pointNumber annotation's height.
     private var pointNumberHeight = Int(MyFont.sizePointNum.height)
     
     init() {
@@ -20,6 +23,12 @@ class PointBuilder {
     
     // MARK: Build Point Line, Number
     
+    /// Returns gradient line annotation group.
+    ///
+    /// - Parameters:
+    ///   - pageWidth: PDFPage's width. Becomes the line annotaion's length.
+    ///   - height: Height position at PDFPage.
+    /// - Returns: An array of line annotations each 1 px thick and 1 different in height.
     func getPointLineGradient(pageWidth: Int, height: Int) -> [PDFAnnotation] {
         var lines:[PDFAnnotation] = []
         for i in 0...3 {
@@ -29,6 +38,14 @@ class PointBuilder {
         return lines
     }
     
+    
+    /// Returns gradient line annotation.
+    ///
+    /// - Parameters:
+    ///   - pageWidth: PDFPage's width. Becomes the line annotaion's length.
+    ///   - height: Height position at PDFPage.
+    ///   - color: Line's color. Default is blue,
+    /// - Returns: A colored line annotation with a thickness of 1 px that exists at a certain height.
     fileprivate func buildPointLine(pageWidth: Int, height: Int, color: UIColor = .blue) -> PDFAnnotation {
         let bounds = CGRect(
             origin: CGPoint(x: 0, y: height - 1),
@@ -51,6 +68,12 @@ class PointBuilder {
         return lineAnnotation
     }
     
+    /// Returns point number annotation.
+    ///
+    /// - Parameters:
+    ///   - number: Point's number by order.
+    ///   - height: Height position at PDFPage.
+    /// - Returns: Point number annotation that exists at a height down by `pointNumberHeight`.
     func getPointNumber(number: Int, height: Int) -> PDFAnnotation {
         let str = String(number)
         
