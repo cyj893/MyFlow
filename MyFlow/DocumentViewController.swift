@@ -16,7 +16,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     
     let myNavigationView = MyNavigationView.singletonView
     private var pdfView = PDFView()
-    private var nowState: PdfViewState?
+    private var nowState: DocumentViewState?
     
     private var pointHelper = PointHelper()
     private var moveStrategy: MoveToPoint?
@@ -98,7 +98,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         openDocument()
     }
         
-    func changeState(state: PdfViewState) {
+    func changeState(state: DocumentViewState) {
         nowState = state
     }
     

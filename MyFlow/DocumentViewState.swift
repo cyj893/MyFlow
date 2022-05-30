@@ -8,10 +8,11 @@
 import UIKit
 import PDFKit
 
-protocol PdfViewState {
+protocol DocumentViewState {
     func tapProcess(location: CGPoint, page: PDFPage)
 }
 
+/// Configurate and animate for `MyNavigationView`
 fileprivate func animateIt(vc: UIViewController) {
     UIView.animate(
         withDuration: 0.5,
@@ -19,9 +20,11 @@ fileprivate func animateIt(vc: UIViewController) {
     )
 }
 
-struct NormalState: PdfViewState {
+/// State that is not any modes(adding, handling), just showing navigationView.
+struct NormalState: DocumentViewState {
     private(set) weak var vc: DocumentViewController?
     
+    /// Hide navigationView and change state to `HideNaviState`.
     func tapProcess(location: CGPoint, page: PDFPage) {
         guard let vc = vc else { return }
         
@@ -40,9 +43,11 @@ struct NormalState: PdfViewState {
     }
 }
 
-struct HideNaviState: PdfViewState {
+/// State that not any modes(adding, handling), hiding navigaionView.
+struct HideNaviState: DocumentViewState {
     private(set) weak var vc: DocumentViewController?
     
+    /// Show navigationView and change state to `NormalState`.
     func tapProcess(location: CGPoint, page: PDFPage) {
         guard let vc = vc else { return }
         
@@ -61,9 +66,11 @@ struct HideNaviState: PdfViewState {
     }
 }
 
-struct HandlePointsState: PdfViewState {
+/// State that handling points. User can select and move points at this state.
+struct HandlePointsState: DocumentViewState {
     private(set) weak var vc: DocumentViewController?
     
+    /// Move selected points to `location`.
     func tapProcess(location: CGPoint, page: PDFPage) {
         guard let vc = vc else { return }
         
@@ -75,9 +82,11 @@ struct HandlePointsState: PdfViewState {
     }
 }
 
-struct AddPointsState: PdfViewState {
+/// State that adding points. User can  add new points at this state.
+struct AddPointsState: DocumentViewState {
     private(set) weak var vc: DocumentViewController?
     
+    /// add new point to `location`.
     func tapProcess(location: CGPoint, page: PDFPage) {
         guard let vc = vc else { return }
         
