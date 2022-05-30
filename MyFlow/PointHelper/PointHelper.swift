@@ -10,7 +10,7 @@ import PDFKit
 
 /// Manages point annotations.
 ///
-/// Do add and move operations for points from PDFView.
+/// Do add and move operations for points from `PDFView`.
 /// Returns the point annotation in now order.
 class PointHelper {
     
@@ -183,9 +183,9 @@ extension PointHelper {
     /// Adds gradient line annotaions at specific height and page.
     ///
     /// - Parameters:
-    ///     - number: PDFPage to make point annotation.
-    ///     - height: Height position at PDFPage.
-    ///     - page: PDFPage to make point annotation.
+    ///     - number: Number of the point.
+    ///     - height: Height position at `PDFPage`.
+    ///     - page: `PDFPage` to make point annotation.
     fileprivate func addPointLine(_ number: Int, _ height: Int, _ page: PDFPage) {
         let pageWidth = page.bounds(for: PDFDisplayBox.mediaBox).size.width
         let lines = pointBuilder.getPointLineGradient(pageWidth: Int(pageWidth), height: height)
@@ -198,7 +198,7 @@ extension PointHelper {
     /// Adds point number annotaion at specific height and page.
     ///
     /// - Parameters:
-    ///     - number: PDFPage to make point annotation.
+    ///     - number: Number of the point.
     ///     - height: Height position at PDFPage.
     ///     - page: PDFPage to make point annotation.
     fileprivate func addPointNumber(_ number: Int, _ height: Int, _ page: PDFPage) {

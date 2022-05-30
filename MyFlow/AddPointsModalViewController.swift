@@ -9,20 +9,28 @@ import UIKit
 import SnapKit
 import PDFKit
 
+/// ModalView that user can select pages to add points on the top.
 class AddPointsModalViewController: UIViewController {
+    /// The object that helps add points.`
     var pointHelper: PointHelper?
+    /// PDFDocument to generate thumbnails and add point annotations.
     var pdfDocument: PDFDocument?
     
+    /// Thumbnails of each page.
     var thumbnails: [UIImage] = []
+    /// The maximum height of each thumbnail.
     var maxHeight:Int = 0
     
+    /// Selected orders by user.
     var orders: [Int] = []
     
+    /// Shows the guide text.
     lazy var thumbnailLabel = UILabel().then {
         $0.text = "Choose Pages to add points"
         $0.font = UIFont.boldSystemFont(ofSize: 25)
     }
     
+    /// CollectionView containing thumbnails. User can select pages from it.
     lazy var thumbnailCollectionView:UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout.init()
         flowLayout.scrollDirection = .horizontal
@@ -60,8 +68,15 @@ class AddPointsModalViewController: UIViewController {
         setButtons()
     }
     
-    fileprivate func generatePdfThumbnail(at pageIndex: Int, width: CGFloat = 150) -> UIImage? {
-        guard let page = pdfDocument?.page(at: pageIndex) else {
+    
+    /// Get `UIImage` from each `PDFPage`.
+    ///
+    /// - Parameters:
+    ///   - at pageIdx: Index of the page.
+    ///   - width: Thumbnail's width. Default is 150.
+    /// - Returns: Thumbnail of the page.
+    fileprivate func generatePdfThumbnail(at pageIdx: Int, width: CGFloat = 150) -> UIImage? {
+        guard let page = pdfDocument?.page(at: pageIdx) else {
             return nil
         }
         
@@ -74,6 +89,7 @@ class AddPointsModalViewController: UIViewController {
         return page.thumbnail(of: size, for: .mediaBox)
     }
     
+    /// Set array `thumbnails`.
     fileprivate func getPdfThumbnails() {
         guard let pdfDocument = pdfDocument else { return }
         for i in 0..<pdfDocument.pageCount {
@@ -83,6 +99,7 @@ class AddPointsModalViewController: UIViewController {
         }
     }
     
+    /// Set `thumbnailLabel`'s constraints.
     fileprivate func setThumbnailLabel() {
         thumbnailLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(20)
@@ -90,6 +107,7 @@ class AddPointsModalViewController: UIViewController {
         }
     }
     
+    /// Set `thumbnailCollectionView`'s preferences and constraints.
     fileprivate func setThumbnailCollectionView() {
         thumbnailCollectionView.delegate = self
         thumbnailCollectionView.dataSource = self
@@ -106,6 +124,7 @@ class AddPointsModalViewController: UIViewController {
         }
     }
     
+    /// Set `cancelButton` and `addPointsButton`'s action and constraints.
     fileprivate func setButtons() {
         cancelButton.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
         cancelButton.snp.makeConstraints {
@@ -126,10 +145,12 @@ class AddPointsModalViewController: UIViewController {
     
     // MARK: Button Actions
     
+    /// Cancel selection and just dismiss modal.
     @objc fileprivate func cancelButtonAction() {
         dismiss(animated: true, completion: nil)
     }
     
+    /// Add point annotations at top of selected pages and dismiss modal.
     @objc fileprivate func addPointsButtonAction() {
         guard let pointHelper = pointHelper else { return }
         orders.forEach {
@@ -175,18 +196,22 @@ extension AddPointsModalViewController: UICollectionViewDelegate, UICollectionVi
         }
     }
     
+    /// When user select or deselect the cell, set cell's selection by `order`.
+    ///
+    /// If `order` is `nil`, deselection mode.
+    ///
+    /// - Parameters:
+    ///   - pageIdx: Index of cell to change.
+    ///   - order: Order of selected cell. If `order` is `nil`, deselect cell.
+    ///   - collectionView: collectionView containing the thumbnail cell.
     func updateOrder(pageIdx: Int, order: Int?, _ collectionView: UICollectionView) {
         let indexPath = IndexPath(item: pageIdx, section: 0)
         if let cell = collectionView.cellForItem(at: indexPath) as? ThumbnailCell {
             if let order = order {
-                cell.orderLabel.text = String(order)
-                cell.orderLabel.backgroundColor = MyColor.borderColor
-                cell.thumbnailView.layer.borderWidth = 5
+                cell.select(order)
             }
             else {
-                cell.orderLabel.text = " "
-                cell.orderLabel.backgroundColor = .gray.withAlphaComponent(0.5)
-                cell.thumbnailView.layer.borderWidth = 0
+                cell.deSelect()
             }
         }
     }

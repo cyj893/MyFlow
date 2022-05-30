@@ -42,8 +42,8 @@ class PointBuilder {
     /// Returns gradient line annotation.
     ///
     /// - Parameters:
-    ///   - pageWidth: PDFPage's width. Becomes the line annotaion's length.
-    ///   - height: Height position at PDFPage.
+    ///   - pageWidth: `PDFPage`'s width. Becomes the line annotaion's length.
+    ///   - height: Height position at `PDFPage`.
     ///   - color: Line's color. Default is blue,
     /// - Returns: A colored line annotation with a thickness of 1 px that exists at a certain height.
     fileprivate func buildPointLine(pageWidth: Int, height: Int, color: UIColor = .blue) -> PDFAnnotation {
@@ -72,7 +72,7 @@ class PointBuilder {
     ///
     /// - Parameters:
     ///   - number: Point's number by order.
-    ///   - height: Height position at PDFPage.
+    ///   - height: Height position at the `PDFPage`.
     /// - Returns: Point number annotation that exists at a height down by `pointNumberHeight`.
     func getPointNumber(number: Int, height: Int) -> PDFAnnotation {
         let str = String(number)
