@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Shows each `PDFPage`'s thumbnail.
 class ThumbnailCell: UICollectionViewCell {
     
     lazy var thumbnailCell = UIView()
@@ -51,5 +52,22 @@ class ThumbnailCell: UICollectionViewCell {
             $0.trailing.bottom.equalToSuperview().offset(-10)
         }
     }
+    
+    /// When user select the cell set order and border.
+    ///
+    /// - Parameter order: Cell's selected order.
+    func select(_ order: Int) {
+        orderLabel.text = String(order)
+        orderLabel.backgroundColor = MyColor.borderColor
+        thumbnailView.layer.borderWidth = 5
+    }
+    
+    /// When user cancel selection clear cell.
+    func deSelect() {
+        orderLabel.text = " "
+        orderLabel.backgroundColor = .gray.withAlphaComponent(0.5)
+        thumbnailView.layer.borderWidth = 0
+    }
+    
     
 }
