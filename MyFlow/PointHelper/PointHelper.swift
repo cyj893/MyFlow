@@ -68,6 +68,21 @@ extension PointHelper {
         return points[idx]
     }
     
+    /// Move to point at index and return the point number annotation.
+    ///
+    /// - Returns:Point number annotation at index.
+    func moveToPoint(at index: Int) throws -> PDFAnnotation {
+        print(points.count)
+        guard getPointsCount() > 0 else {
+            throw PointError.emptyPoints
+        }
+        guard 0 <= index && index < points.count else {
+            throw PointError.indexOutOfRange
+        }
+        idx = index
+        return points[idx]
+    }
+    
 }
 
 

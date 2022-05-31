@@ -9,6 +9,7 @@ import Foundation
 
 enum PointError: Error {
     case emptyPoints
+    case indexOutOfRange
 }
 
 enum PdfError: Error {
