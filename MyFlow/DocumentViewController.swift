@@ -16,6 +16,8 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     
     let myNavigationView = MyNavigationView.singletonView
     private var pdfView = PDFView()
+    private let endPlayModeButton = UIButton()
+    
     private var nowState: DocumentViewState?
     
     private var pointHelper = PointHelper()
@@ -85,6 +87,24 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         }
     }
     
+    fileprivate func setEndPlayModeButton() {
+        view.addSubview(endPlayModeButton)
+        endPlayModeButton.then {
+            $0.setIconStyle(systemName: "stop.circle", tintColor: .gray.withAlphaComponent(0.5))
+        }.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(MyOffset.betweenIconGroup)
+            $0.right.equalToSuperview().offset(-MyOffset.betweenIconGroup)
+        }
+        endPlayModeButton.addTarget(self, action: #selector(endPlayModeButtonAction), for: .touchUpInside)
+        hideEndPlayModeButton()
+    }
+    
+    @objc fileprivate func endPlayModeButtonAction() {
+        hideEndPlayModeButton()
+        showNavi()
+        changeState(state: NormalState(vc: self))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,6 +116,8 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         addTapGesture()
         
         openDocument()
+        
+        setEndPlayModeButton()
     }
         
     func changeState(state: DocumentViewState) {
@@ -140,6 +162,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     }
     
     func playButtonAction() {
+        showEndPlayModeButton()
         hideNavi()
         moveToPoint(at: 0)
         changeState(state: PlayModeState(vc: self))
@@ -156,6 +179,14 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
             // TODO: Aleart Unexpected Error
             print("Unexpected")
         }
+    }
+    
+    func showEndPlayModeButton() {
+        endPlayModeButton.isHidden = false
+    }
+    
+    func hideEndPlayModeButton() {
+        endPlayModeButton.isHidden = true
     }
     
 }
