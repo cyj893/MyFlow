@@ -114,6 +114,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         setPdfView()
         
         addTapGesture()
+        addPanGesture()
         
         openDocument()
         
@@ -199,7 +200,6 @@ extension DocumentViewController {
     fileprivate func addTapGesture() {
         let taps = UITapGestureRecognizer(target: self, action: #selector(setTapGesture))
         pdfView.addGestureRecognizer(taps)
-        addPanGesture()
     }
     
     fileprivate func addPanGesture() {
