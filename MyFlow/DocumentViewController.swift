@@ -141,7 +141,21 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     
     func playButtonAction() {
         hideNavi()
+        moveToPoint(at: 0)
         changeState(state: PlayModeState(vc: self))
+    }
+    
+    func moveToPoint(at index: Int) {
+        print("nextPointButtonAction")
+        do {
+            let next:PDFAnnotation = try pointHelper.moveToPoint(at: index)
+            moveStrategy?.move(to: next)
+        } catch let e as PointError {
+            showAddPointsModalView()
+        } catch {
+            // TODO: Aleart Unexpected Error
+            print("Unexpected")
+        }
     }
     
 }
