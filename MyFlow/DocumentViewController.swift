@@ -139,6 +139,11 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         present(navigationController, animated: true, completion: nil)
     }
     
+    func playButtonAction() {
+        hideNavi()
+        changeState(state: PlayModeState(vc: self))
+    }
+    
 }
 
 
@@ -159,10 +164,8 @@ extension DocumentViewController {
     
     @objc func setTapGesture(_ recognizer: UITapGestureRecognizer) {
         let location = recognizer.location(in: pdfView)
-        guard let page = pdfView.page(for: location, nearest: true) else { return }
-        let convertedLocation = pdfView.convert(location, to: page)
         
-        nowState?.tapProcess(location: convertedLocation, page: page)
+        nowState?.tapProcess(location: location)
     }
     
     @objc func setPanGesture(_ recognizer: UIPanGestureRecognizer) {
@@ -185,6 +188,50 @@ extension DocumentViewController {
         default:
             break
         }
+    }
+    
+}
+
+// MARK: Show/Hide NavigationView
+
+extension DocumentViewController {
+    
+    /// hide`MyNavigationView`
+    func hideNavi() {
+        print("hide myNavigationView")
+        myNavigationView.snp.remakeConstraints {
+            $0.top.equalToSuperview().offset(-100)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(0)
+        }
+        getPdfView().snp.remakeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        animateIt()
+    }
+    
+    /// show `MyNavigationView`
+    func showNavi() {
+        print("show myNavigationView")
+        myNavigationView.snp.remakeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(100)
+        }
+        getPdfView().snp.remakeConstraints {
+            $0.top.equalTo(myNavigationView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        animateIt()
+    }
+    
+    /// Configurate and animate for `MyNavigationView`
+    fileprivate func animateIt() {
+        UIView.animate(
+            withDuration: 0.5,
+            animations: view.layoutIfNeeded
+        )
     }
     
 }

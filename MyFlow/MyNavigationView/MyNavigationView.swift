@@ -86,6 +86,7 @@ class MyNavigationView: UIView {
         }.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-MyOffset.betweenIcon)
         }
+        playButton.addTarget(self, action: #selector(playButtonAction), for: .touchUpInside)
     }
     
     fileprivate func setPointsButtons() {
@@ -200,6 +201,11 @@ class MyNavigationView: UIView {
     @objc fileprivate func addPointsPagesButtonAction() {
         guard let currentVC = currentVC else { return }
         currentVC.showAddPointsModalView()
+    }
+    
+    @objc fileprivate func playButtonAction() {
+        guard let currentVC = currentVC else { return }
+        currentVC.playButtonAction()
     }
     
     
