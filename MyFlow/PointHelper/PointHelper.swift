@@ -16,13 +16,16 @@ class PointHelper {
     
     // MARK: Properties
     
+    var commandHistory = UndoRedoHistory()
+    
     /// Added points to pdf.
-    private var points:[PDFAnnotation] = []
+    var points:[PDFAnnotation] = []
     /// (number: line annotations) dictionary  to find easily based on point number.
-    private var linesDict:[Int:[PDFAnnotation]] = [:]
+    var linesDict:[Int:[PDFAnnotation]] = [:]
     /// Currently located point's index.
     private var idx:Int = 0
     
+    var moveBackup: PointMemento?
     /// Current point number annotation selected by user.
     var nowSelectedPoint:PDFAnnotation?
     /// Current point line annotations selected by user.
@@ -36,6 +39,18 @@ class PointHelper {
     
     func getPointsCount() -> Int { points.count }
     func getNowSelectedPoint() -> PDFAnnotation? { nowSelectedPoint }
+        
+    func createMemento() -> PointHelperMemento {
+        return PointHelperMemento(points: points, linesDict: linesDict)
+    }
+    
+    func undo() {
+        commandHistory.undoCommand()
+    }
+    
+    func redo() {
+        commandHistory.redoCommand()
+    }
     
 }
 
@@ -113,6 +128,10 @@ extension PointHelper {
         for i in 0...3 {
             nowSelectedPointLines[i].color = GradientColor.selected[i]
         }
+        
+        moveBackup = PointMemento(page: annotation.page!,
+                                   height: Int(annotation.bounds.origin.y)
+                                            + Int(MyFont.sizePointNum.height))
     }
     
     /// Moves point annnotaions to new location.
@@ -175,6 +194,23 @@ extension PointHelper {
         nowSelectedPointLines = []
     }
     
+    func endMove() {
+        var change: [PDFAnnotation] = []
+        change.append(nowSelectedPoint!)
+        change.append(contentsOf: nowSelectedPointLines)
+        
+        let afterMove = PointMemento(page: nowSelectedPoint!.page!,
+                                     height: Int(nowSelectedPoint!.bounds.origin.y)
+                                            + Int(MyFont.sizePointNum.height))
+        let command = MoveCommand(pointHelper: self,
+                                  change: change,
+                                  backup: moveBackup!,
+                                  after: afterMove)
+        commandHistory.push(command)
+        
+        clearSelectedPoint()
+    }
+    
 }
 
 
@@ -189,37 +225,18 @@ extension PointHelper {
     ///     - page: PDFPage to make point annotation.
     func addPoint(_ height: Int, _ page: PDFPage) {
         let number:Int = getPointsCount() + 1
-        linesDict[number] = []
-        
-        addPointLine(number, height, page)
-        addPointNumber(number, height, page)
-    }
-    
-    /// Adds gradient line annotaions at specific height and page.
-    ///
-    /// - Parameters:
-    ///     - number: Number of the point.
-    ///     - height: Height position at `PDFPage`.
-    ///     - page: `PDFPage` to make point annotation.
-    fileprivate func addPointLine(_ number: Int, _ height: Int, _ page: PDFPage) {
         let pageWidth = page.bounds(for: PDFDisplayBox.mediaBox).size.width
-        let lines = pointBuilder.getPointLineGradient(pageWidth: Int(pageWidth), height: height)
-        linesDict[number]!.append(contentsOf: lines)
-        lines.forEach {
-            page.addAnnotation($0)
-        }
-    }
-    
-    /// Adds point number annotaion at specific height and page.
-    ///
-    /// - Parameters:
-    ///     - number: Number of the point.
-    ///     - height: Height position at PDFPage.
-    ///     - page: PDFPage to make point annotation.
-    fileprivate func addPointNumber(_ number: Int, _ height: Int, _ page: PDFPage) {
-        let pointNumber = pointBuilder.getPointNumber(number: number, height: height)
-        points.append(pointNumber)
-        page.addAnnotation(pointNumber)
+        
+        var change: [PDFAnnotation] = []
+        change.append(pointBuilder.getPointNumber(number: number, height: height))
+        change.append(contentsOf: pointBuilder.getPointLineGradient(pageWidth: Int(pageWidth), height: height))
+        
+        let command = AddCommand(pointHelper: self,
+                                 change: change,
+                                 page: page,
+                                 backup: createMemento())
+        
+        commandHistory.executeCommand(command)
     }
     
 }

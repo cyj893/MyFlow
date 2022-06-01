@@ -28,6 +28,13 @@
 		AF98A38A2832A6380035601D /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF98A3892832A6380035601D /* StringExtension.swift */; };
 		AF98A38C2832A6590035601D /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF98A38B2832A6590035601D /* UIFontExtension.swift */; };
 		AF98A38E2832A6760035601D /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF98A38D2832A6760035601D /* UIColorExtension.swift */; };
+		AFAB47B728477E060034515A /* PointCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47B628477E060034515A /* PointCommand.swift */; };
+		AFAB47B9284795780034515A /* PointMemento.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47B8284795780034515A /* PointMemento.swift */; };
+		AFAB47BB28479F6F0034515A /* PointCommandHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47BA28479F6F0034515A /* PointCommandHistory.swift */; };
+		AFAB47BD28479F9D0034515A /* UndoRedoHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47BC28479F9D0034515A /* UndoRedoHistory.swift */; };
+		AFAB47C02847A0830034515A /* AddCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47BF2847A0830034515A /* AddCommand.swift */; };
+		AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C52847B26B0034515A /* MoveCommand.swift */; };
+		AFAB47C82847BC050034515A /* PointHelperMemento.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C72847BC050034515A /* PointHelperMemento.swift */; };
 		AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */; };
 		AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */; };
 		AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */; };
@@ -74,6 +81,13 @@
 		AF98A3892832A6380035601D /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		AF98A38B2832A6590035601D /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		AF98A38D2832A6760035601D /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		AFAB47B628477E060034515A /* PointCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCommand.swift; sourceTree = "<group>"; };
+		AFAB47B8284795780034515A /* PointMemento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointMemento.swift; sourceTree = "<group>"; };
+		AFAB47BA28479F6F0034515A /* PointCommandHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCommandHistory.swift; sourceTree = "<group>"; };
+		AFAB47BC28479F9D0034515A /* UndoRedoHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoRedoHistory.swift; sourceTree = "<group>"; };
+		AFAB47BF2847A0830034515A /* AddCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommand.swift; sourceTree = "<group>"; };
+		AFAB47C52847B26B0034515A /* MoveCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCommand.swift; sourceTree = "<group>"; };
+		AFAB47C72847BC050034515A /* PointHelperMemento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelperMemento.swift; sourceTree = "<group>"; };
 		AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationView.swift; sourceTree = "<group>"; };
 		AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGestureRecognizer.swift; sourceTree = "<group>"; };
 		AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -175,6 +189,34 @@
 			path = MyExtensions;
 			sourceTree = "<group>";
 		};
+		AFAB47BE2847A06D0034515A /* PointCommand */ = {
+			isa = PBXGroup;
+			children = (
+				AFAB47B628477E060034515A /* PointCommand.swift */,
+				AFAB47BF2847A0830034515A /* AddCommand.swift */,
+				AFAB47C52847B26B0034515A /* MoveCommand.swift */,
+			);
+			path = PointCommand;
+			sourceTree = "<group>";
+		};
+		AFAB47C12847A0AA0034515A /* CommandHistory */ = {
+			isa = PBXGroup;
+			children = (
+				AFAB47BA28479F6F0034515A /* PointCommandHistory.swift */,
+				AFAB47BC28479F9D0034515A /* UndoRedoHistory.swift */,
+			);
+			path = CommandHistory;
+			sourceTree = "<group>";
+		};
+		AFAB47C22847A0C30034515A /* Memento */ = {
+			isa = PBXGroup;
+			children = (
+				AFAB47B8284795780034515A /* PointMemento.swift */,
+				AFAB47C72847BC050034515A /* PointHelperMemento.swift */,
+			);
+			path = Memento;
+			sourceTree = "<group>";
+		};
 		AFCAE25A283A97F300BCB486 /* MyFlowTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +236,9 @@
 		AFD6DE342833FFFF00E9FA5E /* PointHelper */ = {
 			isa = PBXGroup;
 			children = (
+				AFAB47C22847A0C30034515A /* Memento */,
+				AFAB47C12847A0AA0034515A /* CommandHistory */,
+				AFAB47BE2847A06D0034515A /* PointCommand */,
 				AFD6DE312833B99800E9FA5E /* PointHelper.swift */,
 				AF8936B92836655C001031FC /* PointBuilder.swift */,
 			);
@@ -422,9 +467,13 @@
 				AF8EDF85282E3F7A00CCFF19 /* Document.swift in Sources */,
 				AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */,
 				AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */,
+				AFAB47B9284795780034515A /* PointMemento.swift in Sources */,
 				AF255AA3283E843A00747FF3 /* AddPointsModalViewController.swift in Sources */,
+				AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */,
+				AFAB47B728477E060034515A /* PointCommand.swift in Sources */,
 				AF8936BC28367FD2001031FC /* MyError.swift in Sources */,
 				AF98A38A2832A6380035601D /* StringExtension.swift in Sources */,
+				AFAB47C82847BC050034515A /* PointHelperMemento.swift in Sources */,
 				AF8EDF83282E3F7A00CCFF19 /* DocumentViewController.swift in Sources */,
 				AF3C3F972843C0C2007ED4F9 /* DocumentViewState.swift in Sources */,
 				AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */,
@@ -433,7 +482,10 @@
 				AFED0CC82844C25400FD177D /* MoveToPoint.swift in Sources */,
 				AFF8DA82282FDE20005F0DED /* UIBezierPathExtension.swift in Sources */,
 				AFD6DE322833B99800E9FA5E /* PointHelper.swift in Sources */,
+				AFAB47BB28479F6F0034515A /* PointCommandHistory.swift in Sources */,
+				AFAB47BD28479F9D0034515A /* UndoRedoHistory.swift in Sources */,
 				AF8EDF7F282E3F7A00CCFF19 /* AppDelegate.swift in Sources */,
+				AFAB47C02847A0830034515A /* AddCommand.swift in Sources */,
 				AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */,
 				AF255AA1283E809E00747FF3 /* UIDeviceExtension.swift in Sources */,
 				AF98A38C2832A6590035601D /* UIFontExtension.swift in Sources */,
