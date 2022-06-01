@@ -129,7 +129,7 @@ extension PointHelper {
             nowSelectedPointLines[i].color = GradientColor.selected[i]
         }
         
-        moveMemento = PointMemento(page: annotation.page!, height: Int(annotation.bounds.origin.y))
+        moveMemento = PointMemento(page: annotation.page!, height: Int(annotation.bounds.origin.y) + Int(MyFont.sizePointNum.height))
     }
     
     /// Moves point annnotaions to new location.
@@ -197,7 +197,7 @@ extension PointHelper {
         change.append(nowSelectedPoint!)
         change.append(contentsOf: nowSelectedPointLines)
         
-        let nowMoveMemento = PointMemento(page: nowSelectedPoint!.page!, height: Int(nowSelectedPoint!.bounds.origin.y))
+        let nowMoveMemento = PointMemento(page: nowSelectedPoint!.page!, height: Int(nowSelectedPoint!.bounds.origin.y) + Int(MyFont.sizePointNum.height))
         let command = MoveCommand(pointHelper: self, backup: moveMemento!, after: nowMoveMemento, change: change)
         commandHistory.push(command)
         clearSelectedPoint()
