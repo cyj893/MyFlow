@@ -16,10 +16,12 @@ class PointHelper {
     
     // MARK: Properties
     
+    var pointCommandHistory = PointCommandHistory()
+    
     /// Added points to pdf.
-    private var points:[PDFAnnotation] = []
+    var points:[PDFAnnotation] = []
     /// (number: line annotations) dictionary  to find easily based on point number.
-    private var linesDict:[Int:[PDFAnnotation]] = [:]
+    var linesDict:[Int:[PDFAnnotation]] = [:]
     /// Currently located point's index.
     private var idx:Int = 0
     
@@ -36,7 +38,10 @@ class PointHelper {
     
     func getPointsCount() -> Int { points.count }
     func getNowSelectedPoint() -> PDFAnnotation? { nowSelectedPoint }
-    
+        
+    func createMemento() -> PointMemento {
+        return PointMemento(points: points, linesDict: linesDict)
+    }
 }
 
 
@@ -189,37 +194,18 @@ extension PointHelper {
     ///     - page: PDFPage to make point annotation.
     func addPoint(_ height: Int, _ page: PDFPage) {
         let number:Int = getPointsCount() + 1
-        linesDict[number] = []
-        
-        addPointLine(number, height, page)
-        addPointNumber(number, height, page)
-    }
-    
-    /// Adds gradient line annotaions at specific height and page.
-    ///
-    /// - Parameters:
-    ///     - number: Number of the point.
-    ///     - height: Height position at `PDFPage`.
-    ///     - page: `PDFPage` to make point annotation.
-    fileprivate func addPointLine(_ number: Int, _ height: Int, _ page: PDFPage) {
         let pageWidth = page.bounds(for: PDFDisplayBox.mediaBox).size.width
-        let lines = pointBuilder.getPointLineGradient(pageWidth: Int(pageWidth), height: height)
-        linesDict[number]!.append(contentsOf: lines)
-        lines.forEach {
-            page.addAnnotation($0)
-        }
-    }
-    
-    /// Adds point number annotaion at specific height and page.
-    ///
-    /// - Parameters:
-    ///     - number: Number of the point.
-    ///     - height: Height position at PDFPage.
-    ///     - page: PDFPage to make point annotation.
-    fileprivate func addPointNumber(_ number: Int, _ height: Int, _ page: PDFPage) {
-        let pointNumber = pointBuilder.getPointNumber(number: number, height: height)
-        points.append(pointNumber)
-        page.addAnnotation(pointNumber)
+        
+        var change: [PDFAnnotation] = []
+        change.append(pointBuilder.getPointNumber(number: number, height: height))
+        change.append(contentsOf: pointBuilder.getPointLineGradient(pageWidth: Int(pageWidth), height: height))
+        
+        let command = AddCommand(pointHelper: self,
+                                 page: page,
+                                 backup: createMemento(),
+                                 change: change)
+        
+        pointCommandHistory.executeCommand(command)
     }
     
 }
