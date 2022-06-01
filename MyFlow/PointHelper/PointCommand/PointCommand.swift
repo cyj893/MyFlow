@@ -10,8 +10,6 @@ import PDFKit
 
 protocol PointCommand {
     var pointHelper: PointHelper { get }
-    var page: PDFPage { get }
-    var backup: Memento { get }
     var change: [PDFAnnotation] { get }
     
     func execute()

@@ -19,6 +19,11 @@ class UndoRedoHistory {
         print("executeCommand Undo: \(getUndoCount()) Redo: \(getRedoCount())")
     }
     
+    func push(_ command: PointCommand) {
+        undoHistory.push(command)
+        print("push Undo: \(getUndoCount()) Redo: \(getRedoCount())")
+    }
+    
     func undoCommand() {
         guard let command = undoHistory.pop() else {
             return

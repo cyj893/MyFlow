@@ -33,6 +33,7 @@
 		AFAB47BB28479F6F0034515A /* PointCommandHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47BA28479F6F0034515A /* PointCommandHistory.swift */; };
 		AFAB47BD28479F9D0034515A /* UndoRedoHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47BC28479F9D0034515A /* UndoRedoHistory.swift */; };
 		AFAB47C02847A0830034515A /* AddCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47BF2847A0830034515A /* AddCommand.swift */; };
+		AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C52847B26B0034515A /* MoveCommand.swift */; };
 		AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */; };
 		AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */; };
 		AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */; };
@@ -84,6 +85,7 @@
 		AFAB47BA28479F6F0034515A /* PointCommandHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCommandHistory.swift; sourceTree = "<group>"; };
 		AFAB47BC28479F9D0034515A /* UndoRedoHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoRedoHistory.swift; sourceTree = "<group>"; };
 		AFAB47BF2847A0830034515A /* AddCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommand.swift; sourceTree = "<group>"; };
+		AFAB47C52847B26B0034515A /* MoveCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCommand.swift; sourceTree = "<group>"; };
 		AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationView.swift; sourceTree = "<group>"; };
 		AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGestureRecognizer.swift; sourceTree = "<group>"; };
 		AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 			children = (
 				AFAB47B628477E060034515A /* PointCommand.swift */,
 				AFAB47BF2847A0830034515A /* AddCommand.swift */,
+				AFAB47C52847B26B0034515A /* MoveCommand.swift */,
 			);
 			path = PointCommand;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */,
 				AFAB47B9284795780034515A /* PointMemento.swift in Sources */,
 				AF255AA3283E843A00747FF3 /* AddPointsModalViewController.swift in Sources */,
+				AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */,
 				AFAB47B728477E060034515A /* PointCommand.swift in Sources */,
 				AF8936BC28367FD2001031FC /* MyError.swift in Sources */,
 				AF98A38A2832A6380035601D /* StringExtension.swift in Sources */,
