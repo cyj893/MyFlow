@@ -10,10 +10,10 @@ import PDFKit
 class AddCommand: PointCommand {
     private(set) var pointHelper: PointHelper
     private(set) var page: PDFPage
-    var backup: Memento
+    var backup: PointHelperMemento
     var change: [PDFAnnotation]
     
-    init(pointHelper: PointHelper, page: PDFPage, backup: Memento, change: [PDFAnnotation]) {
+    init(pointHelper: PointHelper, page: PDFPage, backup: PointHelperMemento, change: [PDFAnnotation]) {
         self.pointHelper = pointHelper
         self.page = page
         self.backup = backup

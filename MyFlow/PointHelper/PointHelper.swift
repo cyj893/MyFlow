@@ -25,7 +25,7 @@ class PointHelper {
     /// Currently located point's index.
     private var idx:Int = 0
     
-    var moveMemento: PointHMemento?
+    var moveMemento: PointMemento?
     /// Current point number annotation selected by user.
     var nowSelectedPoint:PDFAnnotation?
     /// Current point line annotations selected by user.
@@ -40,8 +40,8 @@ class PointHelper {
     func getPointsCount() -> Int { points.count }
     func getNowSelectedPoint() -> PDFAnnotation? { nowSelectedPoint }
         
-    func createMemento() -> PointMemento {
-        return PointMemento(points: points, linesDict: linesDict)
+    func createMemento() -> PointHelperMemento {
+        return PointHelperMemento(points: points, linesDict: linesDict)
     }
     
     func undo() {
@@ -129,7 +129,7 @@ extension PointHelper {
             nowSelectedPointLines[i].color = GradientColor.selected[i]
         }
         
-        moveMemento = PointHMemento(page: annotation.page!, height: Int(annotation.bounds.origin.y))
+        moveMemento = PointMemento(page: annotation.page!, height: Int(annotation.bounds.origin.y))
     }
     
     /// Moves point annnotaions to new location.
@@ -197,7 +197,8 @@ extension PointHelper {
         change.append(nowSelectedPoint!)
         change.append(contentsOf: nowSelectedPointLines)
         
-        let command = MoveCommand(pointHelper: self, backup: moveMemento!, after: PointHMemento(page: nowSelectedPoint!.page!, height: Int(nowSelectedPoint!.bounds.origin.y)), change: change)
+        let nowMoveMemento = PointMemento(page: nowSelectedPoint!.page!, height: Int(nowSelectedPoint!.bounds.origin.y))
+        let command = MoveCommand(pointHelper: self, backup: moveMemento!, after: nowMoveMemento, change: change)
         commandHistory.push(command)
         clearSelectedPoint()
     }
