@@ -31,6 +31,7 @@ class AddCommand: PointCommand {
         self.change = change
     }
     
+    // TODO: Should be able to process multiple points at once - AddpointsModalViewController
     func execute() {
         guard let number = Int(change[0].widgetStringValue ?? "") else {
             return

@@ -42,6 +42,11 @@ class PointHelper {
     func createMemento() -> PointMemento {
         return PointMemento(points: points, linesDict: linesDict)
     }
+    
+    func undo() {
+        pointCommandHistory.undoCommand()
+    }
+    
 }
 
 

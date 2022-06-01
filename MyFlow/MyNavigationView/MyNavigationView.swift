@@ -20,6 +20,7 @@ class MyNavigationView: UIView {
     private let backButton = UIButton()
     
     
+    private let undoButton = UIButton()
     private let addPointsPagesButton = UIButton()
     private let handlePointButton = UIButton()
     private let prevPointButton = UIButton()
@@ -62,7 +63,7 @@ class MyNavigationView: UIView {
         setBackButton()
         setPlayButton()
         setPointsButtons()
-        [backButton, playButton, addPointsPagesButton, prevPointButton, addPointsButton, nextPointButton, handlePointButton].forEach {
+        [backButton, playButton, undoButton, addPointsPagesButton, prevPointButton, addPointsButton, nextPointButton, handlePointButton].forEach {
             $0.snp.makeConstraints { make in
                 make.centerY.equalToSuperview()
             }
@@ -95,6 +96,7 @@ class MyNavigationView: UIView {
         setPrevPointButton()
         setHandlePointButton()
         setAddPointsPagesButton()
+        setUndoButton()
     }
     
     fileprivate func setNextPointButton() {
@@ -150,6 +152,16 @@ class MyNavigationView: UIView {
         addPointsPagesButton.addTarget(self, action: #selector(addPointsPagesButtonAction), for: .touchUpInside)
     }
     
+    fileprivate func setUndoButton() {
+        self.addSubview(undoButton)
+        undoButton.then {
+            $0.setIconStyle(systemName: "arrow.uturn.backward")
+        }.snp.makeConstraints {
+            $0.trailing.equalTo(addPointsPagesButton.snp.leading).offset(-MyOffset.betweenIcon)
+        }
+        undoButton.addTarget(self, action: #selector(undoButtonAction), for: .touchUpInside)
+    }
+    
     
     // MARK: Button Actions
     
@@ -201,6 +213,11 @@ class MyNavigationView: UIView {
     @objc fileprivate func addPointsPagesButtonAction() {
         guard let currentVC = currentVC else { return }
         currentVC.showAddPointsModalView()
+    }
+    
+    @objc fileprivate func undoButtonAction() {
+        guard let currentPH = currentPH else { return }
+        currentPH.undo()
     }
     
     @objc fileprivate func playButtonAction() {
