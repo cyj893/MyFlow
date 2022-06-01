@@ -16,7 +16,7 @@ class PointHelper {
     
     // MARK: Properties
     
-    var pointCommandHistory = PointCommandHistory()
+    var commandHistory = UndoRedoHistory()
     
     /// Added points to pdf.
     var points:[PDFAnnotation] = []
@@ -44,7 +44,11 @@ class PointHelper {
     }
     
     func undo() {
-        pointCommandHistory.undoCommand()
+        commandHistory.undoCommand()
+    }
+    
+    func redo() {
+        commandHistory.redoCommand()
     }
     
 }
@@ -210,7 +214,7 @@ extension PointHelper {
                                  backup: createMemento(),
                                  change: change)
         
-        pointCommandHistory.executeCommand(command)
+        commandHistory.executeCommand(command)
     }
     
 }

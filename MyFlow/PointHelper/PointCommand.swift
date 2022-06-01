@@ -61,23 +61,44 @@ class PointCommandHistory {
     }
     var count: Int = 0
     
-    private func push(_ command: PointCommand) {
+    func push(_ command: PointCommand) {
         history.append(command)
     }
     
-    private func pop() -> PointCommand? {
+    func pop() -> PointCommand? {
         return history.popLast()
     }
+}
+
+class UndoRedoHistory {
+    private var undoHistory = PointCommandHistory()
+    private var redoHistory = PointCommandHistory()
+    
+    func getUndoCount() -> Int { return undoHistory.count }
+    func getRedoCount() -> Int { return redoHistory.count }
     
     func executeCommand(_ command: PointCommand) {
         command.execute()
-        push(command)
+        undoHistory.push(command)
+        print("executeCommand Undo: \(getUndoCount()) Redo: \(getRedoCount())")
     }
     
     func undoCommand() {
-        guard let command = pop() else {
+        guard let command = undoHistory.pop() else {
             return
         }
         command.undo()
+        redoHistory.push(command)
+        print("undoCommand Undo: \(getUndoCount()) Redo: \(getRedoCount())")
     }
+    
+    func redoCommand() {
+        guard let command = redoHistory.pop() else {
+            return
+        }
+        command.execute()
+        undoHistory.push(command)
+        print("redoCommand Undo: \(getUndoCount()) Redo: \(getRedoCount())")
+    }
+    
 }

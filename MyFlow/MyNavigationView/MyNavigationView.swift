@@ -21,6 +21,7 @@ class MyNavigationView: UIView {
     
     
     private let undoButton = UIButton()
+    private let redoButton = UIButton()
     private let addPointsPagesButton = UIButton()
     private let handlePointButton = UIButton()
     private let prevPointButton = UIButton()
@@ -63,7 +64,7 @@ class MyNavigationView: UIView {
         setBackButton()
         setPlayButton()
         setPointsButtons()
-        [backButton, playButton, undoButton, addPointsPagesButton, prevPointButton, addPointsButton, nextPointButton, handlePointButton].forEach {
+        [backButton, playButton, undoButton, redoButton, addPointsPagesButton, prevPointButton, addPointsButton, nextPointButton, handlePointButton].forEach {
             $0.snp.makeConstraints { make in
                 make.centerY.equalToSuperview()
             }
@@ -96,6 +97,7 @@ class MyNavigationView: UIView {
         setPrevPointButton()
         setHandlePointButton()
         setAddPointsPagesButton()
+        setRedoButton()
         setUndoButton()
     }
     
@@ -152,12 +154,22 @@ class MyNavigationView: UIView {
         addPointsPagesButton.addTarget(self, action: #selector(addPointsPagesButtonAction), for: .touchUpInside)
     }
     
+    fileprivate func setRedoButton() {
+        self.addSubview(redoButton)
+        redoButton.then {
+            $0.setIconStyle(systemName: "arrow.uturn.forward")
+        }.snp.makeConstraints {
+            $0.trailing.equalTo(addPointsPagesButton.snp.leading).offset(-MyOffset.betweenIcon)
+        }
+        redoButton.addTarget(self, action: #selector(redoButtonAction), for: .touchUpInside)
+    }
+    
     fileprivate func setUndoButton() {
         self.addSubview(undoButton)
         undoButton.then {
             $0.setIconStyle(systemName: "arrow.uturn.backward")
         }.snp.makeConstraints {
-            $0.trailing.equalTo(addPointsPagesButton.snp.leading).offset(-MyOffset.betweenIcon)
+            $0.trailing.equalTo(redoButton.snp.leading).offset(-MyOffset.betweenIcon)
         }
         undoButton.addTarget(self, action: #selector(undoButtonAction), for: .touchUpInside)
     }
@@ -213,6 +225,11 @@ class MyNavigationView: UIView {
     @objc fileprivate func addPointsPagesButtonAction() {
         guard let currentVC = currentVC else { return }
         currentVC.showAddPointsModalView()
+    }
+    
+    @objc fileprivate func redoButtonAction() {
+        guard let currentPH = currentPH else { return }
+        currentPH.redo()
     }
     
     @objc fileprivate func undoButtonAction() {
