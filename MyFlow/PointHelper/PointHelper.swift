@@ -25,7 +25,7 @@ class PointHelper {
     /// Currently located point's index.
     private var idx:Int = 0
     
-    var moveMemento: PointMemento?
+    var moveBackup: PointMemento?
     /// Current point number annotation selected by user.
     var nowSelectedPoint:PDFAnnotation?
     /// Current point line annotations selected by user.
@@ -129,7 +129,9 @@ extension PointHelper {
             nowSelectedPointLines[i].color = GradientColor.selected[i]
         }
         
-        moveMemento = PointMemento(page: annotation.page!, height: Int(annotation.bounds.origin.y) + Int(MyFont.sizePointNum.height))
+        moveBackup = PointMemento(page: annotation.page!,
+                                   height: Int(annotation.bounds.origin.y)
+                                            + Int(MyFont.sizePointNum.height))
     }
     
     /// Moves point annnotaions to new location.
@@ -197,9 +199,15 @@ extension PointHelper {
         change.append(nowSelectedPoint!)
         change.append(contentsOf: nowSelectedPointLines)
         
-        let nowMoveMemento = PointMemento(page: nowSelectedPoint!.page!, height: Int(nowSelectedPoint!.bounds.origin.y) + Int(MyFont.sizePointNum.height))
-        let command = MoveCommand(pointHelper: self, backup: moveMemento!, after: nowMoveMemento, change: change)
+        let afterMove = PointMemento(page: nowSelectedPoint!.page!,
+                                     height: Int(nowSelectedPoint!.bounds.origin.y)
+                                            + Int(MyFont.sizePointNum.height))
+        let command = MoveCommand(pointHelper: self,
+                                  change: change,
+                                  backup: moveBackup!,
+                                  after: afterMove)
         commandHistory.push(command)
+        
         clearSelectedPoint()
     }
     
@@ -224,9 +232,9 @@ extension PointHelper {
         change.append(contentsOf: pointBuilder.getPointLineGradient(pageWidth: Int(pageWidth), height: height))
         
         let command = AddCommand(pointHelper: self,
+                                 change: change,
                                  page: page,
-                                 backup: createMemento(),
-                                 change: change)
+                                 backup: createMemento())
         
         commandHistory.executeCommand(command)
     }

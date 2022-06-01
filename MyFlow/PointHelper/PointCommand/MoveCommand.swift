@@ -9,15 +9,16 @@ import PDFKit
 
 class MoveCommand: PointCommand {
     private(set) var pointHelper: PointHelper
-    var backup: PointMemento
-    var after: PointMemento
     var change: [PDFAnnotation]
     
-    init(pointHelper: PointHelper, backup: PointMemento, after: PointMemento, change: [PDFAnnotation]) {
+    var backup: PointMemento
+    var after: PointMemento
+    
+    init(pointHelper: PointHelper, change: [PDFAnnotation], backup: PointMemento, after: PointMemento) {
         self.pointHelper = pointHelper
+        self.change = change
         self.backup = backup
         self.after = after
-        self.change = change
     }
     
     func execute() {

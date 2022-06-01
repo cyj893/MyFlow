@@ -9,15 +9,16 @@ import PDFKit
 
 class AddCommand: PointCommand {
     private(set) var pointHelper: PointHelper
-    private(set) var page: PDFPage
-    var backup: PointHelperMemento
     var change: [PDFAnnotation]
     
-    init(pointHelper: PointHelper, page: PDFPage, backup: PointHelperMemento, change: [PDFAnnotation]) {
+    private(set) var page: PDFPage
+    var backup: PointHelperMemento
+    
+    init(pointHelper: PointHelper, change: [PDFAnnotation], page: PDFPage, backup: PointHelperMemento) {
         self.pointHelper = pointHelper
+        self.change = change
         self.page = page
         self.backup = backup
-        self.change = change
     }
     
     // TODO: Should be able to process multiple points at once - AddpointsModalViewController
