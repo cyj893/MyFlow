@@ -6,6 +6,7 @@
 //
 
 class PointCommandHistory {
+    private static var stackSize = 15
     private var history: [PointCommand] = [] {
         didSet {
             count = history.count
@@ -15,6 +16,9 @@ class PointCommandHistory {
     
     func push(_ command: PointCommand) {
         history.append(command)
+        if history.count > PointCommandHistory.stackSize {
+            history.removeFirst()
+        }
     }
     
     func pop() -> PointCommand? {
