@@ -40,6 +40,7 @@
 		AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */; };
 		AFCAE25C283A97F300BCB486 /* MyFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAE25B283A97F300BCB486 /* MyFlowTests.swift */; };
 		AFD6DE322833B99800E9FA5E /* PointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD6DE312833B99800E9FA5E /* PointHelper.swift */; };
+		AFE6C78D28487DD4003C4580 /* MyPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE6C78C28487DD4003C4580 /* MyPDFView.swift */; };
 		AFED0CC82844C25400FD177D /* MoveToPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED0CC72844C25400FD177D /* MoveToPoint.swift */; };
 		AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8DA7F282F65F8005F0DED /* MyConstants.swift */; };
 		AFF8DA82282FDE20005F0DED /* UIBezierPathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */; };
@@ -94,6 +95,7 @@
 		AFCAE259283A97F300BCB486 /* MyFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFCAE25B283A97F300BCB486 /* MyFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFlowTests.swift; sourceTree = "<group>"; };
 		AFD6DE312833B99800E9FA5E /* PointHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelper.swift; sourceTree = "<group>"; };
+		AFE6C78C28487DD4003C4580 /* MyPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPDFView.swift; sourceTree = "<group>"; };
 		AFED0CC72844C25400FD177D /* MoveToPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveToPoint.swift; sourceTree = "<group>"; };
 		AFF8DA7F282F65F8005F0DED /* MyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyConstants.swift; sourceTree = "<group>"; };
 		AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtension.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				AF255AA4283E95C900747FF3 /* ThumbnailCell.swift */,
 				AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */,
 				AFED0CC72844C25400FD177D /* MoveToPoint.swift */,
+				AFE6C78C28487DD4003C4580 /* MyPDFView.swift */,
 			);
 			path = MyFlow;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */,
 				AF8EDF81282E3F7A00CCFF19 /* DocumentBrowserViewController.swift in Sources */,
 				AFED0CC82844C25400FD177D /* MoveToPoint.swift in Sources */,
+				AFE6C78D28487DD4003C4580 /* MyPDFView.swift in Sources */,
 				AFF8DA82282FDE20005F0DED /* UIBezierPathExtension.swift in Sources */,
 				AFD6DE322833B99800E9FA5E /* PointHelper.swift in Sources */,
 				AFAB47BB28479F6F0034515A /* PointCommandHistory.swift in Sources */,

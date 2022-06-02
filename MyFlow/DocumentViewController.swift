@@ -15,7 +15,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     var pdfDocument: PDFDocument?
     
     let myNavigationView = MyNavigationView.singletonView
-    private var pdfView = PDFView()
+    private var pdfView = MyPDFView()
     private let endPlayModeButton = UIButton()
     
     private var nowState: DocumentViewState?
