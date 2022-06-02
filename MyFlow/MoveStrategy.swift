@@ -8,11 +8,12 @@
 import UIKit
 import PDFKit
 
-protocol MoveToPoint {
+protocol MoveStrategy {
     func move(to point: PDFAnnotation)
+    func moveAfter(to height: CGFloat)
 }
 
-struct UseGo: MoveToPoint {
+struct UseGo: MoveStrategy {
     private(set) weak var vc: DocumentViewController?
     
     func move(to point: PDFAnnotation) {
@@ -20,9 +21,13 @@ struct UseGo: MoveToPoint {
         
         vc.getPdfView().go(to: CGRect(origin: CGPoint(x: 0, y: point.bounds.maxY), size: CGSize(width: 1, height: -vc.view.frame.height)), on: point.page!)
     }
+    
+    func moveAfter(to height: CGFloat) {
+        print("Don't autoscroll with GO")
+    }
 }
 
-struct UseScrollView: MoveToPoint {
+struct UseScrollView: MoveStrategy {
     private weak var pdfView: PDFView?
     private var pdfScrollView: UIScrollView
     private var pdfDocument: PDFDocument
@@ -62,7 +67,7 @@ struct UseScrollView: MoveToPoint {
         }
     }
     
-    func tryMove(to point: PDFAnnotation) throws {
+    fileprivate func tryMove(to point: PDFAnnotation) throws {
         // Actual scrollView's height(pdfScrollView?.contentSize.height)
         // keeps changing depending on whether user zoom or not.
         // So get scaleFactor from pdfView and multiply scrollView's height by it
@@ -70,10 +75,15 @@ struct UseScrollView: MoveToPoint {
         guard let scaleFactor = pdfView?.scaleFactor else {
             throw PdfError.cannotGetScaleFactor
         }
-        let pageIndex: Int = pdfDocument.index(for: point.page!)
+        let pageIndex = pdfDocument.index(for: point.page!)
         let height = pageHeightsPrefixSum[pageIndex] + pageHeights[pageIndex] - point.bounds.maxY
         let convertedHeight = CGPoint(x: 0, y: height * scaleFactor)
         print("Move to \(convertedHeight.y)")
         pdfScrollView.setContentOffset(convertedHeight, animated: true)
     }
+    
+    func moveAfter(to height: CGFloat) {
+        pdfScrollView.setContentOffset(CGPoint(x: 0, y: pdfScrollView.contentOffset.y + height), animated: true)
+    }
+    
 }
