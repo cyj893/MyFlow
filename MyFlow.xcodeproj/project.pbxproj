@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		5A64057F6052DD8B2D450EEF /* Pods_MyFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F29E0F658105FB87AA1F90FB /* Pods_MyFlow.framework */; };
+		73894CB62959C9438C6F0780 /* Pods_MyFlowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12557F259FCE95C3D038CFF7 /* Pods_MyFlowTests.framework */; };
+		AF255AA1283E809E00747FF3 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF255AA0283E809E00747FF3 /* UIDeviceExtension.swift */; };
+		AF255AA3283E843A00747FF3 /* AddPointsModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF255AA2283E843A00747FF3 /* AddPointsModalViewController.swift */; };
+		AF255AA5283E95C900747FF3 /* ThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF255AA4283E95C900747FF3 /* ThumbnailCell.swift */; };
+		AF3C3F972843C0C2007ED4F9 /* DocumentViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */; };
+		AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8936B92836655C001031FC /* PointBuilder.swift */; };
+		AF8936BC28367FD2001031FC /* MyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8936BB28367FD2001031FC /* MyError.swift */; };
 		AF8EDF7F282E3F7A00CCFF19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8EDF7E282E3F7A00CCFF19 /* AppDelegate.swift */; };
 		AF8EDF81282E3F7A00CCFF19 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8EDF80282E3F7A00CCFF19 /* DocumentBrowserViewController.swift */; };
 		AF8EDF83282E3F7A00CCFF19 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8EDF82282E3F7A00CCFF19 /* DocumentViewController.swift */; };
@@ -15,11 +22,51 @@
 		AF8EDF88282E3F7A00CCFF19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8EDF86282E3F7A00CCFF19 /* Main.storyboard */; };
 		AF8EDF8A282E3F7B00CCFF19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8EDF89282E3F7B00CCFF19 /* Assets.xcassets */; };
 		AF8EDF8D282E3F7B00CCFF19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8EDF8B282E3F7B00CCFF19 /* LaunchScreen.storyboard */; };
+		AF98A383283291560035601D /* comic_andy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF98A382283291560035601D /* comic_andy.ttf */; };
+		AF98A385283291620035601D /* Fonarto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF98A384283291620035601D /* Fonarto.ttf */; };
+		AF98A387283297810035601D /* Fonarto XT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF98A386283297810035601D /* Fonarto XT.ttf */; };
+		AF98A38A2832A6380035601D /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF98A3892832A6380035601D /* StringExtension.swift */; };
+		AF98A38C2832A6590035601D /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF98A38B2832A6590035601D /* UIFontExtension.swift */; };
+		AF98A38E2832A6760035601D /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF98A38D2832A6760035601D /* UIColorExtension.swift */; };
+		AFAB47B728477E060034515A /* PointCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47B628477E060034515A /* PointCommand.swift */; };
+		AFAB47B9284795780034515A /* PointMemento.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47B8284795780034515A /* PointMemento.swift */; };
+		AFAB47BB28479F6F0034515A /* PointCommandHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47BA28479F6F0034515A /* PointCommandHistory.swift */; };
+		AFAB47BD28479F9D0034515A /* UndoRedoHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47BC28479F9D0034515A /* UndoRedoHistory.swift */; };
+		AFAB47C02847A0830034515A /* AddCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47BF2847A0830034515A /* AddCommand.swift */; };
+		AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C52847B26B0034515A /* MoveCommand.swift */; };
+		AFAB47C82847BC050034515A /* PointHelperMemento.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C72847BC050034515A /* PointHelperMemento.swift */; };
+		AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */; };
+		AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */; };
+		AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */; };
+		AFCAE25C283A97F300BCB486 /* MyFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAE25B283A97F300BCB486 /* MyFlowTests.swift */; };
+		AFD6DE322833B99800E9FA5E /* PointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD6DE312833B99800E9FA5E /* PointHelper.swift */; };
+		AFE6C78D28487DD4003C4580 /* MyPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE6C78C28487DD4003C4580 /* MyPDFView.swift */; };
+		AFED0CC82844C25400FD177D /* MoveStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED0CC72844C25400FD177D /* MoveStrategy.swift */; };
+		AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8DA7F282F65F8005F0DED /* MyConstants.swift */; };
+		AFF8DA82282FDE20005F0DED /* UIBezierPathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		AFCAE25D283A97F300BCB486 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AF8EDF73282E3F7A00CCFF19 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AF8EDF7A282E3F7A00CCFF19;
+			remoteInfo = MyFlow;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		12557F259FCE95C3D038CFF7 /* Pods_MyFlowTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFlowTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		72830817BE64C5FD7A97FEFE /* Pods-MyFlow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFlow.debug.xcconfig"; path = "Target Support Files/Pods-MyFlow/Pods-MyFlow.debug.xcconfig"; sourceTree = "<group>"; };
 		8C90261A3B6F029D0A3C9123 /* Pods-MyFlow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFlow.release.xcconfig"; path = "Target Support Files/Pods-MyFlow/Pods-MyFlow.release.xcconfig"; sourceTree = "<group>"; };
+		AE5AF18F3489F07A8DE9ECAF /* Pods-MyFlowTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFlowTests.debug.xcconfig"; path = "Target Support Files/Pods-MyFlowTests/Pods-MyFlowTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AF255AA0283E809E00747FF3 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
+		AF255AA2283E843A00747FF3 /* AddPointsModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointsModalViewController.swift; sourceTree = "<group>"; };
+		AF255AA4283E95C900747FF3 /* ThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCell.swift; sourceTree = "<group>"; };
+		AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewState.swift; sourceTree = "<group>"; };
+		AF8936B92836655C001031FC /* PointBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointBuilder.swift; sourceTree = "<group>"; };
+		AF8936BB28367FD2001031FC /* MyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyError.swift; sourceTree = "<group>"; };
 		AF8EDF7B282E3F7A00CCFF19 /* MyFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF8EDF7E282E3F7A00CCFF19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF8EDF80282E3F7A00CCFF19 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
@@ -29,7 +76,31 @@
 		AF8EDF89282E3F7B00CCFF19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF8EDF8C282E3F7B00CCFF19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF8EDF8E282E3F7B00CCFF19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF98A382283291560035601D /* comic_andy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = comic_andy.ttf; sourceTree = "<group>"; };
+		AF98A384283291620035601D /* Fonarto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fonarto.ttf; sourceTree = "<group>"; };
+		AF98A386283297810035601D /* Fonarto XT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fonarto XT.ttf"; sourceTree = "<group>"; };
+		AF98A3892832A6380035601D /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		AF98A38B2832A6590035601D /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
+		AF98A38D2832A6760035601D /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		AFAB47B628477E060034515A /* PointCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCommand.swift; sourceTree = "<group>"; };
+		AFAB47B8284795780034515A /* PointMemento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointMemento.swift; sourceTree = "<group>"; };
+		AFAB47BA28479F6F0034515A /* PointCommandHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCommandHistory.swift; sourceTree = "<group>"; };
+		AFAB47BC28479F9D0034515A /* UndoRedoHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoRedoHistory.swift; sourceTree = "<group>"; };
+		AFAB47BF2847A0830034515A /* AddCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommand.swift; sourceTree = "<group>"; };
+		AFAB47C52847B26B0034515A /* MoveCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCommand.swift; sourceTree = "<group>"; };
+		AFAB47C72847BC050034515A /* PointHelperMemento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelperMemento.swift; sourceTree = "<group>"; };
+		AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationView.swift; sourceTree = "<group>"; };
+		AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGestureRecognizer.swift; sourceTree = "<group>"; };
+		AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		AFCAE259283A97F300BCB486 /* MyFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFCAE25B283A97F300BCB486 /* MyFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFlowTests.swift; sourceTree = "<group>"; };
+		AFD6DE312833B99800E9FA5E /* PointHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelper.swift; sourceTree = "<group>"; };
+		AFE6C78C28487DD4003C4580 /* MyPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPDFView.swift; sourceTree = "<group>"; };
+		AFED0CC72844C25400FD177D /* MoveStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveStrategy.swift; sourceTree = "<group>"; };
+		AFF8DA7F282F65F8005F0DED /* MyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyConstants.swift; sourceTree = "<group>"; };
+		AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtension.swift; sourceTree = "<group>"; };
 		F29E0F658105FB87AA1F90FB /* Pods_MyFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF8D75CDC8806C5C7B215083 /* Pods-MyFlowTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFlowTests.release.xcconfig"; path = "Target Support Files/Pods-MyFlowTests/Pods-MyFlowTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,13 +112,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AFCAE256283A97F300BCB486 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73894CB62959C9438C6F0780 /* Pods_MyFlowTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		AF8EDF72282E3F7A00CCFF19 = {
 			isa = PBXGroup;
 			children = (
+				AF98A381283291310035601D /* Fonts */,
 				AF8EDF7D282E3F7A00CCFF19 /* MyFlow */,
+				AFCAE25A283A97F300BCB486 /* MyFlowTests */,
 				AF8EDF7C282E3F7A00CCFF19 /* Products */,
 				FD7F7BE189D70E1DACD3E0C3 /* Pods */,
 				F01107C7CE67F05F784421B8 /* Frameworks */,
@@ -58,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				AF8EDF7B282E3F7A00CCFF19 /* MyFlow.app */,
+				AFCAE259283A97F300BCB486 /* MyFlowTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -65,22 +147,121 @@
 		AF8EDF7D282E3F7A00CCFF19 /* MyFlow */ = {
 			isa = PBXGroup;
 			children = (
+				AFD6DE352834000B00E9FA5E /* DocumentHelper */,
+				AFD6DE342833FFFF00E9FA5E /* PointHelper */,
+				AFD6DE332833FFDC00E9FA5E /* MyNavigationView */,
+				AF98A3882832A6140035601D /* MyExtensions */,
 				AF8EDF7E282E3F7A00CCFF19 /* AppDelegate.swift */,
-				AF8EDF80282E3F7A00CCFF19 /* DocumentBrowserViewController.swift */,
 				AF8EDF82282E3F7A00CCFF19 /* DocumentViewController.swift */,
-				AF8EDF84282E3F7A00CCFF19 /* Document.swift */,
+				AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */,
+				AFF8DA7F282F65F8005F0DED /* MyConstants.swift */,
 				AF8EDF86282E3F7A00CCFF19 /* Main.storyboard */,
 				AF8EDF89282E3F7B00CCFF19 /* Assets.xcassets */,
 				AF8EDF8B282E3F7B00CCFF19 /* LaunchScreen.storyboard */,
 				AF8EDF8E282E3F7B00CCFF19 /* Info.plist */,
+				AF8936BB28367FD2001031FC /* MyError.swift */,
+				AF255AA2283E843A00747FF3 /* AddPointsModalViewController.swift */,
+				AF255AA4283E95C900747FF3 /* ThumbnailCell.swift */,
+				AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */,
+				AFED0CC72844C25400FD177D /* MoveStrategy.swift */,
+				AFE6C78C28487DD4003C4580 /* MyPDFView.swift */,
 			);
 			path = MyFlow;
+			sourceTree = "<group>";
+		};
+		AF98A381283291310035601D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				AF98A382283291560035601D /* comic_andy.ttf */,
+				AF98A384283291620035601D /* Fonarto.ttf */,
+				AF98A386283297810035601D /* Fonarto XT.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		AF98A3882832A6140035601D /* MyExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */,
+				AF98A3892832A6380035601D /* StringExtension.swift */,
+				AF98A38B2832A6590035601D /* UIFontExtension.swift */,
+				AF98A38D2832A6760035601D /* UIColorExtension.swift */,
+				AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */,
+				AF255AA0283E809E00747FF3 /* UIDeviceExtension.swift */,
+			);
+			path = MyExtensions;
+			sourceTree = "<group>";
+		};
+		AFAB47BE2847A06D0034515A /* PointCommand */ = {
+			isa = PBXGroup;
+			children = (
+				AFAB47B628477E060034515A /* PointCommand.swift */,
+				AFAB47BF2847A0830034515A /* AddCommand.swift */,
+				AFAB47C52847B26B0034515A /* MoveCommand.swift */,
+			);
+			path = PointCommand;
+			sourceTree = "<group>";
+		};
+		AFAB47C12847A0AA0034515A /* CommandHistory */ = {
+			isa = PBXGroup;
+			children = (
+				AFAB47BA28479F6F0034515A /* PointCommandHistory.swift */,
+				AFAB47BC28479F9D0034515A /* UndoRedoHistory.swift */,
+			);
+			path = CommandHistory;
+			sourceTree = "<group>";
+		};
+		AFAB47C22847A0C30034515A /* Memento */ = {
+			isa = PBXGroup;
+			children = (
+				AFAB47B8284795780034515A /* PointMemento.swift */,
+				AFAB47C72847BC050034515A /* PointHelperMemento.swift */,
+			);
+			path = Memento;
+			sourceTree = "<group>";
+		};
+		AFCAE25A283A97F300BCB486 /* MyFlowTests */ = {
+			isa = PBXGroup;
+			children = (
+				AFCAE25B283A97F300BCB486 /* MyFlowTests.swift */,
+			);
+			path = MyFlowTests;
+			sourceTree = "<group>";
+		};
+		AFD6DE332833FFDC00E9FA5E /* MyNavigationView */ = {
+			isa = PBXGroup;
+			children = (
+				AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */,
+			);
+			path = MyNavigationView;
+			sourceTree = "<group>";
+		};
+		AFD6DE342833FFFF00E9FA5E /* PointHelper */ = {
+			isa = PBXGroup;
+			children = (
+				AFAB47C22847A0C30034515A /* Memento */,
+				AFAB47C12847A0AA0034515A /* CommandHistory */,
+				AFAB47BE2847A06D0034515A /* PointCommand */,
+				AFD6DE312833B99800E9FA5E /* PointHelper.swift */,
+				AF8936B92836655C001031FC /* PointBuilder.swift */,
+			);
+			path = PointHelper;
+			sourceTree = "<group>";
+		};
+		AFD6DE352834000B00E9FA5E /* DocumentHelper */ = {
+			isa = PBXGroup;
+			children = (
+				AF8EDF80282E3F7A00CCFF19 /* DocumentBrowserViewController.swift */,
+				AF8EDF84282E3F7A00CCFF19 /* Document.swift */,
+			);
+			path = DocumentHelper;
 			sourceTree = "<group>";
 		};
 		F01107C7CE67F05F784421B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				F29E0F658105FB87AA1F90FB /* Pods_MyFlow.framework */,
+				12557F259FCE95C3D038CFF7 /* Pods_MyFlowTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -90,8 +271,9 @@
 			children = (
 				72830817BE64C5FD7A97FEFE /* Pods-MyFlow.debug.xcconfig */,
 				8C90261A3B6F029D0A3C9123 /* Pods-MyFlow.release.xcconfig */,
+				AE5AF18F3489F07A8DE9ECAF /* Pods-MyFlowTests.debug.xcconfig */,
+				FF8D75CDC8806C5C7B215083 /* Pods-MyFlowTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -117,6 +299,26 @@
 			productReference = AF8EDF7B282E3F7A00CCFF19 /* MyFlow.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AFCAE258283A97F300BCB486 /* MyFlowTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AFCAE261283A97F300BCB486 /* Build configuration list for PBXNativeTarget "MyFlowTests" */;
+			buildPhases = (
+				C31180C289A66191A4F5E0B7 /* [CP] Check Pods Manifest.lock */,
+				AFCAE255283A97F300BCB486 /* Sources */,
+				AFCAE256283A97F300BCB486 /* Frameworks */,
+				AFCAE257283A97F300BCB486 /* Resources */,
+				9FB5D7DA25D6A696DD37F44A /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AFCAE25E283A97F300BCB486 /* PBXTargetDependency */,
+			);
+			name = MyFlowTests;
+			productName = MyFlowTests;
+			productReference = AFCAE259283A97F300BCB486 /* MyFlowTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -129,6 +331,10 @@
 				TargetAttributes = {
 					AF8EDF7A282E3F7A00CCFF19 = {
 						CreatedOnToolsVersion = 13.2.1;
+					};
+					AFCAE258283A97F300BCB486 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = AF8EDF7A282E3F7A00CCFF19;
 					};
 				};
 			};
@@ -146,6 +352,7 @@
 			projectRoot = "";
 			targets = (
 				AF8EDF7A282E3F7A00CCFF19 /* MyFlow */,
+				AFCAE258283A97F300BCB486 /* MyFlowTests */,
 			);
 		};
 /* End PBXProject section */
@@ -155,9 +362,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF98A383283291560035601D /* comic_andy.ttf in Resources */,
 				AF8EDF8D282E3F7B00CCFF19 /* LaunchScreen.storyboard in Resources */,
+				AF98A385283291620035601D /* Fonarto.ttf in Resources */,
 				AF8EDF8A282E3F7B00CCFF19 /* Assets.xcassets in Resources */,
 				AF8EDF88282E3F7A00CCFF19 /* Main.storyboard in Resources */,
+				AF98A387283297810035601D /* Fonarto XT.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFCAE257283A97F300BCB486 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +396,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyFlow/Pods-MyFlow-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9FB5D7DA25D6A696DD37F44A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyFlowTests/Pods-MyFlowTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyFlowTests/Pods-MyFlowTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyFlowTests/Pods-MyFlowTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C31180C289A66191A4F5E0B7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyFlowTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CB3EBE098B755AB8BCA09389 /* [CP] Check Pods Manifest.lock */ = {
@@ -210,14 +466,54 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF255AA5283E95C900747FF3 /* ThumbnailCell.swift in Sources */,
 				AF8EDF85282E3F7A00CCFF19 /* Document.swift in Sources */,
+				AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */,
+				AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */,
+				AFAB47B9284795780034515A /* PointMemento.swift in Sources */,
+				AF255AA3283E843A00747FF3 /* AddPointsModalViewController.swift in Sources */,
+				AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */,
+				AFAB47B728477E060034515A /* PointCommand.swift in Sources */,
+				AF8936BC28367FD2001031FC /* MyError.swift in Sources */,
+				AF98A38A2832A6380035601D /* StringExtension.swift in Sources */,
+				AFAB47C82847BC050034515A /* PointHelperMemento.swift in Sources */,
 				AF8EDF83282E3F7A00CCFF19 /* DocumentViewController.swift in Sources */,
+				AF3C3F972843C0C2007ED4F9 /* DocumentViewState.swift in Sources */,
+				AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */,
+				AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */,
 				AF8EDF81282E3F7A00CCFF19 /* DocumentBrowserViewController.swift in Sources */,
+				AFED0CC82844C25400FD177D /* MoveStrategy.swift in Sources */,
+				AFE6C78D28487DD4003C4580 /* MyPDFView.swift in Sources */,
+				AFF8DA82282FDE20005F0DED /* UIBezierPathExtension.swift in Sources */,
+				AFD6DE322833B99800E9FA5E /* PointHelper.swift in Sources */,
+				AFAB47BB28479F6F0034515A /* PointCommandHistory.swift in Sources */,
+				AFAB47BD28479F9D0034515A /* UndoRedoHistory.swift in Sources */,
 				AF8EDF7F282E3F7A00CCFF19 /* AppDelegate.swift in Sources */,
+				AFAB47C02847A0830034515A /* AddCommand.swift in Sources */,
+				AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */,
+				AF255AA1283E809E00747FF3 /* UIDeviceExtension.swift in Sources */,
+				AF98A38C2832A6590035601D /* UIFontExtension.swift in Sources */,
+				AF98A38E2832A6760035601D /* UIColorExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFCAE255283A97F300BCB486 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFCAE25C283A97F300BCB486 /* MyFlowTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AFCAE25E283A97F300BCB486 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AF8EDF7A282E3F7A00CCFF19 /* MyFlow */;
+			targetProxy = AFCAE25D283A97F300BCB486 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		AF8EDF86282E3F7A00CCFF19 /* Main.storyboard */ = {
@@ -372,7 +668,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -403,7 +699,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -414,6 +710,44 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AFCAE25F283A97F300BCB486 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE5AF18F3489F07A8DE9ECAF /* Pods-MyFlowTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HMC6A8BFFC;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chayujin.MyFlowTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyFlow.app/MyFlow";
+			};
+			name = Debug;
+		};
+		AFCAE260283A97F300BCB486 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF8D75CDC8806C5C7B215083 /* Pods-MyFlowTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HMC6A8BFFC;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chayujin.MyFlowTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyFlow.app/MyFlow";
 			};
 			name = Release;
 		};
@@ -434,6 +768,15 @@
 			buildConfigurations = (
 				AF8EDF92282E3F7B00CCFF19 /* Debug */,
 				AF8EDF93282E3F7B00CCFF19 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AFCAE261283A97F300BCB486 /* Build configuration list for PBXNativeTarget "MyFlowTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFCAE25F283A97F300BCB486 /* Debug */,
+				AFCAE260283A97F300BCB486 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
