@@ -20,4 +20,8 @@ class PointCommandHistory {
     func pop() -> PointCommand? {
         return history.popLast()
     }
+    
+    func clear() {
+        history.removeAll()
+    }
 }
