@@ -21,7 +21,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     private var nowState: DocumentViewState?
     
     private var pointHelper = PointHelper()
-    private var moveStrategy: MoveToPoint?
+    private var moveStrategy: MoveStrategy?
     
     // MARK: Getter
     func getPointHelper() -> PointHelper { return pointHelper }
@@ -224,6 +224,10 @@ extension DocumentViewController {
             
         case .changed:
             guard let _ = pointHelper.getNowSelectedPoint() else { return }
+            if pdfView.frame.height - location.y < pdfView.frame.height * 0.2 {
+                print("AutoScroll")
+                moveStrategy?.moveAfter(to: pdfView.frame.height * 0.2 + 100)
+            }
             print("move to \(convertedLocation)")
             pointHelper.movePoint(Int(convertedLocation.y), page)
 
