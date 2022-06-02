@@ -16,6 +16,7 @@ class UndoRedoHistory {
     func executeCommand(_ command: PointCommand) {
         command.execute()
         undoHistory.push(command)
+        redoHistory.clear()
         print("executeCommand Undo: \(getUndoCount()) Redo: \(getRedoCount())")
     }
     
