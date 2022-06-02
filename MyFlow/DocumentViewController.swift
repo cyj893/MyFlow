@@ -163,6 +163,10 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     }
     
     func playButtonAction() {
+        if pointHelper.getPointsCount() == 0 {
+            showAddPointsModalView()
+            return
+        }
         showEndPlayModeButton()
         hideNavi()
         moveToPoint(at: 0)
