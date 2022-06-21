@@ -16,3 +16,13 @@ class PointHelperMemento {
         self.linesDict = linesDict
     }
 }
+
+class PointInstanceMemento {
+    private(set) var change: [PDFAnnotation]
+    private(set) var idx: Int
+    
+    init(change: [PDFAnnotation], idx: Int) {
+        self.change = change
+        self.idx = idx
+    }
+}

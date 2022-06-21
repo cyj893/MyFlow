@@ -44,6 +44,13 @@ class PointHelper {
         return PointHelperMemento(points: points, linesDict: linesDict)
     }
     
+    func createMemento2(_ annotation: PDFAnnotation, _ idx: Int) -> PointInstanceMemento {
+    var change:[PDFAnnotation] = []
+    change.append(annotation)
+    change.append(contentsOf: nowSelectedPointLines)
+    return PointInstanceMemento(change: change, idx: idx)
+}
+
     func undo() {
         commandHistory.undoCommand()
     }
@@ -237,6 +244,36 @@ extension PointHelper {
                                  backup: createMemento())
         
         commandHistory.executeCommand(command)
+    }
+    
+}
+
+
+// MARK: Delete Point
+
+extension PointHelper {
+    
+    /// Deletes point annotaion at specific height and page.
+    ///
+    /// - Parameter annotation: PDFAnnotation to delete.
+    func deletePoint() {
+        guard let annotation = nowSelectedPoint else {
+            return
+        }
+        guard let number = Int(annotation.widgetStringValue ?? "") else {
+            return
+        }
+        var change: [PDFAnnotation] = []
+        change.append(annotation)
+        change.append(contentsOf: nowSelectedPointLines)
+        
+        print("Delete point")
+        let command = DeleteCommand(pointHelper: self,
+                                 backup: createMemento2(annotation, number))
+        
+        commandHistory.executeCommand(command)
+        
+        clearSelectedPoint()
     }
     
 }
