@@ -59,6 +59,15 @@ class PointHelper {
         commandHistory.redoCommand()
     }
     
+    func clear() {
+        commandHistory.clear()
+    }
+    
+    #if DEBUG
+    deinit {
+        print("PointHelper deinit")
+    }
+    #endif
 }
 
 

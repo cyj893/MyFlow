@@ -50,6 +50,13 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
             }
         })
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        myNavigationView.clear()
+        pointHelper.clear()
+    }
         
     fileprivate func setMyNavigationView() {
         myNavigationView.setCurrentVC(viewController: self)
