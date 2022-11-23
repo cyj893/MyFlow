@@ -43,4 +43,8 @@ class UndoRedoHistory {
         print("redoCommand Undo: \(getUndoCount()) Redo: \(getRedoCount())")
     }
     
+    func clear() {
+        undoHistory.clear()
+        redoHistory.clear()
+    }
 }

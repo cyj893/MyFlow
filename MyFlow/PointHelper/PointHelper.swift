@@ -31,9 +31,6 @@ class PointHelper {
     /// Current point line annotations selected by user.
     var nowSelectedPointLines:[PDFAnnotation] = []
     
-    /// The object that actually builds the point annotaion groups when user add it.
-    let pointBuilder = PointBuilder()
-    
     
     // MARK: Getter, Setter
     
@@ -59,6 +56,15 @@ class PointHelper {
         commandHistory.redoCommand()
     }
     
+    func clear() {
+        commandHistory.clear()
+    }
+    
+    #if DEBUG
+    deinit {
+        print("PointHelper deinit")
+    }
+    #endif
 }
 
 
@@ -235,8 +241,8 @@ extension PointHelper {
         let pageWidth = page.bounds(for: PDFDisplayBox.mediaBox).size.width
         
         var change: [PDFAnnotation] = []
-        change.append(pointBuilder.getPointNumber(number: number, height: height))
-        change.append(contentsOf: pointBuilder.getPointLineGradient(pageWidth: Int(pageWidth), height: height))
+        change.append(PointBuilder.getPointNumber(number: number, height: height))
+        change.append(contentsOf: PointBuilder.getPointLineGradient(pageWidth: Int(pageWidth), height: height))
         
         let command = AddCommand(pointHelper: self,
                                  change: change,

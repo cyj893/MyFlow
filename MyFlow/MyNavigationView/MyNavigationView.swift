@@ -58,6 +58,12 @@ class MyNavigationView: UIView {
     func setCurrentVC(viewController: DocumentViewController) { currentVC = viewController }
     func setCurrentPH(pointHelper: PointHelper) { currentPH = pointHelper }
     
+    func clear() {
+        currentVC = nil
+        currentPH = nil
+        addPointsButton.isSelected = false
+        handlePointButton.isSelected = false
+    }
     
     // MARK: Setting Buttons
     
