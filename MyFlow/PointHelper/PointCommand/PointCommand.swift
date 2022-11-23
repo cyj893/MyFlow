@@ -10,7 +10,6 @@ import PDFKit
 
 protocol PointCommand {
     var pointHelper: PointHelper { get }
-    var change: [PDFAnnotation] { get }
     
     func execute()
     func undo()
