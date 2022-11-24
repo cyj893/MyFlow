@@ -14,6 +14,7 @@
 		AF255AA5283E95C900747FF3 /* ThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF255AA4283E95C900747FF3 /* ThumbnailCell.swift */; };
 		AF2A9ACA28615C2200D0BB24 /* DeleteCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2A9AC928615C2200D0BB24 /* DeleteCommand.swift */; };
 		AF3C3F972843C0C2007ED4F9 /* DocumentViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */; };
+		AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF65F78F292E4E5F0005D9AF /* FileHelper.swift */; };
 		AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8936B92836655C001031FC /* PointBuilder.swift */; };
 		AF8936BC28367FD2001031FC /* MyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8936BB28367FD2001031FC /* MyError.swift */; };
 		AF8EDF7F282E3F7A00CCFF19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8EDF7E282E3F7A00CCFF19 /* AppDelegate.swift */; };
@@ -67,6 +68,7 @@
 		AF255AA4283E95C900747FF3 /* ThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCell.swift; sourceTree = "<group>"; };
 		AF2A9AC928615C2200D0BB24 /* DeleteCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCommand.swift; sourceTree = "<group>"; };
 		AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewState.swift; sourceTree = "<group>"; };
+		AF65F78F292E4E5F0005D9AF /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		AF8936B92836655C001031FC /* PointBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointBuilder.swift; sourceTree = "<group>"; };
 		AF8936BB28367FD2001031FC /* MyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyError.swift; sourceTree = "<group>"; };
 		AF8EDF7B282E3F7A00CCFF19 /* MyFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +127,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF65F78E292E4E4D0005D9AF /* FileHelper */ = {
+			isa = PBXGroup;
+			children = (
+				AF65F78F292E4E5F0005D9AF /* FileHelper.swift */,
+			);
+			path = FileHelper;
+			sourceTree = "<group>";
+		};
 		AF8EDF72282E3F7A00CCFF19 = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +159,7 @@
 		AF8EDF7D282E3F7A00CCFF19 /* MyFlow */ = {
 			isa = PBXGroup;
 			children = (
+				AF65F78E292E4E4D0005D9AF /* FileHelper */,
 				AFD6DE352834000B00E9FA5E /* DocumentHelper */,
 				AFD6DE342833FFFF00E9FA5E /* PointHelper */,
 				AFD6DE332833FFDC00E9FA5E /* MyNavigationView */,
@@ -498,6 +509,7 @@
 				AF255AA1283E809E00747FF3 /* UIDeviceExtension.swift in Sources */,
 				AF98A38C2832A6590035601D /* UIFontExtension.swift in Sources */,
 				AF98A38E2832A6760035601D /* UIColorExtension.swift in Sources */,
+				AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
