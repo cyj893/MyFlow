@@ -11,7 +11,7 @@ import PDFKit
 
 extension PointBuilder {
     /// pointNumber annotation's height.
-    private static let pointNumberHeight = Int(MyFont.sizePointNum.height)
+    static let pointNumberHeight = Int(MyFont.sizePointNum.height)
 }
 
 /// Builds the point annotaion group at specific height.
