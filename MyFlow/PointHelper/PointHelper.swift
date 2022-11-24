@@ -36,7 +36,13 @@ class PointHelper {
     
     func getPointsCount() -> Int { points.count }
     func getNowSelectedPoint() -> PDFAnnotation? { nowSelectedPoint }
-        
+    
+    func getPointsInfo() -> [(Int, PDFPage)] {
+        points.compactMap { annotaion in
+            (Int(annotaion.bounds.origin.y) + PointBuilder.pointNumberHeight, annotaion.page) as? (Int, PDFPage)
+        }
+    }
+    
     func createMemento() -> PointHelperMemento {
         return PointHelperMemento(points: points, linesDict: linesDict)
     }
