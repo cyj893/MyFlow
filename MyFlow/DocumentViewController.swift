@@ -43,6 +43,12 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
                     print("This file cannot be commented")
                 }
                 setMoveStrategy()
+                
+                if let pointsInfos = FileHelper.shared.readPointsFileIfExist(absoluteString: document!.fileURL.absoluteString) {
+                    pointsInfos.forEach { info in
+                        pointHelper.addPoint(info.height, pdfDocument.page(at: info.page)!)
+                    }
+                }
             }
             else {
                 print("error")
@@ -56,6 +62,13 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         
         myNavigationView.clear()
         pointHelper.clear()
+        
+        let pointsInfos = pointHelper
+            .getPointsInfo()
+            .map { (height, page) in
+                PointsInfo(height: height, page: pdfDocument!.index(for: page))
+            }
+        FileHelper.shared.writePointsFile(absoluteString: document!.fileURL.absoluteString, pointsInfos: pointsInfos)
     }
         
     fileprivate func setMyNavigationView() {
