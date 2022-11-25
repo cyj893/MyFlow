@@ -23,38 +23,23 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     private var pointHelper = PointHelper()
     private var moveStrategy: MoveStrategy?
     
-    // MARK: Getter
-    func getPointHelper() -> PointHelper { return pointHelper }
-    func getPdfView() -> PDFView { return pdfView }
     
+    // MARK: LifeCycle
     
-    func openDocument() {
-        document?.open(completionHandler: { [self] (success) in
-            if success {
-                print("success")
-                self.pdfDocument = PDFDocument(url: self.document!.fileURL)
-                guard let pdfDocument = self.pdfDocument else {
-                    return
-                }
-                pdfDocument.delegate = self
-                self.pdfView.document = pdfDocument
-                if pdfDocument.allowsCommenting == false {
-                    // TODO: presenting an message to the user.
-                    print("This file cannot be commented")
-                }
-                setMoveStrategy()
-                
-                if let pointsInfos = FileHelper.shared.readPointsFileIfExist(absoluteString: document!.fileURL.absoluteString) {
-                    pointsInfos.forEach { info in
-                        pointHelper.addPoint(info.height, pdfDocument.page(at: info.page)!)
-                    }
-                }
-            }
-            else {
-                print("error")
-                // TODO: presenting an error message to the user.
-            }
-        })
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        nowState = NormalState(vc: self)
+        
+        setMyNavigationView()
+        setPdfView()
+        
+        addTapGesture()
+        addPanGesture()
+        
+        openDocument()
+        
+        setEndPlayModeButton()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -70,7 +55,23 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
             }
         FileHelper.shared.writePointsFile(absoluteString: document!.fileURL.absoluteString, pointsInfos: pointsInfos)
     }
-        
+    
+}
+
+
+// MARK: Getter & Setter
+extension DocumentViewController {
+    func getPointHelper() -> PointHelper { return pointHelper }
+    func getPdfView() -> PDFView { return pdfView }
+    
+    func changeState(state: DocumentViewState) {
+        nowState = state
+    }
+}
+
+
+// MARK: Views
+extension DocumentViewController {
     fileprivate func setMyNavigationView() {
         myNavigationView.setCurrentVC(viewController: self)
         myNavigationView.setCurrentPH(pointHelper: pointHelper)
@@ -95,18 +96,6 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         pdfView.backgroundColor = .black
     }
     
-    fileprivate func setMoveStrategy() {
-        do {
-            moveStrategy = try UseScrollView(pdfView: pdfView)
-        } catch let e as PdfError {
-            // TODO: Aleart Error
-            moveStrategy = UseGo(vc: self)
-        } catch {
-            // TODO: Aleart Unexpected Error
-            moveStrategy = UseGo(vc: self)
-        }
-    }
-    
     fileprivate func setEndPlayModeButton() {
         view.addSubview(endPlayModeButton)
         endPlayModeButton.then {
@@ -118,31 +107,15 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         endPlayModeButton.addTarget(self, action: #selector(endPlayModeButtonAction), for: .touchUpInside)
         hideEndPlayModeButton()
     }
-    
+}
+
+
+// MARK: Actions
+extension DocumentViewController {
     @objc fileprivate func endPlayModeButtonAction() {
         hideEndPlayModeButton()
         showNavi()
         changeState(state: NormalState(vc: self))
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        nowState = NormalState(vc: self)
-        
-        setMyNavigationView()
-        setPdfView()
-        
-        addTapGesture()
-        addPanGesture()
-        
-        openDocument()
-        
-        setEndPlayModeButton()
-    }
-        
-    func changeState(state: DocumentViewState) {
-        nowState = state
     }
     
     func prevPointButtonAction() {
@@ -210,19 +183,63 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         }
     }
     
-    func showEndPlayModeButton() {
+    private func showEndPlayModeButton() {
         endPlayModeButton.isHidden = false
     }
     
-    func hideEndPlayModeButton() {
+    private func hideEndPlayModeButton() {
         endPlayModeButton.isHidden = true
     }
     
 }
 
 
-// MARK: Define Gestures
+// MARK: Prepare
+extension DocumentViewController {
+    func openDocument() {
+        document?.open(completionHandler: { [self] (success) in
+            if success {
+                print("success")
+                self.pdfDocument = PDFDocument(url: self.document!.fileURL)
+                guard let pdfDocument = self.pdfDocument else {
+                    return
+                }
+                pdfDocument.delegate = self
+                self.pdfView.document = pdfDocument
+                if pdfDocument.allowsCommenting == false {
+                    // TODO: presenting an message to the user.
+                    print("This file cannot be commented")
+                }
+                setMoveStrategy()
+                
+                if let pointsInfos = FileHelper.shared.readPointsFileIfExist(absoluteString: document!.fileURL.absoluteString) {
+                    pointsInfos.forEach { info in
+                        pointHelper.addPoint(info.height, pdfDocument.page(at: info.page)!)
+                    }
+                }
+            }
+            else {
+                print("error")
+                // TODO: presenting an error message to the user.
+            }
+        })
+    }
+    
+    fileprivate func setMoveStrategy() {
+        do {
+            moveStrategy = try UseScrollView(pdfView: pdfView)
+        } catch let e as PdfError {
+            // TODO: Aleart Error
+            moveStrategy = UseGo(vc: self)
+        } catch {
+            // TODO: Aleart Unexpected Error
+            moveStrategy = UseGo(vc: self)
+        }
+    }
+}
 
+
+// MARK: Define Gestures
 extension DocumentViewController {
     
     fileprivate func addTapGesture() {
