@@ -246,8 +246,8 @@ class MyNavigationView: UIView {
     }
     
     @objc fileprivate func deleteButtonAction() {
-        guard let currentVC = currentVC else { return }
-        currentVC.deleteButtonAction()
+        guard let currentPH = currentPH else { return }
+        currentPH.deletePoint()
     }
     
     @objc fileprivate func redoButtonAction() {

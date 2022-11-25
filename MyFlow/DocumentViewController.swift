@@ -166,10 +166,6 @@ extension DocumentViewController {
         changeState(state: PlayModeState(vc: self))
     }
     
-    func deleteButtonAction() {
-        pointHelper.deletePoint()
-    }
-    
     func moveToPoint(at index: Int) {
         print("nextPointButtonAction")
         do {
