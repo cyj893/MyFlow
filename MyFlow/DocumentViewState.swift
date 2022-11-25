@@ -82,10 +82,10 @@ struct PlayModeState: DocumentViewState {
         
         let halfWidth = vc.view.frame.width / 2
         if location.x < halfWidth {
-            vc.prevPointButtonAction()
+            vc.moveToPrevPoint()
         }
         else {
-            vc.nextPointButtonAction()
+            vc.moveToNextPoint()
         }
     }
 }

@@ -232,12 +232,12 @@ class MyNavigationView: UIView {
     
     @objc fileprivate func prevPointButtonAction() {
         guard let currentVC = currentVC else { return }
-        currentVC.prevPointButtonAction()
+        currentVC.moveToPrevPoint()
     }
     
     @objc fileprivate func nextPointButtonAction() {
         guard let currentVC = currentVC else { return }
-        currentVC.nextPointButtonAction()
+        currentVC.moveToNextPoint()
     }
     
     @objc fileprivate func addPointsPagesButtonAction() {

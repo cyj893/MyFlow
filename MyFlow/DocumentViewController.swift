@@ -107,20 +107,20 @@ extension DocumentViewController {
         nowState = NormalState(vc: self)
     }
     
-    func prevPointButtonAction() {
-        print("prevPointButtonAction")
+    func moveToPrevPoint() {
+        print("moveToPrevPoint")
         do {
-            let prev:PDFAnnotation = try pointHelper.moveToPrev()
+            let prev = try pointHelper.moveToPrev()
             moveStrategy?.move(to: prev)
         } catch {
             showAddPointsModalView()
         }
     }
     
-    func nextPointButtonAction() {
-        print("nextPointButtonAction")
+    func moveToNextPoint() {
+        print("moveToNextPoint")
         do {
-            let next:PDFAnnotation = try pointHelper.moveToNext()
+            let next = try pointHelper.moveToNext()
             moveStrategy?.move(to: next)
         } catch {
             showAddPointsModalView()
@@ -155,10 +155,10 @@ extension DocumentViewController {
         nowState = PlayModeState(vc: self)
     }
     
-    func moveToPoint(at index: Int) {
-        print("nextPointButtonAction")
+    private func moveToPoint(at index: Int) {
+        print("moveToPoint")
         do {
-            let next:PDFAnnotation = try pointHelper.moveToPoint(at: index)
+            let next = try pointHelper.moveToPoint(at: index)
             moveStrategy?.move(to: next)
         } catch let e as PointError {
             showAddPointsModalView()
