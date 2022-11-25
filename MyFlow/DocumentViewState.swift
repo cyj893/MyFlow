@@ -21,7 +21,7 @@ struct NormalState: DocumentViewState {
     func tapProcess(location: CGPoint) {
         guard let vc = vc else { return }
         vc.hideNavi()
-        vc.changeState(state: HideNaviState(vc: vc))
+        vc.nowState = HideNaviState(vc: vc)
     }
 }
 
@@ -33,7 +33,7 @@ struct HideNaviState: DocumentViewState {
     func tapProcess(location: CGPoint) {
         guard let vc = vc else { return }
         vc.showNavi()
-        vc.changeState(state: NormalState(vc: vc))
+        vc.nowState = NormalState(vc: vc)
     }
     
 }
@@ -46,14 +46,14 @@ struct HandlePointsState: DocumentViewState {
     func tapProcess(location: CGPoint) {
         guard let vc = vc else { return }
         
-        guard let page = vc.getPdfView().page(for: location, nearest: true) else { return }
-        let convertedLocation = vc.getPdfView().convert(location, to: page)
+        guard let page = vc.pdfView.page(for: location, nearest: true) else { return }
+        let convertedLocation = vc.pdfView.convert(location, to: page)
         
         print(convertedLocation)
         guard let annotation = page.annotation(at: convertedLocation) else { return }
         print(annotation)
         guard let _ = annotation.annotationKeyValues["/isPoint"] else { return }
-        vc.getPointHelper().selectPoint(annotation)
+        vc.pointHelper.selectPoint(annotation)
     }
 }
 
@@ -65,10 +65,10 @@ struct AddPointsState: DocumentViewState {
     func tapProcess(location: CGPoint) {
         guard let vc = vc else { return }
         
-        guard let page = vc.getPdfView().page(for: location, nearest: true) else { return }
-        let convertedLocation = vc.getPdfView().convert(location, to: page)
+        guard let page = vc.pdfView.page(for: location, nearest: true) else { return }
+        let convertedLocation = vc.pdfView.convert(location, to: page)
         
-        vc.getPointHelper().addPoint(Int(convertedLocation.y), page)
+        vc.pointHelper.addPoint(Int(convertedLocation.y), page)
     }
 }
 

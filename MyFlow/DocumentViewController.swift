@@ -15,12 +15,12 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
     var pdfDocument: PDFDocument?
     
     let myNavigationView = MyNavigationView.singletonView
-    private var pdfView = MyPDFView()
+    private(set) var pdfView = MyPDFView()
     private let endPlayModeButton = UIButton()
     
-    private var nowState: DocumentViewState?
+    var nowState: DocumentViewState?
     
-    private var pointHelper = PointHelper()
+    private(set) var pointHelper = PointHelper()
     private var moveStrategy: MoveStrategy?
     
     
@@ -56,17 +56,6 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         FileHelper.shared.writePointsFile(absoluteString: document!.fileURL.absoluteString, pointsInfos: pointsInfos)
     }
     
-}
-
-
-// MARK: Getter & Setter
-extension DocumentViewController {
-    func getPointHelper() -> PointHelper { return pointHelper }
-    func getPdfView() -> PDFView { return pdfView }
-    
-    func changeState(state: DocumentViewState) {
-        nowState = state
-    }
 }
 
 
@@ -115,7 +104,7 @@ extension DocumentViewController {
     @objc fileprivate func endPlayModeButtonAction() {
         hideEndPlayModeButton()
         showNavi()
-        changeState(state: NormalState(vc: self))
+        nowState = NormalState(vc: self)
     }
     
     func prevPointButtonAction() {
@@ -163,7 +152,7 @@ extension DocumentViewController {
         showEndPlayModeButton()
         hideNavi()
         moveToPoint(at: 0)
-        changeState(state: PlayModeState(vc: self))
+        nowState = PlayModeState(vc: self)
     }
     
     func moveToPoint(at index: Int) {
@@ -294,7 +283,7 @@ extension DocumentViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(0)
         }
-        getPdfView().snp.remakeConstraints {
+        pdfView.snp.remakeConstraints {
             $0.edges.equalToSuperview()
         }
         
@@ -308,7 +297,7 @@ extension DocumentViewController {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(100)
         }
-        getPdfView().snp.remakeConstraints {
+        pdfView.snp.remakeConstraints {
             $0.top.equalTo(myNavigationView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }

@@ -19,7 +19,7 @@ struct UseGo: MoveStrategy {
     func move(to point: PDFAnnotation) {
         guard let vc = vc else { return }
         
-        vc.getPdfView().go(to: CGRect(origin: CGPoint(x: 0, y: point.bounds.maxY), size: CGSize(width: 1, height: -vc.view.frame.height)), on: point.page!)
+        vc.pdfView.go(to: CGRect(origin: CGPoint(x: 0, y: point.bounds.maxY), size: CGSize(width: 1, height: -vc.view.frame.height)), on: point.page!)
     }
     
     func moveAfter(to height: CGFloat) {

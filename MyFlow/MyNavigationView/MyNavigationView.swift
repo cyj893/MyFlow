@@ -204,11 +204,11 @@ class MyNavigationView: UIView {
         addPointsButton.toggleIconWithTransition()
         if getIsAddingPoints() {
             print("포인트 추가")
-            currentVC?.changeState(state: AddPointsState(vc: currentVC))
+            currentVC?.nowState = AddPointsState(vc: currentVC)
         }
         else {
             print("포인트 추가 끝")
-            currentVC?.changeState(state: NormalState(vc: currentVC))
+            currentVC?.nowState = NormalState(vc: currentVC)
         }
         if getIsHandlingPoints() {
             handlePointButton.toggleIconWithTransition()
@@ -220,11 +220,11 @@ class MyNavigationView: UIView {
         handlePointButton.toggleIconWithTransition()
         if getIsHandlingPoints() {
             print("포인트 핸들링")
-            currentVC?.changeState(state: HandlePointsState(vc: currentVC))
+            currentVC?.nowState = HandlePointsState(vc: currentVC)
         }
         else {
             print("포인트 핸들링 끝")
-            currentVC?.changeState(state: NormalState(vc: currentVC))
+            currentVC?.nowState = NormalState(vc: currentVC)
             clearSelectedPoint()
         }
         if getIsAddingPoints() { addPointsButton.toggleIconWithTransition() }
