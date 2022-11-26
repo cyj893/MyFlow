@@ -6,38 +6,31 @@
 //
 
 import UIKit
-import SnapKit
-
 import PDFKit
 
-class DocumentViewController: UIViewController, PDFDocumentDelegate {
-    var document: UIDocument?
-    var pdfDocument: PDFDocument?
-    
+import Then
+import SnapKit
+
+
+class DocumentViewController: UIViewController {
     let myNavigationView = MyNavigationView.singletonView
     private(set) var pdfView = MyPDFView()
     private let endPlayModeButton = UIButton()
     
-    var nowState: DocumentViewState?
-    
-    private(set) var pointHelper = PointHelper()
-    private var moveStrategy: MoveStrategy?
-    
+    var viewModel: DocumentViewModel?
     
     // MARK: LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        nowState = NormalState(vc: self)
+        viewModel?.delegate = self
         
         setMyNavigationView()
         setPdfView()
         
         addTapGesture()
         addPanGesture()
-        
-        openDocument()
         
         setEndPlayModeButton()
     }
@@ -46,14 +39,8 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
         super.viewWillDisappear(animated)
         
         myNavigationView.clear()
-        pointHelper.clear()
-        
-        let pointsInfos = pointHelper
-            .getPointsInfo()
-            .map { (height, page) in
-                PointsInfo(height: height, page: pdfDocument!.index(for: page))
-            }
-        FileHelper.shared.writePointsFile(absoluteString: document!.fileURL.absoluteString, pointsInfos: pointsInfos)
+        viewModel?.clear()
+        viewModel = nil
     }
     
 }
@@ -62,8 +49,7 @@ class DocumentViewController: UIViewController, PDFDocumentDelegate {
 // MARK: Views
 extension DocumentViewController {
     fileprivate func setMyNavigationView() {
-        myNavigationView.setCurrentVC(viewController: self)
-        myNavigationView.setCurrentPH(pointHelper: pointHelper)
+        myNavigationView.currentVM = viewModel
         view.addSubview(myNavigationView)
         myNavigationView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
@@ -93,132 +79,19 @@ extension DocumentViewController {
             $0.top.equalToSuperview().offset(MyOffset.betweenIconGroup)
             $0.right.equalToSuperview().offset(-MyOffset.betweenIconGroup)
         }
-        endPlayModeButton.addTarget(self, action: #selector(endPlayModeButtonAction), for: .touchUpInside)
+        endPlayModeButton.addTarget(self, action: #selector(viewModel?.endPlayModeButtonAction), for: .touchUpInside)
         hideEndPlayModeButton()
     }
-}
-
-
-// MARK: Actions
-extension DocumentViewController {
-    @objc fileprivate func endPlayModeButtonAction() {
-        hideEndPlayModeButton()
-        showNavi()
-        nowState = NormalState(vc: self)
-    }
     
-    func moveToPrevPoint() {
-        print("moveToPrevPoint")
+    fileprivate func getMoveStrategy() -> MoveStrategy {
         do {
-            let prev = try pointHelper.moveToPrev()
-            moveStrategy?.move(to: prev)
-        } catch {
-            showAddPointsModalView()
-        }
-    }
-    
-    func moveToNextPoint() {
-        print("moveToNextPoint")
-        do {
-            let next = try pointHelper.moveToNext()
-            moveStrategy?.move(to: next)
-        } catch {
-            showAddPointsModalView()
-        }
-    }
-    
-    func showAddPointsModalView() {
-        let viewController = AddPointsModalViewController()
-        viewController.pointHelper = pointHelper
-        viewController.pdfDocument = pdfDocument!
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.modalPresentationStyle = .pageSheet
-
-        if #available(iOS 15.0, *) {
-            if let sheet = navigationController.sheetPresentationController {
-                sheet.detents = [.medium()]
-            }
-        } else {
-            // Fallback on earlier versions
-        }
-        present(navigationController, animated: true, completion: nil)
-    }
-    
-    func playButtonAction() {
-        if pointHelper.getPointsCount() == 0 {
-            showAddPointsModalView()
-            return
-        }
-        showEndPlayModeButton()
-        hideNavi()
-        moveToPoint(at: 0)
-        nowState = PlayModeState(vc: self)
-    }
-    
-    private func moveToPoint(at index: Int) {
-        print("moveToPoint")
-        do {
-            let next = try pointHelper.moveToPoint(at: index)
-            moveStrategy?.move(to: next)
-        } catch let e as PointError {
-            showAddPointsModalView()
-        } catch {
-            // TODO: Aleart Unexpected Error
-            print("Unexpected")
-        }
-    }
-    
-    private func showEndPlayModeButton() {
-        endPlayModeButton.isHidden = false
-    }
-    
-    private func hideEndPlayModeButton() {
-        endPlayModeButton.isHidden = true
-    }
-    
-}
-
-
-// MARK: Prepare
-extension DocumentViewController {
-    func openDocument() {
-        document?.open(completionHandler: { [self] (success) in
-            if success {
-                print("success")
-                self.pdfDocument = PDFDocument(url: self.document!.fileURL)
-                guard let pdfDocument = self.pdfDocument else {
-                    return
-                }
-                pdfDocument.delegate = self
-                self.pdfView.document = pdfDocument
-                if pdfDocument.allowsCommenting == false {
-                    // TODO: presenting an message to the user.
-                    print("This file cannot be commented")
-                }
-                setMoveStrategy()
-                
-                if let pointsInfos = FileHelper.shared.readPointsFileIfExist(absoluteString: document!.fileURL.absoluteString) {
-                    pointsInfos.forEach { info in
-                        pointHelper.addPoint(info.height, pdfDocument.page(at: info.page)!)
-                    }
-                }
-            }
-            else {
-                print("error")
-                // TODO: presenting an error message to the user.
-            }
-        })
-    }
-    
-    fileprivate func setMoveStrategy() {
-        do {
-            moveStrategy = try UseScrollView(pdfView: pdfView)
+            return try UseScrollView(pdfView: pdfView)
         } catch let e as PdfError {
             // TODO: Aleart Error
-            moveStrategy = UseGo(vc: self)
+            return UseGo(vc: self)
         } catch {
             // TODO: Aleart Unexpected Error
-            moveStrategy = UseGo(vc: self)
+            return UseGo(vc: self)
         }
     }
 }
@@ -240,40 +113,61 @@ extension DocumentViewController {
     @objc func setTapGesture(_ recognizer: UITapGestureRecognizer) {
         let location = recognizer.location(in: pdfView)
         
-        nowState?.tapProcess(location: location)
+        viewModel?.tapGestureRecognized(location: location, pdfView: pdfView)
     }
     
     @objc func setPanGesture(_ recognizer: UIPanGestureRecognizer) {
         let location = recognizer.location(in: pdfView)
-        guard let page = pdfView.page(for: location, nearest: true) else { return }
-        let convertedLocation = pdfView.convert(location, to: page)
         
         switch recognizer.state {
         case .began:
-            print(convertedLocation)
+            print("Begin pan gesture")
             
         case .changed:
-            guard let _ = pointHelper.getNowSelectedPoint() else { return }
-            if pdfView.frame.height - location.y < pdfView.frame.height * 0.2 {
-                print("AutoScroll")
-                moveStrategy?.moveAfter(to: pdfView.frame.height * 0.2 + 100)
-            }
-            print("move to \(convertedLocation)")
-            pointHelper.movePoint(Int(convertedLocation.y), page)
-
+            viewModel?.panGestureChanged(location: location, pdfView: pdfView)
+            
         case .ended, .cancelled, .failed:
-            guard let _ = pointHelper.getNowSelectedPoint() else { return }
-            pointHelper.endMove()
+            viewModel?.panGestureEnded()
+            
         default:
             break
         }
     }
-    
 }
 
 // MARK: Show/Hide NavigationView
 
-extension DocumentViewController {
+extension DocumentViewController: DocumentViewDelegate {
+    func setDocument(with pdfDocument: PDFDocument) {
+        self.pdfView.document = pdfDocument
+        viewModel?.moveStrategy = getMoveStrategy()
+    }
+    
+    func showEndPlayModeButton() {
+        endPlayModeButton.isHidden = false
+    }
+    
+    func hideEndPlayModeButton() {
+        endPlayModeButton.isHidden = true
+    }
+    
+    func dismiss() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func showAddPointsModalView(_ viewController: UIViewController) {
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.modalPresentationStyle = .pageSheet
+
+        if #available(iOS 15.0, *) {
+            if let sheet = navigationController.sheetPresentationController {
+                sheet.detents = [.medium()]
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+        present(navigationController, animated: true, completion: nil)
+    }
     
     /// hide`MyNavigationView`
     func hideNavi() {

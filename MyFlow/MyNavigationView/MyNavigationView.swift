@@ -13,8 +13,7 @@ import PDFKit
 class MyNavigationView: UIView {
     static let singletonView = MyNavigationView()
     
-    private var currentVC:DocumentViewController?
-    private var currentPH:PointHelper?
+    var currentVM: DocumentViewModel?
     
     private let optionsView = UIView()
     private let backButton = UIButton()
@@ -55,12 +54,9 @@ class MyNavigationView: UIView {
     func getIsAddingPoints() -> Bool { addPointsButton.isSelected }
     func getIsHandlingPoints() -> Bool { handlePointButton.isSelected }
     
-    func setCurrentVC(viewController: DocumentViewController) { currentVC = viewController }
-    func setCurrentPH(pointHelper: PointHelper) { currentPH = pointHelper }
     
     func clear() {
-        currentVC = nil
-        currentPH = nil
+        currentVM = nil
         addPointsButton.isSelected = false
         handlePointButton.isSelected = false
     }
@@ -196,19 +192,18 @@ class MyNavigationView: UIView {
     // MARK: Button Actions
     
     @objc fileprivate func backButtonAction() {
-        guard let currentVC = currentVC else { return }
-        currentVC.dismiss(animated: true, completion: nil)
+        currentVM?.dismiss()
     }
     
     @objc fileprivate func toggleAddingPointsMode() {
         addPointsButton.toggleIconWithTransition()
         if getIsAddingPoints() {
             print("포인트 추가")
-            currentVC?.nowState = AddPointsState(vc: currentVC)
+            currentVM?.nowState = AddPointsState(vm: currentVM)
         }
         else {
             print("포인트 추가 끝")
-            currentVC?.nowState = NormalState(vc: currentVC)
+            currentVM?.nowState = NormalState(vm: currentVM)
         }
         if getIsHandlingPoints() {
             handlePointButton.toggleIconWithTransition()
@@ -220,55 +215,47 @@ class MyNavigationView: UIView {
         handlePointButton.toggleIconWithTransition()
         if getIsHandlingPoints() {
             print("포인트 핸들링")
-            currentVC?.nowState = HandlePointsState(vc: currentVC)
+            currentVM?.nowState = HandlePointsState(vm: currentVM)
         }
         else {
             print("포인트 핸들링 끝")
-            currentVC?.nowState = NormalState(vc: currentVC)
+            currentVM?.nowState = NormalState(vm: currentVM)
             clearSelectedPoint()
         }
         if getIsAddingPoints() { addPointsButton.toggleIconWithTransition() }
     }
     
     @objc fileprivate func prevPointButtonAction() {
-        guard let currentVC = currentVC else { return }
-        currentVC.moveToPrevPoint()
+        currentVM?.moveToPrevPoint()
     }
     
     @objc fileprivate func nextPointButtonAction() {
-        guard let currentVC = currentVC else { return }
-        currentVC.moveToNextPoint()
+        currentVM?.moveToNextPoint()
     }
     
     @objc fileprivate func addPointsPagesButtonAction() {
-        guard let currentVC = currentVC else { return }
-        currentVC.showAddPointsModalView()
+        currentVM?.showAddPointsModalView()
     }
     
     @objc fileprivate func deleteButtonAction() {
-        guard let currentPH = currentPH else { return }
-        currentPH.deletePoint()
+        currentVM?.pointHelper.deletePoint()
     }
     
     @objc fileprivate func redoButtonAction() {
-        guard let currentPH = currentPH else { return }
-        currentPH.redo()
+        currentVM?.pointHelper.redo()
     }
     
     @objc fileprivate func undoButtonAction() {
-        guard let currentPH = currentPH else { return }
-        currentPH.undo()
+        currentVM?.pointHelper.undo()
     }
     
     @objc fileprivate func playButtonAction() {
-        guard let currentVC = currentVC else { return }
-        currentVC.playButtonAction()
+        currentVM?.playButtonAction()
     }
     
     
     fileprivate func clearSelectedPoint() {
-        guard let currentPH = currentPH else { return }
-        currentPH.clearSelectedPoint()
+        currentVM?.pointHelper.clearSelectedPoint()
     }
     
     
