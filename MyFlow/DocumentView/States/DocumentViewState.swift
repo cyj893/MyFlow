@@ -1,5 +1,5 @@
 //
-//  PdfViewState.swift
+//  DocumentViewState.swift
 //  MyFlow
 //
 //  Created by Yujin Cha on 2022/05/29.
@@ -8,13 +8,9 @@
 import UIKit
 import PDFKit
 
-protocol DocumentViewState {
-    func tapProcess(location: CGPoint, pdfView: PDFView)
-}
-
 
 /// State that is not any modes(adding, handling), just showing navigationView.
-struct NormalState: DocumentViewState {
+struct NormalState: DocumentViewStateInterface {
     private(set) weak var vm: DocumentViewModel?
     
     /// Hide navigationView and change state to `HideNaviState`.
@@ -26,7 +22,7 @@ struct NormalState: DocumentViewState {
 }
 
 /// State that not any modes(adding, handling), hiding navigaionView.
-struct HideNaviState: DocumentViewState {
+struct HideNaviState: DocumentViewStateInterface {
     private(set) weak var vm: DocumentViewModel?
     
     /// Show navigationView and change state to `NormalState`.
@@ -39,7 +35,7 @@ struct HideNaviState: DocumentViewState {
 }
 
 /// State that handling points. User can select and move points at this state.
-struct HandlePointsState: DocumentViewState {
+struct HandlePointsState: DocumentViewStateInterface {
     private(set) weak var vm: DocumentViewModel?
     
     /// Move selected points to `location`.
@@ -58,7 +54,7 @@ struct HandlePointsState: DocumentViewState {
 }
 
 /// State that adding points. User can  add new points at this state.
-struct AddPointsState: DocumentViewState {
+struct AddPointsState: DocumentViewStateInterface {
     private(set) weak var vm: DocumentViewModel?
     
     /// add new point to `location`.
@@ -73,7 +69,7 @@ struct AddPointsState: DocumentViewState {
 }
 
 /// Play mode. At this state, user can move to previous point with touching left side and next point with toucing right side.
-struct PlayModeState: DocumentViewState {
+struct PlayModeState: DocumentViewStateInterface {
     private(set) weak var vm: DocumentViewModel?
     
     /// Move to previous point with touching left side and next point with toucing right side.

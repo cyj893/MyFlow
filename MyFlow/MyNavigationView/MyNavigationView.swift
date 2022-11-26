@@ -13,7 +13,7 @@ import PDFKit
 class MyNavigationView: UIView {
     static let singletonView = MyNavigationView()
     
-    var currentVM: DocumentViewModel?
+    var currentVM: DocumentViewModelInterface?
     
     private let optionsView = UIView()
     private let backButton = UIButton()
@@ -199,15 +199,15 @@ class MyNavigationView: UIView {
         addPointsButton.toggleIconWithTransition()
         if getIsAddingPoints() {
             print("포인트 추가")
-            currentVM?.nowState = AddPointsState(vm: currentVM)
+            currentVM?.changeState(to: .addPoints)
         }
         else {
             print("포인트 추가 끝")
-            currentVM?.nowState = NormalState(vm: currentVM)
+            currentVM?.changeState(to: .normal)
         }
         if getIsHandlingPoints() {
             handlePointButton.toggleIconWithTransition()
-            clearSelectedPoint()
+            currentVM?.clearSelectedPoint()
         }
     }
     
@@ -215,12 +215,12 @@ class MyNavigationView: UIView {
         handlePointButton.toggleIconWithTransition()
         if getIsHandlingPoints() {
             print("포인트 핸들링")
-            currentVM?.nowState = HandlePointsState(vm: currentVM)
+            currentVM?.changeState(to: .handlePoints)
         }
         else {
             print("포인트 핸들링 끝")
-            currentVM?.nowState = NormalState(vm: currentVM)
-            clearSelectedPoint()
+            currentVM?.changeState(to: .normal)
+            currentVM?.clearSelectedPoint()
         }
         if getIsAddingPoints() { addPointsButton.toggleIconWithTransition() }
     }
@@ -238,25 +238,19 @@ class MyNavigationView: UIView {
     }
     
     @objc fileprivate func deleteButtonAction() {
-        currentVM?.pointHelper.deletePoint()
+        currentVM?.deletePoint()
     }
     
     @objc fileprivate func redoButtonAction() {
-        currentVM?.pointHelper.redo()
+        currentVM?.redo()
     }
     
     @objc fileprivate func undoButtonAction() {
-        currentVM?.pointHelper.undo()
+        currentVM?.undo()
     }
     
     @objc fileprivate func playButtonAction() {
         currentVM?.playButtonAction()
     }
-    
-    
-    fileprivate func clearSelectedPoint() {
-        currentVM?.pointHelper.clearSelectedPoint()
-    }
-    
     
 }

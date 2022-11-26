@@ -12,7 +12,7 @@ import Then
 import SnapKit
 
 
-class DocumentViewController: UIViewController {
+final class DocumentViewController: UIViewController {
     let myNavigationView = MyNavigationView.singletonView
     private(set) var pdfView = MyPDFView()
     private let endPlayModeButton = UIButton()
@@ -79,7 +79,7 @@ extension DocumentViewController {
             $0.top.equalToSuperview().offset(MyOffset.betweenIconGroup)
             $0.right.equalToSuperview().offset(-MyOffset.betweenIconGroup)
         }
-        endPlayModeButton.addTarget(self, action: #selector(viewModel?.endPlayModeButtonAction), for: .touchUpInside)
+        endPlayModeButton.addTarget(self, action: #selector(endPlayModeButtonAction), for: .touchUpInside)
         hideEndPlayModeButton()
     }
     
@@ -93,6 +93,16 @@ extension DocumentViewController {
             // TODO: Aleart Unexpected Error
             return UseGo(vc: self)
         }
+    }
+}
+
+
+// MARK: Actions
+extension DocumentViewController {
+    @objc func endPlayModeButtonAction() {
+        hideEndPlayModeButton()
+        showNavi()
+        viewModel?.changeState(to: .normal)
     }
 }
 
@@ -135,8 +145,8 @@ extension DocumentViewController {
     }
 }
 
-// MARK: Show/Hide NavigationView
 
+// MARK: DocumentViewDelegate
 extension DocumentViewController: DocumentViewDelegate {
     func setDocument(with pdfDocument: PDFDocument) {
         self.pdfView.document = pdfDocument

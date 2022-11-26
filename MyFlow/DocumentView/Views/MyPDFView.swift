@@ -9,7 +9,7 @@ import PDFKit
 
 /// For disable selection.
 /// Reference: https://stackoverflow.com/a/60377242
-class MyPDFView: PDFView {
+final class MyPDFView: PDFView {
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         self.currentSelection = nil

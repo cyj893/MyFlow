@@ -8,17 +8,6 @@
 import PDFKit
 
 
-protocol DocumentViewDelegate {
-    func setDocument(with pdfDocument: PDFDocument)
-    func hideNavi()
-    func showNavi()
-    func hideEndPlayModeButton()
-    func showEndPlayModeButton()
-    func showAddPointsModalView(_ viewController: UIViewController)
-    func dismiss()
-}
-
-
 final class DocumentViewModel: NSObject, PDFDocumentDelegate {
     
     var delegate: DocumentViewDelegate?
@@ -30,7 +19,7 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
         }
     }
     
-    var nowState: DocumentViewState?
+    var nowState: DocumentViewStateInterface?
     
     private(set) var pointHelper = PointHelper()
     var moveStrategy: MoveStrategy?
@@ -93,12 +82,63 @@ extension DocumentViewModel {
 }
 
 
-// MARK: Actions
+// MARK: Gestures
 extension DocumentViewModel {
-    @objc func endPlayModeButtonAction() {
-        delegate?.hideEndPlayModeButton()
-        delegate?.showNavi()
-        nowState = NormalState(vm: self)
+    
+    func tapGestureRecognized(location: CGPoint, pdfView: PDFView) {
+        nowState?.tapProcess(location: location, pdfView: pdfView)
+    }
+    
+    func panGestureChanged(location: CGPoint, pdfView: PDFView) {
+        guard let page = pdfView.page(for: location, nearest: true) else { return }
+        let convertedLocation = pdfView.convert(location, to: page)
+        
+        guard let _ = pointHelper.getNowSelectedPoint() else { return }
+        if pdfView.frame.height - location.y < pdfView.frame.height * 0.2 {
+            print("AutoScroll")
+            moveStrategy?.moveAfter(to: pdfView.frame.height * 0.2 + 100)
+        }
+        print("move to \(convertedLocation)")
+        pointHelper.movePoint(Int(convertedLocation.y), page)
+    }
+    
+    private func moveToPoint(at index: Int) {
+        print("moveToPoint")
+        do {
+            let next = try pointHelper.moveToPoint(at: index)
+            moveStrategy?.move(to: next)
+        } catch let e as PointError {
+            delegate?.showAddPointsModalView(getAddPointsModalView())
+        } catch {
+            // TODO: Aleart Unexpected Error
+            print("Unexpected")
+        }
+    }
+    
+    func panGestureEnded() {
+        guard let _ = pointHelper.getNowSelectedPoint() else { return }
+        pointHelper.endMove()
+    }
+    
+}
+
+
+// MARK: DocumentViewModelInterface
+extension DocumentViewModel: DocumentViewModelInterface {
+    
+    func changeState(to state: DocumentViewState) {
+        switch state {
+        case .normal:
+            nowState = NormalState(vm: self)
+        case .hideNavi:
+            nowState = HideNaviState(vm: self)
+        case .handlePoints:
+            nowState = HandlePointsState(vm: self)
+        case .addPoints:
+            nowState = AddPointsState(vm: self)
+        case .playMode:
+            nowState = PlayModeState(vm: self)
+        }
     }
     
     func moveToPrevPoint() {
@@ -121,6 +161,29 @@ extension DocumentViewModel {
         }
     }
     
+    func deletePoint() {
+        pointHelper.deletePoint()
+    }
+    
+    func selectPoint(_ annotation: PDFAnnotation) {
+        pointHelper.selectPoint(annotation)
+    }
+    
+    func addPoint(_ height: Int, _ page: PDFPage) {
+        pointHelper.addPoint(height, page)
+    }
+    
+    func clearSelectedPoint() {
+        pointHelper.clearSelectedPoint()
+    }
+    
+    func undo() {
+        pointHelper.undo()
+    }
+    
+    func redo() {
+        pointHelper.redo()
+    }
     
     func playButtonAction() {
         if pointHelper.getPointsCount() == 0 {
@@ -133,17 +196,8 @@ extension DocumentViewModel {
         nowState = PlayModeState(vm: self)
     }
     
-    private func moveToPoint(at index: Int) {
-        print("moveToPoint")
-        do {
-            let next = try pointHelper.moveToPoint(at: index)
-            moveStrategy?.move(to: next)
-        } catch let e as PointError {
-            delegate?.showAddPointsModalView(getAddPointsModalView())
-        } catch {
-            // TODO: Aleart Unexpected Error
-            print("Unexpected")
-        }
+    func showAddPointsModalView() {
+        delegate?.showAddPointsModalView(getAddPointsModalView())
     }
     
     private func getAddPointsModalView() -> UIViewController {
@@ -153,40 +207,8 @@ extension DocumentViewModel {
         return viewController
     }
     
-    func showAddPointsModalView() {
-        delegate?.showAddPointsModalView(getAddPointsModalView())
-    }
-    
     func dismiss() {
         delegate?.dismiss()
-    }
-    
-}
-
-
-// MARK: Gestures
-extension DocumentViewModel {
-    
-    func tapGestureRecognized(location: CGPoint, pdfView: PDFView) {
-        nowState?.tapProcess(location: location, pdfView: pdfView)
-    }
-    
-    func panGestureChanged(location: CGPoint, pdfView: PDFView) {
-        guard let page = pdfView.page(for: location, nearest: true) else { return }
-        let convertedLocation = pdfView.convert(location, to: page)
-        
-        guard let _ = pointHelper.getNowSelectedPoint() else { return }
-        if pdfView.frame.height - location.y < pdfView.frame.height * 0.2 {
-            print("AutoScroll")
-            moveStrategy?.moveAfter(to: pdfView.frame.height * 0.2 + 100)
-        }
-        print("move to \(convertedLocation)")
-        pointHelper.movePoint(Int(convertedLocation.y), page)
-    }
-    
-    func panGestureEnded() {
-        guard let _ = pointHelper.getNowSelectedPoint() else { return }
-        pointHelper.endMove()
     }
     
 }
