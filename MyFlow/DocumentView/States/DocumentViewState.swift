@@ -9,29 +9,13 @@ import UIKit
 import PDFKit
 
 
-/// State that is not any modes(adding, handling), just showing navigationView.
+/// State that is not any modes(adding, handling). If user touches the screen, navigation is toggled.
 struct NormalState: DocumentViewStateInterface {
     private(set) weak var vm: DocumentViewModel?
     
-    /// Hide navigationView and change state to `HideNaviState`.
     func tapProcess(location: CGPoint, pdfView: PDFView) {
-        guard let vm = vm else { return }
-        vm.delegate?.hideNavi()
-        vm.nowState = HideNaviState(vm: vm)
+        NotificationCenter.default.post(name: NSNotification.Name("ToggleNavi"), object: nil, userInfo: nil)
     }
-}
-
-/// State that not any modes(adding, handling), hiding navigaionView.
-struct HideNaviState: DocumentViewStateInterface {
-    private(set) weak var vm: DocumentViewModel?
-    
-    /// Show navigationView and change state to `NormalState`.
-    func tapProcess(location: CGPoint, pdfView: PDFView) {
-        guard let vm = vm else { return }
-        vm.delegate?.showNavi()
-        vm.nowState = NormalState(vm: vm)
-    }
-    
 }
 
 /// State that handling points. User can select and move points at this state.

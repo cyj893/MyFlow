@@ -130,8 +130,6 @@ extension DocumentViewModel: DocumentViewModelInterface {
         switch state {
         case .normal:
             nowState = NormalState(vm: self)
-        case .hideNavi:
-            nowState = HideNaviState(vm: self)
         case .handlePoints:
             nowState = HandlePointsState(vm: self)
         case .addPoints:
@@ -190,8 +188,6 @@ extension DocumentViewModel: DocumentViewModelInterface {
             delegate?.showAddPointsModalView(getAddPointsModalView())
             return
         }
-        delegate?.showEndPlayModeButton()
-        delegate?.hideNavi()
         moveToPoint(at: 0)
         nowState = PlayModeState(vm: self)
     }

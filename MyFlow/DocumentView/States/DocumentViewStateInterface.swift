@@ -9,7 +9,6 @@ import PDFKit
 
 enum DocumentViewState {
     case normal
-    case hideNavi
     case handlePoints
     case addPoints
     case playMode
