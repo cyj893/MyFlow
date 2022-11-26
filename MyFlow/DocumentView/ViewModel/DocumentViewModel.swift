@@ -188,8 +188,6 @@ extension DocumentViewModel: DocumentViewModelInterface {
             delegate?.showAddPointsModalView(getAddPointsModalView())
             return
         }
-        delegate?.showEndPlayModeButton()
-        delegate?.hideNavi()
         moveToPoint(at: 0)
         nowState = PlayModeState(vm: self)
     }

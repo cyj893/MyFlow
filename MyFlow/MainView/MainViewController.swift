@@ -25,6 +25,7 @@ final class MainViewController: UIViewController {
         documentViews = [initialVC]
         super.init(nibName: nil, bundle: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(toggleNavi), name: NSNotification.Name("ToggleNavi"), object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -89,6 +90,15 @@ extension MainViewController {
 
 // MARK: Action
 extension MainViewController {
+    
+    @objc func toggleNavi() {
+        if isNaviShowing {
+            hideNavi()
+        } else {
+            showNavi()
+        }
+        isNaviShowing = !isNaviShowing
+    }
     
     @objc func endPlayMode() {
         documentViews[nowIndex].viewModel?.changeState(to: .normal)
