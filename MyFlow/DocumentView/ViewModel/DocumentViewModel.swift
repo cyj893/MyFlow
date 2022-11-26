@@ -130,8 +130,6 @@ extension DocumentViewModel: DocumentViewModelInterface {
         switch state {
         case .normal:
             nowState = NormalState(vm: self)
-        case .hideNavi:
-            nowState = HideNaviState(vm: self)
         case .handlePoints:
             nowState = HandlePointsState(vm: self)
         case .addPoints:

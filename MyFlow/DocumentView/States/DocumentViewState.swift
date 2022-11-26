@@ -21,19 +21,6 @@ struct NormalState: DocumentViewStateInterface {
     }
 }
 
-/// State that not any modes(adding, handling), hiding navigaionView.
-struct HideNaviState: DocumentViewStateInterface {
-    private(set) weak var vm: DocumentViewModel?
-    
-    /// Show navigationView and change state to `NormalState`.
-    func tapProcess(location: CGPoint, pdfView: PDFView) {
-        guard let vm = vm else { return }
-        vm.delegate?.showNavi()
-        vm.nowState = NormalState(vm: vm)
-    }
-    
-}
-
 /// State that handling points. User can select and move points at this state.
 struct HandlePointsState: DocumentViewStateInterface {
     private(set) weak var vm: DocumentViewModel?
