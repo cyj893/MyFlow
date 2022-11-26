@@ -13,9 +13,7 @@ import SnapKit
 
 
 final class DocumentViewController: UIViewController {
-    let myNavigationView = MyNavigationView.singletonView
     private(set) var pdfView = MyPDFView()
-    private let endPlayModeButton = UIButton()
     
     var viewModel: DocumentViewModel?
     
@@ -26,19 +24,15 @@ final class DocumentViewController: UIViewController {
         
         viewModel?.delegate = self
         
-        setMyNavigationView()
         setPdfView()
         
         addTapGesture()
         addPanGesture()
-        
-        setEndPlayModeButton()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        myNavigationView.clear()
         viewModel?.clear()
         viewModel = nil
     }
@@ -48,20 +42,10 @@ final class DocumentViewController: UIViewController {
 
 // MARK: Views
 extension DocumentViewController {
-    fileprivate func setMyNavigationView() {
-        myNavigationView.currentVM = viewModel
-        view.addSubview(myNavigationView)
-        myNavigationView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(100)
-        }
-    }
-    
     fileprivate func setPdfView() {
         view.addSubview(pdfView)
         pdfView.snp.makeConstraints {
-            $0.top.equalTo(myNavigationView.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
         pdfView.displayDirection = .vertical
         pdfView.usePageViewController(false)
@@ -69,18 +53,6 @@ extension DocumentViewController {
         pdfView.autoScales = true
         
         pdfView.backgroundColor = .black
-    }
-    
-    fileprivate func setEndPlayModeButton() {
-        view.addSubview(endPlayModeButton)
-        endPlayModeButton.then {
-            $0.setIconStyle(systemName: "stop.circle", tintColor: .gray.withAlphaComponent(0.5))
-        }.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(MyOffset.betweenIconGroup)
-            $0.right.equalToSuperview().offset(-MyOffset.betweenIconGroup)
-        }
-        endPlayModeButton.addTarget(self, action: #selector(endPlayModeButtonAction), for: .touchUpInside)
-        hideEndPlayModeButton()
     }
     
     fileprivate func getMoveStrategy() -> MoveStrategy {
@@ -99,9 +71,7 @@ extension DocumentViewController {
 
 // MARK: Actions
 extension DocumentViewController {
-    @objc func endPlayModeButtonAction() {
-        hideEndPlayModeButton()
-        showNavi()
+    func endPlayModeButtonAction() {
         viewModel?.changeState(to: .normal)
     }
 }
@@ -153,14 +123,6 @@ extension DocumentViewController: DocumentViewDelegate {
         viewModel?.moveStrategy = getMoveStrategy()
     }
     
-    func showEndPlayModeButton() {
-        endPlayModeButton.isHidden = false
-    }
-    
-    func hideEndPlayModeButton() {
-        endPlayModeButton.isHidden = true
-    }
-    
     func dismiss() {
         self.dismiss(animated: true, completion: nil)
     }
@@ -177,44 +139,6 @@ extension DocumentViewController: DocumentViewDelegate {
             // Fallback on earlier versions
         }
         present(navigationController, animated: true, completion: nil)
-    }
-    
-    /// hide`MyNavigationView`
-    func hideNavi() {
-        print("hide myNavigationView")
-        myNavigationView.snp.remakeConstraints {
-            $0.top.equalToSuperview().offset(-100)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(0)
-        }
-        pdfView.snp.remakeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        animateIt()
-    }
-    
-    /// show `MyNavigationView`
-    func showNavi() {
-        print("show myNavigationView")
-        myNavigationView.snp.remakeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(100)
-        }
-        pdfView.snp.remakeConstraints {
-            $0.top.equalTo(myNavigationView.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
-        
-        animateIt()
-    }
-    
-    /// Configurate and animate for `MyNavigationView`
-    fileprivate func animateIt() {
-        UIView.animate(
-            withDuration: 0.5,
-            animations: view.layoutIfNeeded
-        )
     }
     
 }

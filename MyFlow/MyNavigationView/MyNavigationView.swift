@@ -250,6 +250,7 @@ class MyNavigationView: UIView {
     }
     
     @objc fileprivate func playButtonAction() {
+        // notify mainView
         currentVM?.playButtonAction()
     }
     

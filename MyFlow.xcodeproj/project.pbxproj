@@ -45,6 +45,7 @@
 		AFCDB58D29326E6C00E22DEA /* DocumentViewStateInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB58C29326E6C00E22DEA /* DocumentViewStateInterface.swift */; };
 		AFCDB58F29326EB100E22DEA /* DocumentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB58E29326EB100E22DEA /* DocumentViewDelegate.swift */; };
 		AFCDB59229326ED500E22DEA /* DocumentViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB59129326ED500E22DEA /* DocumentViewModelInterface.swift */; };
+		AFCDB5972932735C00E22DEA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB5962932735C00E22DEA /* MainViewController.swift */; };
 		AFD6DE322833B99800E9FA5E /* PointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD6DE312833B99800E9FA5E /* PointHelper.swift */; };
 		AFE6C78D28487DD4003C4580 /* MyPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE6C78C28487DD4003C4580 /* MyPDFView.swift */; };
 		AFED0CC82844C25400FD177D /* MoveStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED0CC72844C25400FD177D /* MoveStrategy.swift */; };
@@ -106,6 +107,7 @@
 		AFCDB58C29326E6C00E22DEA /* DocumentViewStateInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewStateInterface.swift; sourceTree = "<group>"; };
 		AFCDB58E29326EB100E22DEA /* DocumentViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewDelegate.swift; sourceTree = "<group>"; };
 		AFCDB59129326ED500E22DEA /* DocumentViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewModelInterface.swift; sourceTree = "<group>"; };
+		AFCDB5962932735C00E22DEA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		AFD6DE312833B99800E9FA5E /* PointHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelper.swift; sourceTree = "<group>"; };
 		AFE6C78C28487DD4003C4580 /* MyPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPDFView.swift; sourceTree = "<group>"; };
 		AFED0CC72844C25400FD177D /* MoveStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveStrategy.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 		AF8EDF7D282E3F7A00CCFF19 /* MyFlow */ = {
 			isa = PBXGroup;
 			children = (
+				AFCDB5982932848F00E22DEA /* MainView */,
 				AFCDB58A29326E0200E22DEA /* DocumentView */,
 				AF65F78E292E4E4D0005D9AF /* FileHelper */,
 				AFD6DE352834000B00E9FA5E /* DocumentHelper */,
@@ -292,6 +295,14 @@
 				AFCDB586293122A200E22DEA /* DocumentViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AFCDB5982932848F00E22DEA /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				AFCDB5962932735C00E22DEA /* MainViewController.swift */,
+			);
+			path = MainView;
 			sourceTree = "<group>";
 		};
 		AFD6DE332833FFDC00E9FA5E /* MyNavigationView */ = {
@@ -546,6 +557,7 @@
 				AFAB47C82847BC050034515A /* PointHelperMemento.swift in Sources */,
 				AF8EDF83282E3F7A00CCFF19 /* DocumentViewController.swift in Sources */,
 				AF3C3F972843C0C2007ED4F9 /* DocumentViewState.swift in Sources */,
+				AFCDB5972932735C00E22DEA /* MainViewController.swift in Sources */,
 				AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */,
 				AFCDB58D29326E6C00E22DEA /* DocumentViewStateInterface.swift in Sources */,
 				AFCDB58F29326EB100E22DEA /* DocumentViewDelegate.swift in Sources */,
