@@ -13,8 +13,7 @@ import PDFKit
 class MyNavigationView: UIView {
     static let singletonView = MyNavigationView()
     
-    private var currentVC:DocumentViewController?
-    private var currentPH:PointHelper?
+    var currentVM: DocumentViewModelInterface?
     
     private let optionsView = UIView()
     private let backButton = UIButton()
@@ -55,12 +54,9 @@ class MyNavigationView: UIView {
     func getIsAddingPoints() -> Bool { addPointsButton.isSelected }
     func getIsHandlingPoints() -> Bool { handlePointButton.isSelected }
     
-    func setCurrentVC(viewController: DocumentViewController) { currentVC = viewController }
-    func setCurrentPH(pointHelper: PointHelper) { currentPH = pointHelper }
     
     func clear() {
-        currentVC = nil
-        currentPH = nil
+        currentVM = nil
         addPointsButton.isSelected = false
         handlePointButton.isSelected = false
     }
@@ -196,23 +192,22 @@ class MyNavigationView: UIView {
     // MARK: Button Actions
     
     @objc fileprivate func backButtonAction() {
-        guard let currentVC = currentVC else { return }
-        currentVC.dismiss(animated: true, completion: nil)
+        currentVM?.dismiss()
     }
     
     @objc fileprivate func toggleAddingPointsMode() {
         addPointsButton.toggleIconWithTransition()
         if getIsAddingPoints() {
             print("포인트 추가")
-            currentVC?.changeState(state: AddPointsState(vc: currentVC))
+            currentVM?.changeState(to: .addPoints)
         }
         else {
             print("포인트 추가 끝")
-            currentVC?.changeState(state: NormalState(vc: currentVC))
+            currentVM?.changeState(to: .normal)
         }
         if getIsHandlingPoints() {
             handlePointButton.toggleIconWithTransition()
-            clearSelectedPoint()
+            currentVM?.clearSelectedPoint()
         }
     }
     
@@ -220,56 +215,42 @@ class MyNavigationView: UIView {
         handlePointButton.toggleIconWithTransition()
         if getIsHandlingPoints() {
             print("포인트 핸들링")
-            currentVC?.changeState(state: HandlePointsState(vc: currentVC))
+            currentVM?.changeState(to: .handlePoints)
         }
         else {
             print("포인트 핸들링 끝")
-            currentVC?.changeState(state: NormalState(vc: currentVC))
-            clearSelectedPoint()
+            currentVM?.changeState(to: .normal)
+            currentVM?.clearSelectedPoint()
         }
         if getIsAddingPoints() { addPointsButton.toggleIconWithTransition() }
     }
     
     @objc fileprivate func prevPointButtonAction() {
-        guard let currentVC = currentVC else { return }
-        currentVC.prevPointButtonAction()
+        currentVM?.moveToPrevPoint()
     }
     
     @objc fileprivate func nextPointButtonAction() {
-        guard let currentVC = currentVC else { return }
-        currentVC.nextPointButtonAction()
+        currentVM?.moveToNextPoint()
     }
     
     @objc fileprivate func addPointsPagesButtonAction() {
-        guard let currentVC = currentVC else { return }
-        currentVC.showAddPointsModalView()
+        currentVM?.showAddPointsModalView()
     }
     
     @objc fileprivate func deleteButtonAction() {
-        guard let currentVC = currentVC else { return }
-        currentVC.deleteButtonAction()
+        currentVM?.deletePoint()
     }
     
     @objc fileprivate func redoButtonAction() {
-        guard let currentPH = currentPH else { return }
-        currentPH.redo()
+        currentVM?.redo()
     }
     
     @objc fileprivate func undoButtonAction() {
-        guard let currentPH = currentPH else { return }
-        currentPH.undo()
+        currentVM?.undo()
     }
     
     @objc fileprivate func playButtonAction() {
-        guard let currentVC = currentVC else { return }
-        currentVC.playButtonAction()
+        currentVM?.playButtonAction()
     }
-    
-    
-    fileprivate func clearSelectedPoint() {
-        guard let currentPH = currentPH else { return }
-        currentPH.clearSelectedPoint()
-    }
-    
     
 }
