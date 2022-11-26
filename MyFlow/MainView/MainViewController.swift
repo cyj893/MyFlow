@@ -53,6 +53,7 @@ final class MainViewController: UIViewController {
 // MARK: Views
 extension MainViewController {
     private func setMyNavigationView() {
+        myNavigationView.mainViewDelegate = self
         myNavigationView.currentVM = documentViews[nowIndex].viewModel
         view.addSubview(myNavigationView)
         myNavigationView.snp.makeConstraints {
@@ -142,6 +143,17 @@ extension MainViewController {
             withDuration: 0.5,
             animations: view.layoutIfNeeded
         )
+    }
+    
+}
+
+
+// MARK: MainViewDelegate
+extension MainViewController: MainViewDelegate {
+    
+    func playModeStart() {
+        hideNavi()
+        endPlayModeButton.isHidden = false
     }
     
 }

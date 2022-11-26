@@ -13,6 +13,7 @@ import PDFKit
 class MyNavigationView: UIView {
     static let singletonView = MyNavigationView()
     
+    var mainViewDelegate: MainViewDelegate?
     var currentVM: DocumentViewModelInterface?
     
     private let optionsView = UIView()
@@ -250,7 +251,7 @@ class MyNavigationView: UIView {
     }
     
     @objc fileprivate func playButtonAction() {
-        // notify mainView
+        mainViewDelegate?.playModeStart()
         currentVM?.playButtonAction()
     }
     
