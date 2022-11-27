@@ -23,7 +23,7 @@ class PointHelper {
     /// (number: line annotations) dictionary  to find easily based on point number.
     var linesDict:[Int:[PDFAnnotation]] = [:]
     /// Currently located point's index.
-    private var idx:Int = 0
+    var idx:Int = 0
     
     var moveBackup: PointMemento?
     /// Current point number annotation selected by user.
