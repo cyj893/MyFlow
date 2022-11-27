@@ -22,6 +22,8 @@ final class MovingArea: UIStackView {
         $0.setIconStyle(systemName: "backward.frame")
     }
     
+    private let nowPointView = NowPointView()
+    
     private let nextPointButton = UIButton().then {
         $0.setIconStyle(systemName: "forward.frame")
     }
@@ -41,8 +43,16 @@ final class MovingArea: UIStackView {
 
 
 extension MovingArea {
+    func setPointNum(with num: Int) {
+        nowPointView.setPointNum(with: num)
+    }
+}
+
+
+extension MovingArea {
     private func setView() {
         addArrangedSubview(prevPointButton)
+        addArrangedSubview(nowPointView)
         addArrangedSubview(nextPointButton)
     }
     

@@ -12,6 +12,7 @@ protocol DocumentViewModelInterface {
     
     func moveToPrevPoint()
     func moveToNextPoint()
+    func getNowPointNum() -> Int
     
     func deletePoint()
     func selectPoint(_ annotation: PDFAnnotation)
