@@ -33,7 +33,7 @@ class ThumbnailCell: UICollectionViewCell {
         
         thumbnailCell.addSubview(thumbnailView)
         thumbnailView.then{
-            $0.layer.borderColor = MyColor.borderColor?.cgColor
+            $0.layer.borderColor = MyColor.border.cgColor
         }.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -58,7 +58,7 @@ class ThumbnailCell: UICollectionViewCell {
     /// - Parameter order: Cell's selected order.
     func select(_ order: Int) {
         orderLabel.text = String(order)
-        orderLabel.backgroundColor = MyColor.borderColor
+        orderLabel.backgroundColor = MyColor.border
         thumbnailView.layer.borderWidth = 5
     }
     

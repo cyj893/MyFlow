@@ -47,6 +47,7 @@
 		AFCDB59229326ED500E22DEA /* DocumentViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB59129326ED500E22DEA /* DocumentViewModelInterface.swift */; };
 		AFCDB5972932735C00E22DEA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB5962932735C00E22DEA /* MainViewController.swift */; };
 		AFCDB59A293284A500E22DEA /* MainViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB599293284A500E22DEA /* MainViewDelegate.swift */; };
+		AFCDB59C29332B0400E22DEA /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB59B29332B0400E22DEA /* UIViewExtension.swift */; };
 		AFD6DE322833B99800E9FA5E /* PointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD6DE312833B99800E9FA5E /* PointHelper.swift */; };
 		AFE6C78D28487DD4003C4580 /* MyPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE6C78C28487DD4003C4580 /* MyPDFView.swift */; };
 		AFED0CC82844C25400FD177D /* MoveStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED0CC72844C25400FD177D /* MoveStrategy.swift */; };
@@ -110,6 +111,7 @@
 		AFCDB59129326ED500E22DEA /* DocumentViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewModelInterface.swift; sourceTree = "<group>"; };
 		AFCDB5962932735C00E22DEA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		AFCDB599293284A500E22DEA /* MainViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewDelegate.swift; sourceTree = "<group>"; };
+		AFCDB59B29332B0400E22DEA /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		AFD6DE312833B99800E9FA5E /* PointHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelper.swift; sourceTree = "<group>"; };
 		AFE6C78C28487DD4003C4580 /* MyPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPDFView.swift; sourceTree = "<group>"; };
 		AFED0CC72844C25400FD177D /* MoveStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveStrategy.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				AF98A38D2832A6760035601D /* UIColorExtension.swift */,
 				AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */,
 				AF255AA0283E809E00747FF3 /* UIDeviceExtension.swift */,
+				AFCDB59B29332B0400E22DEA /* UIViewExtension.swift */,
 			);
 			path = MyExtensions;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				AF98A38E2832A6760035601D /* UIColorExtension.swift in Sources */,
 				AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */,
 				AFCDB587293122A200E22DEA /* DocumentViewModel.swift in Sources */,
+				AFCDB59C29332B0400E22DEA /* UIViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

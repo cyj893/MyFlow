@@ -9,7 +9,7 @@ import UIKit
 
 extension UIButton {
     
-    func setIconStyle(systemName: String, tintColor: UIColor = .white, forState: UIControl.State = .normal) {
+    func setIconStyle(systemName: String, tintColor: UIColor = MyColor.icon, forState: UIControl.State = .normal) {
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 0, weight: .bold, scale: .large)
         let largeBoldDoc = UIImage(systemName: systemName, withConfiguration: largeConfig)?.withTintColor(tintColor, renderingMode: .alwaysOriginal)
         self.setImage(largeBoldDoc, for: forState)
