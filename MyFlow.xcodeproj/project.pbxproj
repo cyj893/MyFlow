@@ -37,6 +37,7 @@
 		AFAB47C02847A0830034515A /* AddCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47BF2847A0830034515A /* AddCommand.swift */; };
 		AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C52847B26B0034515A /* MoveCommand.swift */; };
 		AFAB47C82847BC050034515A /* PointHelperMemento.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C72847BC050034515A /* PointHelperMemento.swift */; };
+		AFC8E24629333A4A009F9EC9 /* NowPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E24529333A4A009F9EC9 /* NowPointView.swift */; };
 		AFC8E2482933439F009F9EC9 /* UndoRedoArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E2472933439F009F9EC9 /* UndoRedoArea.swift */; };
 		AFC8E24A293345F2009F9EC9 /* PointsArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E249293345F2009F9EC9 /* PointsArea.swift */; };
 		AFC8E24C29334C8A009F9EC9 /* MovingArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E24B29334C8A009F9EC9 /* MovingArea.swift */; };
@@ -106,6 +107,7 @@
 		AFAB47BF2847A0830034515A /* AddCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommand.swift; sourceTree = "<group>"; };
 		AFAB47C52847B26B0034515A /* MoveCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCommand.swift; sourceTree = "<group>"; };
 		AFAB47C72847BC050034515A /* PointHelperMemento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelperMemento.swift; sourceTree = "<group>"; };
+		AFC8E24529333A4A009F9EC9 /* NowPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPointView.swift; sourceTree = "<group>"; };
 		AFC8E2472933439F009F9EC9 /* UndoRedoArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoRedoArea.swift; sourceTree = "<group>"; };
 		AFC8E249293345F2009F9EC9 /* PointsArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsArea.swift; sourceTree = "<group>"; };
 		AFC8E24B29334C8A009F9EC9 /* MovingArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingArea.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				AFC8E2472933439F009F9EC9 /* UndoRedoArea.swift */,
 				AFC8E249293345F2009F9EC9 /* PointsArea.swift */,
 				AFC8E24B29334C8A009F9EC9 /* MovingArea.swift */,
+				AFC8E24529333A4A009F9EC9 /* NowPointView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				AF3C3F972843C0C2007ED4F9 /* DocumentViewState.swift in Sources */,
 				AFCDB5972932735C00E22DEA /* MainViewController.swift in Sources */,
 				AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */,
+				AFC8E24629333A4A009F9EC9 /* NowPointView.swift in Sources */,
 				AFCDB58D29326E6C00E22DEA /* DocumentViewStateInterface.swift in Sources */,
 				AFCDB58F29326EB100E22DEA /* DocumentViewDelegate.swift in Sources */,
 				AFC8E24C29334C8A009F9EC9 /* MovingArea.swift in Sources */,
