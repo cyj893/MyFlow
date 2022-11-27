@@ -41,6 +41,8 @@
 		AFC8E24A293345F2009F9EC9 /* PointsArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E249293345F2009F9EC9 /* PointsArea.swift */; };
 		AFC8E24C29334C8A009F9EC9 /* MovingArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E24B29334C8A009F9EC9 /* MovingArea.swift */; };
 		AFC8E24F29335431009F9EC9 /* MyNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E24E29335431009F9EC9 /* MyNavigationViewModel.swift */; };
+		AFC8E25329335DAF009F9EC9 /* MyNavigationViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E25229335DAF009F9EC9 /* MyNavigationViewDelegate.swift */; };
+		AFC8E25529335DCD009F9EC9 /* MyNavigationViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E25429335DCD009F9EC9 /* MyNavigationViewModelInterface.swift */; };
 		AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */; };
 		AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */; };
 		AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */; };
@@ -108,6 +110,8 @@
 		AFC8E249293345F2009F9EC9 /* PointsArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsArea.swift; sourceTree = "<group>"; };
 		AFC8E24B29334C8A009F9EC9 /* MovingArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingArea.swift; sourceTree = "<group>"; };
 		AFC8E24E29335431009F9EC9 /* MyNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationViewModel.swift; sourceTree = "<group>"; };
+		AFC8E25229335DAF009F9EC9 /* MyNavigationViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationViewDelegate.swift; sourceTree = "<group>"; };
+		AFC8E25429335DCD009F9EC9 /* MyNavigationViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationViewModelInterface.swift; sourceTree = "<group>"; };
 		AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationView.swift; sourceTree = "<group>"; };
 		AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGestureRecognizer.swift; sourceTree = "<group>"; };
 		AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -265,6 +269,25 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
+		AFC8E25029335D88009F9EC9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AFC8E25229335DAF009F9EC9 /* MyNavigationViewDelegate.swift */,
+				AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */,
+				AFC8E24D29334DFE009F9EC9 /* Subviews */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AFC8E25129335D98009F9EC9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AFC8E25429335DCD009F9EC9 /* MyNavigationViewModelInterface.swift */,
+				AFC8E24E29335431009F9EC9 /* MyNavigationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		AFCAE25A283A97F300BCB486 /* MyFlowTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -332,9 +355,8 @@
 		AFD6DE332833FFDC00E9FA5E /* MyNavigationView */ = {
 			isa = PBXGroup;
 			children = (
-				AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */,
-				AFC8E24E29335431009F9EC9 /* MyNavigationViewModel.swift */,
-				AFC8E24D29334DFE009F9EC9 /* Subviews */,
+				AFC8E25029335D88009F9EC9 /* Views */,
+				AFC8E25129335D98009F9EC9 /* ViewModel */,
 			);
 			path = MyNavigationView;
 			sourceTree = "<group>";
@@ -572,6 +594,7 @@
 				AF255AA5283E95C900747FF3 /* ThumbnailCell.swift in Sources */,
 				AF8EDF85282E3F7A00CCFF19 /* Document.swift in Sources */,
 				AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */,
+				AFC8E25329335DAF009F9EC9 /* MyNavigationViewDelegate.swift in Sources */,
 				AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */,
 				AFCDB59229326ED500E22DEA /* DocumentViewModelInterface.swift in Sources */,
 				AFAB47B9284795780034515A /* PointMemento.swift in Sources */,
@@ -589,6 +612,7 @@
 				AFCDB58F29326EB100E22DEA /* DocumentViewDelegate.swift in Sources */,
 				AFC8E24C29334C8A009F9EC9 /* MovingArea.swift in Sources */,
 				AF2A9ACA28615C2200D0BB24 /* DeleteCommand.swift in Sources */,
+				AFC8E25529335DCD009F9EC9 /* MyNavigationViewModelInterface.swift in Sources */,
 				AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */,
 				AF8EDF81282E3F7A00CCFF19 /* DocumentBrowserViewController.swift in Sources */,
 				AFED0CC82844C25400FD177D /* MoveStrategy.swift in Sources */,

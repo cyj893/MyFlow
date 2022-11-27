@@ -7,16 +7,6 @@
 
 import Foundation
 
-protocol MyNavigationViewDelegate {
-    func toggleHandlePointButton()
-    func toggleAddPointsButton()
-}
-
-protocol MyNavigationViewModelInterface {
-    func backButtonAction()
-    func playButtonAction()
-}
-
 
 final class MyNavigationViewModel {
     
