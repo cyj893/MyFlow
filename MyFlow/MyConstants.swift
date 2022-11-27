@@ -48,6 +48,9 @@ struct MyColor {
     static let border = UIColor(named: "borderColor")!
     static let pageSheetBackground = UIColor(named: "pageSheetBackgroundColor")!
     static let thumbnailViewBackground = UIColor(named: "thumbnailViewBackgroundColor")!
+    static let tabCell = UIColor(named: "tabCellColor")!
+    static let tabCellSelected = UIColor(named: "tabCellSelectedColor")!
+    static let separator = UIColor(named: "separatorColor")!
 }
 
 struct MyFont {
