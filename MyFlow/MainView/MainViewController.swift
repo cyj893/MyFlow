@@ -56,8 +56,8 @@ final class MainViewController: UIViewController {
 // MARK: Views
 extension MainViewController {
     private func setMyNavigationView() {
-        myNavigationView.mainViewDelegate = self
-        myNavigationView.currentVM = documentViews[nowIndex].viewModel
+        myNavigationView.viewModel.mainViewDelegate = self
+        myNavigationView.viewModel.currentVM = documentViews[nowIndex].viewModel
         myNavigationView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).offset(MyOffset.navigationViewHeight)
