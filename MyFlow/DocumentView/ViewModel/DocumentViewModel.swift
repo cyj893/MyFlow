@@ -159,6 +159,10 @@ extension DocumentViewModel: DocumentViewModelInterface {
         }
     }
     
+    func getNowPointNum() -> Int {
+        return pointHelper.idx + 1
+    }
+    
     func deletePoint() {
         pointHelper.deletePoint()
     }
