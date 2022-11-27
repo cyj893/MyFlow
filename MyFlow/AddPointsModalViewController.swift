@@ -53,7 +53,7 @@ class AddPointsModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = MyColor.pageSheetBackgroundColor
+        view.backgroundColor = MyColor.pageSheetBackground
         
         getPdfThumbnails()
         
@@ -112,7 +112,7 @@ class AddPointsModalViewController: UIViewController {
         thumbnailCollectionView.delegate = self
         thumbnailCollectionView.dataSource = self
         
-        thumbnailCollectionView.backgroundColor = MyColor.thumbnailViewBackgroundColor
+        thumbnailCollectionView.backgroundColor = MyColor.thumbnailViewBackground
         
         thumbnailCollectionView.showsHorizontalScrollIndicator = true
         thumbnailCollectionView.register(ThumbnailCell.classForCoder(), forCellWithReuseIdentifier: "ThumbnailCell")

@@ -34,10 +34,13 @@ struct GradientColor {
 }
 
 struct MyColor {
-    static let navigationBackgroundColor = UIColor(named: "navigationBackgroundColor")
-    static let borderColor = UIColor(named: "borderColor")
-    static let pageSheetBackgroundColor = UIColor(named: "pageSheetBackgroundColor")
-    static let thumbnailViewBackgroundColor = UIColor(named: "thumbnailViewBackgroundColor")
+    static let navigationBackground = UIColor(named: "navigationBackgroundColor")!
+    static let secondaryNavigationBackground = UIColor(named: "secondaryNavigationBackgroundColor")!
+    static let pdfBackground = UIColor(named: "pdfViewBackgroundColor")!
+    static let icon = UIColor(named: "iconColor")!
+    static let border = UIColor(named: "borderColor")!
+    static let pageSheetBackground = UIColor(named: "pageSheetBackgroundColor")!
+    static let thumbnailViewBackground = UIColor(named: "thumbnailViewBackgroundColor")!
 }
 
 struct MyFont {

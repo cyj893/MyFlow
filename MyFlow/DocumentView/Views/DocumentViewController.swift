@@ -52,7 +52,7 @@ extension DocumentViewController {
         pdfView.pageBreakMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         pdfView.autoScales = true
         
-        pdfView.backgroundColor = .black
+        pdfView.backgroundColor = MyColor.pdfBackground
     }
     
     fileprivate func getMoveStrategy() -> MoveStrategy {
