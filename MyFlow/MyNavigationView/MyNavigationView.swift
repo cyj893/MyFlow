@@ -16,7 +16,6 @@ class MyNavigationView: UIView {
     var mainViewDelegate: MainViewDelegate?
     var currentVM: DocumentViewModelInterface?
     
-    private let optionsView = UIView()
     private let backButton = UIButton()
     
     
@@ -35,14 +34,14 @@ class MyNavigationView: UIView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        self.addSubview(optionsView)
-        optionsView.backgroundColor = MyColor.navigationBackgroundColor
-        optionsView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(100)
+        backgroundColor = MyColor.navigationBackground
+        
+        snp.makeConstraints {
+            $0.height.equalTo(MyOffset.navigationViewHeight + MyOffset.topPadding)
         }
         
         setButtons()
+        addShadow()
     }
     
     required init?(coder: NSCoder) {
