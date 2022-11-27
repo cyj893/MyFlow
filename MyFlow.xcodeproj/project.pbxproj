@@ -45,6 +45,7 @@
 		AFC8E25329335DAF009F9EC9 /* MyNavigationViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E25229335DAF009F9EC9 /* MyNavigationViewDelegate.swift */; };
 		AFC8E25529335DCD009F9EC9 /* MyNavigationViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E25429335DCD009F9EC9 /* MyNavigationViewModelInterface.swift */; };
 		AFC8E259293368C1009F9EC9 /* DocumentTabsCollectionViewAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E258293368C1009F9EC9 /* DocumentTabsCollectionViewAdaptor.swift */; };
+		AFC8E25B2933826D009F9EC9 /* TabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E25A2933826D009F9EC9 /* TabCell.swift */; };
 		AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */; };
 		AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */; };
 		AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */; };
@@ -116,6 +117,7 @@
 		AFC8E25229335DAF009F9EC9 /* MyNavigationViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationViewDelegate.swift; sourceTree = "<group>"; };
 		AFC8E25429335DCD009F9EC9 /* MyNavigationViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationViewModelInterface.swift; sourceTree = "<group>"; };
 		AFC8E258293368C1009F9EC9 /* DocumentTabsCollectionViewAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTabsCollectionViewAdaptor.swift; sourceTree = "<group>"; };
+		AFC8E25A2933826D009F9EC9 /* TabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCell.swift; sourceTree = "<group>"; };
 		AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationView.swift; sourceTree = "<group>"; };
 		AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGestureRecognizer.swift; sourceTree = "<group>"; };
 		AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				AFC8E24B29334C8A009F9EC9 /* MovingArea.swift */,
 				AFC8E24529333A4A009F9EC9 /* NowPointView.swift */,
 				AFC8E258293368C1009F9EC9 /* DocumentTabsCollectionViewAdaptor.swift */,
+				AFC8E25A2933826D009F9EC9 /* TabCell.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -604,6 +607,7 @@
 				AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */,
 				AFCDB59229326ED500E22DEA /* DocumentViewModelInterface.swift in Sources */,
 				AFAB47B9284795780034515A /* PointMemento.swift in Sources */,
+				AFC8E25B2933826D009F9EC9 /* TabCell.swift in Sources */,
 				AF255AA3283E843A00747FF3 /* AddPointsModalViewController.swift in Sources */,
 				AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */,
 				AFAB47B728477E060034515A /* PointCommand.swift in Sources */,
