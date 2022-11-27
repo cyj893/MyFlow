@@ -24,10 +24,12 @@ final class MyNavigationViewModel {
 extension MyNavigationViewModel: MovingAreaDelegate {
     func prevPointButtonAction() {
         currentVM?.moveToPrevPoint()
+        delegate?.setPointNum(with: currentVM?.getNowPointNum() ?? 0)
     }
     
     func nextPointButtonAction() {
         currentVM?.moveToNextPoint()
+        delegate?.setPointNum(with: currentVM?.getNowPointNum() ?? 0)
     }
 }
 
