@@ -18,20 +18,9 @@ class MyNavigationView: UIView {
     
     private let backButton = UIButton()
     
-    
-    private let undoRedoArea = UIStackView()
-    private let undoButton = UIButton()
-    private let redoButton = UIButton()
-    
-    private let pointsArea = UIStackView()
-    private let addPointsPagesButton = UIButton()
-    private let addPointsButton = UIButton()
-    private let deleteButton = UIButton()
-    private let handlePointButton = UIButton()
-    
-    private let movingArea = UIStackView()
-    private let prevPointButton = UIButton()
-    private let nextPointButton = UIButton()
+    private let undoRedoArea = UndoRedoArea()
+    private let pointsArea = PointsArea()
+    private let movingArea = MovingArea()
     
     private let playButton = UIButton()
     
@@ -54,16 +43,9 @@ class MyNavigationView: UIView {
     }
     
     
-    // MARK: Getter, Setter
-    
-    func getIsAddingPoints() -> Bool { addPointsButton.isSelected }
-    func getIsHandlingPoints() -> Bool { handlePointButton.isSelected }
-    
-    
     func clear() {
         currentVM = nil
-        addPointsButton.isSelected = false
-        handlePointButton.isSelected = false
+        pointsArea.clear()
     }
     
     // MARK: Setting Buttons
@@ -71,8 +53,8 @@ class MyNavigationView: UIView {
     fileprivate func setButtons() {
         setBackButton()
         setPlayButton()
-        setPointsButtons()
-        [backButton, playButton, undoButton, redoButton, deleteButton, addPointsPagesButton, prevPointButton, addPointsButton, nextPointButton, handlePointButton].forEach {
+        setAreas()
+        [backButton, playButton].forEach {
             $0.snp.makeConstraints { make in
                 make.centerY.equalToSuperview()
             }
@@ -99,7 +81,7 @@ class MyNavigationView: UIView {
         playButton.addTarget(self, action: #selector(playButtonAction), for: .touchUpInside)
     }
     
-    fileprivate func setPointsButtons() {
+    fileprivate func setAreas() {
         [movingArea, pointsArea, undoRedoArea].forEach { area in
             addSubview(area)
             area.then {
@@ -122,60 +104,6 @@ class MyNavigationView: UIView {
         currentVM?.dismiss()
     }
     
-    @objc fileprivate func toggleAddingPointsMode() {
-        addPointsButton.toggleIconWithTransition()
-        if getIsAddingPoints() {
-            print("포인트 추가")
-            currentVM?.changeState(to: .addPoints)
-        }
-        else {
-            print("포인트 추가 끝")
-            currentVM?.changeState(to: .normal)
-        }
-        if getIsHandlingPoints() {
-            handlePointButton.toggleIconWithTransition()
-            currentVM?.clearSelectedPoint()
-        }
-    }
-    
-    @objc fileprivate func toggleHandlingPointsMode() {
-        handlePointButton.toggleIconWithTransition()
-        if getIsHandlingPoints() {
-            print("포인트 핸들링")
-            currentVM?.changeState(to: .handlePoints)
-        }
-        else {
-            print("포인트 핸들링 끝")
-            currentVM?.changeState(to: .normal)
-            currentVM?.clearSelectedPoint()
-        }
-        if getIsAddingPoints() { addPointsButton.toggleIconWithTransition() }
-    }
-    
-    @objc fileprivate func prevPointButtonAction() {
-        currentVM?.moveToPrevPoint()
-    }
-    
-    @objc fileprivate func nextPointButtonAction() {
-        currentVM?.moveToNextPoint()
-    }
-    
-    @objc fileprivate func addPointsPagesButtonAction() {
-        currentVM?.showAddPointsModalView()
-    }
-    
-    @objc fileprivate func deleteButtonAction() {
-        currentVM?.deletePoint()
-    }
-    
-    @objc fileprivate func redoButtonAction() {
-        currentVM?.redo()
-    }
-    
-    @objc fileprivate func undoButtonAction() {
-        currentVM?.undo()
-    }
-    
     @objc fileprivate func playButtonAction() {
         mainViewDelegate?.playModeStart()
         currentVM?.playButtonAction()
@@ -185,117 +113,95 @@ class MyNavigationView: UIView {
 
 
 // MARK: Views - Set Moving Area
-extension MyNavigationView {
+extension MyNavigationView: MovingAreaDelegate {
     
     private func setMovingArea() {
+        movingArea.delegate = self
         movingArea.snp.makeConstraints { make in
             make.trailing.equalTo(playButton.snp.leading).offset(-MyOffset.betweenIcon)
         }
-        
-        movingArea.addArrangedSubview(prevPointButton)
-        movingArea.addArrangedSubview(nextPointButton)
-        
-        setPrevPointButton()
-        setNextPointButton()
     }
     
-    fileprivate func setNextPointButton() {
-        nextPointButton.then {
-            $0.setIconStyle(systemName: "forward.frame")
-        }
-        nextPointButton.addTarget(self, action: #selector(nextPointButtonAction), for: .touchUpInside)
+    func prevPointButtonAction() {
+        currentVM?.moveToPrevPoint()
     }
     
-    fileprivate func setPrevPointButton() {
-        prevPointButton.then {
-            $0.setIconStyle(systemName: "backward.frame")
-        }
-        prevPointButton.addTarget(self, action: #selector(prevPointButtonAction), for: .touchUpInside)
+    func nextPointButtonAction() {
+        currentVM?.moveToNextPoint()
     }
     
 }
 
 
 // MARK: Views - Set Points Area
-extension MyNavigationView {
+extension MyNavigationView: PointsAreaDelegate {
     
     private func setPointsArea() {
+        pointsArea.delegate = self
         pointsArea.snp.makeConstraints { make in
             make.trailing.equalTo(movingArea.snp.leading).offset(-MyOffset.betweenIcon)
         }
+    }
+    
+    func addPointsPagesButtonAction() {
+        currentVM?.showAddPointsModalView()
+    }
+    
+    func toggleAddingPointsMode(_ isAddingPoints: Bool, _ isHandlingPoints: Bool) {
+        if isHandlingPoints {
+            pointsArea.toggleHandlePointButton()
+        }
         
-        pointsArea.addArrangedSubview(addPointsPagesButton)
-        pointsArea.addArrangedSubview(addPointsButton)
-        pointsArea.addArrangedSubview(deleteButton)
-        pointsArea.addArrangedSubview(handlePointButton)
+        if isAddingPoints {
+            print("포인트 추가")
+            currentVM?.clearSelectedPoint()
+            currentVM?.changeState(to: .addPoints)
+        }
+        else {
+            print("포인트 추가 끝")
+            currentVM?.changeState(to: .normal)
+        }
+    }
+    
+    func deleteButtonAction() {
+        currentVM?.deletePoint()
+    }
+    
+    func toggleHandlingPointsMode(_ isHandlingPoints: Bool, _ isAddingPoints: Bool) {
+        if isAddingPoints {
+            pointsArea.toggleAddPointsButton()
+        }
         
-        setAddPointsPagesButton()
-        setAddPointsButton()
-        setDeleteButton()
-        setHandlePointButton()
-    }
-    
-    private func setAddPointsPagesButton() {
-        addPointsPagesButton.then {
-            $0.setIconStyle(systemName: "plus.square.on.square")
-            $0.setIconStyle(systemName: "plus.square.on.square.fill", forState: .selected)
+        if isHandlingPoints {
+            print("포인트 핸들링")
+            currentVM?.changeState(to: .handlePoints)
         }
-        addPointsPagesButton.addTarget(self, action: #selector(addPointsPagesButtonAction), for: .touchUpInside)
-    }
-    
-    private func setAddPointsButton() {
-        addPointsButton.then {
-            $0.setIconStyle(systemName: "plus.app")
-            $0.setIconStyle(systemName: "plus.app.fill", tintColor: .orange, forState: .selected)
+        else {
+            print("포인트 핸들링 끝")
+            currentVM?.clearSelectedPoint()
+            currentVM?.changeState(to: .normal)
         }
-        addPointsButton.addTarget(self, action: #selector(toggleAddingPointsMode), for: .touchUpInside)
-    }
-    
-    private func setDeleteButton() {
-        deleteButton.then {
-            $0.setIconStyle(systemName: "trash")
-        }
-        deleteButton.addTarget(self, action: #selector(deleteButtonAction), for: .touchUpInside)
-    }
-    
-    private func setHandlePointButton() {
-        handlePointButton.then {
-            $0.setIconStyle(systemName: "hand.tap")
-            $0.setIconStyle(systemName: "hand.tap.fill", forState: .selected)
-        }
-        handlePointButton.addTarget(self, action: #selector(toggleHandlingPointsMode), for: .touchUpInside)
     }
     
 }
 
 
 // MARK: Views - Set Undo Redo Area
-extension MyNavigationView {
+extension MyNavigationView: UndoRedoAreaDelegate {
     
     private func setUndoRedoArea() {
+        undoRedoArea.delegate = self
         undoRedoArea.snp.makeConstraints { make in
             make.trailing.equalTo(pointsArea.snp.leading).offset(-MyOffset.betweenIcon)
         }
-        
-        undoRedoArea.addArrangedSubview(undoButton)
-        undoRedoArea.addArrangedSubview(redoButton)
-        
-        setUndoButton()
-        setRedoButton()
     }
     
-    fileprivate func setUndoButton() {
-        undoButton.then {
-            $0.setIconStyle(systemName: "arrow.uturn.backward")
-        }
-        undoButton.addTarget(self, action: #selector(undoButtonAction), for: .touchUpInside)
+    func redoButtonAction() {
+        currentVM?.redo()
     }
     
-    fileprivate func setRedoButton() {
-        redoButton.then {
-            $0.setIconStyle(systemName: "arrow.uturn.forward")
-        }
-        redoButton.addTarget(self, action: #selector(redoButtonAction), for: .touchUpInside)
+    func undoButtonAction() {
+        currentVM?.undo()
     }
     
 }

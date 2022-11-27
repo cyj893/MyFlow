@@ -37,6 +37,9 @@
 		AFAB47C02847A0830034515A /* AddCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47BF2847A0830034515A /* AddCommand.swift */; };
 		AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C52847B26B0034515A /* MoveCommand.swift */; };
 		AFAB47C82847BC050034515A /* PointHelperMemento.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C72847BC050034515A /* PointHelperMemento.swift */; };
+		AFC8E2482933439F009F9EC9 /* UndoRedoArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E2472933439F009F9EC9 /* UndoRedoArea.swift */; };
+		AFC8E24A293345F2009F9EC9 /* PointsArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E249293345F2009F9EC9 /* PointsArea.swift */; };
+		AFC8E24C29334C8A009F9EC9 /* MovingArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E24B29334C8A009F9EC9 /* MovingArea.swift */; };
 		AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */; };
 		AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */; };
 		AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */; };
@@ -100,6 +103,9 @@
 		AFAB47BF2847A0830034515A /* AddCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommand.swift; sourceTree = "<group>"; };
 		AFAB47C52847B26B0034515A /* MoveCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCommand.swift; sourceTree = "<group>"; };
 		AFAB47C72847BC050034515A /* PointHelperMemento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelperMemento.swift; sourceTree = "<group>"; };
+		AFC8E2472933439F009F9EC9 /* UndoRedoArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoRedoArea.swift; sourceTree = "<group>"; };
+		AFC8E249293345F2009F9EC9 /* PointsArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsArea.swift; sourceTree = "<group>"; };
+		AFC8E24B29334C8A009F9EC9 /* MovingArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingArea.swift; sourceTree = "<group>"; };
 		AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationView.swift; sourceTree = "<group>"; };
 		AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGestureRecognizer.swift; sourceTree = "<group>"; };
 		AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -247,6 +253,16 @@
 			path = Memento;
 			sourceTree = "<group>";
 		};
+		AFC8E24D29334DFE009F9EC9 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				AFC8E2472933439F009F9EC9 /* UndoRedoArea.swift */,
+				AFC8E249293345F2009F9EC9 /* PointsArea.swift */,
+				AFC8E24B29334C8A009F9EC9 /* MovingArea.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		AFCAE25A283A97F300BCB486 /* MyFlowTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */,
+				AFC8E24D29334DFE009F9EC9 /* Subviews */,
 			);
 			path = MyNavigationView;
 			sourceTree = "<group>";
@@ -567,6 +584,7 @@
 				AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */,
 				AFCDB58D29326E6C00E22DEA /* DocumentViewStateInterface.swift in Sources */,
 				AFCDB58F29326EB100E22DEA /* DocumentViewDelegate.swift in Sources */,
+				AFC8E24C29334C8A009F9EC9 /* MovingArea.swift in Sources */,
 				AF2A9ACA28615C2200D0BB24 /* DeleteCommand.swift in Sources */,
 				AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */,
 				AF8EDF81282E3F7A00CCFF19 /* DocumentBrowserViewController.swift in Sources */,
@@ -581,10 +599,12 @@
 				AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */,
 				AF255AA1283E809E00747FF3 /* UIDeviceExtension.swift in Sources */,
 				AF98A38C2832A6590035601D /* UIFontExtension.swift in Sources */,
+				AFC8E24A293345F2009F9EC9 /* PointsArea.swift in Sources */,
 				AFCDB59A293284A500E22DEA /* MainViewDelegate.swift in Sources */,
 				AF98A38E2832A6760035601D /* UIColorExtension.swift in Sources */,
 				AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */,
 				AFCDB587293122A200E22DEA /* DocumentViewModel.swift in Sources */,
+				AFC8E2482933439F009F9EC9 /* UndoRedoArea.swift in Sources */,
 				AFCDB59C29332B0400E22DEA /* UIViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
