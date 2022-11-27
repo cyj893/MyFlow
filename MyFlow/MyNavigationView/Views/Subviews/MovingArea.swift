@@ -43,6 +43,13 @@ final class MovingArea: UIStackView {
 
 
 extension MovingArea {
+    func setPointNum(with num: Int) {
+        nowPointView.setPointNum(with: num)
+    }
+}
+
+
+extension MovingArea {
     private func setView() {
         addArrangedSubview(prevPointButton)
         addArrangedSubview(nowPointView)

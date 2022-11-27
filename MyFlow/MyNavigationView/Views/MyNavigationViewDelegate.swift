@@ -9,4 +9,5 @@
 protocol MyNavigationViewDelegate {
     func toggleHandlePointButton()
     func toggleAddPointsButton()
+    func setPointNum(with num: Int)
 }
