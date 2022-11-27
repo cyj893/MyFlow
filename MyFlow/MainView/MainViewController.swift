@@ -35,6 +35,9 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addSubview(documentArea)
+        view.addSubview(myNavigationView)
+        
         setMyNavigationView()
         setDocumentView()
         
@@ -55,15 +58,14 @@ extension MainViewController {
     private func setMyNavigationView() {
         myNavigationView.mainViewDelegate = self
         myNavigationView.currentVM = documentViews[nowIndex].viewModel
-        view.addSubview(myNavigationView)
         myNavigationView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(100)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).offset(MyOffset.navigationViewHeight)
         }
     }
     
     private func setDocumentView() {
-        view.addSubview(documentArea)
+        documentArea.backgroundColor = MyColor.pdfBackground
         documentArea.snp.makeConstraints {
             $0.top.equalTo(myNavigationView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
@@ -110,13 +112,8 @@ extension MainViewController {
     /// hide`MyNavigationView`
     private func hideNavi() {
         print("hide myNavigationView")
-        myNavigationView.snp.remakeConstraints {
-            $0.top.equalToSuperview().offset(-100)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(0)
-        }
-        documentArea.snp.remakeConstraints {
-            $0.edges.equalToSuperview()
+        myNavigationView.snp.updateConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
         
         animateIt()
@@ -125,13 +122,8 @@ extension MainViewController {
     /// show `MyNavigationView`
     private func showNavi() {
         print("show myNavigationView")
-        myNavigationView.snp.remakeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(100)
-        }
-        documentArea.snp.remakeConstraints {
-            $0.top.equalTo(myNavigationView.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
+        myNavigationView.snp.updateConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).offset(MyOffset.navigationViewHeight)
         }
         
         animateIt()
