@@ -13,8 +13,7 @@ import PDFKit
 class MyNavigationView: UIView {
     static let singletonView = MyNavigationView()
     
-    var mainViewDelegate: MainViewDelegate?
-    var currentVM: DocumentViewModelInterface?
+    var viewModel = MyNavigationViewModel()
     
     private let backButton = UIButton()
     
@@ -27,6 +26,8 @@ class MyNavigationView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        
+        viewModel.delegate = self
         
         backgroundColor = MyColor.navigationBackground
         
@@ -44,12 +45,15 @@ class MyNavigationView: UIView {
     
     
     func clear() {
-        currentVM = nil
+        viewModel.clear()
         pointsArea.clear()
     }
     
-    // MARK: Setting Buttons
-    
+}
+
+
+// MARK: Views
+extension MyNavigationView {
     fileprivate func setButtons() {
         setBackButton()
         setPlayButton()
@@ -68,7 +72,9 @@ class MyNavigationView: UIView {
         }.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(MyOffset.betweenIcon)
         }
-        backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
+        backButton.addAction { [unowned self] in
+            self.viewModel.backButtonAction()
+        }
     }
     
     fileprivate func setPlayButton() {
@@ -78,7 +84,9 @@ class MyNavigationView: UIView {
         }.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-MyOffset.betweenIcon)
         }
-        playButton.addTarget(self, action: #selector(playButtonAction), for: .touchUpInside)
+        playButton.addAction { [unowned self] in
+            self.viewModel.playButtonAction()
+        }
     }
     
     fileprivate func setAreas() {
@@ -97,111 +105,36 @@ class MyNavigationView: UIView {
         setUndoRedoArea()
     }
     
-    
-    // MARK: Button Actions
-    
-    @objc fileprivate func backButtonAction() {
-        currentVM?.dismiss()
-    }
-    
-    @objc fileprivate func playButtonAction() {
-        mainViewDelegate?.playModeStart()
-        currentVM?.playButtonAction()
-    }
-    
-}
-
-
-// MARK: Views - Set Moving Area
-extension MyNavigationView: MovingAreaDelegate {
-    
     private func setMovingArea() {
-        movingArea.delegate = self
+        movingArea.delegate = viewModel
         movingArea.snp.makeConstraints { make in
             make.trailing.equalTo(playButton.snp.leading).offset(-MyOffset.betweenIcon)
         }
     }
     
-    func prevPointButtonAction() {
-        currentVM?.moveToPrevPoint()
-    }
-    
-    func nextPointButtonAction() {
-        currentVM?.moveToNextPoint()
-    }
-    
-}
-
-
-// MARK: Views - Set Points Area
-extension MyNavigationView: PointsAreaDelegate {
-    
     private func setPointsArea() {
-        pointsArea.delegate = self
+        pointsArea.delegate = viewModel
         pointsArea.snp.makeConstraints { make in
             make.trailing.equalTo(movingArea.snp.leading).offset(-MyOffset.betweenIcon)
         }
     }
     
-    func addPointsPagesButtonAction() {
-        currentVM?.showAddPointsModalView()
-    }
-    
-    func toggleAddingPointsMode(_ isAddingPoints: Bool, _ isHandlingPoints: Bool) {
-        if isHandlingPoints {
-            pointsArea.toggleHandlePointButton()
-        }
-        
-        if isAddingPoints {
-            print("포인트 추가")
-            currentVM?.clearSelectedPoint()
-            currentVM?.changeState(to: .addPoints)
-        }
-        else {
-            print("포인트 추가 끝")
-            currentVM?.changeState(to: .normal)
-        }
-    }
-    
-    func deleteButtonAction() {
-        currentVM?.deletePoint()
-    }
-    
-    func toggleHandlingPointsMode(_ isHandlingPoints: Bool, _ isAddingPoints: Bool) {
-        if isAddingPoints {
-            pointsArea.toggleAddPointsButton()
-        }
-        
-        if isHandlingPoints {
-            print("포인트 핸들링")
-            currentVM?.changeState(to: .handlePoints)
-        }
-        else {
-            print("포인트 핸들링 끝")
-            currentVM?.clearSelectedPoint()
-            currentVM?.changeState(to: .normal)
-        }
-    }
-    
-}
-
-
-// MARK: Views - Set Undo Redo Area
-extension MyNavigationView: UndoRedoAreaDelegate {
-    
     private func setUndoRedoArea() {
-        undoRedoArea.delegate = self
+        undoRedoArea.delegate = viewModel
         undoRedoArea.snp.makeConstraints { make in
             make.trailing.equalTo(pointsArea.snp.leading).offset(-MyOffset.betweenIcon)
         }
     }
-    
-    func redoButtonAction() {
-        currentVM?.redo()
+}
+
+
+// MARK: MyNavigationViewDelegate
+extension MyNavigationView: MyNavigationViewDelegate {
+    func toggleHandlePointButton() {
+        pointsArea.toggleHandlePointButton()
     }
     
-    func undoButtonAction() {
-        currentVM?.undo()
+    func toggleAddPointsButton() {
+        pointsArea.toggleAddPointsButton()
     }
-    
 }

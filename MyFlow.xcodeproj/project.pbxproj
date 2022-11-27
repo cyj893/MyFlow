@@ -40,6 +40,7 @@
 		AFC8E2482933439F009F9EC9 /* UndoRedoArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E2472933439F009F9EC9 /* UndoRedoArea.swift */; };
 		AFC8E24A293345F2009F9EC9 /* PointsArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E249293345F2009F9EC9 /* PointsArea.swift */; };
 		AFC8E24C29334C8A009F9EC9 /* MovingArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E24B29334C8A009F9EC9 /* MovingArea.swift */; };
+		AFC8E24F29335431009F9EC9 /* MyNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E24E29335431009F9EC9 /* MyNavigationViewModel.swift */; };
 		AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */; };
 		AFC95BA6282E830D006E9773 /* MyGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */; };
 		AFC95BA8282EB4D3006E9773 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */; };
@@ -106,6 +107,7 @@
 		AFC8E2472933439F009F9EC9 /* UndoRedoArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoRedoArea.swift; sourceTree = "<group>"; };
 		AFC8E249293345F2009F9EC9 /* PointsArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsArea.swift; sourceTree = "<group>"; };
 		AFC8E24B29334C8A009F9EC9 /* MovingArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingArea.swift; sourceTree = "<group>"; };
+		AFC8E24E29335431009F9EC9 /* MyNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationViewModel.swift; sourceTree = "<group>"; };
 		AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationView.swift; sourceTree = "<group>"; };
 		AFC95BA5282E830D006E9773 /* MyGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGestureRecognizer.swift; sourceTree = "<group>"; };
 		AFC95BA7282EB4D3006E9773 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */,
+				AFC8E24E29335431009F9EC9 /* MyNavigationViewModel.swift */,
 				AFC8E24D29334DFE009F9EC9 /* Subviews */,
 			);
 			path = MyNavigationView;
@@ -605,6 +608,7 @@
 				AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */,
 				AFCDB587293122A200E22DEA /* DocumentViewModel.swift in Sources */,
 				AFC8E2482933439F009F9EC9 /* UndoRedoArea.swift in Sources */,
+				AFC8E24F29335431009F9EC9 /* MyNavigationViewModel.swift in Sources */,
 				AFCDB59C29332B0400E22DEA /* UIViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
