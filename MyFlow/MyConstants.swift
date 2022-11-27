@@ -10,6 +10,13 @@ import UIKit
 struct MyOffset {
     static let betweenIconGroup:Double = 30.0
     static let betweenIcon:Double = 15.0
+    
+    static let navigationViewHeight: CGFloat = 100.0
+    
+    static var topPadding: CGFloat {
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        return window?.safeAreaInsets.top ?? 0
+    }
 }
 
 struct AnimateDuration {
