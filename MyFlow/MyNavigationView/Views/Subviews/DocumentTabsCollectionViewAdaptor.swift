@@ -13,13 +13,14 @@ final class DocumentTabsCollectionViewAdaptor: NSObject {
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 300, height: 30)
-        layout.minimumLineSpacing = 10
+        layout.minimumLineSpacing = 2.0
         
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 1.0, left: 0, bottom: 0, right: 0)
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.showsHorizontalScrollIndicator = false
+        cv.bounces = false
         
         return cv
     }()
@@ -34,6 +35,8 @@ final class DocumentTabsCollectionViewAdaptor: NSObject {
         collectionView.dragInteractionEnabled = true
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
+        
+        collectionView.backgroundColor = MyColor.separator
         
         collectionView.register(TabCell.self, forCellWithReuseIdentifier: "TabCell")
     }
