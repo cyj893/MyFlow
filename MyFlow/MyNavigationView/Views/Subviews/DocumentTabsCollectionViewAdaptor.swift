@@ -26,6 +26,7 @@ final class DocumentTabsCollectionViewAdaptor: NSObject {
     }()
     
     var tabs: [String] = ["asd", "asd2", "asd3", "asd4", "asd5", "asd6"]
+    var nowSelectedIdx = 0
     
     override init() {
         super.init()
@@ -60,8 +61,29 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDataSource {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if nowSelectedIdx == indexPath.item {
+            cell.isSelected = true
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == nowSelectedIdx {
+            return
+        }
+        
+        let beforeSelectedIdx = nowSelectedIdx
+        nowSelectedIdx = indexPath.item
+        
+        collectionView.cellForItem(at: IndexPath(item: beforeSelectedIdx, section: 0))?.isSelected = false
+        collectionView.cellForItem(at: indexPath)?.isSelected = true
+        
+        print(beforeSelectedIdx, nowSelectedIdx)
+        // TODO: logic for changing document
     }
 }
 
@@ -82,7 +104,7 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDropDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-        var destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: tabs.count - 1, section: 0)
+        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: tabs.count - 1, section: 0)
         
         if coordinator.proposal.operation == .move {
             if let item = coordinator.items.first, let sourceIndexPath = item.sourceIndexPath {
@@ -93,6 +115,12 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDropDelegate {
                     
                     collectionView.deleteItems(at: [sourceIndexPath])
                     collectionView.insertItems(at: [destinationIndexPath])
+                } completion: { _ in
+                    if sourceIndexPath.item == self.nowSelectedIdx {
+                        collectionView.cellForItem(at: destinationIndexPath)?.isSelected = true
+                        self.nowSelectedIdx = destinationIndexPath.item
+                    }
+                    collectionView.scrollToItem(at: destinationIndexPath, at: .centeredHorizontally, animated: true)
                 }
                 coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
             }
