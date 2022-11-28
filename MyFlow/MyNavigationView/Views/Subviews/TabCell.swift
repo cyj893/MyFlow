@@ -7,13 +7,25 @@
 
 import UIKit
 
+import Then
+import SnapKit
+
 
 extension TabCell {
     static let fontSize: CGFloat = 17.0
+    static let contentInset: CGFloat = 8.0
 }
 
+
 final class TabCell: UICollectionViewCell {
-    lazy var label = UILabel()
+    
+    lazy var label = UILabel().then {
+        $0.textAlignment = .center
+    }
+    
+    lazy var deleteButton = UIButton().then {
+        $0.setIconStyle(systemName: "xmark", tintColor: MyColor.icon.withAlphaComponent(0.5), weight: .regular, scale: .default)
+    }
     
     override var isSelected: Bool {
         willSet {
@@ -21,20 +33,19 @@ final class TabCell: UICollectionViewCell {
         }
     }
     
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        backgroundColor = MyColor.tabCell
         
-        contentView.addSubview(label)
-        label.font = .systemFont(ofSize: TabCell.fontSize, weight: .regular)
-        label.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-        }
+        setSelected(false)
+        addViews()
+        setViews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     private func setSelected(_ selected: Bool) {
         if selected {
@@ -43,6 +54,34 @@ final class TabCell: UICollectionViewCell {
         } else {
             backgroundColor = MyColor.tabCell
             label.font = .systemFont(ofSize: TabCell.fontSize, weight: .regular)
+        }
+    }
+}
+
+
+extension TabCell {
+    private func addViews() {
+        contentView.addSubview(label)
+        contentView.addSubview(deleteButton)
+    }
+    
+    private func setViews() {
+        setLabel()
+        setDeleteButton()
+    }
+    
+    private func setLabel() {
+        label.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().inset(TabCell.contentInset)
+            make.trailing.equalTo(deleteButton.snp.leading).offset(-TabCell.contentInset)
+        }
+    }
+    
+    private func setDeleteButton() {
+        deleteButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(TabCell.contentInset)
+            make.centerY.equalToSuperview()
         }
     }
 }
