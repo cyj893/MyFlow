@@ -24,7 +24,7 @@ final class TabCell: UICollectionViewCell {
     }
     
     lazy var deleteButton = UIButton().then {
-        $0.setIconStyle(systemName: "xmark", tintColor: MyColor.icon.withAlphaComponent(0.5), weight: .regular, scale: .default)
+        $0.setIconStyle(systemName: "xmark", tintColor: MyColor.icon.withAlphaComponent(0.5), weight: .regular, scale: .small)
     }
     
     override var isSelected: Bool {
@@ -73,15 +73,18 @@ extension TabCell {
     private func setLabel() {
         label.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().inset(TabCell.contentInset)
-            make.trailing.equalTo(deleteButton.snp.leading).offset(-TabCell.contentInset)
+            make.left.equalToSuperview().inset(TabCell.contentInset)
+            make.right.equalTo(deleteButton.snp.left).offset(-TabCell.contentInset)
         }
+        label.setContentHuggingPriority(UILayoutPriority(250), for: .horizontal)
     }
     
     private func setDeleteButton() {
         deleteButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(TabCell.contentInset)
+            make.right.equalToSuperview().inset(TabCell.contentInset)
             make.centerY.equalToSuperview()
         }
+        deleteButton.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
+        deleteButton.setContentCompressionResistancePriority(UILayoutPriority(751), for: .horizontal)
     }
 }
