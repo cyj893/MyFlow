@@ -90,6 +90,8 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDataSource {
         collectionView.cellForItem(at: IndexPath(item: beforeSelectedIdx, section: 0))?.isSelected = false
         collectionView.cellForItem(at: indexPath)?.isSelected = true
         
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        
         print(beforeSelectedIdx, nowSelectedIdx)
         // TODO: logic for changing document
     }
