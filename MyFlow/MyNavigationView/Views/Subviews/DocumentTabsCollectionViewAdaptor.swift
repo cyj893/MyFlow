@@ -58,6 +58,14 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TabCell", for: indexPath) as! TabCell
         let item = tabs[indexPath.row]
         cell.label.text = item
+        
+        cell.deleteAction = {
+            print("Delete \(item)")
+            self.tabs.remove(at: indexPath.item)
+            // TODO: logic for closing document
+            collectionView.reloadData()
+        }
+        
         return cell
     }
     

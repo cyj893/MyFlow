@@ -27,6 +27,8 @@ final class TabCell: UICollectionViewCell {
         $0.setIconStyle(systemName: "xmark", tintColor: MyColor.icon.withAlphaComponent(0.5), weight: .regular, scale: .small)
     }
     
+    var deleteAction: (() -> ())?
+    
     override var isSelected: Bool {
         willSet {
             self.setSelected(newValue)
@@ -86,5 +88,11 @@ extension TabCell {
         }
         deleteButton.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
         deleteButton.setContentCompressionResistancePriority(UILayoutPriority(751), for: .horizontal)
+        
+        deleteButton.addAction { [weak self] in
+            if let action = self?.deleteAction {
+                action()
+            }
+        }
     }
 }
