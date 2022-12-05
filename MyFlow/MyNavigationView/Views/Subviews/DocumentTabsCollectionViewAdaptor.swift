@@ -8,7 +8,18 @@
 import UIKit
 
 
+protocol DocumentTabsCollectionDataSource: NSObjectProtocol {
+    func numberOfItems() -> Int
+    func getItem(at index: Int) -> String
+    func closeTab(at index: Int, nowSelectedIdx: Int) -> Int?
+    func openTab(from before: Int, to after: Int)
+    func moveTab(from before: Int, to after: Int)
+}
+
+
 final class DocumentTabsCollectionViewAdaptor: NSObject {
+    
+    weak var dataSource: DocumentTabsCollectionDataSource?
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -25,7 +36,6 @@ final class DocumentTabsCollectionViewAdaptor: NSObject {
         return cv
     }()
     
-    var tabs: [String] = ["asd", "asd2", "asd3", "asd4", "asd5", "asd6"]
     var nowSelectedIdx = 0
     
     override init() {
@@ -51,13 +61,26 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDelegate {
 
 extension DocumentTabsCollectionViewAdaptor: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tabs.count
+        return dataSource?.numberOfItems() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TabCell", for: indexPath) as! TabCell
-        let item = tabs[indexPath.row]
+        
+        let item = dataSource?.getItem(at: indexPath.row)
         cell.label.text = item
+        
+        cell.deleteAction = {
+            print("Delete \(item)")
+            if let next = self.dataSource?.closeTab(at: indexPath.item,
+                                                    nowSelectedIdx: self.nowSelectedIdx) {
+                self.nowSelectedIdx = next
+                collectionView.cellForItem(at: IndexPath(item: next, section: 0))?.isSelected = true
+            }
+            
+            collectionView.reloadData()
+        }
+        
         return cell
     }
     
@@ -82,8 +105,11 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDataSource {
         collectionView.cellForItem(at: IndexPath(item: beforeSelectedIdx, section: 0))?.isSelected = false
         collectionView.cellForItem(at: indexPath)?.isSelected = true
         
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        
         print(beforeSelectedIdx, nowSelectedIdx)
-        // TODO: logic for changing document
+        
+        dataSource?.openTab(from: beforeSelectedIdx, to: nowSelectedIdx)
     }
 }
 
@@ -104,14 +130,12 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDropDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: tabs.count - 1, section: 0)
+        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: (dataSource?.numberOfItems() ?? 1) - 1, section: 0)
         
         if coordinator.proposal.operation == .move {
             if let item = coordinator.items.first, let sourceIndexPath = item.sourceIndexPath {
                 collectionView.performBatchUpdates {
-                    let temp = self.tabs[sourceIndexPath.item]
-                    self.tabs.remove(at: sourceIndexPath.item)
-                    self.tabs.insert(temp, at: destinationIndexPath.item)
+                    self.dataSource?.moveTab(from: sourceIndexPath.item, to: destinationIndexPath.item)
                     
                     collectionView.deleteItems(at: [sourceIndexPath])
                     collectionView.insertItems(at: [destinationIndexPath])
