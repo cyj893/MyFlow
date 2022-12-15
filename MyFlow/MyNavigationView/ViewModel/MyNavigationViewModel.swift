@@ -10,15 +10,11 @@ import Foundation
 
 final class MyNavigationViewModel {
     
-    var delegate: MyNavigationViewDelegate?
+    weak var delegate: MyNavigationViewDelegate?
     
-    var mainViewDelegate: MainViewDelegate?
-    var currentVM: DocumentViewModelInterface?
+    weak var mainViewDelegate: MainViewDelegate?
+    weak var currentVM: DocumentViewModelInterface?
     
-    
-    func clear() {
-        currentVM = nil
-    }
 }
 
 extension MyNavigationViewModel: MovingAreaDelegate {

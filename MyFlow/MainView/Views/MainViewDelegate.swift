@@ -5,8 +5,10 @@
 //  Created by Yujin Cha on 2022/11/27.
 //
 
+import Foundation
 
-protocol MainViewDelegate {
+
+protocol MainViewDelegate: NSObject {
     func dismiss()
     func playModeStart()
     

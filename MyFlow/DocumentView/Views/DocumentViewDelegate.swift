@@ -7,7 +7,7 @@
 
 import PDFKit
 
-protocol DocumentViewDelegate {
+protocol DocumentViewDelegate: NSObject {
     func setDocument(with pdfDocument: PDFDocument)
     func showAddPointsModalView(_ viewController: UIViewController)
 }

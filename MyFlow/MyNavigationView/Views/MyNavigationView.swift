@@ -45,7 +45,6 @@ class MyNavigationView: UIView {
     
     
     func clear() {
-        viewModel.clear()
         pointsArea.clear()
     }
     

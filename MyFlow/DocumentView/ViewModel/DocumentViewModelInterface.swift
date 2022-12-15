@@ -7,7 +7,7 @@
 
 import PDFKit
 
-protocol DocumentViewModelInterface {
+protocol DocumentViewModelInterface: NSObject {
     func changeState(to state: DocumentViewState)
     
     func moveToPrevPoint()

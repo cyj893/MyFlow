@@ -10,7 +10,7 @@ import PDFKit
 
 final class DocumentViewModel: NSObject, PDFDocumentDelegate {
     
-    var delegate: DocumentViewDelegate?
+    weak var delegate: DocumentViewDelegate?
     
     var document: UIDocument?
     var pdfDocument: PDFDocument? {
