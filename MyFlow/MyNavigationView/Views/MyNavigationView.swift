@@ -26,8 +26,37 @@ class MyNavigationView: UIView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        viewModel.delegate = self
+        addSubviews()
+        setViews()
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("storyboard only DocumentBrowserViewController")
+    }
+    
+    
+    func clear() {
+        pointsArea.clear()
+    }
+    
+}
+
+
+// MARK: Views
+extension MyNavigationView {
+    private func addSubviews() {
+        addSubview(backButton)
+        addSubview(playButton)
         
+        addSubview(movingArea)
+        addSubview(pointsArea)
+        addSubview(undoRedoArea)
+        
+        addSubview(tabsAdaptor.collectionView)
+    }
+    
+    private func setViews() {
         backgroundColor = MyColor.navigationBackground
         
         snp.makeConstraints {
@@ -39,23 +68,22 @@ class MyNavigationView: UIView {
         addShadow()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("storyboard only DocumentBrowserViewController")
+    private func configure() {
+        viewModel.delegate = self
+        
+        backButton.addAction { [unowned self] in
+            self.viewModel.backButtonAction()
+        }
+        playButton.addAction { [unowned self] in
+            self.viewModel.playButtonAction()
+        }
+        
+        movingArea.delegate = viewModel
+        pointsArea.delegate = viewModel
+        undoRedoArea.delegate = viewModel
     }
     
-    
-    func clear() {
-        viewModel.clear()
-        pointsArea.clear()
-    }
-    
-}
-
-
-// MARK: Views
-extension MyNavigationView {
     fileprivate func setTabsCollectionView() {
-        addSubview(tabsAdaptor.collectionView)
         tabsAdaptor.collectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -75,32 +103,23 @@ extension MyNavigationView {
     }
     
     fileprivate func setBackButton() {
-        self.addSubview(backButton)
         backButton.then {
             $0.setIconStyle(systemName: "chevron.left")
         }.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(MyOffset.betweenIcon)
         }
-        backButton.addAction { [unowned self] in
-            self.viewModel.backButtonAction()
-        }
     }
     
     fileprivate func setPlayButton() {
-        self.addSubview(playButton)
         playButton.then {
             $0.setIconStyle(systemName: "play.fill", tintColor: .green)
         }.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-MyOffset.betweenIcon)
         }
-        playButton.addAction { [unowned self] in
-            self.viewModel.playButtonAction()
-        }
     }
     
     fileprivate func setAreas() {
         [movingArea, pointsArea, undoRedoArea].forEach { area in
-            addSubview(area)
             area.then {
                 $0.axis = .horizontal
                 $0.spacing = MyOffset.betweenIcon
@@ -115,21 +134,18 @@ extension MyNavigationView {
     }
     
     private func setMovingArea() {
-        movingArea.delegate = viewModel
         movingArea.snp.makeConstraints { make in
             make.trailing.equalTo(playButton.snp.leading).offset(-MyOffset.betweenIcon)
         }
     }
     
     private func setPointsArea() {
-        pointsArea.delegate = viewModel
         pointsArea.snp.makeConstraints { make in
             make.trailing.equalTo(movingArea.snp.leading).offset(-MyOffset.betweenIcon)
         }
     }
     
     private func setUndoRedoArea() {
-        undoRedoArea.delegate = viewModel
         undoRedoArea.snp.makeConstraints { make in
             make.trailing.equalTo(pointsArea.snp.leading).offset(-MyOffset.betweenIcon)
         }

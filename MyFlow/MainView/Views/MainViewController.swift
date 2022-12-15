@@ -35,15 +35,9 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(toggleNavi), name: NSNotification.Name("ToggleNavi"), object: nil)
-        
-        view.addSubview(documentArea)
-        view.addSubview(myNavigationView)
-        
-        setMyNavigationView()
-        setDocumentView()
-        
-        setEndPlayModeButton()
+        addSubviews()
+        setViews()
+        configure()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -57,13 +51,35 @@ final class MainViewController: UIViewController {
 
 // MARK: Views
 extension MainViewController {
+    private func addSubviews() {
+        view.addSubview(documentArea)
+        view.addSubview(myNavigationView)
+        view.addSubview(endPlayModeButton)
+    }
+    
+    private func setViews() {
+        setMyNavigationView()
+        setDocumentView()
+        setEndPlayModeButton()
+    }
+    
+    private func configure() {
+        NotificationCenter.default.addObserver(self, selector: #selector(toggleNavi), name: NSNotification.Name("ToggleNavi"), object: nil)
+        
+        myNavigationView.viewModel.mainViewDelegate = self
+        myNavigationView.viewModel.currentVM = viewModel.getNowDocumentViewController().viewModel
+        
+        showDocumentView(with: viewModel.getNowDocumentViewController())
+        
+        endPlayModeButton.addTarget(self, action: #selector(endPlayMode), for: .touchUpInside)
+        endPlayModeButton.isHidden = true
+    }
+    
     private func setMyNavigationView() {
         myNavigationView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).offset(MyOffset.navigationViewHeight)
         }
-        myNavigationView.viewModel.mainViewDelegate = self
-        myNavigationView.viewModel.currentVM = viewModel.getNowDocumentViewController().viewModel
     }
     
     private func setDocumentView() {
@@ -72,20 +88,15 @@ extension MainViewController {
             $0.top.equalTo(myNavigationView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
-        
-        showDocumentView(with: viewModel.getNowDocumentViewController())
     }
     
     private func setEndPlayModeButton() {
-        view.addSubview(endPlayModeButton)
         endPlayModeButton.then {
             $0.setIconStyle(systemName: "stop.circle", tintColor: .gray.withAlphaComponent(0.5))
         }.snp.makeConstraints {
             $0.top.equalToSuperview().offset(MyOffset.betweenIconGroup)
             $0.right.equalToSuperview().offset(-MyOffset.betweenIconGroup)
         }
-        endPlayModeButton.addTarget(self, action: #selector(endPlayMode), for: .touchUpInside)
-        endPlayModeButton.isHidden = true
     }
     
 }

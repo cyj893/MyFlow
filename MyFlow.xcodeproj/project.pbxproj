@@ -46,6 +46,7 @@
 		AFC8E24F29335431009F9EC9 /* MyNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E24E29335431009F9EC9 /* MyNavigationViewModel.swift */; };
 		AFC8E25329335DAF009F9EC9 /* MyNavigationViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E25229335DAF009F9EC9 /* MyNavigationViewDelegate.swift */; };
 		AFC8E25529335DCD009F9EC9 /* MyNavigationViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E25429335DCD009F9EC9 /* MyNavigationViewModelInterface.swift */; };
+		AFC8E2572933686E009F9EC9 /* UIControlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E2562933686E009F9EC9 /* UIControlExtension.swift */; };
 		AFC8E259293368C1009F9EC9 /* DocumentTabsCollectionViewAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E258293368C1009F9EC9 /* DocumentTabsCollectionViewAdaptor.swift */; };
 		AFC8E25B2933826D009F9EC9 /* TabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E25A2933826D009F9EC9 /* TabCell.swift */; };
 		AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */; };
@@ -120,6 +121,7 @@
 		AFC8E24E29335431009F9EC9 /* MyNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationViewModel.swift; sourceTree = "<group>"; };
 		AFC8E25229335DAF009F9EC9 /* MyNavigationViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationViewDelegate.swift; sourceTree = "<group>"; };
 		AFC8E25429335DCD009F9EC9 /* MyNavigationViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationViewModelInterface.swift; sourceTree = "<group>"; };
+		AFC8E2562933686E009F9EC9 /* UIControlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIControlExtension.swift; sourceTree = "<group>"; };
 		AFC8E258293368C1009F9EC9 /* DocumentTabsCollectionViewAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTabsCollectionViewAdaptor.swift; sourceTree = "<group>"; };
 		AFC8E25A2933826D009F9EC9 /* TabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCell.swift; sourceTree = "<group>"; };
 		AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationView.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */,
 				AF255AA0283E809E00747FF3 /* UIDeviceExtension.swift */,
 				AFCDB59B29332B0400E22DEA /* UIViewExtension.swift */,
+				AFC8E2562933686E009F9EC9 /* UIControlExtension.swift */,
 			);
 			path = MyExtensions;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				AF8EDF7F282E3F7A00CCFF19 /* AppDelegate.swift in Sources */,
 				AFAB47C02847A0830034515A /* AddCommand.swift in Sources */,
 				AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */,
+				AFC8E2572933686E009F9EC9 /* UIControlExtension.swift in Sources */,
 				AF255AA1283E809E00747FF3 /* UIDeviceExtension.swift in Sources */,
 				AF98A38C2832A6590035601D /* UIFontExtension.swift in Sources */,
 				AFC8E24A293345F2009F9EC9 /* PointsArea.swift in Sources */,
@@ -844,7 +848,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -875,7 +879,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

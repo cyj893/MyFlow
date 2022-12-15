@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SQLite3
 
 struct PointsFile: Codable {
     var fileUrl: String

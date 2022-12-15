@@ -11,7 +11,7 @@ import Foundation
 final class MainViewModel: NSObject {
     static let shared = MainViewModel()
     
-    var delegate: MainViewDelegate?
+    weak var delegate: MainViewDelegate?
     
     var documentViews: [DocumentViewController] = []
     var nowIndex = 0
