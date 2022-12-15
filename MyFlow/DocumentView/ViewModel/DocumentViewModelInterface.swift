@@ -25,5 +25,4 @@ protocol DocumentViewModelInterface {
     func playButtonAction()
     
     func showAddPointsModalView()
-    func dismiss()
 }

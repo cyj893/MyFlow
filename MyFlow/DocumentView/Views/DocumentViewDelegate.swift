@@ -10,5 +10,4 @@ import PDFKit
 protocol DocumentViewDelegate {
     func setDocument(with pdfDocument: PDFDocument)
     func showAddPointsModalView(_ viewController: UIViewController)
-    func dismiss()
 }

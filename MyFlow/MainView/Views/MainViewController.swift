@@ -9,23 +9,23 @@ import UIKit
 
 
 final class MainViewController: UIViewController {
+    var viewModel = MainViewModel.shared
     
-    let myNavigationView = MyNavigationView.singletonView
+    let myNavigationView = MyNavigationView()
     var isNaviShowing = true
     
     var documentArea = UIView()
-    var documentViews: [DocumentViewController]
-    var nowIndex = 0
     
     private let endPlayModeButton = UIButton()
     
     
     // MARK: LifeCycle
     init(initialVC: DocumentViewController) {
-        documentViews = [initialVC]
         super.init(nibName: nil, bundle: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(toggleNavi), name: NSNotification.Name("ToggleNavi"), object: nil)
+        viewModel.delegate = self
+        viewModel.openDocument(initialVC)
+        myNavigationView.tabsAdaptor.dataSource = viewModel
     }
     
     required init?(coder: NSCoder) {
@@ -34,6 +34,8 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(toggleNavi), name: NSNotification.Name("ToggleNavi"), object: nil)
         
         view.addSubview(documentArea)
         view.addSubview(myNavigationView)
@@ -47,8 +49,8 @@ final class MainViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("ToggleNavi"), object: nil)
         myNavigationView.clear()
-        documentViews = []
     }
 }
 
@@ -56,12 +58,12 @@ final class MainViewController: UIViewController {
 // MARK: Views
 extension MainViewController {
     private func setMyNavigationView() {
-        myNavigationView.viewModel.mainViewDelegate = self
-        myNavigationView.viewModel.currentVM = documentViews[nowIndex].viewModel
         myNavigationView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).offset(MyOffset.navigationViewHeight)
         }
+        myNavigationView.viewModel.mainViewDelegate = self
+        myNavigationView.viewModel.currentVM = viewModel.getNowDocumentViewController().viewModel
     }
     
     private func setDocumentView() {
@@ -71,9 +73,7 @@ extension MainViewController {
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
-        addChild(documentViews[nowIndex])
-        documentViews[nowIndex].view.frame = documentArea.frame
-        documentArea.addSubview(documentViews[nowIndex].view)
+        showDocumentView(with: viewModel.getNowDocumentViewController())
     }
     
     private func setEndPlayModeButton() {
@@ -104,7 +104,7 @@ extension MainViewController {
     }
     
     @objc func endPlayMode() {
-        documentViews[nowIndex].viewModel?.changeState(to: .normal)
+        viewModel.changeCurrentDocumentState(to: .normal)
         showNavi()
         endPlayModeButton.isHidden = true
     }
@@ -137,15 +137,36 @@ extension MainViewController {
         )
     }
     
+    private func showDocumentView(with vc: DocumentViewController) {
+        print(vc)
+        addChild(vc)
+        vc.view.frame = documentArea.bounds
+        documentArea.addSubview(vc.view)
+    }
 }
 
 
 // MARK: MainViewDelegate
 extension MainViewController: MainViewDelegate {
     
+    func dismiss() {
+        dismiss(animated: true)
+    }
+    
     func playModeStart() {
         hideNavi()
         endPlayModeButton.isHidden = false
+    }
+    
+    func updateDocumentView(with vc: DocumentViewController) {
+        myNavigationView.viewModel.currentVM = vc.viewModel
+        showDocumentView(with: vc)
+    }
+    
+    func removeDocumentView(with vc: DocumentViewController) {
+        vc.willMove(toParent: nil)
+        vc.removeFromParent()
+        vc.view.removeFromSuperview()
     }
     
 }

@@ -10,8 +10,10 @@ import UIKit
 
 protocol DocumentTabsCollectionDataSource: NSObjectProtocol {
     func numberOfItems() -> Int
+    func getSelectedIndex() -> Int
+    func setSelectedIndex(with index: Int)
     func getItem(at index: Int) -> String
-    func closeTab(at index: Int, nowSelectedIdx: Int) -> Int?
+    func closeTab(at index: Int) -> Int?
     func openTab(from before: Int, to after: Int)
     func moveTab(from before: Int, to after: Int)
 }
@@ -36,7 +38,6 @@ final class DocumentTabsCollectionViewAdaptor: NSObject {
         return cv
     }()
     
-    var nowSelectedIdx = 0
     
     override init() {
         super.init()
@@ -72,9 +73,8 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDataSource {
         
         cell.deleteAction = {
             print("Delete \(item)")
-            if let next = self.dataSource?.closeTab(at: indexPath.item,
-                                                    nowSelectedIdx: self.nowSelectedIdx) {
-                self.nowSelectedIdx = next
+            if let next = self.dataSource?.closeTab(at: indexPath.item) {
+                self.dataSource?.setSelectedIndex(with: next)
                 collectionView.cellForItem(at: IndexPath(item: next, section: 0))?.isSelected = true
             }
             
@@ -85,7 +85,7 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if nowSelectedIdx == indexPath.item {
+        if dataSource?.getSelectedIndex() == indexPath.item {
             cell.isSelected = true
         }
     }
@@ -95,21 +95,21 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == nowSelectedIdx {
+        guard let dataSource = dataSource else { return }
+        if indexPath.item == dataSource.getSelectedIndex() {
             return
         }
         
-        let beforeSelectedIdx = nowSelectedIdx
-        nowSelectedIdx = indexPath.item
+        let beforeSelectedIdx = dataSource.getSelectedIndex()
         
         collectionView.cellForItem(at: IndexPath(item: beforeSelectedIdx, section: 0))?.isSelected = false
         collectionView.cellForItem(at: indexPath)?.isSelected = true
         
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         
-        print(beforeSelectedIdx, nowSelectedIdx)
+        print(beforeSelectedIdx, indexPath.item)
         
-        dataSource?.openTab(from: beforeSelectedIdx, to: nowSelectedIdx)
+        dataSource.openTab(from: beforeSelectedIdx, to: indexPath.item)
     }
 }
 
@@ -140,14 +140,38 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDropDelegate {
                     collectionView.deleteItems(at: [sourceIndexPath])
                     collectionView.insertItems(at: [destinationIndexPath])
                 } completion: { _ in
-                    if sourceIndexPath.item == self.nowSelectedIdx {
-                        collectionView.cellForItem(at: destinationIndexPath)?.isSelected = true
-                        self.nowSelectedIdx = destinationIndexPath.item
+                    guard let dataSource = self.dataSource else { return }
+                    
+                    if sourceIndexPath.item == dataSource.getSelectedIndex() {
+                        collectionView.scrollToItem(at: destinationIndexPath, at: .centeredHorizontally, animated: true)
                     }
-                    collectionView.scrollToItem(at: destinationIndexPath, at: .centeredHorizontally, animated: true)
+                    
+                    collectionView.cellForItem(at: IndexPath(item: dataSource.getSelectedIndex(), section: 0))?.isSelected = false
+                    
+                    let next = self.move(s: sourceIndexPath.item, d: destinationIndexPath.item, now: dataSource.getSelectedIndex())
+                    dataSource.setSelectedIndex(with: next)
+                    
+                    collectionView.cellForItem(at: IndexPath(item: next, section: 0))?.isSelected = true
+                    
+                    print(dataSource.getSelectedIndex())
                 }
                 coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
             }
         }
+    }
+    
+    private func move(s: Int, d: Int, now: Int) -> Int {
+        if s == now {
+            return d
+        } else if s > now {
+            if d <= now {
+                return now + 1
+            }
+        } else {
+            if d >= now {
+                return now - 1
+            }
+        }
+        return now
     }
 }
