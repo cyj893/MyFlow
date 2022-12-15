@@ -11,8 +11,6 @@ import SnapKit
 import PDFKit
 
 class MyNavigationView: UIView {
-    static let singletonView = MyNavigationView()
-    
     var viewModel = MyNavigationViewModel()
     
     private let backButton = UIButton()
@@ -23,6 +21,7 @@ class MyNavigationView: UIView {
     
     private let playButton = UIButton()
     
+    let tabsAdaptor = DocumentTabsCollectionViewAdaptor()
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -35,6 +34,7 @@ class MyNavigationView: UIView {
             $0.height.equalTo(MyOffset.navigationViewHeight + MyOffset.topPadding)
         }
         
+        setTabsCollectionView()
         setButtons()
         addShadow()
     }
@@ -54,6 +54,15 @@ class MyNavigationView: UIView {
 
 // MARK: Views
 extension MyNavigationView {
+    fileprivate func setTabsCollectionView() {
+        addSubview(tabsAdaptor.collectionView)
+        tabsAdaptor.collectionView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(30)
+        }
+    }
+    
     fileprivate func setButtons() {
         setBackButton()
         setPlayButton()
