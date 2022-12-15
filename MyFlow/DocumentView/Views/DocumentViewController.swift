@@ -122,10 +122,6 @@ extension DocumentViewController: DocumentViewDelegate {
         viewModel?.moveStrategy = getMoveStrategy()
     }
     
-    func dismiss() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     func showAddPointsModalView(_ viewController: UIViewController) {
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.modalPresentationStyle = .pageSheet

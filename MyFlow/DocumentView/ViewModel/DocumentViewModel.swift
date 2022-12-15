@@ -206,9 +206,4 @@ extension DocumentViewModel: DocumentViewModelInterface {
         viewController.pdfDocument = pdfDocument!
         return viewController
     }
-    
-    func dismiss() {
-        delegate?.dismiss()
-    }
-    
 }

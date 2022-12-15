@@ -91,7 +91,7 @@ extension MyNavigationViewModel: UndoRedoAreaDelegate {
 // MARK: MyNavigationViewModelInterface
 extension MyNavigationViewModel: MyNavigationViewModelInterface {
     func backButtonAction() {
-        currentVM?.dismiss()
+        mainViewDelegate?.dismiss()
     }
     
     func playButtonAction() {
