@@ -158,8 +158,7 @@ extension MainViewController: MainViewDelegate {
         endPlayModeButton.isHidden = false
     }
     
-    func updateDocumentView(with vc: DocumentViewController, index: Int) {
-        myNavigationView.tabsAdaptor.nowSelectedIdx = index
+    func updateDocumentView(with vc: DocumentViewController) {
         myNavigationView.viewModel.currentVM = vc.viewModel
         showDocumentView(with: vc)
     }

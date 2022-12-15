@@ -24,23 +24,31 @@ extension MainViewModel: DocumentTabsCollectionDataSource {
         return documentViews.count
     }
     
+    func getSelectedIndex() -> Int {
+        return nowIndex
+    }
+    
+    func setSelectedIndex(with index: Int) {
+        nowIndex = index
+    }
+    
     func getItem(at index: Int) -> String {
         return documentViews[index].title ?? ""
     }
     
-    func closeTab(at index: Int, nowSelectedIdx: Int) -> Int? {
+    func closeTab(at index: Int) -> Int? {
         // TODO: Close document logic(saving points, showing message, switch to next index if needed, ...)
         
         documentViews[index].close()
-        if index == nowSelectedIdx {
+        if index == nowIndex {
             delegate?.removeDocumentView(with: documentViews[index])
         }
         documentViews.remove(at: index)
         
-        let nextIndex = getNextIndex(index, nowSelectedIdx)
+        let nextIndex = getNextIndex(index, nowIndex)
         if let nextIndex = nextIndex {
-            if index == nowSelectedIdx {
-                delegate?.updateDocumentView(with: documentViews[nextIndex], index: nextIndex)
+            if index == nowIndex {
+                delegate?.updateDocumentView(with: documentViews[nextIndex])
             }
             nowIndex = nextIndex
         }
@@ -60,7 +68,7 @@ extension MainViewModel: DocumentTabsCollectionDataSource {
         // TODO: Open document logic(saving points, switch to after index, ...)
         
         delegate?.removeDocumentView(with: documentViews[before])
-        delegate?.updateDocumentView(with: documentViews[after], index: after)
+        delegate?.updateDocumentView(with: documentViews[after])
         nowIndex = after
     }
     
@@ -82,7 +90,7 @@ extension MainViewModel: MainViewModelInterface {
             documentViews.append(vc)
             nowIndex = documentViews.count - 1
         }
-        delegate?.updateDocumentView(with: documentViews[nowIndex], index: nowIndex)
+        delegate?.updateDocumentView(with: documentViews[nowIndex])
     }
     
     func changeCurrentDocumentState(to state: DocumentViewState) {

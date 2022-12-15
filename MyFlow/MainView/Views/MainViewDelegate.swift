@@ -10,6 +10,6 @@ protocol MainViewDelegate {
     func dismiss()
     func playModeStart()
     
-    func updateDocumentView(with vc: DocumentViewController, index: Int)
+    func updateDocumentView(with vc: DocumentViewController)
     func removeDocumentView(with vc: DocumentViewController)
 }
