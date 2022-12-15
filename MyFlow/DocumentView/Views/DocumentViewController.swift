@@ -22,13 +22,9 @@ final class DocumentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = viewModel?.document?.fileURL.lastPathComponent
-        viewModel?.delegate = self
-        
-        setPdfView()
-        
-        addTapGesture()
-        addPanGesture()
+        addSubviews()
+        setViews()
+        configure()
     }
     
     func close() {
@@ -41,17 +37,32 @@ final class DocumentViewController: UIViewController {
 
 // MARK: Views
 extension DocumentViewController {
-    fileprivate func setPdfView() {
+    private func addSubviews() {
         view.addSubview(pdfView)
-        pdfView.snp.makeConstraints {
+    }
+    
+    private func setViews() {
+        setPdfView()
+    }
+    
+    private func configure() {
+        title = viewModel?.document?.fileURL.lastPathComponent
+        viewModel?.delegate = self
+        
+        addTapGesture()
+        addPanGesture()
+    }
+    
+    fileprivate func setPdfView() {
+        pdfView.then {
+            $0.displayDirection = .vertical
+            $0.usePageViewController(false)
+            $0.pageBreakMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            $0.autoScales = true
+            $0.backgroundColor = MyColor.pdfBackground
+        }.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        pdfView.displayDirection = .vertical
-        pdfView.usePageViewController(false)
-        pdfView.pageBreakMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        pdfView.autoScales = true
-        
-        pdfView.backgroundColor = MyColor.pdfBackground
     }
     
     fileprivate func getMoveStrategy() -> MoveStrategy {
