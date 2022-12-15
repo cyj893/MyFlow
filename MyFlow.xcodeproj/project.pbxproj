@@ -13,6 +13,8 @@
 		AF255AA3283E843A00747FF3 /* AddPointsModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF255AA2283E843A00747FF3 /* AddPointsModalViewController.swift */; };
 		AF255AA5283E95C900747FF3 /* ThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF255AA4283E95C900747FF3 /* ThumbnailCell.swift */; };
 		AF2A9ACA28615C2200D0BB24 /* DeleteCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2A9AC928615C2200D0BB24 /* DeleteCommand.swift */; };
+		AF2F1A11293DB5B90005E4B9 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F1A10293DB5B90005E4B9 /* MainViewModel.swift */; };
+		AF2F1A15294B379A0005E4B9 /* MainViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F1A14294B379A0005E4B9 /* MainViewModelInterface.swift */; };
 		AF3C3F972843C0C2007ED4F9 /* DocumentViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */; };
 		AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF65F78F292E4E5F0005D9AF /* FileHelper.swift */; };
 		AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8936B92836655C001031FC /* PointBuilder.swift */; };
@@ -83,6 +85,8 @@
 		AF255AA2283E843A00747FF3 /* AddPointsModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointsModalViewController.swift; sourceTree = "<group>"; };
 		AF255AA4283E95C900747FF3 /* ThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCell.swift; sourceTree = "<group>"; };
 		AF2A9AC928615C2200D0BB24 /* DeleteCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCommand.swift; sourceTree = "<group>"; };
+		AF2F1A10293DB5B90005E4B9 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		AF2F1A14294B379A0005E4B9 /* MainViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelInterface.swift; sourceTree = "<group>"; };
 		AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewState.swift; sourceTree = "<group>"; };
 		AF65F78F292E4E5F0005D9AF /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		AF8936B92836655C001031FC /* PointBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointBuilder.swift; sourceTree = "<group>"; };
@@ -159,6 +163,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF2F1A12294B376B0005E4B9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AFCDB599293284A500E22DEA /* MainViewDelegate.swift */,
+				AFCDB5962932735C00E22DEA /* MainViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AF2F1A13294B37780005E4B9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AF2F1A14294B379A0005E4B9 /* MainViewModelInterface.swift */,
+				AF2F1A10293DB5B90005E4B9 /* MainViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		AF65F78E292E4E4D0005D9AF /* FileHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,8 +377,8 @@
 		AFCDB5982932848F00E22DEA /* MainView */ = {
 			isa = PBXGroup;
 			children = (
-				AFCDB599293284A500E22DEA /* MainViewDelegate.swift */,
-				AFCDB5962932735C00E22DEA /* MainViewController.swift */,
+				AF2F1A12294B376B0005E4B9 /* Views */,
+				AF2F1A13294B37780005E4B9 /* ViewModel */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -641,11 +663,13 @@
 				AFC8E24A293345F2009F9EC9 /* PointsArea.swift in Sources */,
 				AFCDB59A293284A500E22DEA /* MainViewDelegate.swift in Sources */,
 				AF98A38E2832A6760035601D /* UIColorExtension.swift in Sources */,
+				AF2F1A15294B379A0005E4B9 /* MainViewModelInterface.swift in Sources */,
 				AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */,
 				AFCDB587293122A200E22DEA /* DocumentViewModel.swift in Sources */,
 				AFC8E2482933439F009F9EC9 /* UndoRedoArea.swift in Sources */,
 				AFC8E24F29335431009F9EC9 /* MyNavigationViewModel.swift in Sources */,
 				AFCDB59C29332B0400E22DEA /* UIViewExtension.swift in Sources */,
+				AF2F1A11293DB5B90005E4B9 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
