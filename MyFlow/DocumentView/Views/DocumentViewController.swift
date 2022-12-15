@@ -22,6 +22,7 @@ final class DocumentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = viewModel?.document?.fileURL.lastPathComponent
         viewModel?.delegate = self
         
         setPdfView()
@@ -30,9 +31,7 @@ final class DocumentViewController: UIViewController {
         addPanGesture()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
+    func close() {
         viewModel?.clear()
         viewModel = nil
     }
