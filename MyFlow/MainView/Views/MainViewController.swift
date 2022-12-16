@@ -170,6 +170,9 @@ extension MainViewController: MainViewDelegate {
     }
     
     func updateDocumentView(with vc: DocumentViewController) {
+        if let beforeState = myNavigationView.viewModel.currentVM?.nowState?.state {
+            vc.viewModel?.changeState(to: beforeState)
+        }
         myNavigationView.viewModel.currentVM = vc.viewModel
         showDocumentView(with: vc)
     }
