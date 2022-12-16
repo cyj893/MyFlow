@@ -12,6 +12,6 @@ protocol MainViewDelegate: NSObject {
     func dismiss()
     func playModeStart()
     
-    func updateDocumentView(with vc: DocumentViewController)
+    func updateDocumentView(with vc: DocumentViewController, info: DocumentTabInfo)
     func removeDocumentView(with vc: DocumentViewController)
 }

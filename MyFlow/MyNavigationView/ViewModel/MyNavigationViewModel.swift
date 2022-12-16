@@ -13,7 +13,7 @@ final class MyNavigationViewModel {
     weak var delegate: MyNavigationViewDelegate?
     
     weak var mainViewDelegate: MainViewDelegate?
-    weak var currentVM: DocumentViewModelInterface?
+    var currentVM: DocumentViewModel?
     
 }
 

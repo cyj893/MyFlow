@@ -169,8 +169,13 @@ extension MainViewController: MainViewDelegate {
         endPlayModeButton.isHidden = false
     }
     
-    func updateDocumentView(with vc: DocumentViewController) {
+    func updateDocumentView(with vc: DocumentViewController, info: DocumentTabInfo) {
+        if let beforeState = myNavigationView.viewModel.currentVM?.nowState?.state {
+            vc.viewModel?.changeState(to: beforeState)
+        }
         myNavigationView.viewModel.currentVM = vc.viewModel
+        
+        myNavigationView.setPointNum(with: info.nowPointNum)
         showDocumentView(with: vc)
     }
     

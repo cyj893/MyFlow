@@ -12,8 +12,8 @@ protocol DocumentTabsCollectionDataSource: NSObjectProtocol {
     func numberOfItems() -> Int
     func getSelectedIndex() -> Int
     func setSelectedIndex(with index: Int)
-    func getItem(at index: Int) -> String
-    func closeTab(at index: Int) -> Int?
+    func getItem(at index: Int) -> (String, URL?)
+    func closeTab(key: URL?) -> Int?
     func openTab(from before: Int, to after: Int)
     func moveTab(from before: Int, to after: Int)
 }
@@ -69,11 +69,11 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TabCell", for: indexPath) as! TabCell
         
         let item = dataSource?.getItem(at: indexPath.row)
-        cell.label.text = item
+        cell.label.text = item?.0 ?? ""
         
         cell.deleteAction = {
-            print("Delete \(item)")
-            if let next = self.dataSource?.closeTab(at: indexPath.item) {
+            print("Delete \(item?.0), \(item?.1)")
+            if let next = self.dataSource?.closeTab(key: item?.1) {
                 self.dataSource?.setSelectedIndex(with: next)
                 collectionView.cellForItem(at: IndexPath(item: next, section: 0))?.isSelected = true
             }

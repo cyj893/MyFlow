@@ -11,6 +11,8 @@ import PDFKit
 
 /// State that is not any modes(adding, handling). If user touches the screen, navigation is toggled.
 struct NormalState: DocumentViewStateInterface {
+    private(set) var state: DocumentViewState = .normal
+    
     private(set) weak var vm: DocumentViewModel?
     
     func tapProcess(location: CGPoint, pdfView: PDFView) {
@@ -20,6 +22,8 @@ struct NormalState: DocumentViewStateInterface {
 
 /// State that handling points. User can select and move points at this state.
 struct HandlePointsState: DocumentViewStateInterface {
+    private(set) var state: DocumentViewState = .handlePoints
+    
     private(set) weak var vm: DocumentViewModel?
     
     /// Move selected points to `location`.
@@ -39,6 +43,8 @@ struct HandlePointsState: DocumentViewStateInterface {
 
 /// State that adding points. User can  add new points at this state.
 struct AddPointsState: DocumentViewStateInterface {
+    private(set) var state: DocumentViewState = .addPoints
+    
     private(set) weak var vm: DocumentViewModel?
     
     /// add new point to `location`.
@@ -54,6 +60,8 @@ struct AddPointsState: DocumentViewStateInterface {
 
 /// Play mode. At this state, user can move to previous point with touching left side and next point with toucing right side.
 struct PlayModeState: DocumentViewStateInterface {
+    private(set) var state: DocumentViewState = .playMode
+    
     private(set) weak var vm: DocumentViewModel?
     
     /// Move to previous point with touching left side and next point with toucing right side.
