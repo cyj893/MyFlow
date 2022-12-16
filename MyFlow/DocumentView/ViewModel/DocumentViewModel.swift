@@ -9,6 +9,10 @@ import PDFKit
 
 
 final class DocumentViewModel: NSObject, PDFDocumentDelegate {
+    var key: URL? {
+        document?.fileURL
+    }
+    
     
     weak var delegate: DocumentViewDelegate?
     
