@@ -15,5 +15,6 @@ enum DocumentViewState {
 }
 
 protocol DocumentViewStateInterface {
+    var state: DocumentViewState { get }
     func tapProcess(location: CGPoint, pdfView: PDFView)
 }
