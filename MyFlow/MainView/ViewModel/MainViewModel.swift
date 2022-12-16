@@ -8,12 +8,18 @@
 import Foundation
 
 
+struct DocumentTabInfo {
+    var nowPointNum: Int
+}
+
 final class MainViewModel: NSObject {
     static let shared = MainViewModel()
     
     weak var delegate: MainViewDelegate?
     
     var documentViews: [DocumentViewController] = []
+    var infos: [DocumentTabInfo] = []
+    
     var nowIndex = 0
     
 }
@@ -44,11 +50,12 @@ extension MainViewModel: DocumentTabsCollectionDataSource {
             delegate?.removeDocumentView(with: documentViews[index])
         }
         documentViews.remove(at: index)
+        infos.remove(at: index)
         
         let nextIndex = getNextIndex(index, nowIndex)
         if let nextIndex = nextIndex {
             if index == nowIndex {
-                delegate?.updateDocumentView(with: documentViews[nextIndex])
+                delegate?.updateDocumentView(with: documentViews[nextIndex], info: infos[nextIndex])
             }
             nowIndex = nextIndex
         }
@@ -67,15 +74,24 @@ extension MainViewModel: DocumentTabsCollectionDataSource {
     func openTab(from before: Int, to after: Int) {
         // TODO: Open document logic(saving points, switch to after index, ...)
         
+        saveTabInfo(before)
         delegate?.removeDocumentView(with: documentViews[before])
-        delegate?.updateDocumentView(with: documentViews[after])
+        delegate?.updateDocumentView(with: documentViews[after], info: infos[after])
         nowIndex = after
+    }
+    
+    private func saveTabInfo(_ index: Int) {
+        infos[index].nowPointNum = documentViews[index].viewModel?.getNowPointNum() ?? 1
     }
     
     func moveTab(from before: Int, to after: Int) {
         let temp = documentViews[before]
         documentViews.remove(at: before)
         documentViews.insert(temp, at: after)
+        
+        let tempInfo = infos[before]
+        infos.remove(at: before)
+        infos.insert(tempInfo, at: after)
     }
     
 }
@@ -87,10 +103,15 @@ extension MainViewModel: MainViewModelInterface {
             // reopen
             nowIndex = idx
         } else {
-            documentViews.append(vc)
+            appendNewTab(vc)
             nowIndex = documentViews.count - 1
         }
-        delegate?.updateDocumentView(with: documentViews[nowIndex])
+        delegate?.updateDocumentView(with: documentViews[nowIndex], info: infos[nowIndex])
+    }
+    
+    private func appendNewTab(_ vc: DocumentViewController) {
+        documentViews.append(vc)
+        infos.append(DocumentTabInfo(nowPointNum: 1))
     }
     
     func changeCurrentDocumentState(to state: DocumentViewState) {
