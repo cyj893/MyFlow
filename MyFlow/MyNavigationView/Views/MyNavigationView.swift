@@ -163,6 +163,10 @@ extension MyNavigationView: MyNavigationViewDelegate {
         pointsArea.toggleAddPointsButton()
     }
     
+    func clearButtonState() {
+        pointsArea.clear()
+    }
+    
     func setPointNum(with num: Int) {
         movingArea.setPointNum(with: num)
     }

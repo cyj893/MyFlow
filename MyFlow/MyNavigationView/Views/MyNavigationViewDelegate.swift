@@ -11,5 +11,6 @@ import Foundation
 protocol MyNavigationViewDelegate: NSObject {
     func toggleHandlePointButton()
     func toggleAddPointsButton()
+    func clearButtonState()
     func setPointNum(with num: Int)
 }
