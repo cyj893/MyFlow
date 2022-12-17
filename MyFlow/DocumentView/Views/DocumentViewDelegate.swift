@@ -10,4 +10,8 @@ import PDFKit
 protocol DocumentViewDelegate: NSObject {
     func setDocument(with pdfDocument: PDFDocument)
     func showAddPointsModalView(_ viewController: UIViewController)
+    
+#if DEBUG
+    func setStateLabelText(with state: DocumentViewState)
+#endif
 }
