@@ -23,7 +23,11 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
         }
     }
     
-    var nowState: DocumentViewStateInterface?
+    var nowState: DocumentViewStateInterface? {
+        willSet {
+            nowState?.completion(next: newValue!.state)
+        }
+    }
     
     private(set) var pointHelper = PointHelper()
     var moveStrategy: MoveStrategy?
