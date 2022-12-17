@@ -18,6 +18,24 @@ struct NormalState: DocumentViewStateInterface {
     func tapProcess(location: CGPoint, pdfView: PDFView) {
         NotificationCenter.default.post(name: NSNotification.Name("ToggleNavi"), object: nil, userInfo: nil)
     }
+    
+    func completion(next: DocumentViewState) {
+        switch next {
+        case .normal:
+            break
+        case .handlePoints:
+            break
+        case .addPoints:
+            break
+        case .playMode:
+            vm?.clearSelectedPoint()
+        default:
+#if DEBUG
+            fatalError("Undefined State")
+#endif
+            print("Undefined State")
+        }
+    }
 }
 
 /// State that handling points. User can select and move points at this state.
@@ -39,6 +57,24 @@ struct HandlePointsState: DocumentViewStateInterface {
         guard let _ = annotation.annotationKeyValues["/isPoint"] else { return }
         vm.pointHelper.selectPoint(annotation)
     }
+    
+    func completion(next: DocumentViewState) {
+        switch next {
+        case .normal:
+            vm?.clearSelectedPoint()
+        case .handlePoints:
+            break
+        case .addPoints:
+            vm?.clearSelectedPoint()
+        case .playMode:
+            vm?.clearSelectedPoint()
+        default:
+#if DEBUG
+            fatalError("Undefined State")
+#endif
+            print("Undefined State")
+        }
+    }
 }
 
 /// State that adding points. User can  add new points at this state.
@@ -55,6 +91,24 @@ struct AddPointsState: DocumentViewStateInterface {
         let convertedLocation = pdfView.convert(location, to: page)
         
         vm.pointHelper.addPoint(Int(convertedLocation.y), page)
+    }
+    
+    func completion(next: DocumentViewState) {
+        switch next {
+        case .normal:
+            break
+        case .handlePoints:
+            break
+        case .addPoints:
+            break
+        case .playMode:
+            break
+        default:
+#if DEBUG
+            fatalError("Undefined State")
+#endif
+            print("Undefined State")
+        }
     }
 }
 
@@ -74,6 +128,18 @@ struct PlayModeState: DocumentViewStateInterface {
         }
         else {
             vm.moveToNextPoint()
+        }
+    }
+    
+    func completion(next: DocumentViewState) {
+        switch next {
+        case .normal:
+            break
+        default:
+#if DEBUG
+            fatalError("Undefined State")
+#endif
+            print("Undefined State")
         }
     }
 }
