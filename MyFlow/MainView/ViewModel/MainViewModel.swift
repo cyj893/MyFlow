@@ -20,7 +20,13 @@ final class MainViewModel: NSObject {
     var documentViews: [DocumentViewController] = []
     var infos: [DocumentTabInfo] = []
     
-    var nowIndex = 0
+    var nowIndex = 0 {
+        willSet {
+#if DEBUG
+            delegate?.setNowIndex(with: newValue)
+#endif
+        }
+    }
     
 }
 
@@ -111,6 +117,11 @@ extension MainViewModel: MainViewModelInterface {
             nowIndex = documentViews.count - 1
         }
         delegate?.updateDocumentView(with: documentViews[nowIndex], info: infos[nowIndex])
+        
+#if DEBUG
+        print(nowIndex)
+        delegate?.setNowIndex(with: nowIndex)
+#endif
     }
     
     private func appendNewTab(_ vc: DocumentViewController) {
