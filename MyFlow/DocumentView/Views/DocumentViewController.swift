@@ -15,6 +15,10 @@ import SnapKit
 final class DocumentViewController: UIViewController {
     private(set) var pdfView = MyPDFView()
     
+#if DEBUG
+    var stateLabel = UILabel()
+#endif
+    
     var viewModel: DocumentViewModel?
     
     // MARK: LifeCycle
@@ -39,10 +43,18 @@ final class DocumentViewController: UIViewController {
 extension DocumentViewController {
     private func addSubviews() {
         view.addSubview(pdfView)
+        
+#if DEBUG
+        view.addSubview(stateLabel)
+#endif
     }
     
     private func setViews() {
         setPdfView()
+        
+#if DEBUG
+        setStateLabel()
+#endif
     }
     
     private func configure() {
@@ -64,6 +76,19 @@ extension DocumentViewController {
             $0.edges.equalToSuperview()
         }
     }
+    
+#if DEBUG
+    fileprivate func setStateLabel() {
+        stateLabel.then {
+            $0.text = "\(DocumentViewState.normal)"
+            $0.textColor = .black
+            $0.backgroundColor = .systemMint
+            $0.font = .systemFont(ofSize: 20)
+        }.snp.makeConstraints {
+            $0.top.trailing.equalToSuperview().inset(20)
+        }
+    }
+#endif
     
     fileprivate func getMoveStrategy() -> MoveStrategy {
         do {
@@ -147,4 +172,15 @@ extension DocumentViewController: DocumentViewDelegate {
         present(navigationController, animated: true, completion: nil)
     }
     
+#if DEBUG
+    func setStateLabelText(with state: DocumentViewState) {
+        stateLabel.text = "\(state)"
+        stateLabel.backgroundColor = UIColor(
+            red: .random(in: 150...200),
+            green: .random(in: 150...200),
+            blue: .random(in: 150...200),
+            alpha: 1.0
+        )
+    }
+#endif
 }

@@ -26,6 +26,10 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
     var nowState: DocumentViewStateInterface? {
         willSet {
             nowState?.completion(next: newValue!.state)
+            
+#if DEBUG
+            delegate?.setStateLabelText(with: newValue!.state)
+#endif
         }
     }
     

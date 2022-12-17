@@ -14,4 +14,8 @@ protocol MainViewDelegate: NSObject {
     
     func updateDocumentView(with vc: DocumentViewController, info: DocumentTabInfo)
     func removeDocumentView(with vc: DocumentViewController)
+    
+#if DEBUG
+    func setNowIndex(with index: Int)
+#endif
 }

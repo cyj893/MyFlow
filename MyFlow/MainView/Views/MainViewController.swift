@@ -18,6 +18,9 @@ final class MainViewController: UIViewController {
     
     private let endPlayModeButton = UIButton()
     
+#if DEBUG
+    var nowIndexLabel = UILabel()
+#endif
     
     // MARK: LifeCycle
     init(initialVC: DocumentViewController) {
@@ -55,12 +58,20 @@ extension MainViewController {
         view.addSubview(documentArea)
         view.addSubview(myNavigationView)
         view.addSubview(endPlayModeButton)
+        
+#if DEBUG
+        view.addSubview(nowIndexLabel)
+#endif
     }
     
     private func setViews() {
         setMyNavigationView()
         setDocumentView()
         setEndPlayModeButton()
+        
+#if DEBUG
+        setNowIndexLabel()
+#endif
     }
     
     private func configure() {
@@ -99,6 +110,18 @@ extension MainViewController {
         }
     }
     
+#if DEBUG
+    private func setNowIndexLabel() {
+        nowIndexLabel.then {
+            $0.textColor = .black
+            $0.backgroundColor = .systemMint
+            $0.font = .systemFont(ofSize: 20)
+        }.snp.makeConstraints {
+            $0.centerX.equalTo(myNavigationView).multipliedBy(0.5)
+            $0.centerY.equalTo(myNavigationView)
+        }
+    }
+#endif
 }
 
 
@@ -185,4 +208,15 @@ extension MainViewController: MainViewDelegate {
         vc.view.removeFromSuperview()
     }
     
+#if DEBUG
+    func setNowIndex(with index: Int) {
+        nowIndexLabel.text = "\(index)"
+        nowIndexLabel.backgroundColor = UIColor(
+            red: .random(in: 150...200),
+            green: .random(in: 150...200),
+            blue: .random(in: 150...200),
+            alpha: 1.0
+        )
+    }
+#endif
 }
