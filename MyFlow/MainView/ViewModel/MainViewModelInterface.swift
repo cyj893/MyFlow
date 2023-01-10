@@ -8,6 +8,6 @@
 
 protocol MainViewModelInterface {
     func openDocument(_ vc: DocumentViewController)
-    func getNowDocumentViewController() -> DocumentViewController
+    func getNowDocumentViewController() -> DocumentViewController?
     func changeCurrentDocumentState(to state: DocumentViewState)
 }

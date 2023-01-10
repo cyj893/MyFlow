@@ -78,9 +78,11 @@ extension MainViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(toggleNavi), name: NSNotification.Name("ToggleNavi"), object: nil)
         
         myNavigationView.viewModel.mainViewDelegate = self
-        myNavigationView.viewModel.currentVM = viewModel.getNowDocumentViewController().viewModel
         
-        showDocumentView(with: viewModel.getNowDocumentViewController())
+        if let nowDocumentVC = viewModel.getNowDocumentViewController() {
+            myNavigationView.viewModel.currentVM = nowDocumentVC.viewModel
+            showDocumentView(with: nowDocumentVC)
+        }
         
         endPlayModeButton.addTarget(self, action: #selector(endPlayMode), for: .touchUpInside)
         endPlayModeButton.isHidden = true

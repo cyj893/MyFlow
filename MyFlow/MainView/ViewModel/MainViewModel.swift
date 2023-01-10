@@ -133,7 +133,10 @@ extension MainViewModel: MainViewModelInterface {
         documentViews[nowIndex].viewModel?.changeState(to: state)
     }
     
-    func getNowDocumentViewController() -> DocumentViewController {
+    func getNowDocumentViewController() -> DocumentViewController? {
+        if documentViews.isEmpty {
+            return nil
+        }
         return documentViews[nowIndex]
     }
 }
