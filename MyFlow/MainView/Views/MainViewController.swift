@@ -9,6 +9,11 @@ import UIKit
 
 
 final class MainViewController: UIViewController {
+    
+    var mainViewUserActivity: NSUserActivity {
+        viewModel.getUserActivity()
+    }
+    
     var viewModel = MainViewModel.shared
     
     let myNavigationView = MyNavigationView()
@@ -23,11 +28,13 @@ final class MainViewController: UIViewController {
 #endif
     
     // MARK: LifeCycle
-    init(initialVC: DocumentViewController) {
+    init(initialVC: DocumentViewController? = nil) {
         super.init(nibName: nil, bundle: nil)
         
         viewModel.delegate = self
-        viewModel.openDocument(initialVC)
+        if let initialVC = initialVC {
+            viewModel.openDocument(initialVC)
+        }
         myNavigationView.tabsAdaptor.dataSource = viewModel
     }
     
@@ -48,6 +55,10 @@ final class MainViewController: UIViewController {
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name("ToggleNavi"), object: nil)
         myNavigationView.clear()
+    }
+    
+    override func restoreUserActivityState(_ activity: NSUserActivity) {
+        viewModel.restoreUserActivityState(activity)
     }
 }
 
@@ -78,9 +89,11 @@ extension MainViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(toggleNavi), name: NSNotification.Name("ToggleNavi"), object: nil)
         
         myNavigationView.viewModel.mainViewDelegate = self
-        myNavigationView.viewModel.currentVM = viewModel.getNowDocumentViewController().viewModel
         
-        showDocumentView(with: viewModel.getNowDocumentViewController())
+        if let nowDocumentVC = viewModel.getNowDocumentViewController() {
+            myNavigationView.viewModel.currentVM = nowDocumentVC.viewModel
+            showDocumentView(with: nowDocumentVC)
+        }
         
         endPlayModeButton.addTarget(self, action: #selector(endPlayMode), for: .touchUpInside)
         endPlayModeButton.isHidden = true

@@ -8,6 +8,9 @@
 
 protocol MainViewModelInterface {
     func openDocument(_ vc: DocumentViewController)
-    func getNowDocumentViewController() -> DocumentViewController
+    func getNowDocumentViewController() -> DocumentViewController?
     func changeCurrentDocumentState(to state: DocumentViewState)
+    
+    func getUserActivity() -> NSUserActivity
+    func restoreUserActivityState(_ activity: NSUserActivity)
 }
