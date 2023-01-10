@@ -139,4 +139,34 @@ extension MainViewModel: MainViewModelInterface {
         }
         return documentViews[nowIndex]
     }
+    
+    func getUserActivity() -> NSUserActivity {
+        let userActivity = NSUserActivity(activityType: SceneDelegate.MainSceneActivityType)
+        
+        let urls = documentViews
+            .map { vc in
+                vc.viewModel?.key
+            }
+        
+        userActivity.addUserInfoEntries(from: ["urls": urls,
+                                               "nowIndex": nowIndex])
+        return userActivity
+    }
+    
+    func restoreUserActivityState(_ activity: NSUserActivity) {
+        guard let urls = activity.userInfo?["urls"] as? [URL?],
+              let nowIndex = activity.userInfo?["nowIndex"] as? Int else {
+            return
+        }
+        
+        urls
+            .compactMap { $0 }
+            .forEach { url in
+                let documentViewController = DocumentViewController()
+                documentViewController.viewModel = DocumentViewModel(document: Document(fileURL: url))
+                openDocument(documentViewController)
+            }
+        
+        self.nowIndex = min(nowIndex, documentViews.count - 1)
+    }
 }
