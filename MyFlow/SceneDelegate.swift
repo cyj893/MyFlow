@@ -13,6 +13,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let userActivity = connectionOptions.userActivities.first ?? session.stateRestorationActivity else { return }
+        
+        if configure(window: self.window, with: userActivity) {
+            scene.userActivity = userActivity
+        } else {
+            print("Failed to restore DetailViewController from \(userActivity)")
+        }
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -30,6 +37,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
+        if let mainVC = window!.rootViewController?.presentedViewController as? MainViewController {
+            print("Set scene's userActivity")
+            scene.userActivity = mainVC.mainViewUserActivity
+        }
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
@@ -47,4 +58,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
+}
+
+extension SceneDelegate {
+    
+    static var MainSceneActivityType: String {
+        let activityTypes = Bundle.main.infoDictionary?["NSUserActivityTypes"] as? [String]
+        return activityTypes![0]
+    }
+    
+    func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
+        guard let urls = scene.userActivity?.userInfo?["urls"] as? [URL?],
+              let nowIndex = scene.userActivity?.userInfo?["nowIndex"] as? Int else {
+            return scene.userActivity
+        }
+        print("stateRestorationActivity: \(urls.map { $0!.lastPathComponent }), \(nowIndex)")
+        return scene.userActivity
+    }
+    
+    func configure(window: UIWindow?, with activity: NSUserActivity) -> Bool {
+        if let documentBrowserViewController = window?.rootViewController as? DocumentBrowserViewController {
+            let mainVC = MainViewController()
+            mainVC.modalPresentationStyle = .fullScreen
+            documentBrowserViewController.present(mainVC, animated: false)
+            mainVC.restoreUserActivityState(activity)
+            return true
+        }
+        return false
+    }
 }
