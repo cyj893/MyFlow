@@ -5,11 +5,14 @@
 //  Created by Yujin Cha on 2022/12/05.
 //
 
-import Foundation
+import UIKit
 
 
 struct DocumentTabInfo {
-    var nowPointNum: Int
+    var url: URL?
+    var nowPointNum: Int = 1
+    var offset: CGPoint = .zero
+    var scaleFactor: CGFloat = 1.0
 }
 
 final class MainViewModel: NSObject {
@@ -45,7 +48,7 @@ extension MainViewModel: DocumentTabsCollectionDataSource {
     }
     
     func getItem(at index: Int) -> (String, URL?) {
-        return (documentViews[index].title ?? "", documentViews[index].viewModel?.key)
+        return (infos[index].url?.lastPathComponent ?? "", documentViews[index].viewModel?.key)
     }
     
     func closeTab(key: URL?) -> Int? {
@@ -92,6 +95,8 @@ extension MainViewModel: DocumentTabsCollectionDataSource {
     
     private func saveTabInfo(_ index: Int) {
         infos[index].nowPointNum = documentViews[index].viewModel?.getNowPointNum() ?? 1
+        infos[index].offset = documentViews[index].pdfView.scrollView?.contentOffset ?? .zero
+        infos[index].scaleFactor = documentViews[index].pdfView.scaleFactor
     }
     
     func moveTab(from before: Int, to after: Int) {
