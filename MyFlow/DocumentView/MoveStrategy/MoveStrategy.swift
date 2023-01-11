@@ -36,7 +36,7 @@ struct UseScrollView: MoveStrategy {
     
     public init (pdfView: PDFView) throws {
         self.pdfView = pdfView
-        guard let pdfScrollView = pdfView.subviews.first as? UIScrollView else {
+        guard let pdfScrollView = pdfView.scrollView else {
             throw PdfError.cannotFindScrollView
         }
         self.pdfScrollView = pdfScrollView

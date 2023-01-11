@@ -63,8 +63,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     
     func presentDocument(at documentURL: URL) {
         
-        let documentViewController = DocumentViewController()
-        documentViewController.viewModel = DocumentViewModel(document: Document(fileURL: documentURL))
+        let documentViewController = DocumentViewController(viewModel: .init(document: Document(fileURL: documentURL)))
         
         let mainVC = MainViewController(initialVC: documentViewController)
         mainVC.modalPresentationStyle = .fullScreen

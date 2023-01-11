@@ -5,11 +5,14 @@
 //  Created by Yujin Cha on 2022/12/05.
 //
 
-import Foundation
+import UIKit
 
 
 struct DocumentTabInfo {
-    var nowPointNum: Int
+    var url: URL?
+    var nowPointNum: Int = 1
+    var offset: CGPoint = .zero
+    var scaleFactor: CGFloat = 1.0
 }
 
 final class MainViewModel: NSObject {
@@ -45,7 +48,7 @@ extension MainViewModel: DocumentTabsCollectionDataSource {
     }
     
     func getItem(at index: Int) -> (String, URL?) {
-        return (documentViews[index].title ?? "", documentViews[index].viewModel?.key)
+        return (infos[index].url?.lastPathComponent ?? "", documentViews[index].viewModel?.key)
     }
     
     func closeTab(key: URL?) -> Int? {
@@ -92,6 +95,8 @@ extension MainViewModel: DocumentTabsCollectionDataSource {
     
     private func saveTabInfo(_ index: Int) {
         infos[index].nowPointNum = documentViews[index].viewModel?.getNowPointNum() ?? 1
+        infos[index].offset = documentViews[index].pdfView.scrollView?.contentOffset ?? .zero
+        infos[index].scaleFactor = documentViews[index].pdfView.scaleFactor
     }
     
     func moveTab(from before: Int, to after: Int) {
@@ -124,9 +129,13 @@ extension MainViewModel: MainViewModelInterface {
 #endif
     }
     
-    private func appendNewTab(_ vc: DocumentViewController) {
+    private func appendNewTab(_ vc: DocumentViewController, withInfo info: DocumentTabInfo? = nil) {
         documentViews.append(vc)
-        infos.append(DocumentTabInfo(nowPointNum: 1))
+        if let info = info {
+            infos.append(info)
+        } else {
+            infos.append(DocumentTabInfo(url: vc.viewModel?.key))
+        }
     }
     
     func changeCurrentDocumentState(to state: DocumentViewState) {
@@ -141,32 +150,57 @@ extension MainViewModel: MainViewModelInterface {
     }
     
     func getUserActivity() -> NSUserActivity {
+        saveTabInfo(nowIndex)
+        
         let userActivity = NSUserActivity(activityType: SceneDelegate.MainSceneActivityType)
         
-        let urls = documentViews
-            .map { vc in
-                vc.viewModel?.key
-            }
+        let urls = infos.map { $0.url }
+        let xOffsets = infos.map { $0.offset.x }
+        let yOffsets = infos.map { $0.offset.y }
+        let scaleFactors = infos.map { $0.scaleFactor }
         
         userActivity.addUserInfoEntries(from: ["urls": urls,
+                                               "xOffsets": xOffsets,
+                                               "yOffsets": yOffsets,
+                                               "scaleFactors": scaleFactors,
                                                "nowIndex": nowIndex])
         return userActivity
     }
     
     func restoreUserActivityState(_ activity: NSUserActivity) {
         guard let urls = activity.userInfo?["urls"] as? [URL?],
+              let xOffsets = activity.userInfo?["xOffsets"] as? [CGFloat],
+              let yOffsets = activity.userInfo?["yOffsets"] as? [CGFloat],
+              let scaleFactors = activity.userInfo?["scaleFactors"] as? [CGFloat],
               let nowIndex = activity.userInfo?["nowIndex"] as? Int else {
             return
         }
         
-        urls
-            .compactMap { $0 }
-            .forEach { url in
-                let documentViewController = DocumentViewController()
-                documentViewController.viewModel = DocumentViewModel(document: Document(fileURL: url))
-                openDocument(documentViewController)
+        zip(urls, zip(xOffsets, zip(yOffsets, scaleFactors)))
+            .map { ($0, CGPoint(x: $1.0, y: $1.1.0), $1.1.1) }
+            .compactMap { (url, point, scaleFactor) -> (URL, CGPoint, CGFloat)? in
+                if let url = url {
+                    return (url, point, scaleFactor)
+                }
+                return nil
+            }
+            .forEach { (url, point, scaleFactor) in
+                let documentViewController = DocumentViewController(viewModel: .init(document: Document(fileURL: url)))
+                restoreDocument(documentViewController, info: DocumentTabInfo(url: url, offset: point, scaleFactor: scaleFactor))
             }
         
         self.nowIndex = min(nowIndex, documentViews.count - 1)
+        delegate?.updateDocumentView(with: documentViews[nowIndex], info: infos[nowIndex])
+        
+#if DEBUG
+        print(nowIndex)
+        delegate?.setNowIndex(with: nowIndex)
+#endif
     }
+    
+    private func restoreDocument(_ vc: DocumentViewController, info: DocumentTabInfo) {
+        appendNewTab(vc, withInfo: info)
+        vc.restoreInfo = info
+    }
+    
 }
