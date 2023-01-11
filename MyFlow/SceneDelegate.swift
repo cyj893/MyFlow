@@ -8,6 +8,9 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    
+    let logger = MyLogger(category: String(describing: SceneDelegate.self))
+    
 
     var window: UIWindow?
 
@@ -18,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if configure(window: self.window, with: userActivity) {
             scene.userActivity = userActivity
         } else {
-            print("Failed to restore DetailViewController from \(userActivity)")
+            logger.log("Failed to restore from \(userActivity)", .info)
         }
     }
     
@@ -38,7 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
         if let mainVC = window!.rootViewController?.presentedViewController as? MainViewController {
-            print("Set scene's userActivity")
+            logger.log("sceneWillResignActive: Set scene's userActivity")
             scene.userActivity = mainVC.mainViewUserActivity
         }
     }
@@ -68,12 +71,26 @@ extension SceneDelegate {
     }
     
     func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
-        guard let urls = scene.userActivity?.userInfo?["urls"] as? [URL?],
-              let nowIndex = scene.userActivity?.userInfo?["nowIndex"] as? Int else {
-            return scene.userActivity
-        }
-        print("stateRestorationActivity: \(urls.map { $0!.lastPathComponent }), \(nowIndex)")
+        logStateRestorationActivity(scene.userActivity)
         return scene.userActivity
+    }
+    
+    private func logStateRestorationActivity(_ activity: NSUserActivity?) {
+        guard let activity = activity else {
+            logger.log("Fail to get userActivity", .info)
+            return
+        }
+        
+        guard let urls = activity.userInfo?["urls"] as? [URL?],
+              let xOffsets = activity.userInfo?["xOffsets"] as? [CGFloat],
+              let yOffsets = activity.userInfo?["yOffsets"] as? [CGFloat],
+              let scaleFactors = activity.userInfo?["scaleFactors"] as? [CGFloat],
+              let nowIndex = activity.userInfo?["nowIndex"] as? Int else {
+            logger.log("Fail to get userActivity's userInfo", .info)
+            return
+        }
+        
+        logger.log("stateRestorationActivity: urls - \(urls.map { $0!.lastPathComponent }), xOffsets - \(xOffsets), yOffsets - \(yOffsets), scaleFactors - \(scaleFactors), nowIndex - \(nowIndex)")
     }
     
     func configure(window: UIWindow?, with activity: NSUserActivity) -> Bool {

@@ -7,6 +7,9 @@
 
 
 class UndoRedoHistory {
+    
+    let logger = MyLogger(category: String(describing: UndoRedoHistory.self))
+    
     private var undoHistory = PointCommandHistory()
     private var redoHistory = PointCommandHistory()
     
@@ -17,12 +20,12 @@ class UndoRedoHistory {
         command.execute()
         undoHistory.push(command)
         redoHistory.clear()
-        print("executeCommand Undo: \(getUndoCount()) Redo: \(getRedoCount())")
+        logger.log("executeCommand \(command). Undo: \(getUndoCount()) Redo: \(getRedoCount())")
     }
     
     func push(_ command: PointCommand) {
         undoHistory.push(command)
-        print("push Undo: \(getUndoCount()) Redo: \(getRedoCount())")
+        logger.log("push \(command). Undo: \(getUndoCount()) Redo: \(getRedoCount())")
     }
     
     func undoCommand() {
@@ -31,7 +34,7 @@ class UndoRedoHistory {
         }
         command.undo()
         redoHistory.push(command)
-        print("undoCommand Undo: \(getUndoCount()) Redo: \(getRedoCount())")
+        logger.log("undoCommand \(command). Undo: \(getUndoCount()) Redo: \(getRedoCount())")
     }
     
     func redoCommand() {
@@ -40,7 +43,7 @@ class UndoRedoHistory {
         }
         command.execute()
         undoHistory.push(command)
-        print("redoCommand Undo: \(getUndoCount()) Redo: \(getRedoCount())")
+        logger.log("redoCommand \(command). Undo: \(getUndoCount()) Redo: \(getRedoCount())")
     }
     
     func clear() {

@@ -10,6 +10,9 @@ import Foundation
 
 final class MyNavigationViewModel {
     
+    let logger = MyLogger(category: String(describing: MyNavigationViewModel.self))
+    
+    
     weak var delegate: MyNavigationViewDelegate?
     
     weak var mainViewDelegate: MainViewDelegate?
@@ -41,12 +44,10 @@ extension MyNavigationViewModel: PointsAreaDelegate {
         }
         
         if isAddingPoints {
-            print("포인트 추가")
             currentVM?.clearSelectedPoint()
             currentVM?.changeState(to: .addPoints)
         }
         else {
-            print("포인트 추가 끝")
             currentVM?.changeState(to: .normal)
         }
     }
@@ -61,11 +62,9 @@ extension MyNavigationViewModel: PointsAreaDelegate {
         }
         
         if isHandlingPoints {
-            print("포인트 핸들링")
             currentVM?.changeState(to: .handlePoints)
         }
         else {
-            print("포인트 핸들링 끝")
             currentVM?.clearSelectedPoint()
             currentVM?.changeState(to: .normal)
         }
@@ -87,6 +86,7 @@ extension MyNavigationViewModel: UndoRedoAreaDelegate {
 // MARK: MyNavigationViewModelInterface
 extension MyNavigationViewModel: MyNavigationViewModelInterface {
     func backButtonAction() {
+        logger.log("backButtonAction")
         mainViewDelegate?.dismiss()
     }
     

@@ -14,6 +14,8 @@ import PDFKit
 /// Returns the point annotation in now order.
 class PointHelper {
     
+    let logger = MyLogger(category: String(describing: PointHelper.self))
+    
     // MARK: Properties
     
     var commandHistory = UndoRedoHistory()
@@ -68,7 +70,7 @@ class PointHelper {
     
     #if DEBUG
     deinit {
-        print("PointHelper deinit")
+        logger.log("PointHelper deinit")
     }
     #endif
 }
@@ -106,8 +108,7 @@ extension PointHelper {
     ///
     /// - Returns:Point number annotation at index.
     func moveToPoint(at index: Int) throws -> PDFAnnotation {
-        print(points.count)
-        guard getPointsCount() > 0 else {
+        guard points.count > 0 else {
             throw PointError.emptyPoints
         }
         guard 0 <= index && index < points.count else {
@@ -139,9 +140,9 @@ extension PointHelper {
         }
         
         nowSelectedPoint = annotation
-        guard let str:String = annotation.widgetStringValue else { return }
+        guard let str: String = annotation.widgetStringValue else { return }
         let number = Int(str)!
-        print(number)
+        logger.log("selectPoint: \(number)")
         
         nowSelectedPointLines = linesDict[number]!
         for i in 0...3 {
@@ -159,16 +160,20 @@ extension PointHelper {
     ///   - height: Height position to move to at PDFPage.
     ///   - page: A PDFPage to move point annotations to. It may or may not be the same as before.
     func movePoint(_ height: Int, _ page: PDFPage) {
-        guard let nowSelectedPoint = nowSelectedPoint else { return }
+        guard let nowSelectedPoint = nowSelectedPoint else {
+            logger.log("movePoint: nowSelectedPoint is nil, No point to move.", .info)
+            return
+        }
         
         if height < 0 {
+            logger.log("movePoint: Height \(height) is less than 0.", .info)
             return
         }
         // set height bound
         if page.pageRef?.pageNumber == 1 {
             let pageSize = page.bounds(for: PDFDisplayBox.mediaBox).size
-            print(pageSize.height)
             if height > Int(pageSize.height) {
+                logger.log("movePoint: Height \(height) is over the page's height \(pageSize.height).", .info)
                 return
             }
         }
@@ -270,16 +275,17 @@ extension PointHelper {
     /// - Parameter annotation: PDFAnnotation to delete.
     func deletePoint() {
         guard let annotation = nowSelectedPoint else {
+            logger.log("deletePoint: nowSelectedPoint is nil, No point to delete.", .info)
             return
         }
         guard let number = Int(annotation.widgetStringValue ?? "") else {
+            logger.log("deletePoint: Cannot convert point to index. value: \(annotation.widgetStringValue ?? "nil")", .info)
             return
         }
         var change: [PDFAnnotation] = []
         change.append(annotation)
         change.append(contentsOf: nowSelectedPointLines)
         
-        print("Delete point")
         let command = DeleteCommand(pointHelper: self,
                                  backup: createMemento2(annotation, number))
         

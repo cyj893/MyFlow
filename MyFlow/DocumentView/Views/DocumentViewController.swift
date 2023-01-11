@@ -13,6 +13,8 @@ import SnapKit
 
 
 final class DocumentViewController: UIViewController {
+    let logger = MyLogger(category: String(describing: DocumentViewController.self))
+    
     private(set) var pdfView = MyPDFView()
     
 #if DEBUG
@@ -47,7 +49,7 @@ final class DocumentViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         if let documentTabInfo = restoreInfo {
-            print("Restore Info")
+            logger.log("\(viewModel?.key?.lastPathComponent ?? "nil") Restore Info: scaleFactor \(documentTabInfo.scaleFactor) offset \(documentTabInfo.offset)")
             pdfView.scaleFactor = documentTabInfo.scaleFactor
             if let pdfScrollView = pdfView.scrollView {
                 pdfScrollView.setContentOffset(documentTabInfo.offset, animated: false)
@@ -95,7 +97,7 @@ extension DocumentViewController {
             $0.displayDirection = .vertical
             $0.usePageViewController(false)
             $0.pageBreakMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            $0.autoScales = true
+            //$0.autoScales = true
             $0.backgroundColor = MyColor.pdfBackground
         }.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -119,6 +121,7 @@ extension DocumentViewController {
         do {
             return try UseScrollView(pdfView: pdfView)
         } catch let e as PdfError {
+            logger.log("Fail to UseScrollView: \(e.localizedDescription)", .info)
             // TODO: Aleart Error
             return UseGo(vc: self)
         } catch {
@@ -161,12 +164,13 @@ extension DocumentViewController {
         
         switch recognizer.state {
         case .began:
-            print("Begin pan gesture")
+            logger.log("Begin pan gesture")
             
         case .changed:
             viewModel?.panGestureChanged(location: location, pdfView: pdfView)
             
         case .ended, .cancelled, .failed:
+            logger.log("End pan gesture")
             viewModel?.panGestureEnded()
             
         default:

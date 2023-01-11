@@ -47,7 +47,6 @@ class DeleteCommand: PointCommand {
             let lines = pointHelper.linesDict[i+1] ?? []
             pointHelper.linesDict[i+2]?.append(contentsOf: lines)
         }
-        print(pointHelper.linesDict)
         
         pointHelper.linesDict[number] = []
         pointHelper.linesDict[number]!.append(contentsOf: backup.change[1...])

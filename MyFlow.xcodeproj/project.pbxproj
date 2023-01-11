@@ -64,6 +64,7 @@
 		AFE6C78D28487DD4003C4580 /* MyPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE6C78C28487DD4003C4580 /* MyPDFView.swift */; };
 		AFEC944B296C422B00B5BEBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEC944A296C422B00B5BEBF /* SceneDelegate.swift */; };
 		AFEC944D296C923D00B5BEBF /* PdfViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEC944C296C923D00B5BEBF /* PdfViewExtension.swift */; };
+		AFEC9450296EEF8000B5BEBF /* MyLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEC944F296EEF8000B5BEBF /* MyLogger.swift */; };
 		AFED0CC82844C25400FD177D /* MoveStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFED0CC72844C25400FD177D /* MoveStrategy.swift */; };
 		AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8DA7F282F65F8005F0DED /* MyConstants.swift */; };
 		AFF8DA82282FDE20005F0DED /* UIBezierPathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */; };
@@ -142,6 +143,7 @@
 		AFE6C78C28487DD4003C4580 /* MyPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPDFView.swift; sourceTree = "<group>"; };
 		AFEC944A296C422B00B5BEBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		AFEC944C296C923D00B5BEBF /* PdfViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfViewExtension.swift; sourceTree = "<group>"; };
+		AFEC944F296EEF8000B5BEBF /* MyLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLogger.swift; sourceTree = "<group>"; };
 		AFED0CC72844C25400FD177D /* MoveStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveStrategy.swift; sourceTree = "<group>"; };
 		AFF8DA7F282F65F8005F0DED /* MyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyConstants.swift; sourceTree = "<group>"; };
 		AFF8DA81282FDE20005F0DED /* UIBezierPathExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtension.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 		AF8EDF7D282E3F7A00CCFF19 /* MyFlow */ = {
 			isa = PBXGroup;
 			children = (
+				AFEC944E296EEF6400B5BEBF /* Utilities */,
 				AFCDB5982932848F00E22DEA /* MainView */,
 				AFCDB58A29326E0200E22DEA /* DocumentView */,
 				AF65F78E292E4E4D0005D9AF /* FileHelper */,
@@ -420,6 +423,14 @@
 				AF8EDF84282E3F7A00CCFF19 /* Document.swift */,
 			);
 			path = DocumentHelper;
+			sourceTree = "<group>";
+		};
+		AFEC944E296EEF6400B5BEBF /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				AFEC944F296EEF8000B5BEBF /* MyLogger.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		F01107C7CE67F05F784421B8 /* Frameworks */ = {
@@ -666,6 +677,7 @@
 				AFC8E259293368C1009F9EC9 /* DocumentTabsCollectionViewAdaptor.swift in Sources */,
 				AFAB47BD28479F9D0034515A /* UndoRedoHistory.swift in Sources */,
 				AF8EDF7F282E3F7A00CCFF19 /* AppDelegate.swift in Sources */,
+				AFEC9450296EEF8000B5BEBF /* MyLogger.swift in Sources */,
 				AFAB47C02847A0830034515A /* AddCommand.swift in Sources */,
 				AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */,
 				AFC8E2572933686E009F9EC9 /* UIControlExtension.swift in Sources */,

@@ -13,8 +13,12 @@ protocol MoveStrategy {
     func moveAfter(to height: CGFloat)
 }
 
-struct UseGo: MoveStrategy {
+class UseGo: MoveStrategy {
     private(set) weak var vc: DocumentViewController?
+    
+    public init(vc: DocumentViewController?) {
+        self.vc = vc
+    }
     
     func move(to point: PDFAnnotation) {
         guard let vc = vc else { return }
@@ -23,14 +27,14 @@ struct UseGo: MoveStrategy {
     }
     
     func moveAfter(to height: CGFloat) {
-        print("Don't autoscroll with GO")
+        MyLogger.log("[MoveStrategy - UseGo] Can't autoscroll with this", .info)
     }
 }
 
-struct UseScrollView: MoveStrategy {
+class UseScrollView: MoveStrategy {
     private weak var pdfView: PDFView?
-    private var pdfScrollView: UIScrollView
-    private var pdfDocument: PDFDocument
+    private weak var pdfScrollView: UIScrollView?
+    private weak var pdfDocument: PDFDocument?
     private var pageHeights: [CGFloat] = []
     private var pageHeightsPrefixSum: [CGFloat] = []
     
@@ -60,29 +64,28 @@ struct UseScrollView: MoveStrategy {
     }
     
     func move(to point: PDFAnnotation) {
-        do {
-            try tryMove(to: point)
-        } catch {
-            // TODO: log
-        }
-    }
-    
-    fileprivate func tryMove(to point: PDFAnnotation) throws {
-        // Actual scrollView's height(pdfScrollView?.contentSize.height)
+        // Actual scrollView's height(pdfScrollView.contentSize.height)
         // keeps changing depending on whether user zoom or not.
         // So get scaleFactor from pdfView and multiply scrollView's height by it
         // to get the converted height of the current scrollview.
-        guard let scaleFactor = pdfView?.scaleFactor else {
-            throw PdfError.cannotGetScaleFactor
+        guard let pdfView = pdfView,
+              let pdfDocument = pdfDocument,
+              let pdfScrollView = pdfScrollView else {
+            MyLogger.log("[MoveStrategy - UseScrollView] Some of pdfView, pdfDocument and pdfScrollView is nil", .error)
+            return
         }
+        let scaleFactor = pdfView.scaleFactor
         let pageIndex = pdfDocument.index(for: point.page!)
         let height = pageHeightsPrefixSum[pageIndex] + pageHeights[pageIndex] - point.bounds.maxY
         let convertedHeight = CGPoint(x: 0, y: height * scaleFactor)
-        print("Move to \(convertedHeight.y)")
         pdfScrollView.setContentOffset(convertedHeight, animated: true)
     }
     
     func moveAfter(to height: CGFloat) {
+        guard let pdfScrollView = pdfScrollView else {
+            MyLogger.log("[MoveStrategy - UseScrollView] pdfScrollView is nil", .error)
+            return
+        }
         pdfScrollView.setContentOffset(CGPoint(x: 0, y: pdfScrollView.contentOffset.y + height), animated: true)
     }
     

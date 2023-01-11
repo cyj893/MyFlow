@@ -30,10 +30,7 @@ struct NormalState: DocumentViewStateInterface {
         case .playMode:
             vm?.clearSelectedPoint()
         default:
-#if DEBUG
-            fatalError("Undefined State")
-#endif
-            print("Undefined State")
+            MyLogger.log("UndefinedState: from \(String(describing: self)) to \(next)", .error)
         }
     }
 }
@@ -48,13 +45,16 @@ struct HandlePointsState: DocumentViewStateInterface {
     func tapProcess(location: CGPoint, pdfView: PDFView) {
         guard let vm = vm else { return }
         
-        guard let page = pdfView.page(for: location, nearest: true) else { return }
-        let convertedLocation = pdfView.convert(location, to: page)
+        guard let page = pdfView.page(for: location, nearest: true),
+              let annotation = page.annotation(at: pdfView.convert(location, to: page)),
+              let _ = annotation.annotationKeyValues["/isPoint"] else {
+            
+            MyLogger.log("ignore tapProcess: location is not point annotation")
+            return
+        }
         
-        print(convertedLocation)
-        guard let annotation = page.annotation(at: convertedLocation) else { return }
-        print(annotation)
-        guard let _ = annotation.annotationKeyValues["/isPoint"] else { return }
+        MyLogger.log("tapProcess: point annotation selected")
+        
         vm.pointHelper.selectPoint(annotation)
     }
     
@@ -69,10 +69,7 @@ struct HandlePointsState: DocumentViewStateInterface {
         case .playMode:
             vm?.clearSelectedPoint()
         default:
-#if DEBUG
-            fatalError("Undefined State")
-#endif
-            print("Undefined State")
+            MyLogger.log("UndefinedState: from \(String(describing: self)) to \(next)", .error)
         }
     }
 }
@@ -104,10 +101,7 @@ struct AddPointsState: DocumentViewStateInterface {
         case .playMode:
             break
         default:
-#if DEBUG
-            fatalError("Undefined State")
-#endif
-            print("Undefined State")
+            MyLogger.log("UndefinedState: from \(String(describing: self)) to \(next)", .error)
         }
     }
 }
@@ -136,10 +130,7 @@ struct PlayModeState: DocumentViewStateInterface {
         case .normal:
             break
         default:
-#if DEBUG
-            fatalError("Undefined State")
-#endif
-            print("Undefined State")
+            MyLogger.log("UndefinedState: from \(String(describing: self)) to \(next)", .error)
         }
     }
 }

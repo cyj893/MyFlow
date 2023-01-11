@@ -21,6 +21,8 @@ protocol DocumentTabsCollectionDataSource: NSObjectProtocol {
 
 final class DocumentTabsCollectionViewAdaptor: NSObject {
     
+    let logger = MyLogger(category: String(describing: DocumentTabsCollectionViewAdaptor.self))
+    
     weak var dataSource: DocumentTabsCollectionDataSource?
     
     let collectionView: UICollectionView = {
@@ -72,7 +74,6 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDataSource {
         cell.label.text = item?.0 ?? ""
         
         cell.deleteAction = {
-            print("Delete \(item?.0), \(item?.1)")
             if let next = self.dataSource?.closeTab(key: item?.1) {
                 self.dataSource?.setSelectedIndex(with: next)
                 collectionView.cellForItem(at: IndexPath(item: next, section: 0))?.isSelected = true
@@ -107,7 +108,7 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDataSource {
         
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         
-        print(beforeSelectedIdx, indexPath.item)
+        logger.log("didSelectItemAt: Tapped \(indexPath.item), before is \(beforeSelectedIdx)")
         
         dataSource.openTab(from: beforeSelectedIdx, to: indexPath.item)
     }
@@ -133,30 +134,34 @@ extension DocumentTabsCollectionViewAdaptor: UICollectionViewDropDelegate {
         let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: (dataSource?.numberOfItems() ?? 1) - 1, section: 0)
         
         if coordinator.proposal.operation == .move {
-            if let item = coordinator.items.first, let sourceIndexPath = item.sourceIndexPath {
-                collectionView.performBatchUpdates {
-                    self.dataSource?.moveTab(from: sourceIndexPath.item, to: destinationIndexPath.item)
-                    
-                    collectionView.deleteItems(at: [sourceIndexPath])
-                    collectionView.insertItems(at: [destinationIndexPath])
-                } completion: { _ in
-                    guard let dataSource = self.dataSource else { return }
-                    
-                    if sourceIndexPath.item == dataSource.getSelectedIndex() {
-                        collectionView.scrollToItem(at: destinationIndexPath, at: .centeredHorizontally, animated: true)
-                    }
-                    
-                    collectionView.cellForItem(at: IndexPath(item: dataSource.getSelectedIndex(), section: 0))?.isSelected = false
-                    
-                    let next = self.move(s: sourceIndexPath.item, d: destinationIndexPath.item, now: dataSource.getSelectedIndex())
-                    dataSource.setSelectedIndex(with: next)
-                    
-                    collectionView.cellForItem(at: IndexPath(item: next, section: 0))?.isSelected = true
-                    
-                    print(dataSource.getSelectedIndex())
-                }
-                coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
+            guard let item = coordinator.items.first, let sourceIndexPath = item.sourceIndexPath else {
+                logger.log("performDropWith: Fail to move tab\(destinationIndexPath.item)", .info)
+                
+                return
             }
+            
+            logger.log("performDropWith: Move \(sourceIndexPath.item) to \(destinationIndexPath.item)")
+            
+            collectionView.performBatchUpdates {
+                self.dataSource?.moveTab(from: sourceIndexPath.item, to: destinationIndexPath.item)
+                
+                collectionView.deleteItems(at: [sourceIndexPath])
+                collectionView.insertItems(at: [destinationIndexPath])
+            } completion: { _ in
+                guard let dataSource = self.dataSource else { return }
+                
+                if sourceIndexPath.item == dataSource.getSelectedIndex() {
+                    collectionView.scrollToItem(at: destinationIndexPath, at: .centeredHorizontally, animated: true)
+                }
+                
+                collectionView.cellForItem(at: IndexPath(item: dataSource.getSelectedIndex(), section: 0))?.isSelected = false
+                
+                let next = self.move(s: sourceIndexPath.item, d: destinationIndexPath.item, now: dataSource.getSelectedIndex())
+                dataSource.setSelectedIndex(with: next)
+                
+                collectionView.cellForItem(at: IndexPath(item: next, section: 0))?.isSelected = true
+            }
+            coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
         }
     }
     
