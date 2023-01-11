@@ -16,6 +16,9 @@ struct DocumentTabInfo {
 }
 
 final class MainViewModel: NSObject {
+    
+    let logger = MyLogger(category: String(describing: MainViewController.self))
+    
     static let shared = MainViewModel()
     
     weak var delegate: MainViewDelegate?
@@ -57,7 +60,7 @@ extension MainViewModel: DocumentTabsCollectionDataSource {
         }
         
         // TODO: Close document logic(saving points, showing message, switch to next index if needed, ...)
-        print(index, "삭제")
+        logger.log("Delete tab\(index) \(infos[index].url?.lastPathComponent ?? "")")
         documentViews[index].close()
         if index == nowIndex {
             delegate?.removeDocumentView(with: documentViews[index])
@@ -114,6 +117,7 @@ extension MainViewModel: DocumentTabsCollectionDataSource {
 
 extension MainViewModel: MainViewModelInterface {
     func openDocument(_ vc: DocumentViewController) {
+        logger.log("openDocument")
         if let idx = documentViews.firstIndex(where: { $0.viewModel?.key == vc.viewModel?.key }) {
             // reopen
             nowIndex = idx
@@ -124,7 +128,6 @@ extension MainViewModel: MainViewModelInterface {
         delegate?.updateDocumentView(with: documentViews[nowIndex], info: infos[nowIndex])
         
 #if DEBUG
-        print(nowIndex)
         delegate?.setNowIndex(with: nowIndex)
 #endif
     }
@@ -193,7 +196,6 @@ extension MainViewModel: MainViewModelInterface {
         delegate?.updateDocumentView(with: documentViews[nowIndex], info: infos[nowIndex])
         
 #if DEBUG
-        print(nowIndex)
         delegate?.setNowIndex(with: nowIndex)
 #endif
     }

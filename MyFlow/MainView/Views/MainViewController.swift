@@ -10,6 +10,8 @@ import UIKit
 
 final class MainViewController: UIViewController {
     
+    let logger = MyLogger(category: String(describing: MainViewController.self))
+    
     var mainViewUserActivity: NSUserActivity {
         viewModel.getUserActivity()
     }
@@ -158,7 +160,7 @@ extension MainViewController {
     
     /// hide`MyNavigationView`
     private func hideNavi() {
-        print("hide myNavigationView")
+        logger.log("hide myNavigationView")
         myNavigationView.snp.updateConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
@@ -168,7 +170,7 @@ extension MainViewController {
     
     /// show `MyNavigationView`
     private func showNavi() {
-        print("show myNavigationView")
+        logger.log("show myNavigationView")
         myNavigationView.snp.updateConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).offset(MyOffset.navigationViewHeight)
         }
@@ -185,7 +187,7 @@ extension MainViewController {
     }
     
     private func showDocumentView(with vc: DocumentViewController) {
-        print(vc)
+        logger.log("showDocumentView \(vc.viewModel?.key?.lastPathComponent ?? "nil")")
         addChild(vc)
         vc.view.frame = documentArea.bounds
         documentArea.addSubview(vc.view)
@@ -223,6 +225,7 @@ extension MainViewController: MainViewDelegate {
     
 #if DEBUG
     func setNowIndex(with index: Int) {
+        MyLogger.log("setNowIndex \(index)")
         nowIndexLabel.text = "\(index)"
         nowIndexLabel.backgroundColor = UIColor(
             red: .random(in: 150...200),

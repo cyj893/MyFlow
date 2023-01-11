@@ -23,6 +23,8 @@ struct PointsInfo: Codable {
 /// Save edited point information with the file path as identifier.
 class FileHelper {
     
+    let logger = MyLogger(category: String(describing: FileHelper.self))
+    
     static let shared = FileHelper()
     let fileManager: FileManager
     let documentsURL: URL
@@ -46,10 +48,10 @@ class FileHelper {
         do {
             let data = try Data(contentsOf: pointsDictPath)
             let dict = try JSONDecoder().decode([PointsFile].self, from: data)
-            print("Find PointsFileDict: \(dict)")
+            logger.log("Find PointsFileDict")
             return dict
         } catch let e {
-            print(e.localizedDescription)
+            logger.log("Fail to find PointsFileDict: \(e.localizedDescription)", .info)
             return []
         }
     }
@@ -57,25 +59,28 @@ class FileHelper {
     private func makeDirectoryIfNeeded() {
         do {
             try fileManager.createDirectory(at: directoryURL, withIntermediateDirectories: false, attributes: nil)
+        } catch CocoaError.fileWriteFileExists {
+            logger.log("directory(\(directoryURL.lastPathComponent)) already exists")
         } catch let e {
-            print(e.localizedDescription)
+            logger.log("Fail to make directory: \(e.localizedDescription)", .error)
         }
     }
     
     func readPointsFileIfExist(absoluteString: String) -> [PointsInfo]? {
         if let pointsFile = dict.first(where: { $0.fileUrl == absoluteString }) {
-            print("Find PointsFile: \(pointsFile)")
+            logger.log("Find PointsFile: \(pointsFile.fileUrl.components(separatedBy: "/").last ?? "nil")")
             let pointsFilePath = directoryURL.appendingPathComponent("\(pointsFile.key)")
             do {
                 let data = try Data(contentsOf: pointsFilePath)
                 let pointsInfos = try JSONDecoder().decode([PointsInfo].self, from: data)
-                print("Find PointsInfos: \(pointsInfos)")
+                logger.log("Find PointsInfos: \(pointsInfos)")
                 return pointsInfos
             } catch let e {
-                print(e.localizedDescription)
+                logger.log("Cannot read PointsFile: \(e.localizedDescription)", .error)
                 return nil
             }
         }
+        logger.log("There's no PointsFile", .info)
         return nil
     }
     
@@ -87,7 +92,7 @@ class FileHelper {
             let jsonData = try JSONEncoder().encode(pointsInfos)
             try jsonData.write(to: pointsFilePath)
         } catch {
-            print("Error writing to JSON file: \(error)")
+            logger.log("Error writing PointsFile to JSON file: \(error)", .error)
         }
     }
     
@@ -103,7 +108,7 @@ class FileHelper {
             let jsonData = try JSONEncoder().encode(dict)
             try jsonData.write(to: pointsDictPath)
         } catch {
-            print("Error writing to JSON file: \(error)")
+            logger.log("Error writing PointsDict to JSON file: \(error)", .error)
         }
     }
     
