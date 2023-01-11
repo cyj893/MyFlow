@@ -5,6 +5,8 @@
 //  Created by Yujin Cha on 2022/12/15.
 //
 
+import Foundation
+
 
 protocol MainViewModelInterface {
     func openDocument(_ vc: DocumentViewController)
