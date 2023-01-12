@@ -37,6 +37,16 @@ final class MainViewModel: NSObject {
 }
 
 
+extension MainViewModel {
+    private func saveTabInfo(_ index: Int) {
+        infos[index].nowPointNum = documentViews[index].viewModel?.getNowPointNum() ?? 1
+        infos[index].offset = documentViews[index].pdfView.scrollView?.contentOffset ?? .zero
+        infos[index].scaleFactor = documentViews[index].pdfView.scaleFactor
+    }
+    
+}
+
+
 extension MainViewModel: DocumentTabsCollectionDataSource {
     func numberOfItems() -> Int {
         return documentViews.count
@@ -51,7 +61,7 @@ extension MainViewModel: DocumentTabsCollectionDataSource {
     }
     
     func getItem(at index: Int) -> (String, URL?) {
-        return (infos[index].url?.lastPathComponent ?? "", documentViews[index].viewModel?.key)
+        return (infos[index].url?.lastPathComponent ?? "", infos[index].url)
     }
     
     func closeTab(key: URL?) -> Int? {
@@ -94,12 +104,6 @@ extension MainViewModel: DocumentTabsCollectionDataSource {
         delegate?.removeDocumentView(with: documentViews[before])
         delegate?.updateDocumentView(with: documentViews[after], info: infos[after])
         nowIndex = after
-    }
-    
-    private func saveTabInfo(_ index: Int) {
-        infos[index].nowPointNum = documentViews[index].viewModel?.getNowPointNum() ?? 1
-        infos[index].offset = documentViews[index].pdfView.scrollView?.contentOffset ?? .zero
-        infos[index].scaleFactor = documentViews[index].pdfView.scaleFactor
     }
     
     func moveTab(from before: Int, to after: Int) {

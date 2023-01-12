@@ -27,7 +27,7 @@ final class DocumentTabsCollectionViewAdaptor: NSObject {
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 300, height: 30)
+        layout.itemSize = CGSize(width: 300, height: 29)
         layout.minimumLineSpacing = 2.0
         
         layout.scrollDirection = .horizontal
