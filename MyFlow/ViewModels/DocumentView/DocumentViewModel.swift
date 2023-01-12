@@ -53,13 +53,19 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
     
     func clear() {
         pointHelper.clear()
+        savePointsInfos()
+    }
+    
+    func savePointsInfos() {
+        guard let document = document,
+              let pdfDocument = pdfDocument else {
+            logger.log("Cant' savePointsInfos \(key?.lastPathComponent ?? ""): document or pdfDocument is nil", .error)
+            return
+        }
         
-        let pointsInfos = pointHelper
-            .getPointsInfo()
-            .map { (height, page) in
-                PointsInfo(height: height, page: pdfDocument!.index(for: page))
-            }
-        FileHelper.shared.writePointsFile(absoluteString: document!.fileURL.absoluteString, pointsInfos: pointsInfos)
+        logger.log("savePointsInfos \(key?.lastPathComponent ?? "")")
+        FileHelper.shared.writePointsFile(absoluteString: document.fileURL.absoluteString,
+                                          pointsInfos: pointHelper.getPointsInfos(in: pdfDocument))
     }
     
 }
