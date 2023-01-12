@@ -120,7 +120,7 @@ extension DocumentViewModel {
     private func moveToPoint(at index: Int) {
         logger.log("moveToPoint \(index)")
         do {
-            let next = try pointHelper.moveToPoint(at: index)
+            let next = try pointHelper.getPoint(at: index)
             moveStrategy?.move(to: next)
         } catch PointError.emptyPoints {
             logger.log("No point to move, Show AddPointsModalView")
@@ -159,7 +159,7 @@ extension DocumentViewModel: DocumentViewModelInterface {
     func moveToPrevPoint() {
         logger.log("now \(getNowPointNum()), moveToPrevPoint")
         do {
-            let prev = try pointHelper.moveToPrev()
+            let prev = try pointHelper.getPrevPoint()
             moveStrategy?.move(to: prev)
         } catch {
             logger.log("No point to move, Show AddPointsModalView")
@@ -170,7 +170,7 @@ extension DocumentViewModel: DocumentViewModelInterface {
     func moveToNextPoint() {
         logger.log("now \(getNowPointNum()), moveToNextPoint")
         do {
-            let next = try pointHelper.moveToNext()
+            let next = try pointHelper.getNextPoint()
             moveStrategy?.move(to: next)
         } catch {
             logger.log("No point to move, Show AddPointsModalView")

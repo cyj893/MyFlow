@@ -80,10 +80,10 @@ class PointHelper {
 
 extension PointHelper {
     
-    /// Move to previous point and return the point number annotation.
+    /// Return the previous point number annotation.
     ///
     /// - Returns:Previous point number annotation from now.
-    func moveToPrev() throws -> PDFAnnotation {
+    func getPrevPoint() throws -> PDFAnnotation {
         guard getPointsCount() > 0 else {
             throw PointError.emptyPoints
         }
@@ -92,10 +92,10 @@ extension PointHelper {
         return points[idx]
     }
     
-    /// Move to next point and return the point number annotation.
+    /// Return the next point number annotation.
     ///
     /// - Returns:Next point number annotation from now.
-    func moveToNext() throws -> PDFAnnotation {
+    func getNextPoint() throws -> PDFAnnotation {
         guard getPointsCount() > 0 else {
             throw PointError.emptyPoints
         }
@@ -104,10 +104,10 @@ extension PointHelper {
         return points[idx]
     }
     
-    /// Move to point at index and return the point number annotation.
+    /// Return the point number annotation at index.
     ///
     /// - Returns:Point number annotation at index.
-    func moveToPoint(at index: Int) throws -> PDFAnnotation {
+    func getPoint(at index: Int) throws -> PDFAnnotation {
         guard points.count > 0 else {
             throw PointError.emptyPoints
         }
@@ -140,8 +140,8 @@ extension PointHelper {
         }
         
         nowSelectedPoint = annotation
-        guard let str: String = annotation.widgetStringValue else { return }
-        let number = Int(str)!
+        guard let str: String = annotation.widgetStringValue,
+              let number = Int(str) else { return }
         logger.log("selectPoint: \(number)")
         
         nowSelectedPointLines = linesDict[number]!
