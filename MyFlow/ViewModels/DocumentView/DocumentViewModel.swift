@@ -53,10 +53,14 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
     
     func clear() {
         pointHelper.clear()
-        savePointsInfos()
+        savePointsInfosIfNeeded()
     }
     
-    func savePointsInfos() {
+    func savePointsInfosIfNeeded() {
+        if !pointHelper.isEdited {
+            return
+        }
+        
         guard let document = document,
               let pdfDocument = pdfDocument else {
             logger.log("Cant' savePointsInfos \(key?.lastPathComponent ?? ""): document or pdfDocument is nil", .error)
@@ -66,6 +70,8 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
         logger.log("savePointsInfos \(key?.lastPathComponent ?? "")")
         FileHelper.shared.writePointsFile(absoluteString: document.fileURL.absoluteString,
                                           pointsInfos: pointHelper.getPointsInfos(in: pdfDocument))
+        
+        pointHelper.isEdited = false
     }
     
 }

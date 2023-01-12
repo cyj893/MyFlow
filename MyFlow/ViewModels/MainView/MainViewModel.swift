@@ -41,7 +41,7 @@ extension MainViewModel {
     func savePointsInfos() {
         documentViews
             .forEach { vc in
-                vc.viewModel?.savePointsInfos()
+                vc.viewModel?.savePointsInfosIfNeeded()
             }
     }
     
