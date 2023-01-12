@@ -33,6 +33,8 @@ class PointHelper {
     /// Current point line annotations selected by user.
     var nowSelectedPointLines:[PDFAnnotation] = []
     
+    /// A Boolean variable indicating whether the point information has been modified.
+    var isEdited = false
     
     // MARK: Getter, Setter
     
