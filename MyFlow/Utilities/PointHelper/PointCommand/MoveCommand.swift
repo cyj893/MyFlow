@@ -21,11 +21,11 @@ class MoveCommand: PointCommand {
         self.after = after
     }
     
-    func execute() {
+    func concreteExecute() {
         movePoint(from: backup, to: after)
     }
     
-    func undo() {
+    func concreteUndo() {
         movePoint(from: after, to: backup)
     }
     

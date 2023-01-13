@@ -38,6 +38,13 @@ final class MainViewModel: NSObject {
 
 
 extension MainViewModel {
+    func savePointsInfos() {
+        documentViews
+            .forEach { vc in
+                vc.viewModel?.savePointsInfosIfNeeded()
+            }
+    }
+    
     private func saveTabInfo(_ index: Int) {
         infos[index].nowPointNum = documentViews[index].viewModel?.getNowPointNum() ?? 1
         infos[index].offset = documentViews[index].pdfView.scrollView?.contentOffset ?? .zero

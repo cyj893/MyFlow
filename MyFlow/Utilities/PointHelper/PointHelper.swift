@@ -33,16 +33,24 @@ class PointHelper {
     /// Current point line annotations selected by user.
     var nowSelectedPointLines:[PDFAnnotation] = []
     
+    /// A Boolean variable indicating whether the point information has been modified.
+    var isEdited = false
     
     // MARK: Getter, Setter
     
     func getPointsCount() -> Int { points.count }
     func getNowSelectedPoint() -> PDFAnnotation? { nowSelectedPoint }
     
-    func getPointsInfo() -> [(Int, PDFPage)] {
-        points.compactMap { annotaion in
-            (Int(annotaion.bounds.origin.y) + PointBuilder.pointNumberHeight, annotaion.page) as? (Int, PDFPage)
-        }
+    func getPointsInfos(in pdfDocument: PDFDocument) -> [PointsInfo] {
+        points
+            .compactMap { annotaion in
+                if let page = annotaion.page {
+                    return PointsInfo(height: Int(annotaion.bounds.origin.y)
+                                        + PointBuilder.pointNumberHeight,
+                                      page: pdfDocument.index(for: page))
+                }
+                return nil
+            }
     }
     
     func createMemento() -> PointHelperMemento {

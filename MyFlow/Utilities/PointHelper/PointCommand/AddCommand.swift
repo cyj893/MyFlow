@@ -22,7 +22,7 @@ class AddCommand: PointCommand {
     }
     
     // TODO: Should be able to process multiple points at once - AddpointsModalViewController
-    func execute() {
+    func concreteExecute() {
         guard let number = Int(change[0].widgetStringValue ?? "") else {
             return
         }
@@ -34,7 +34,7 @@ class AddCommand: PointCommand {
         }
     }
     
-    func undo() {
+    func concreteUndo() {
         pointHelper.points = backup.points
         pointHelper.linesDict = backup.linesDict
         change.forEach {

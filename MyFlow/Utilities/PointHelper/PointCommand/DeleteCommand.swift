@@ -16,7 +16,7 @@ class DeleteCommand: PointCommand {
         self.backup = backup
     }
     
-    func execute() {
+    func concreteExecute() {
         guard let number = Int(backup.change[0].widgetStringValue ?? "") else {
             return
         }
@@ -37,7 +37,7 @@ class DeleteCommand: PointCommand {
         }
     }
     
-    func undo() {
+    func concreteUndo() {
         guard let number = Int(backup.change[0].widgetStringValue ?? "") else {
             return
         }

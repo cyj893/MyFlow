@@ -40,6 +40,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
+        
+        MainViewModel.shared.savePointsInfos()
+        
         if let mainVC = window!.rootViewController?.presentedViewController as? MainViewController {
             logger.log("sceneWillResignActive: Set scene's userActivity")
             scene.userActivity = mainVC.mainViewUserActivity
@@ -57,7 +60,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
 
         // Save changes in the application's managed object context when the application transitions to the background.
-//        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        
+        MainViewModel.shared.savePointsInfos()
     }
 
 
