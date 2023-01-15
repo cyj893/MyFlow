@@ -164,7 +164,9 @@ extension MainViewModel: MainViewModelInterface {
     }
     
     func getUserActivity() -> NSUserActivity {
-        saveTabInfo(nowIndex)
+        if !documentViews.isEmpty {
+            saveTabInfo(nowIndex)
+        }
         
         let userActivity = NSUserActivity(activityType: SceneDelegate.MainSceneActivityType)
         
