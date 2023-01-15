@@ -43,10 +43,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         MainViewModel.shared.savePointsInfos()
         
-        if let mainVC = window!.rootViewController?.presentedViewController as? MainViewController {
-            logger.log("sceneWillResignActive: Set scene's userActivity")
-            scene.userActivity = mainVC.mainViewUserActivity
-        }
+        logger.log("sceneWillResignActive: Set scene's userActivity")
+        scene.userActivity = MainViewModel.shared.getUserActivity()
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
