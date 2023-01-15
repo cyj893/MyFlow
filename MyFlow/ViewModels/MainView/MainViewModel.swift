@@ -85,6 +85,11 @@ extension MainViewModel: DocumentTabsCollectionDataSource {
         documentViews.remove(at: index)
         infos.remove(at: index)
         
+        if documentViews.isEmpty {
+            delegate?.dismiss()
+            return 0
+        }
+        
         let nextIndex = getNextIndex(index, nowIndex)
         if let nextIndex = nextIndex {
             if index == nowIndex {
@@ -164,7 +169,9 @@ extension MainViewModel: MainViewModelInterface {
     }
     
     func getUserActivity() -> NSUserActivity {
-        saveTabInfo(nowIndex)
+        if !documentViews.isEmpty {
+            saveTabInfo(nowIndex)
+        }
         
         let userActivity = NSUserActivity(activityType: SceneDelegate.MainSceneActivityType)
         

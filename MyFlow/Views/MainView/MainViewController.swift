@@ -12,10 +12,6 @@ final class MainViewController: UIViewController {
     
     let logger = MyLogger(category: String(describing: MainViewController.self))
     
-    var mainViewUserActivity: NSUserActivity {
-        viewModel.getUserActivity()
-    }
-    
     var viewModel = MainViewModel.shared
     
     let myNavigationView = MyNavigationView()

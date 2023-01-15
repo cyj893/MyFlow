@@ -43,10 +43,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         MainViewModel.shared.savePointsInfos()
         
-        if let mainVC = window!.rootViewController?.presentedViewController as? MainViewController {
-            logger.log("sceneWillResignActive: Set scene's userActivity")
-            scene.userActivity = mainVC.mainViewUserActivity
-        }
+        logger.log("sceneWillResignActive: Set scene's userActivity")
+        scene.userActivity = MainViewModel.shared.getUserActivity()
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
@@ -98,6 +96,12 @@ extension SceneDelegate {
     }
     
     func configure(window: UIWindow?, with activity: NSUserActivity) -> Bool {
+        if let urls = activity.userInfo?["urls"] as? [URL?],
+           urls.isEmpty {
+            logger.log("No need to restore state", .info)
+            return true
+        }
+        
         if let documentBrowserViewController = window?.rootViewController as? DocumentBrowserViewController {
             let mainVC = MainViewController()
             mainVC.modalPresentationStyle = .fullScreen
