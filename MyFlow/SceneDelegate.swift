@@ -83,8 +83,7 @@ extension SceneDelegate {
             return
         }
         
-        guard let urls = activity.userInfo?["urls"] as? [URL?],
-              let xOffsets = activity.userInfo?["xOffsets"] as? [CGFloat],
+        guard let xOffsets = activity.userInfo?["xOffsets"] as? [CGFloat],
               let yOffsets = activity.userInfo?["yOffsets"] as? [CGFloat],
               let scaleFactors = activity.userInfo?["scaleFactors"] as? [CGFloat],
               let nowIndex = activity.userInfo?["nowIndex"] as? Int else {
@@ -92,7 +91,7 @@ extension SceneDelegate {
             return
         }
         
-        logger.log("stateRestorationActivity: urls - \(urls.map { $0!.lastPathComponent }), xOffsets - \(xOffsets), yOffsets - \(yOffsets), scaleFactors - \(scaleFactors), nowIndex - \(nowIndex)")
+        logger.log("stateRestorationActivity: xOffsets - \(xOffsets), yOffsets - \(yOffsets), scaleFactors - \(scaleFactors), nowIndex - \(nowIndex)")
     }
     
     func configure(window: UIWindow?, with activity: NSUserActivity) -> Bool {
