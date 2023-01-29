@@ -172,77 +172,19 @@ extension MainViewModel: MainViewModelInterface {
         if !documentViews.isEmpty {
             saveTabInfo(nowIndex)
         }
-        
-        let userActivity = NSUserActivity(activityType: SceneDelegate.MainSceneActivityType)
-        
-        let bookmarks = infos.map { info -> Data? in
-            guard let url = info.url else {
-                logger.log("url is empty", .error)
-                return nil
-            }
-            do {
-                guard url.startAccessingSecurityScopedResource() else {
-                    logger.log("startAccessingSecurityScopedResource error: \(url.lastPathComponent)", .error)
-                    return nil
-                }
-                
-                defer { url.stopAccessingSecurityScopedResource() }
-                
-                let bookmarkData = try url.bookmarkData(options: .minimalBookmark, includingResourceValuesForKeys: nil, relativeTo: nil)
-                
-                return bookmarkData
-            }
-            catch let error {
-                logger.log(error.localizedDescription, .error)
-            }
-            return nil
-        }
-        let xOffsets = infos.map { $0.offset.x }
-        let yOffsets = infos.map { $0.offset.y }
-        let scaleFactors = infos.map { $0.scaleFactor }
-        
-        userActivity.addUserInfoEntries(from: ["bookmarks": bookmarks,
-                                               "xOffsets": xOffsets,
-                                               "yOffsets": yOffsets,
-                                               "scaleFactors": scaleFactors,
-                                               "nowIndex": nowIndex])
-        return userActivity
+        return UserActivityHelper.convert(from: infos, nowIndex: nowIndex)
     }
     
     func restoreUserActivityState(_ activity: NSUserActivity) {
-        guard let bookmarks = activity.userInfo?["bookmarks"] as? [Data?],
-              let xOffsets = activity.userInfo?["xOffsets"] as? [CGFloat],
-              let yOffsets = activity.userInfo?["yOffsets"] as? [CGFloat],
-              let scaleFactors = activity.userInfo?["scaleFactors"] as? [CGFloat],
-              let nowIndex = activity.userInfo?["nowIndex"] as? Int else {
+        guard let activity = UserActivityHelper.convert(from: activity) else {
             return
         }
         
-        zip(bookmarks, zip(xOffsets, zip(yOffsets, scaleFactors)))
-            .map { ($0, CGPoint(x: $1.0, y: $1.1.0), $1.1.1) }
-            .compactMap { (bookmark, point, scaleFactor) -> (Data, CGPoint, CGFloat)? in
-                if let bookmark = bookmark {
-                    return (bookmark, point, scaleFactor)
-                }
-                return nil
-            }
-            .forEach { (bookmark, point, scaleFactor) in
-                do {
-                    var isStale = false
-                    let url = try URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale)
-                    
-                    guard !isStale else {
-                        logger.log("Bookmark(\(url.lastPathComponent)) is stale")
-                        // TODO: handle stale bookmark
-                        return
-                    }
-                    
-                    let documentViewController = DocumentViewController(viewModel: .init(document: Document(fileURL: url)))
-                    restoreDocument(documentViewController, info: DocumentTabInfo(url: url, offset: point, scaleFactor: scaleFactor))
-                }
-                catch let error {
-                    logger.log(error.localizedDescription, .error)
-                }
+        zip(activity.urls, zip(activity.points, activity.scaleFactors))
+            .map { ($0, $1.0, $1.1) }
+            .forEach { (url, point, scaleFactor) in
+                let documentViewController = DocumentViewController(viewModel: .init(document: Document(fileURL: url)))
+                restoreDocument(documentViewController, info: DocumentTabInfo(url: url, offset: point, scaleFactor: scaleFactor))
             }
         
         self.nowIndex = min(nowIndex, documentViews.count - 1)
