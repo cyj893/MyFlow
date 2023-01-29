@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		5A64057F6052DD8B2D450EEF /* Pods_MyFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F29E0F658105FB87AA1F90FB /* Pods_MyFlow.framework */; };
 		73894CB62959C9438C6F0780 /* Pods_MyFlowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12557F259FCE95C3D038CFF7 /* Pods_MyFlowTests.framework */; };
+		AF1B76D22986A414002D9BAE /* UserActivityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1B76D12986A414002D9BAE /* UserActivityHelper.swift */; };
+		AF1B76D42986C399002D9BAE /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1B76D32986C399002D9BAE /* URL+.swift */; };
+		AF1B76D72986C3F1002D9BAE /* MyUserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1B76D62986C3F1002D9BAE /* MyUserActivity.swift */; };
 		AF255AA1283E809E00747FF3 /* UIDevice+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF255AA0283E809E00747FF3 /* UIDevice+.swift */; };
 		AF255AA3283E843A00747FF3 /* AddPointsModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF255AA2283E843A00747FF3 /* AddPointsModalViewController.swift */; };
 		AF255AA5283E95C900747FF3 /* ThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF255AA4283E95C900747FF3 /* ThumbnailCell.swift */; };
@@ -84,6 +87,9 @@
 		72830817BE64C5FD7A97FEFE /* Pods-MyFlow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFlow.debug.xcconfig"; path = "Target Support Files/Pods-MyFlow/Pods-MyFlow.debug.xcconfig"; sourceTree = "<group>"; };
 		8C90261A3B6F029D0A3C9123 /* Pods-MyFlow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFlow.release.xcconfig"; path = "Target Support Files/Pods-MyFlow/Pods-MyFlow.release.xcconfig"; sourceTree = "<group>"; };
 		AE5AF18F3489F07A8DE9ECAF /* Pods-MyFlowTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFlowTests.debug.xcconfig"; path = "Target Support Files/Pods-MyFlowTests/Pods-MyFlowTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AF1B76D12986A414002D9BAE /* UserActivityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivityHelper.swift; sourceTree = "<group>"; };
+		AF1B76D32986C399002D9BAE /* URL+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
+		AF1B76D62986C3F1002D9BAE /* MyUserActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUserActivity.swift; sourceTree = "<group>"; };
 		AF255AA0283E809E00747FF3 /* UIDevice+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
 		AF255AA2283E843A00747FF3 /* AddPointsModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointsModalViewController.swift; sourceTree = "<group>"; };
 		AF255AA4283E95C900747FF3 /* ThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCell.swift; sourceTree = "<group>"; };
@@ -169,6 +175,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF1B76D52986C3DE002D9BAE /* UserActivityHelper */ = {
+			isa = PBXGroup;
+			children = (
+				AF1B76D12986A414002D9BAE /* UserActivityHelper.swift */,
+				AF1B76D62986C3F1002D9BAE /* MyUserActivity.swift */,
+			);
+			path = UserActivityHelper;
+			sourceTree = "<group>";
+		};
 		AF2F1A12294B376B0005E4B9 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +272,7 @@
 				AFCDB59B29332B0400E22DEA /* UIView+.swift */,
 				AFC8E2562933686E009F9EC9 /* UIControl+.swift */,
 				AFEC944C296C923D00B5BEBF /* PdfView+.swift */,
+				AF1B76D32986C399002D9BAE /* URL+.swift */,
 			);
 			path = MyExtensions;
 			sourceTree = "<group>";
@@ -432,6 +448,7 @@
 			children = (
 				AF8936BB28367FD2001031FC /* MyError.swift */,
 				AFEC944F296EEF8000B5BEBF /* MyLogger.swift */,
+				AF1B76D52986C3DE002D9BAE /* UserActivityHelper */,
 				AF65F78E292E4E4D0005D9AF /* FileHelper */,
 				AFD6DE342833FFFF00E9FA5E /* PointHelper */,
 			);
@@ -650,12 +667,14 @@
 				AF255AA5283E95C900747FF3 /* ThumbnailCell.swift in Sources */,
 				AF8EDF85282E3F7A00CCFF19 /* Document.swift in Sources */,
 				AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */,
+				AF1B76D42986C399002D9BAE /* URL+.swift in Sources */,
 				AFC8E25329335DAF009F9EC9 /* MyNavigationViewDelegate.swift in Sources */,
 				AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */,
 				AFCDB59229326ED500E22DEA /* DocumentViewModelInterface.swift in Sources */,
 				AFAB47B9284795780034515A /* PointMemento.swift in Sources */,
 				AFC8E25B2933826D009F9EC9 /* TabCell.swift in Sources */,
 				AF255AA3283E843A00747FF3 /* AddPointsModalViewController.swift in Sources */,
+				AF1B76D22986A414002D9BAE /* UserActivityHelper.swift in Sources */,
 				AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */,
 				AFAB47B728477E060034515A /* PointCommand.swift in Sources */,
 				AF8936BC28367FD2001031FC /* MyError.swift in Sources */,
@@ -666,6 +685,7 @@
 				AFCDB5972932735C00E22DEA /* MainViewController.swift in Sources */,
 				AFC8E24629333A4A009F9EC9 /* NowPointView.swift in Sources */,
 				AFCDB58D29326E6C00E22DEA /* DocumentViewStateInterface.swift in Sources */,
+				AF1B76D72986C3F1002D9BAE /* MyUserActivity.swift in Sources */,
 				AFCDB58F29326EB100E22DEA /* DocumentViewDelegate.swift in Sources */,
 				AFC8E24C29334C8A009F9EC9 /* MovingArea.swift in Sources */,
 				AF2A9ACA28615C2200D0BB24 /* DeleteCommand.swift in Sources */,

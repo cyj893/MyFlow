@@ -172,39 +172,16 @@ extension MainViewModel: MainViewModelInterface {
         if !documentViews.isEmpty {
             saveTabInfo(nowIndex)
         }
-        
-        let userActivity = NSUserActivity(activityType: SceneDelegate.MainSceneActivityType)
-        
-        let urls = infos.map { $0.url }
-        let xOffsets = infos.map { $0.offset.x }
-        let yOffsets = infos.map { $0.offset.y }
-        let scaleFactors = infos.map { $0.scaleFactor }
-        
-        userActivity.addUserInfoEntries(from: ["urls": urls,
-                                               "xOffsets": xOffsets,
-                                               "yOffsets": yOffsets,
-                                               "scaleFactors": scaleFactors,
-                                               "nowIndex": nowIndex])
-        return userActivity
+        return UserActivityHelper.convert(from: infos, nowIndex: nowIndex)
     }
     
     func restoreUserActivityState(_ activity: NSUserActivity) {
-        guard let urls = activity.userInfo?["urls"] as? [URL?],
-              let xOffsets = activity.userInfo?["xOffsets"] as? [CGFloat],
-              let yOffsets = activity.userInfo?["yOffsets"] as? [CGFloat],
-              let scaleFactors = activity.userInfo?["scaleFactors"] as? [CGFloat],
-              let nowIndex = activity.userInfo?["nowIndex"] as? Int else {
+        guard let activity = UserActivityHelper.convert(from: activity) else {
             return
         }
         
-        zip(urls, zip(xOffsets, zip(yOffsets, scaleFactors)))
-            .map { ($0, CGPoint(x: $1.0, y: $1.1.0), $1.1.1) }
-            .compactMap { (url, point, scaleFactor) -> (URL, CGPoint, CGFloat)? in
-                if let url = url {
-                    return (url, point, scaleFactor)
-                }
-                return nil
-            }
+        zip(activity.urls, zip(activity.points, activity.scaleFactors))
+            .map { ($0, $1.0, $1.1) }
             .forEach { (url, point, scaleFactor) in
                 let documentViewController = DocumentViewController(viewModel: .init(document: Document(fileURL: url)))
                 restoreDocument(documentViewController, info: DocumentTabInfo(url: url, offset: point, scaleFactor: scaleFactor))
