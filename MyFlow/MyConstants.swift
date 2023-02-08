@@ -10,6 +10,13 @@ import UIKit
 struct MyOffset {
     static let betweenIconGroup:Double = 30.0
     static let betweenIcon:Double = 15.0
+    
+    static let navigationViewHeight: CGFloat = 100.0
+    
+    static var topPadding: CGFloat {
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        return window?.safeAreaInsets.top ?? 0
+    }
 }
 
 struct AnimateDuration {
@@ -34,10 +41,16 @@ struct GradientColor {
 }
 
 struct MyColor {
-    static let navigationBackgroundColor = UIColor(named: "navigationBackgroundColor")
-    static let borderColor = UIColor(named: "borderColor")
-    static let pageSheetBackgroundColor = UIColor(named: "pageSheetBackgroundColor")
-    static let thumbnailViewBackgroundColor = UIColor(named: "thumbnailViewBackgroundColor")
+    static let navigationBackground = UIColor(named: "navigationBackgroundColor")!
+    static let secondaryNavigationBackground = UIColor(named: "secondaryNavigationBackgroundColor")!
+    static let pdfBackground = UIColor(named: "pdfViewBackgroundColor")!
+    static let icon = UIColor(named: "iconColor")!
+    static let border = UIColor(named: "borderColor")!
+    static let pageSheetBackground = UIColor(named: "pageSheetBackgroundColor")!
+    static let thumbnailViewBackground = UIColor(named: "thumbnailViewBackgroundColor")!
+    static let tabCell = UIColor(named: "tabCellColor")!
+    static let tabCellSelected = UIColor(named: "tabCellSelectedColor")!
+    static let separator = UIColor(named: "separatorColor")!
 }
 
 struct MyFont {
