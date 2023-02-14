@@ -76,19 +76,22 @@ extension DocumentViewModel {
         let isSuccess = await document.open()
         
         if isSuccess {
-            openSuccess()
+            try openSuccess()
         } else {
             try openFail()
         }
     }
     
-    func openSuccess() {
+    func openSuccess() throws {
         logger.log("Success to read file: \(document.fileURL.lastPathComponent)")
         
-        self.pdfDocument = PDFDocument(url: document.fileURL)
-        guard let pdfDocument = self.pdfDocument else { return }
+        guard let pdfDocument = PDFDocument(url: document.fileURL) else {
+            logger.log("Fail to get pdf file: \(document.fileURL.absoluteString)", .error)
+            throw PdfError.cannotFindDocument
+        }
+        self.pdfDocument = pdfDocument
         pdfDocument.delegate = self
-        if pdfDocument.allowsCommenting == false {
+        if !pdfDocument.allowsCommenting {
             // TODO: presenting an message to the user.
             logger.log("This file cannot be commented", .info)
         }
