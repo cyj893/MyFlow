@@ -132,15 +132,27 @@ extension MainViewModel: DocumentTabsCollectionDataSource {
 
 
 extension MainViewModel: MainViewModelInterface {
-    func openDocument(_ vc: DocumentViewController) {
+    func openDocument(with url: URL, completion: (() -> ())? = nil) {
         logger.log("openDocument")
-        if let idx = documentViews.firstIndex(where: { $0.viewModel?.key == vc.viewModel?.key }) {
+        if let idx = documentViews.firstIndex(where: { $0.viewModel.key == url }) {
             // reopen
             nowIndex = idx
-        } else {
-            appendNewTab(vc)
-            nowIndex = documentViews.count - 1
+            updateWithNowIndex()
+            (completion ?? {})()
+            return
         }
+        Task {
+            let viewModel = try await DocumentViewModel(document: Document(fileURL: url))
+            DispatchQueue.main.async { [unowned self] in
+                appendNewTab(DocumentViewController(viewModel: viewModel))
+                nowIndex = documentViews.count - 1
+                updateWithNowIndex()
+                (completion ?? {})()
+            }
+        }
+    }
+    
+    private func updateWithNowIndex() {
         delegate?.updateDocumentView(with: documentViews[nowIndex], info: infos[nowIndex])
         
 #if DEBUG
