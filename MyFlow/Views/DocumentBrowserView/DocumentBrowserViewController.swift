@@ -62,17 +62,10 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     // MARK: Document Presentation
     
     func presentDocument(at documentURL: URL) {
-        Task {
-            let viewModel = try! await DocumentViewModel(document: Document(fileURL: documentURL))
-            DispatchQueue.main.async {
-                let documentViewController = DocumentViewController(viewModel: viewModel)
-                
-                let mainVC = MainViewController(initialVC: documentViewController)
-                mainVC.modalPresentationStyle = .fullScreen
-                
-                self.present(mainVC, animated: true, completion: nil)
-            }
-        }
+        let mainVC = MainViewController(initialURL: documentURL)
+        mainVC.modalPresentationStyle = .fullScreen
+        
+        self.present(mainVC, animated: true, completion: nil)
     }
 }
 

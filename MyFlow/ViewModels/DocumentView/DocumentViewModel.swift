@@ -11,14 +11,14 @@ import PDFKit
 final class DocumentViewModel: NSObject, PDFDocumentDelegate {
     let logger = MyLogger(category: String(describing: DocumentViewModel.self))
     
-    var key: URL? {
-        document?.fileURL
+    var key: URL {
+        document.fileURL
     }
     
     
     weak var delegate: DocumentViewDelegate?
     
-    var document: UIDocument?
+    var document: UIDocument
     var pdfDocument: PDFDocument?
     
     var nowState: DocumentViewStateInterface? {
@@ -56,13 +56,12 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
             return
         }
         
-        guard let document = document,
-              let pdfDocument = pdfDocument else {
-            logger.log("Cant' savePointsInfos \(key?.lastPathComponent ?? ""): document or pdfDocument is nil", .error)
+        guard let pdfDocument = pdfDocument else {
+            logger.log("Cant' savePointsInfos \(key.lastPathComponent): pdfDocument is nil", .error)
             return
         }
         
-        logger.log("savePointsInfos \(key?.lastPathComponent ?? "")")
+        logger.log("savePointsInfos \(key.lastPathComponent)")
         FileHelper.shared.writePointsFile(absoluteString: document.fileURL.absoluteString,
                                           pointsInfos: pointHelper.getPointsInfos(in: pdfDocument))
         
@@ -74,26 +73,25 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
 // MARK: Prepare
 extension DocumentViewModel {
     func openDocument() async throws {
-        guard let document = document else { return }
-        
         let isSuccess = await document.open()
         
         if isSuccess {
-            openSuccess()
+            try openSuccess()
         } else {
             try openFail()
         }
     }
     
-    func openSuccess() {
-        guard let document = document else { return }
-        
+    func openSuccess() throws {
         logger.log("Success to read file: \(document.fileURL.lastPathComponent)")
         
-        self.pdfDocument = PDFDocument(url: document.fileURL)
-        guard let pdfDocument = self.pdfDocument else { return }
+        guard let pdfDocument = PDFDocument(url: document.fileURL) else {
+            logger.log("Fail to get pdf file: \(document.fileURL.absoluteString)", .error)
+            throw PdfError.cannotFindDocument
+        }
+        self.pdfDocument = pdfDocument
         pdfDocument.delegate = self
-        if pdfDocument.allowsCommenting == false {
+        if !pdfDocument.allowsCommenting {
             // TODO: presenting an message to the user.
             logger.log("This file cannot be commented", .info)
         }
@@ -106,8 +104,6 @@ extension DocumentViewModel {
     }
     
     func openFail() throws {
-        guard let document = document else { return }
-        
         logger.log("Fail to read file: \(document.fileURL.absoluteString)", .error)
         throw PdfError.cannotFindDocument
     }

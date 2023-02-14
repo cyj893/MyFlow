@@ -9,6 +9,8 @@ import Foundation
 
 
 protocol MyNavigationViewDelegate: NSObject {
+    var tabsAdaptor: DocumentTabsCollectionViewAdaptor { get }
+    
     func toggleHandlePointButton()
     func toggleAddPointsButton()
     func clearButtonState()

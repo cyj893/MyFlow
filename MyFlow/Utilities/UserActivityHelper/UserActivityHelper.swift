@@ -25,11 +25,7 @@ extension UserActivityHelper {
         return userActivity
     }
     
-    private static func getBookmark(from url: URL?) -> Data? {
-        guard let url = url else {
-            logger.log("url is nil", .error)
-            return nil
-        }
+    private static func getBookmark(from url: URL) -> Data? {
         do {
             let bookmarkData = try url.bookmarkData(options: .minimalBookmark, includingResourceValuesForKeys: nil, relativeTo: nil)
             return bookmarkData
@@ -72,10 +68,10 @@ extension UserActivityHelper {
     private static func getURL(from bookmark: Data) -> URL? {
         do {
             var isStale = false
-            var url = try URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale)
+            let url = try URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale)
             if isStale {
                 logger.log("Bookmark(\(url.lastPathComponent)) is stale")
-                let updatedBookmark = try url.bookmarkData()
+                _ = try url.bookmarkData()
             }
             return url
         } catch let error {
