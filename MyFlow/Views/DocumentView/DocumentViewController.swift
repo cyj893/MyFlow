@@ -21,7 +21,7 @@ final class DocumentViewController: UIViewController {
     var stateLabel = UILabel()
 #endif
     
-    var viewModel: DocumentViewModel?
+    var viewModel: DocumentViewModel
     
     var restoreInfo: DocumentTabInfo?
     
@@ -33,7 +33,7 @@ final class DocumentViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         
-        self.viewModel?.moveStrategy = getMoveStrategy()
+        self.viewModel.moveStrategy = getMoveStrategy()
         
         configure()
     }
@@ -53,7 +53,7 @@ final class DocumentViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         if let documentTabInfo = restoreInfo {
-            logger.log("\(viewModel?.key?.lastPathComponent ?? "nil") Restore Info: scaleFactor \(documentTabInfo.scaleFactor) offset \(documentTabInfo.offset)")
+            logger.log("\(viewModel.key.lastPathComponent) Restore Info: scaleFactor \(documentTabInfo.scaleFactor) offset \(documentTabInfo.offset)")
             pdfView.scaleFactor = documentTabInfo.scaleFactor
             if let pdfScrollView = pdfView.scrollView {
                 pdfScrollView.setContentOffset(documentTabInfo.offset, animated: false)
@@ -63,8 +63,7 @@ final class DocumentViewController: UIViewController {
     }
     
     func close() {
-        viewModel?.clear()
-        viewModel = nil
+        viewModel.clear()
     }
     
 }
@@ -89,8 +88,8 @@ extension DocumentViewController {
     }
     
     private func configure() {
-        title = viewModel?.document?.fileURL.lastPathComponent
-        viewModel?.delegate = self
+        title = viewModel.document.fileURL.lastPathComponent
+        viewModel.delegate = self
         
         addTapGesture()
         addPanGesture()
@@ -139,7 +138,7 @@ extension DocumentViewController {
 // MARK: Actions
 extension DocumentViewController {
     func endPlayModeButtonAction() {
-        viewModel?.changeState(to: .normal)
+        viewModel.changeState(to: .normal)
     }
 }
 
@@ -160,7 +159,7 @@ extension DocumentViewController {
     @objc func setTapGesture(_ recognizer: UITapGestureRecognizer) {
         let location = recognizer.location(in: pdfView)
         
-        viewModel?.tapGestureRecognized(location: location, pdfView: pdfView)
+        viewModel.tapGestureRecognized(location: location, pdfView: pdfView)
     }
     
     @objc func setPanGesture(_ recognizer: UIPanGestureRecognizer) {
@@ -171,11 +170,11 @@ extension DocumentViewController {
             logger.log("Begin pan gesture")
             
         case .changed:
-            viewModel?.panGestureChanged(location: location, pdfView: pdfView)
+            viewModel.panGestureChanged(location: location, pdfView: pdfView)
             
         case .ended, .cancelled, .failed:
             logger.log("End pan gesture")
-            viewModel?.panGestureEnded()
+            viewModel.panGestureEnded()
             
         default:
             break

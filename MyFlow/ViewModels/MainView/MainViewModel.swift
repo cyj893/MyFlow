@@ -9,7 +9,7 @@ import UIKit
 
 
 struct DocumentTabInfo {
-    var url: URL?
+    var url: URL
     var nowPointNum: Int = 1
     var offset: CGPoint = .zero
     var scaleFactor: CGFloat = 1.0
@@ -41,12 +41,12 @@ extension MainViewModel {
     func savePointsInfos() {
         documentViews
             .forEach { vc in
-                vc.viewModel?.savePointsInfosIfNeeded()
+                vc.viewModel.savePointsInfosIfNeeded()
             }
     }
     
     private func saveTabInfo(_ index: Int) {
-        infos[index].nowPointNum = documentViews[index].viewModel?.getNowPointNum() ?? 1
+        infos[index].nowPointNum = documentViews[index].viewModel.getNowPointNum()
         infos[index].offset = documentViews[index].pdfView.scrollView?.contentOffset ?? .zero
         infos[index].scaleFactor = documentViews[index].pdfView.scaleFactor
     }
@@ -68,16 +68,16 @@ extension MainViewModel: DocumentTabsCollectionDataSource {
     }
     
     func getItem(at index: Int) -> (String, URL?) {
-        return (infos[index].url?.lastPathComponent ?? "", infos[index].url)
+        return (infos[index].url.lastPathComponent, infos[index].url)
     }
     
     func closeTab(key: URL?) -> Int? {
-        guard let index = documentViews.firstIndex(where:{ $0.viewModel?.key == key }) else {
+        guard let index = documentViews.firstIndex(where:{ $0.viewModel.key == key }) else {
             return nil
         }
         
         // TODO: Close document logic(saving points, showing message, switch to next index if needed, ...)
-        logger.log("Delete tab\(index) \(infos[index].url?.lastPathComponent ?? "")")
+        logger.log("Delete tab\(index) \(infos[index].url.lastPathComponent)")
         documentViews[index].close()
         if index == nowIndex {
             delegate?.removeDocumentView(with: documentViews[index])
@@ -153,12 +153,12 @@ extension MainViewModel: MainViewModelInterface {
         if let info = info {
             infos.append(info)
         } else {
-            infos.append(DocumentTabInfo(url: vc.viewModel?.key))
+            infos.append(DocumentTabInfo(url: vc.viewModel.key))
         }
     }
     
     func changeCurrentDocumentState(to state: DocumentViewState) {
-        documentViews[nowIndex].viewModel?.changeState(to: state)
+        documentViews[nowIndex].viewModel.changeState(to: state)
     }
     
     func getNowDocumentViewController() -> DocumentViewController? {
@@ -215,10 +215,10 @@ extension MainViewModel: MainViewModelInterface {
                 .forEach { (i, info) in
                     group.addTask {
                         do {
-                            let viewModel = try await DocumentViewModel(document: Document(fileURL: info.url!))
+                            let viewModel = try await DocumentViewModel(document: Document(fileURL: info.url))
                             return (i, viewModel, info)
                         } catch {
-                            self.logger.log("Fail to make viewModel with \(info.url!.lastPathComponent)", .error)
+                            self.logger.log("Fail to make viewModel with \(info.url.lastPathComponent)", .error)
                             return nil
                         }
                     }

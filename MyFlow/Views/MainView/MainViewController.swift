@@ -183,7 +183,7 @@ extension MainViewController {
     }
     
     private func showDocumentView(with vc: DocumentViewController) {
-        logger.log("showDocumentView \(vc.viewModel?.key?.lastPathComponent ?? "nil")")
+        logger.log("showDocumentView \(vc.viewModel.key.lastPathComponent)")
         addChild(vc)
         vc.view.frame = documentArea.bounds
         documentArea.addSubview(vc.view)
@@ -205,7 +205,7 @@ extension MainViewController: MainViewDelegate {
     
     func updateDocumentView(with vc: DocumentViewController, info: DocumentTabInfo) {
         if let beforeState = myNavigationView.viewModel.currentVM?.nowState?.state {
-            vc.viewModel?.changeState(to: beforeState)
+            vc.viewModel.changeState(to: beforeState)
         }
         myNavigationView.viewModel.currentVM = vc.viewModel
         
