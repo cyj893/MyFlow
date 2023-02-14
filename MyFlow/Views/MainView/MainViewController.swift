@@ -26,12 +26,14 @@ final class MainViewController: UIViewController {
 #endif
     
     // MARK: LifeCycle
-    init(initialVC: DocumentViewController? = nil) {
+    init(initialURL: URL? = nil) {
         super.init(nibName: nil, bundle: nil)
         
         viewModel.delegate = self
-        if let initialVC = initialVC {
-            viewModel.openDocument(initialVC)
+        if let initialURL = initialURL {
+            viewModel.openDocument(with: initialURL) { [unowned self] in
+                myNavigationView.tabsAdaptor.reloadData()
+            }
         }
         myNavigationView.tabsAdaptor.dataSource = viewModel
     }
