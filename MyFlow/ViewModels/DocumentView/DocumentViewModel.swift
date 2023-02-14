@@ -19,11 +19,7 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
     weak var delegate: DocumentViewDelegate?
     
     var document: UIDocument?
-    var pdfDocument: PDFDocument? {
-        didSet {
-            delegate?.setDocument(with: pdfDocument!)
-        }
-    }
+    var pdfDocument: PDFDocument?
     
     var nowState: DocumentViewStateInterface? {
         willSet {
@@ -39,7 +35,7 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
     var moveStrategy: MoveStrategy?
     
     
-    init(delegate: DocumentViewDelegate? = nil, document: Document) {
+    init(delegate: DocumentViewDelegate? = nil, document: Document) async throws {
         self.delegate = delegate
         self.document = document
         
@@ -47,8 +43,7 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
         
         nowState = NormalState(vm: self)
         
-        openDocument()
-        
+        try await openDocument()
     }
     
     func clear() {
@@ -78,32 +73,43 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
 
 // MARK: Prepare
 extension DocumentViewModel {
-    func openDocument() {
-        document?.open(completionHandler: { [self] (success) in
-            if success {
-                logger.log("Success to read file: \(self.document?.fileURL.lastPathComponent ?? "nil")")
-                
-                self.pdfDocument = PDFDocument(url: self.document!.fileURL)
-                guard let pdfDocument = self.pdfDocument else {
-                    return
-                }
-                pdfDocument.delegate = self
-                if pdfDocument.allowsCommenting == false {
-                    // TODO: presenting an message to the user.
-                    logger.log("This file cannot be commented", .info)
-                }
-                
-                if let pointsInfos = FileHelper.shared.readPointsFileIfExist(absoluteString: document!.fileURL.absoluteString) {
-                    pointsInfos.forEach { info in
-                        pointHelper.addPoint(info.height, pdfDocument.page(at: info.page)!)
-                    }
-                }
+    func openDocument() async throws {
+        guard let document = document else { return }
+        
+        let isSuccess = await document.open()
+        
+        if isSuccess {
+            openSuccess()
+        } else {
+            try openFail()
+        }
+    }
+    
+    func openSuccess() {
+        guard let document = document else { return }
+        
+        logger.log("Success to read file: \(document.fileURL.lastPathComponent)")
+        
+        self.pdfDocument = PDFDocument(url: document.fileURL)
+        guard let pdfDocument = self.pdfDocument else { return }
+        pdfDocument.delegate = self
+        if pdfDocument.allowsCommenting == false {
+            // TODO: presenting an message to the user.
+            logger.log("This file cannot be commented", .info)
+        }
+        
+        if let pointsInfos = FileHelper.shared.readPointsFileIfExist(absoluteString: document.fileURL.absoluteString) {
+            pointsInfos.forEach { info in
+                pointHelper.addPoint(info.height, pdfDocument.page(at: info.page)!)
             }
-            else {
-                logger.log("Fail to read file: \(self.document?.fileURL.absoluteString ?? "nil")", .error)
-                // TODO: presenting an error message to the user.
-            }
-        })
+        }
+    }
+    
+    func openFail() throws {
+        guard let document = document else { return }
+        
+        logger.log("Fail to read file: \(document.fileURL.absoluteString)", .error)
+        throw PdfError.cannotFindDocument
     }
     
 }
