@@ -177,22 +177,58 @@ extension MainViewModel: MainViewModelInterface {
     
     func restoreUserActivityState(_ activity: NSUserActivity) {
         guard let activity = UserActivityHelper.convert(from: activity) else {
+            logger.log("Fail to convert userActivity")
             return
         }
+        logger.log("restoreUserActivityState")
         
-        zip(activity.urls, zip(activity.points, activity.scaleFactors))
-            .map { ($0, $1.0, $1.1) }
-            .forEach { (url, point, scaleFactor) in
-                let documentViewController = DocumentViewController(viewModel: .init(document: Document(fileURL: url)))
-                restoreDocument(documentViewController, info: DocumentTabInfo(url: url, offset: point, scaleFactor: scaleFactor))
-            }
-        
-        self.nowIndex = min(nowIndex, documentViews.count - 1)
-        delegate?.updateDocumentView(with: documentViews[nowIndex], info: infos[nowIndex])
-        
+        Task {
+            let viewModels = await getViewModels(activity)
+            DispatchQueue.main.async { [unowned self] in
+                viewModels.forEach { (viewModel, tabInfo) in
+                    let documentViewController = DocumentViewController(viewModel: viewModel)
+                    restoreDocument(documentViewController, info: tabInfo)
+                }
+                if documentViews.isEmpty {
+                    logger.log("empty documents, dismiss MainView")
+                    delegate?.dismiss()
+                    return
+                }
+                nowIndex = min(activity.nowIndex, documentViews.count - 1)
+                delegate?.updateDocumentView(with: documentViews[nowIndex], info: infos[nowIndex])
+                
 #if DEBUG
-        delegate?.setNowIndex(with: nowIndex)
+                delegate?.setNowIndex(with: nowIndex)
 #endif
+            }
+        }
+    }
+    
+    private func getViewModels(_ activity: MyUserActivity) async -> [(DocumentViewModel, DocumentTabInfo)] {
+        await withTaskGroup(
+            of: (Int, DocumentViewModel, DocumentTabInfo)?.self,
+            returning: [(DocumentViewModel, DocumentTabInfo)].self
+        ) { [unowned self] group in
+            zip(activity.urls, zip(activity.points, activity.scaleFactors))
+                .map { DocumentTabInfo(url: $0, offset: $1.0, scaleFactor: $1.1) }
+                .enumerated()
+                .forEach { (i, info) in
+                    group.addTask {
+                        do {
+                            let viewModel = try await DocumentViewModel(document: Document(fileURL: info.url!))
+                            return (i, viewModel, info)
+                        } catch {
+                            self.logger.log("Fail to make viewModel with \(info.url!.lastPathComponent)", .error)
+                            return nil
+                        }
+                    }
+                }
+            var viewModels = [(DocumentViewModel, DocumentTabInfo)?](repeating: nil, count: activity.urls.count)
+            for await result in group.compactMap({$0}) {
+                viewModels[result.0] = (result.1, result.2)
+            }
+            return viewModels.compactMap({$0})
+        }
     }
     
     private func restoreDocument(_ vc: DocumentViewController, info: DocumentTabInfo) {
