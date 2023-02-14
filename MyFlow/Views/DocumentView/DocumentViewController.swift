@@ -29,7 +29,11 @@ final class DocumentViewController: UIViewController {
     
     init(viewModel: DocumentViewModel) {
         self.viewModel = viewModel
+        self.pdfView.document = viewModel.pdfDocument
+        
         super.init(nibName: nil, bundle: nil)
+        
+        self.viewModel?.moveStrategy = getMoveStrategy()
         
         configure()
     }
@@ -182,11 +186,6 @@ extension DocumentViewController {
 
 // MARK: DocumentViewDelegate
 extension DocumentViewController: DocumentViewDelegate {
-    func setDocument(with pdfDocument: PDFDocument) {
-        self.pdfView.document = pdfDocument
-        viewModel?.moveStrategy = getMoveStrategy()
-    }
-    
     func showAddPointsModalView(_ viewController: UIViewController) {
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.modalPresentationStyle = .pageSheet
