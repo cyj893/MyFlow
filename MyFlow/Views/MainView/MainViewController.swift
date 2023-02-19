@@ -200,6 +200,13 @@ extension MainViewController: MainViewDelegate {
         dismiss(animated: true)
     }
     
+    func showSettings() {
+        let settingVC = SettingsView()
+        settingVC.modalPresentationStyle = .formSheet
+        
+        self.present(settingVC, animated: true, completion: nil)
+    }
+    
     func playModeStart() {
         hideNavi()
         endPlayModeButton.isHidden = false
