@@ -20,6 +20,7 @@
 		AF2F1A15294B379A0005E4B9 /* MainViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F1A14294B379A0005E4B9 /* MainViewModelInterface.swift */; };
 		AF3C3F972843C0C2007ED4F9 /* DocumentViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */; };
 		AF3D083129A1187600C26566 /* UITapGestureRecognizer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083029A1187600C26566 /* UITapGestureRecognizer+.swift */; };
+		AF3D083529A118BD00C26566 /* MoveStrategyAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083429A118BD00C26566 /* MoveStrategyAnimationView.swift */; };
 		AF3D083B29A1198500C26566 /* RadioButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083A29A1198500C26566 /* RadioButtons.swift */; };
 		AF3D083D29A119B700C26566 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083C29A119B700C26566 /* RadioButton.swift */; };
 		AF58AF7229A13D2F00EFD8A4 /* AnimatableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7129A13D2F00EFD8A4 /* AnimatableView.swift */; };
@@ -104,6 +105,7 @@
 		AF2F1A14294B379A0005E4B9 /* MainViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelInterface.swift; sourceTree = "<group>"; };
 		AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewState.swift; sourceTree = "<group>"; };
 		AF3D083029A1187600C26566 /* UITapGestureRecognizer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+.swift"; sourceTree = "<group>"; };
+		AF3D083429A118BD00C26566 /* MoveStrategyAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveStrategyAnimationView.swift; sourceTree = "<group>"; };
 		AF3D083A29A1198500C26566 /* RadioButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtons.swift; sourceTree = "<group>"; };
 		AF3D083C29A119B700C26566 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		AF58AF7129A13D2F00EFD8A4 /* AnimatableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableView.swift; sourceTree = "<group>"; };
@@ -212,6 +214,22 @@
 				AF2F1A10293DB5B90005E4B9 /* MainViewModel.swift */,
 			);
 			path = MainView;
+			sourceTree = "<group>";
+		};
+		AF3D083229A118A500C26566 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				AF3D083329A118B200C26566 /* MoveStrategySettingView */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		AF3D083329A118B200C26566 /* MoveStrategySettingView */ = {
+			isa = PBXGroup;
+			children = (
+				AF3D083429A118BD00C26566 /* MoveStrategyAnimationView.swift */,
+			);
+			path = MoveStrategySettingView;
 			sourceTree = "<group>";
 		};
 		AF3D083829A1197000C26566 /* UIComponents */ = {
@@ -706,6 +724,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF3D083529A118BD00C26566 /* MoveStrategyAnimationView.swift in Sources */,
 				AF255AA5283E95C900747FF3 /* ThumbnailCell.swift in Sources */,
 				AF8EDF85282E3F7A00CCFF19 /* Document.swift in Sources */,
 				AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */,
