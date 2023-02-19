@@ -19,6 +19,7 @@
 		AF2F1A11293DB5B90005E4B9 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F1A10293DB5B90005E4B9 /* MainViewModel.swift */; };
 		AF2F1A15294B379A0005E4B9 /* MainViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F1A14294B379A0005E4B9 /* MainViewModelInterface.swift */; };
 		AF3C3F972843C0C2007ED4F9 /* DocumentViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */; };
+		AF58AF7B29A1F3A400EFD8A4 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7A29A1F3A400EFD8A4 /* UILabel+.swift */; };
 		AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF65F78F292E4E5F0005D9AF /* FileHelper.swift */; };
 		AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8936B92836655C001031FC /* PointBuilder.swift */; };
 		AF8936BC28367FD2001031FC /* MyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8936BB28367FD2001031FC /* MyError.swift */; };
@@ -97,6 +98,7 @@
 		AF2F1A10293DB5B90005E4B9 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		AF2F1A14294B379A0005E4B9 /* MainViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelInterface.swift; sourceTree = "<group>"; };
 		AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewState.swift; sourceTree = "<group>"; };
+		AF58AF7A29A1F3A400EFD8A4 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		AF65F78F292E4E5F0005D9AF /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		AF8936B92836655C001031FC /* PointBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointBuilder.swift; sourceTree = "<group>"; };
 		AF8936BB28367FD2001031FC /* MyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyError.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				AFC95BA7282EB4D3006E9773 /* UIButton+.swift */,
+				AF58AF7A29A1F3A400EFD8A4 /* UILabel+.swift */,
 				AF98A3892832A6380035601D /* String+.swift */,
 				AF98A38B2832A6590035601D /* UIFont+.swift */,
 				AF98A38D2832A6760035601D /* UIColor+.swift */,
@@ -698,6 +701,7 @@
 				AFF8DA82282FDE20005F0DED /* UIBezierPath+.swift in Sources */,
 				AFD6DE322833B99800E9FA5E /* PointHelper.swift in Sources */,
 				AFAB47BB28479F6F0034515A /* PointCommandHistory.swift in Sources */,
+				AF58AF7B29A1F3A400EFD8A4 /* UILabel+.swift in Sources */,
 				AFC8E259293368C1009F9EC9 /* DocumentTabsCollectionViewAdaptor.swift in Sources */,
 				AFAB47BD28479F9D0034515A /* UndoRedoHistory.swift in Sources */,
 				AF8EDF7F282E3F7A00CCFF19 /* AppDelegate.swift in Sources */,
