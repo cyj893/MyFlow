@@ -16,11 +16,19 @@ extension UIView {
         layer.shadowRadius = radius
     }
     
+    /// Creates a shadow inside the border of the view. The view appears to be under the superView.
+    ///
+    /// Be sure to call it from `layoutSubviews()`. It fits the shadow layer to the view's bounds, so it should be called after the view's bounds are set.
+    ///
+    /// - Parameters:
+    ///   - opacity: The opacity of the shadow.
+    ///   - radius: The thickness of the shadow.
     func addInnerShadow(opacity: Float = 0.5, radius: CGFloat = 1.0) {
         if layer.sublayers?.contains(where: { $0.name == "innerShadow" }) ?? true {
             return
         }
         
+        if bounds.width == 0 || bounds.height == 0 { return }
         let innerShadow = CALayer()
         innerShadow.name = "innerShadow"
         innerShadow.frame = bounds
