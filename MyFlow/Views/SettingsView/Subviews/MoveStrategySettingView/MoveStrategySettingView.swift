@@ -35,6 +35,9 @@ extension MoveStrategySettingView {
 final class MoveStrategySettingView: UIView, ExpandableSettingViewStyle {
     var isExpanded = false
     
+    var titleView = UIView()
+    var contentView = UIView()
+    
     var titleLabel = UILabel()
     
     var content = UIView()
@@ -51,8 +54,7 @@ final class MoveStrategySettingView: UIView, ExpandableSettingViewStyle {
         
         super.init(frame: .zero)
         
-        setStandardStyle()
-        setExpandable()
+        setExpandableStyle()
         
         addSubviews()
         setViews()
