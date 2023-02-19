@@ -20,8 +20,13 @@
 		AF2F1A15294B379A0005E4B9 /* MainViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F1A14294B379A0005E4B9 /* MainViewModelInterface.swift */; };
 		AF3C3F972843C0C2007ED4F9 /* DocumentViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */; };
 		AF3D083129A1187600C26566 /* UITapGestureRecognizer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083029A1187600C26566 /* UITapGestureRecognizer+.swift */; };
+		AF3D083529A118BD00C26566 /* MoveStrategyAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083429A118BD00C26566 /* MoveStrategyAnimationView.swift */; };
+		AF3D083729A118F000C26566 /* MoveStrategySettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083629A118F000C26566 /* MoveStrategySettingView.swift */; };
 		AF3D083B29A1198500C26566 /* RadioButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083A29A1198500C26566 /* RadioButtons.swift */; };
 		AF3D083D29A119B700C26566 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083C29A119B700C26566 /* RadioButton.swift */; };
+		AF58AF7229A13D2F00EFD8A4 /* AnimatableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7129A13D2F00EFD8A4 /* AnimatableView.swift */; };
+		AF58AF7529A13D6B00EFD8A4 /* SettingViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7429A13D6B00EFD8A4 /* SettingViewStyle.swift */; };
+		AF58AF7729A13DD200EFD8A4 /* ExpandableSettingViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7629A13DD200EFD8A4 /* ExpandableSettingViewStyle.swift */; };
 		AF58AF7929A1F24B00EFD8A4 /* RadioButtonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7829A1F24B00EFD8A4 /* RadioButtonShape.swift */; };
 		AF58AF7B29A1F3A400EFD8A4 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7A29A1F3A400EFD8A4 /* UILabel+.swift */; };
 		AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF65F78F292E4E5F0005D9AF /* FileHelper.swift */; };
@@ -60,6 +65,7 @@
 		AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */; };
 		AFC95BA8282EB4D3006E9773 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA7282EB4D3006E9773 /* UIButton+.swift */; };
 		AFCAE25C283A97F300BCB486 /* MyFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAE25B283A97F300BCB486 /* MyFlowTests.swift */; };
+		AFCBEFBF29A250E9005FD84B /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCBEFBE29A250E9005FD84B /* UserDefaultsHelper.swift */; };
 		AFCDB587293122A200E22DEA /* DocumentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB586293122A200E22DEA /* DocumentViewModel.swift */; };
 		AFCDB58D29326E6C00E22DEA /* DocumentViewStateInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB58C29326E6C00E22DEA /* DocumentViewStateInterface.swift */; };
 		AFCDB58F29326EB100E22DEA /* DocumentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB58E29326EB100E22DEA /* DocumentViewDelegate.swift */; };
@@ -103,8 +109,13 @@
 		AF2F1A14294B379A0005E4B9 /* MainViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelInterface.swift; sourceTree = "<group>"; };
 		AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewState.swift; sourceTree = "<group>"; };
 		AF3D083029A1187600C26566 /* UITapGestureRecognizer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+.swift"; sourceTree = "<group>"; };
+		AF3D083429A118BD00C26566 /* MoveStrategyAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveStrategyAnimationView.swift; sourceTree = "<group>"; };
+		AF3D083629A118F000C26566 /* MoveStrategySettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveStrategySettingView.swift; sourceTree = "<group>"; };
 		AF3D083A29A1198500C26566 /* RadioButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtons.swift; sourceTree = "<group>"; };
 		AF3D083C29A119B700C26566 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		AF58AF7129A13D2F00EFD8A4 /* AnimatableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableView.swift; sourceTree = "<group>"; };
+		AF58AF7429A13D6B00EFD8A4 /* SettingViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewStyle.swift; sourceTree = "<group>"; };
+		AF58AF7629A13DD200EFD8A4 /* ExpandableSettingViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableSettingViewStyle.swift; sourceTree = "<group>"; };
 		AF58AF7829A1F24B00EFD8A4 /* RadioButtonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonShape.swift; sourceTree = "<group>"; };
 		AF58AF7A29A1F3A400EFD8A4 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		AF65F78F292E4E5F0005D9AF /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
@@ -146,6 +157,7 @@
 		AFC95BA7282EB4D3006E9773 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		AFCAE259283A97F300BCB486 /* MyFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFCAE25B283A97F300BCB486 /* MyFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFlowTests.swift; sourceTree = "<group>"; };
+		AFCBEFBE29A250E9005FD84B /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		AFCDB586293122A200E22DEA /* DocumentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewModel.swift; sourceTree = "<group>"; };
 		AFCDB58C29326E6C00E22DEA /* DocumentViewStateInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewStateInterface.swift; sourceTree = "<group>"; };
 		AFCDB58E29326EB100E22DEA /* DocumentViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewDelegate.swift; sourceTree = "<group>"; };
@@ -212,9 +224,28 @@
 			path = MainView;
 			sourceTree = "<group>";
 		};
+		AF3D083229A118A500C26566 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				AF3D083329A118B200C26566 /* MoveStrategySettingView */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		AF3D083329A118B200C26566 /* MoveStrategySettingView */ = {
+			isa = PBXGroup;
+			children = (
+				AF3D083629A118F000C26566 /* MoveStrategySettingView.swift */,
+				AF3D083429A118BD00C26566 /* MoveStrategyAnimationView.swift */,
+			);
+			path = MoveStrategySettingView;
+			sourceTree = "<group>";
+		};
 		AF3D083829A1197000C26566 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				AF58AF7329A13D5E00EFD8A4 /* SettingViews */,
+				AF3D083E29A13D0400C26566 /* Protocols */,
 				AF3D083929A1197900C26566 /* RadioButtons */,
 			);
 			path = UIComponents;
@@ -228,6 +259,23 @@
 				AF58AF7829A1F24B00EFD8A4 /* RadioButtonShape.swift */,
 			);
 			path = RadioButtons;
+			sourceTree = "<group>";
+		};
+		AF3D083E29A13D0400C26566 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				AF58AF7129A13D2F00EFD8A4 /* AnimatableView.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		AF58AF7329A13D5E00EFD8A4 /* SettingViews */ = {
+			isa = PBXGroup;
+			children = (
+				AF58AF7429A13D6B00EFD8A4 /* SettingViewStyle.swift */,
+				AF58AF7629A13DD200EFD8A4 /* ExpandableSettingViewStyle.swift */,
+			);
+			path = SettingViews;
 			sourceTree = "<group>";
 		};
 		AF65F78E292E4E4D0005D9AF /* FileHelper */ = {
@@ -337,6 +385,14 @@
 			path = Memento;
 			sourceTree = "<group>";
 		};
+		AFC7A327299CC0CD008E906D /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				AF3D083229A118A500C26566 /* Subviews */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
 		AFC8E24D29334DFE009F9EC9 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,6 +431,14 @@
 				AFCAE25B283A97F300BCB486 /* MyFlowTests.swift */,
 			);
 			path = MyFlowTests;
+			sourceTree = "<group>";
+		};
+		AFCBEFBD29A250D8005FD84B /* UserDefaultsHelper */ = {
+			isa = PBXGroup;
+			children = (
+				AFCBEFBE29A250E9005FD84B /* UserDefaultsHelper.swift */,
+			);
+			path = UserDefaultsHelper;
 			sourceTree = "<group>";
 		};
 		AFCDB58A29326E0200E22DEA /* DocumentView */ = {
@@ -477,6 +541,7 @@
 		AFEC944E296EEF6400B5BEBF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				AFCBEFBD29A250D8005FD84B /* UserDefaultsHelper */,
 				AF8936BB28367FD2001031FC /* MyError.swift */,
 				AFEC944F296EEF8000B5BEBF /* MyLogger.swift */,
 				AF1B76D52986C3DE002D9BAE /* UserActivityHelper */,
@@ -695,6 +760,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF3D083529A118BD00C26566 /* MoveStrategyAnimationView.swift in Sources */,
 				AF255AA5283E95C900747FF3 /* ThumbnailCell.swift in Sources */,
 				AF8EDF85282E3F7A00CCFF19 /* Document.swift in Sources */,
 				AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */,
@@ -719,6 +785,7 @@
 				AFCDB5972932735C00E22DEA /* MainViewController.swift in Sources */,
 				AFC8E24629333A4A009F9EC9 /* NowPointView.swift in Sources */,
 				AFCDB58D29326E6C00E22DEA /* DocumentViewStateInterface.swift in Sources */,
+				AF58AF7729A13DD200EFD8A4 /* ExpandableSettingViewStyle.swift in Sources */,
 				AF1B76D72986C3F1002D9BAE /* MyUserActivity.swift in Sources */,
 				AFCDB58F29326EB100E22DEA /* DocumentViewDelegate.swift in Sources */,
 				AF3D083D29A119B700C26566 /* RadioButton.swift in Sources */,
@@ -726,6 +793,7 @@
 				AF2A9ACA28615C2200D0BB24 /* DeleteCommand.swift in Sources */,
 				AFC8E25529335DCD009F9EC9 /* MyNavigationViewModelInterface.swift in Sources */,
 				AFC95BA8282EB4D3006E9773 /* UIButton+.swift in Sources */,
+				AF58AF7229A13D2F00EFD8A4 /* AnimatableView.swift in Sources */,
 				AF8EDF81282E3F7A00CCFF19 /* DocumentBrowserViewController.swift in Sources */,
 				AFED0CC82844C25400FD177D /* MoveStrategy.swift in Sources */,
 				AFEC944D296C923D00B5BEBF /* PdfView+.swift in Sources */,
@@ -747,11 +815,13 @@
 				AFCDB59A293284A500E22DEA /* MainViewDelegate.swift in Sources */,
 				AF98A38E2832A6760035601D /* UIColor+.swift in Sources */,
 				AF2F1A15294B379A0005E4B9 /* MainViewModelInterface.swift in Sources */,
+				AF58AF7529A13D6B00EFD8A4 /* SettingViewStyle.swift in Sources */,
 				AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */,
 				AFCDB587293122A200E22DEA /* DocumentViewModel.swift in Sources */,
 				AFEC944B296C422B00B5BEBF /* SceneDelegate.swift in Sources */,
 				AFC8E2482933439F009F9EC9 /* UndoRedoArea.swift in Sources */,
 				AFC8E24F29335431009F9EC9 /* MyNavigationViewModel.swift in Sources */,
+				AF3D083729A118F000C26566 /* MoveStrategySettingView.swift in Sources */,
 				AFCDB59C29332B0400E22DEA /* UIView+.swift in Sources */,
 				AF2F1A11293DB5B90005E4B9 /* MainViewModel.swift in Sources */,
 			);
