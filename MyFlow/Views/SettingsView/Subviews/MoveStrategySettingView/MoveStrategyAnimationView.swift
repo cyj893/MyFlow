@@ -89,6 +89,9 @@ extension MoveStrategyAnimationView {
     }
     
     private func configure() {
+        snp.makeConstraints { make in
+            make.height.equalTo(MoveStrategyAnimationView.pageHeight + 30)
+        }
         layer.cornerRadius = 10
         backgroundColor = MyColor.pdfBackground
         clipsToBounds = true
