@@ -20,6 +20,7 @@
 		AF2F1A15294B379A0005E4B9 /* MainViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F1A14294B379A0005E4B9 /* MainViewModelInterface.swift */; };
 		AF3C3F972843C0C2007ED4F9 /* DocumentViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */; };
 		AF3D083129A1187600C26566 /* UITapGestureRecognizer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083029A1187600C26566 /* UITapGestureRecognizer+.swift */; };
+		AF3D083D29A119B700C26566 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083C29A119B700C26566 /* RadioButton.swift */; };
 		AF58AF7929A1F24B00EFD8A4 /* RadioButtonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7829A1F24B00EFD8A4 /* RadioButtonShape.swift */; };
 		AF58AF7B29A1F3A400EFD8A4 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7A29A1F3A400EFD8A4 /* UILabel+.swift */; };
 		AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF65F78F292E4E5F0005D9AF /* FileHelper.swift */; };
@@ -101,6 +102,7 @@
 		AF2F1A14294B379A0005E4B9 /* MainViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelInterface.swift; sourceTree = "<group>"; };
 		AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewState.swift; sourceTree = "<group>"; };
 		AF3D083029A1187600C26566 /* UITapGestureRecognizer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+.swift"; sourceTree = "<group>"; };
+		AF3D083C29A119B700C26566 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		AF58AF7829A1F24B00EFD8A4 /* RadioButtonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonShape.swift; sourceTree = "<group>"; };
 		AF58AF7A29A1F3A400EFD8A4 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		AF65F78F292E4E5F0005D9AF /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 		AF3D083929A1197900C26566 /* RadioButtons */ = {
 			isa = PBXGroup;
 			children = (
+				AF3D083C29A119B700C26566 /* RadioButton.swift */,
 				AF58AF7829A1F24B00EFD8A4 /* RadioButtonShape.swift */,
 			);
 			path = RadioButtons;
@@ -256,6 +259,7 @@
 		AF8EDF7D282E3F7A00CCFF19 /* MyFlow */ = {
 			isa = PBXGroup;
 			children = (
+				AF3D083829A1197000C26566 /* UIComponents */,
 				AFE0A8DD2970137A00EDCBBC /* Views */,
 				AFE0A8DC2970135500EDCBBC /* ViewModels */,
 				AFEC944E296EEF6400B5BEBF /* Utilities */,
@@ -713,6 +717,7 @@
 				AFCDB58D29326E6C00E22DEA /* DocumentViewStateInterface.swift in Sources */,
 				AF1B76D72986C3F1002D9BAE /* MyUserActivity.swift in Sources */,
 				AFCDB58F29326EB100E22DEA /* DocumentViewDelegate.swift in Sources */,
+				AF3D083D29A119B700C26566 /* RadioButton.swift in Sources */,
 				AFC8E24C29334C8A009F9EC9 /* MovingArea.swift in Sources */,
 				AF2A9ACA28615C2200D0BB24 /* DeleteCommand.swift in Sources */,
 				AFC8E25529335DCD009F9EC9 /* MyNavigationViewModelInterface.swift in Sources */,
