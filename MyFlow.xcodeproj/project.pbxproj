@@ -64,6 +64,7 @@
 		AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA3282E6E49006E9773 /* MyNavigationView.swift */; };
 		AFC95BA8282EB4D3006E9773 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA7282EB4D3006E9773 /* UIButton+.swift */; };
 		AFCAE25C283A97F300BCB486 /* MyFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAE25B283A97F300BCB486 /* MyFlowTests.swift */; };
+		AFCBEFBF29A250E9005FD84B /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCBEFBE29A250E9005FD84B /* UserDefaultsHelper.swift */; };
 		AFCDB587293122A200E22DEA /* DocumentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB586293122A200E22DEA /* DocumentViewModel.swift */; };
 		AFCDB58D29326E6C00E22DEA /* DocumentViewStateInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB58C29326E6C00E22DEA /* DocumentViewStateInterface.swift */; };
 		AFCDB58F29326EB100E22DEA /* DocumentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB58E29326EB100E22DEA /* DocumentViewDelegate.swift */; };
@@ -154,6 +155,7 @@
 		AFC95BA7282EB4D3006E9773 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		AFCAE259283A97F300BCB486 /* MyFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFCAE25B283A97F300BCB486 /* MyFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFlowTests.swift; sourceTree = "<group>"; };
+		AFCBEFBE29A250E9005FD84B /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		AFCDB586293122A200E22DEA /* DocumentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewModel.swift; sourceTree = "<group>"; };
 		AFCDB58C29326E6C00E22DEA /* DocumentViewStateInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewStateInterface.swift; sourceTree = "<group>"; };
 		AFCDB58E29326EB100E22DEA /* DocumentViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewDelegate.swift; sourceTree = "<group>"; };
@@ -420,6 +422,14 @@
 			path = MyFlowTests;
 			sourceTree = "<group>";
 		};
+		AFCBEFBD29A250D8005FD84B /* UserDefaultsHelper */ = {
+			isa = PBXGroup;
+			children = (
+				AFCBEFBE29A250E9005FD84B /* UserDefaultsHelper.swift */,
+			);
+			path = UserDefaultsHelper;
+			sourceTree = "<group>";
+		};
 		AFCDB58A29326E0200E22DEA /* DocumentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,6 +530,7 @@
 		AFEC944E296EEF6400B5BEBF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				AFCBEFBD29A250D8005FD84B /* UserDefaultsHelper */,
 				AF8936BB28367FD2001031FC /* MyError.swift */,
 				AFEC944F296EEF8000B5BEBF /* MyLogger.swift */,
 				AF1B76D52986C3DE002D9BAE /* UserActivityHelper */,
