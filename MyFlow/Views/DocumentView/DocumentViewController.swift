@@ -33,7 +33,7 @@ final class DocumentViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         
-        self.viewModel.moveStrategy = getMoveStrategy()
+        setMoveStrategy()
         
         configure()
     }
@@ -93,6 +93,8 @@ extension DocumentViewController {
         
         addTapGesture()
         addPanGesture()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setMoveStrategy), name: NSNotification.Name(UserDefaults.Keys.moveStrategy.rawValue), object: nil)
     }
     
     fileprivate func setPdfView() {
@@ -120,16 +122,22 @@ extension DocumentViewController {
     }
 #endif
     
-    fileprivate func getMoveStrategy() -> MoveStrategy {
-        do {
-            return try UseScrollView(pdfView: pdfView)
-        } catch let e as PdfError {
-            logger.log("Fail to UseScrollView: \(e.localizedDescription)", .info)
-            // TODO: Aleart Error
-            return UseGo(vc: self)
-        } catch {
-            // TODO: Aleart Unexpected Error
-            return UseGo(vc: self)
+    @objc fileprivate func setMoveStrategy() {
+        let type = MoveStrategyType(rawValue: UserDefaults.moveStrategy)!
+        switch type {
+        case .useGo:
+            viewModel.moveStrategy = UseGo(vc: self)
+        case .useScrollView:
+            do {
+                viewModel.moveStrategy = try UseScrollView(pdfView: pdfView)
+            } catch let e as PdfError {
+                logger.log("Fail to UseScrollView: \(e.localizedDescription)", .info)
+                // TODO: Aleart Error
+                viewModel.moveStrategy = UseGo(vc: self)
+            } catch {
+                // TODO: Aleart Unexpected Error
+                viewModel.moveStrategy = UseGo(vc: self)
+            }
         }
     }
 }
