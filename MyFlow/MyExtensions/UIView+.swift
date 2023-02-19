@@ -48,4 +48,17 @@ extension UIView {
         innerShadow.cornerRadius = layer.cornerRadius
         layer.addSublayer(innerShadow)
     }
+    
+    static func divider(_ axis: UIAxis) -> UIView {
+        let divider = UIView()
+        divider.snp.makeConstraints { make in
+            if axis == .horizontal {
+                make.height.equalTo(1.0)
+            } else {
+                make.width.equalTo(1.0)
+            }
+        }
+        divider.backgroundColor = MyColor.separator
+        return divider
+    }
 }
