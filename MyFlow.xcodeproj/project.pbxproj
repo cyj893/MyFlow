@@ -24,6 +24,7 @@
 		AF3D083B29A1198500C26566 /* RadioButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083A29A1198500C26566 /* RadioButtons.swift */; };
 		AF3D083D29A119B700C26566 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083C29A119B700C26566 /* RadioButton.swift */; };
 		AF58AF7229A13D2F00EFD8A4 /* AnimatableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7129A13D2F00EFD8A4 /* AnimatableView.swift */; };
+		AF58AF7529A13D6B00EFD8A4 /* SettingViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7429A13D6B00EFD8A4 /* SettingViewStyle.swift */; };
 		AF58AF7929A1F24B00EFD8A4 /* RadioButtonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7829A1F24B00EFD8A4 /* RadioButtonShape.swift */; };
 		AF58AF7B29A1F3A400EFD8A4 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7A29A1F3A400EFD8A4 /* UILabel+.swift */; };
 		AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF65F78F292E4E5F0005D9AF /* FileHelper.swift */; };
@@ -109,6 +110,7 @@
 		AF3D083A29A1198500C26566 /* RadioButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtons.swift; sourceTree = "<group>"; };
 		AF3D083C29A119B700C26566 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		AF58AF7129A13D2F00EFD8A4 /* AnimatableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableView.swift; sourceTree = "<group>"; };
+		AF58AF7429A13D6B00EFD8A4 /* SettingViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewStyle.swift; sourceTree = "<group>"; };
 		AF58AF7829A1F24B00EFD8A4 /* RadioButtonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonShape.swift; sourceTree = "<group>"; };
 		AF58AF7A29A1F3A400EFD8A4 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		AF65F78F292E4E5F0005D9AF /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 		AF3D083829A1197000C26566 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				AF58AF7329A13D5E00EFD8A4 /* SettingViews */,
 				AF3D083E29A13D0400C26566 /* Protocols */,
 				AF3D083929A1197900C26566 /* RadioButtons */,
 			);
@@ -257,6 +260,14 @@
 				AF58AF7129A13D2F00EFD8A4 /* AnimatableView.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		AF58AF7329A13D5E00EFD8A4 /* SettingViews */ = {
+			isa = PBXGroup;
+			children = (
+				AF58AF7429A13D6B00EFD8A4 /* SettingViewStyle.swift */,
+			);
+			path = SettingViews;
 			sourceTree = "<group>";
 		};
 		AF65F78E292E4E4D0005D9AF /* FileHelper */ = {
@@ -778,6 +789,7 @@
 				AFCDB59A293284A500E22DEA /* MainViewDelegate.swift in Sources */,
 				AF98A38E2832A6760035601D /* UIColor+.swift in Sources */,
 				AF2F1A15294B379A0005E4B9 /* MainViewModelInterface.swift in Sources */,
+				AF58AF7529A13D6B00EFD8A4 /* SettingViewStyle.swift in Sources */,
 				AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */,
 				AFCDB587293122A200E22DEA /* DocumentViewModel.swift in Sources */,
 				AFEC944B296C422B00B5BEBF /* SceneDelegate.swift in Sources */,
