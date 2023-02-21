@@ -28,8 +28,13 @@ struct UserDefault<T> {
 extension UserDefaults {
     enum Keys: String {
         case moveStrategy = "MoveStrategy"
+        case playModeAutoScale = "PlayModeAutoScale"
     }
     
     @UserDefault(key: Keys.moveStrategy.rawValue, defaultValue: MoveStrategyType.useScrollView.rawValue)
     static var moveStrategy: Int
+    
+    
+    @UserDefault(key: Keys.playModeAutoScale.rawValue, defaultValue: false)
+    static var playModeAutoScale: Bool
 }
