@@ -220,16 +220,17 @@ extension DocumentViewModel: DocumentViewModelInterface {
         pointHelper.redo()
     }
     
-    func playButtonAction() {
+    func playButtonAction() -> Bool {
         logger.log("Start play mode")
         if pointHelper.getPointsCount() == 0 {
             logger.log("No point to move, Show AddPointsModalView")
             delegate?.showAddPointsModalView(getAddPointsModalView())
-            return
+            return false
         }
         delegate?.setAutoScale(UserDefaults.playModeAutoScale)
         moveToPoint(at: 0)
         nowState = PlayModeState(vm: self)
+        return true
     }
     
     func showAddPointsModalView() {

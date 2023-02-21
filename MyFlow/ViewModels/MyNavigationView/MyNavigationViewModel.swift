@@ -96,8 +96,9 @@ extension MyNavigationViewModel: MyNavigationViewModelInterface {
     }
     
     func playButtonAction() {
-        delegate?.clearButtonState()
-        mainViewDelegate?.playModeStart()
-        currentVM?.playButtonAction()
+        if currentVM?.playButtonAction() == true {
+            delegate?.clearButtonState()
+            mainViewDelegate?.playModeStart()
+        }
     }
 }
