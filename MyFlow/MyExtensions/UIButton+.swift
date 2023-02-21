@@ -10,9 +10,7 @@ import UIKit
 extension UIButton {
     
     func setIconStyle(systemName: String, tintColor: UIColor = MyColor.icon, forState: UIControl.State = .normal, weight: UIImage.SymbolWeight = .bold, scale: UIImage.SymbolScale = .large) {
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 0, weight: weight, scale: scale)
-        let largeBoldDoc = UIImage(systemName: systemName, withConfiguration: largeConfig)?.withTintColor(tintColor, renderingMode: .alwaysOriginal)
-        self.setImage(largeBoldDoc, for: forState)
+        self.setImage(UIImage.withIconStyle(systemName: systemName, tintColor: tintColor, weight: weight, scale: scale), for: forState)
     }
     
     func toggleIconWithTransition(transitionOptions: UIView.AnimationOptions = .transitionCrossDissolve) {

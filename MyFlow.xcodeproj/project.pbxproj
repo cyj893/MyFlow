@@ -39,6 +39,10 @@
 		AF8EDF88282E3F7A00CCFF19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8EDF86282E3F7A00CCFF19 /* Main.storyboard */; };
 		AF8EDF8A282E3F7B00CCFF19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8EDF89282E3F7B00CCFF19 /* Assets.xcassets */; };
 		AF8EDF8D282E3F7B00CCFF19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8EDF8B282E3F7B00CCFF19 /* LaunchScreen.storyboard */; };
+		AF91FB2329A3C34500E161AC /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB2229A3C34500E161AC /* UIStackView+.swift */; };
+		AF91FB2529A3CA1300E161AC /* SettingStackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB2429A3CA1300E161AC /* SettingStackCell.swift */; };
+		AF91FB2F29A3E21600E161AC /* ToggleableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB2E29A3E21600E161AC /* ToggleableButton.swift */; };
+		AF91FB3129A4EFBB00E161AC /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB3029A4EFBB00E161AC /* UIImage+.swift */; };
 		AF98A383283291560035601D /* comic_andy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF98A382283291560035601D /* comic_andy.ttf */; };
 		AF98A385283291620035601D /* Fonarto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF98A384283291620035601D /* Fonarto.ttf */; };
 		AF98A387283297810035601D /* Fonarto XT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF98A386283297810035601D /* Fonarto XT.ttf */; };
@@ -67,6 +71,7 @@
 		AFC95BA8282EB4D3006E9773 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC95BA7282EB4D3006E9773 /* UIButton+.swift */; };
 		AFCAE25C283A97F300BCB486 /* MyFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAE25B283A97F300BCB486 /* MyFlowTests.swift */; };
 		AFCBEFBF29A250E9005FD84B /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCBEFBE29A250E9005FD84B /* UserDefaultsHelper.swift */; };
+		AFCBEFC529A28098005FD84B /* PlayModeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCBEFC429A28098005FD84B /* PlayModeSettingView.swift */; };
 		AFCDB587293122A200E22DEA /* DocumentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB586293122A200E22DEA /* DocumentViewModel.swift */; };
 		AFCDB58D29326E6C00E22DEA /* DocumentViewStateInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB58C29326E6C00E22DEA /* DocumentViewStateInterface.swift */; };
 		AFCDB58F29326EB100E22DEA /* DocumentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB58E29326EB100E22DEA /* DocumentViewDelegate.swift */; };
@@ -131,6 +136,10 @@
 		AF8EDF89282E3F7B00CCFF19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF8EDF8C282E3F7B00CCFF19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF8EDF8E282E3F7B00CCFF19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF91FB2229A3C34500E161AC /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
+		AF91FB2429A3CA1300E161AC /* SettingStackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingStackCell.swift; sourceTree = "<group>"; };
+		AF91FB2E29A3E21600E161AC /* ToggleableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleableButton.swift; sourceTree = "<group>"; };
+		AF91FB3029A4EFBB00E161AC /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		AF98A382283291560035601D /* comic_andy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = comic_andy.ttf; sourceTree = "<group>"; };
 		AF98A384283291620035601D /* Fonarto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fonarto.ttf; sourceTree = "<group>"; };
 		AF98A386283297810035601D /* Fonarto XT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fonarto XT.ttf"; sourceTree = "<group>"; };
@@ -160,6 +169,7 @@
 		AFCAE259283A97F300BCB486 /* MyFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFCAE25B283A97F300BCB486 /* MyFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFlowTests.swift; sourceTree = "<group>"; };
 		AFCBEFBE29A250E9005FD84B /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
+		AFCBEFC429A28098005FD84B /* PlayModeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayModeSettingView.swift; sourceTree = "<group>"; };
 		AFCDB586293122A200E22DEA /* DocumentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewModel.swift; sourceTree = "<group>"; };
 		AFCDB58C29326E6C00E22DEA /* DocumentViewStateInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewStateInterface.swift; sourceTree = "<group>"; };
 		AFCDB58E29326EB100E22DEA /* DocumentViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewDelegate.swift; sourceTree = "<group>"; };
@@ -230,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				AF3D083329A118B200C26566 /* MoveStrategySettingView */,
+				AFCBEFC329A2807E005FD84B /* PlayModeSettingView */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -249,6 +260,7 @@
 				AF58AF7329A13D5E00EFD8A4 /* SettingViews */,
 				AF3D083E29A13D0400C26566 /* Protocols */,
 				AF3D083929A1197900C26566 /* RadioButtons */,
+				AF91FB2E29A3E21600E161AC /* ToggleableButton.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -276,6 +288,7 @@
 			children = (
 				AF58AF7429A13D6B00EFD8A4 /* SettingViewStyle.swift */,
 				AF58AF7629A13DD200EFD8A4 /* ExpandableSettingViewStyle.swift */,
+				AF91FB2429A3CA1300E161AC /* SettingStackCell.swift */,
 			);
 			path = SettingViews;
 			sourceTree = "<group>";
@@ -354,6 +367,8 @@
 				AFEC944C296C923D00B5BEBF /* PdfView+.swift */,
 				AF1B76D32986C399002D9BAE /* URL+.swift */,
 				AF3D083029A1187600C26566 /* UITapGestureRecognizer+.swift */,
+				AF91FB2229A3C34500E161AC /* UIStackView+.swift */,
+				AF91FB3029A4EFBB00E161AC /* UIImage+.swift */,
 			);
 			path = MyExtensions;
 			sourceTree = "<group>";
@@ -442,6 +457,14 @@
 				AFCBEFBE29A250E9005FD84B /* UserDefaultsHelper.swift */,
 			);
 			path = UserDefaultsHelper;
+			sourceTree = "<group>";
+		};
+		AFCBEFC329A2807E005FD84B /* PlayModeSettingView */ = {
+			isa = PBXGroup;
+			children = (
+				AFCBEFC429A28098005FD84B /* PlayModeSettingView.swift */,
+			);
+			path = PlayModeSettingView;
 			sourceTree = "<group>";
 		};
 		AFCDB58A29326E0200E22DEA /* DocumentView */ = {
@@ -769,6 +792,7 @@
 				AF8EDF85282E3F7A00CCFF19 /* Document.swift in Sources */,
 				AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */,
 				AF1B76D42986C399002D9BAE /* URL+.swift in Sources */,
+				AF91FB2529A3CA1300E161AC /* SettingStackCell.swift in Sources */,
 				AFC8E25329335DAF009F9EC9 /* MyNavigationViewDelegate.swift in Sources */,
 				AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */,
 				AFCDB59229326ED500E22DEA /* DocumentViewModelInterface.swift in Sources */,
@@ -790,12 +814,15 @@
 				AF3C3F972843C0C2007ED4F9 /* DocumentViewState.swift in Sources */,
 				AFCDB5972932735C00E22DEA /* MainViewController.swift in Sources */,
 				AFC8E24629333A4A009F9EC9 /* NowPointView.swift in Sources */,
+				AF91FB2329A3C34500E161AC /* UIStackView+.swift in Sources */,
 				AFCDB58D29326E6C00E22DEA /* DocumentViewStateInterface.swift in Sources */,
 				AF58AF7729A13DD200EFD8A4 /* ExpandableSettingViewStyle.swift in Sources */,
 				AF1B76D72986C3F1002D9BAE /* MyUserActivity.swift in Sources */,
 				AFCDB58F29326EB100E22DEA /* DocumentViewDelegate.swift in Sources */,
 				AF3D083D29A119B700C26566 /* RadioButton.swift in Sources */,
 				AFC8E24C29334C8A009F9EC9 /* MovingArea.swift in Sources */,
+				AF91FB2F29A3E21600E161AC /* ToggleableButton.swift in Sources */,
+				AF91FB3129A4EFBB00E161AC /* UIImage+.swift in Sources */,
 				AF2A9ACA28615C2200D0BB24 /* DeleteCommand.swift in Sources */,
 				AFC8E25529335DCD009F9EC9 /* MyNavigationViewModelInterface.swift in Sources */,
 				AFC95BA8282EB4D3006E9773 /* UIButton+.swift in Sources */,

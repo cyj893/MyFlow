@@ -227,6 +227,7 @@ extension DocumentViewModel: DocumentViewModelInterface {
             delegate?.showAddPointsModalView(getAddPointsModalView())
             return
         }
+        delegate?.setAutoScale(UserDefaults.playModeAutoScale)
         moveToPoint(at: 0)
         nowState = PlayModeState(vm: self)
     }

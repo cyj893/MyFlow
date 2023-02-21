@@ -25,13 +25,14 @@ final class RadioButton: UIView {
     weak var delegate: RadioButtonDelegate?
     
     lazy var stackView = UIStackView()
-    lazy var buttonShape = RadioButtonShape()
+    var buttonShape: RadioButtonShape
     lazy var label = UILabel()
     
-    init(id: Int, label: String, with content: UIView? = nil) {
+    init(id: Int, label: String, with content: UIView? = nil, size: RadioButtonShape.Size) {
         self.id = id
         self.labelText = label
         self.content = content
+        buttonShape = RadioButtonShape(size: size)
         
         super.init(frame: .zero)
         
@@ -64,7 +65,6 @@ extension RadioButton {
     
     private func setViews() {
         setStackView()
-        setButtonView()
         setLabel()
         setContentIfNeeded()
     }
@@ -89,12 +89,6 @@ extension RadioButton {
             $0.distribution = .fill
         }.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
-        }
-    }
-    
-    private func setButtonView() {
-        buttonShape.snp.makeConstraints { make in
-            make.width.height.equalTo(30)
         }
     }
     

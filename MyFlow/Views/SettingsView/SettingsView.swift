@@ -13,6 +13,7 @@ final class SettingsView: UIViewController {
     lazy var stackView = UIStackView()
     
     lazy var moveStrategySettingView = MoveStrategySettingView()
+    lazy var playModeSettingView = PlayModeSettingView()
     
     
     override func viewDidLoad() {
@@ -37,9 +38,8 @@ extension SettingsView {
     private func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-        [moveStrategySettingView].forEach { settingCell in
-            stackView.addArrangedSubview(settingCell)
-            stackView.addArrangedSubview(UIView.divider(.horizontal))
+        [moveStrategySettingView, playModeSettingView].forEach { settingCell in
+            stackView.addArrangedSubviewWithDivider(settingCell)
         }
         
         stackView.arrangedSubviews.forEach { subview in
@@ -81,7 +81,7 @@ extension SettingsView {
     }
     
     private func setCells() {
-        [moveStrategySettingView].forEach { settingCell in
+        [moveStrategySettingView, playModeSettingView].forEach { settingCell in
             settingCell.snp.makeConstraints { make in
                 make.height.greaterThanOrEqualTo(50)
             }

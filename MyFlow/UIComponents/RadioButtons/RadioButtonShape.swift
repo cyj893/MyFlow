@@ -9,16 +9,25 @@ import UIKit
 
 
 final class RadioButtonShape: UIView {
+    enum Size: CGFloat {
+        case small = 25.0
+        case middle = 30.0
+        case big = 35.0
+    }
+    
     let innerShape = CAShapeLayer()
     private let selectedColor: UIColor
     private let deselectedColor: UIColor
     
-    init(_ selectedColor: UIColor = .systemMint, _ deselectedColor: UIColor = .gray) {
+    init(_ selectedColor: UIColor = .systemMint, _ deselectedColor: UIColor = .gray, size: Size) {
         self.selectedColor = selectedColor
         self.deselectedColor = deselectedColor
         
         super.init(frame: .zero)
         
+        snp.makeConstraints { make in
+            make.width.height.equalTo(size.rawValue)
+        }
         configure()
     }
     
