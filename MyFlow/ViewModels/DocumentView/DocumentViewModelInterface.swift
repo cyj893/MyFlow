@@ -53,8 +53,8 @@ protocol DocumentViewModelInterface: NSObject {
     func redo()
     
     
-    /// After moving to the first point, switch the current state to `PlayModeState`.
-    func playButtonAction()
+    /// After moving to the first point, switch the current state to `PlayModeState`. If fail to start play mode, returns `false`.
+    func playButtonAction() -> Bool
     /// Opens a modal view that can be added on a per-point page basis.
     func showAddPointsModalView()
 }
