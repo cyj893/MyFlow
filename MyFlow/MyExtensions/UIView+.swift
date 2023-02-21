@@ -41,7 +41,7 @@ extension UIView {
         
         innerShadow.masksToBounds = true
         
-        innerShadow.shadowColor = UIColor.black.cgColor
+        innerShadow.shadowColor = MyColor.shadow.cgColor
         innerShadow.shadowOffset = CGSize(width: 0, height: 0)
         innerShadow.shadowOpacity = opacity
         innerShadow.shadowRadius = radius

@@ -55,6 +55,7 @@ struct MyColor {
     static let tabCell = UIColor(named: "tabCellColor")!
     static let tabCellSelected = UIColor(named: "tabCellSelectedColor")!
     static let separator = UIColor(named: "separatorColor")!
+    static let shadow = UIColor(named: "shadowColor")!
 }
 
 struct MyFont {
