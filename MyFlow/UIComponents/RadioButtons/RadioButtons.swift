@@ -17,14 +17,15 @@ final class RadioButtons: NSObject {
     init(labels: [String],
          with contents: [UIView] = [],
          defaultID: Int,
+         size: RadioButtonShape.Size = .middle,
          selectAction: @escaping (Int) -> ()) {
         self.selectAction = selectAction
         
         super.init()
         
         labels.enumerated().forEach { (id, label) in
-            let button = contents.isEmpty ? RadioButton(id: id, label: label)
-                                          : RadioButton(id: id, label: label, with: contents[id])
+            let button = contents.isEmpty ? RadioButton(id: id, label: label, size: size)
+            : RadioButton(id: id, label: label, with: contents[id], size: size)
             button.delegate = self
             if id == defaultID {
                 button.select()
