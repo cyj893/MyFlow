@@ -10,13 +10,21 @@ import Then
 import SnapKit
 
 
+protocol PlayModeSettingDelegate: NSObject {
+    func showVcWithFullScreen(_ vc: UIViewController)
+}
+
+
 extension PlayModeSettingView {
     static let title = "In PlayMode"
     static let autoScaleTitle = "Auto Scale When Start"
+    static let tapAreaTitle = "Set Tap Area"
     
 }
 
 final class PlayModeSettingView: UIView, ExpandableSettingViewStyle {
+    weak var delegate: PlayModeSettingDelegate?
+    
     var isExpanded = false
     
     var titleView = UIView()
@@ -28,6 +36,8 @@ final class PlayModeSettingView: UIView, ExpandableSettingViewStyle {
     var stackView = UIStackView()
     var autoScaleLabel = SettingStackCell(title: PlayModeSettingView.autoScaleTitle,
                                           type: .toggleable(UserDefaults.playModeAutoScale))
+    var tapAreaLabel = SettingStackCell(title: PlayModeSettingView.tapAreaTitle,
+                                        type: .withIcon("chevron.right"))
     
     
     init() {
@@ -51,7 +61,7 @@ final class PlayModeSettingView: UIView, ExpandableSettingViewStyle {
 extension PlayModeSettingView {
     private func addSubviews() {
         content.addSubview(stackView)
-        [autoScaleLabel].forEach { subview in
+        [autoScaleLabel, tapAreaLabel].forEach { subview in
             stackView.addArrangedSubviewWithDivider(subview)
         }
         stackView.arrangedSubviews.forEach { subview in
@@ -69,10 +79,15 @@ extension PlayModeSettingView {
         autoScaleLabel.addToggleAction { isSelected in
             UserDefaults.playModeAutoScale = isSelected
         }
+        tapAreaLabel.addTapAction { [unowned self] in
+            let vc = PlayModeTapAreaSettingView()
+            self.delegate?.showVcWithFullScreen(vc)
+        }
         
 #if DEBUG
         titleLabel.backgroundColor = .systemCyan
         content.backgroundColor = .systemPink.withAlphaComponent(0.3)
+        tapAreaLabel.backgroundColor = .systemBlue.withAlphaComponent(0.3)
 #endif
     }
     
