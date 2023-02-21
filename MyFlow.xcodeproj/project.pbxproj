@@ -281,6 +281,7 @@
 			children = (
 				AF58AF7429A13D6B00EFD8A4 /* SettingViewStyle.swift */,
 				AF58AF7629A13DD200EFD8A4 /* ExpandableSettingViewStyle.swift */,
+				AF91FB2429A3CA1300E161AC /* SettingStackCell.swift */,
 			);
 			path = SettingViews;
 			sourceTree = "<group>";
@@ -774,6 +775,7 @@
 				AF8EDF85282E3F7A00CCFF19 /* Document.swift in Sources */,
 				AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */,
 				AF1B76D42986C399002D9BAE /* URL+.swift in Sources */,
+				AF91FB2529A3CA1300E161AC /* SettingStackCell.swift in Sources */,
 				AFC8E25329335DAF009F9EC9 /* MyNavigationViewDelegate.swift in Sources */,
 				AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */,
 				AFCDB59229326ED500E22DEA /* DocumentViewModelInterface.swift in Sources */,
