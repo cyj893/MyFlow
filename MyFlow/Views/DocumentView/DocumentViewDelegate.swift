@@ -9,6 +9,7 @@ import PDFKit
 
 protocol DocumentViewDelegate: NSObject {
     func showAddPointsModalView(_ viewController: UIViewController)
+    func setAutoScale(_ autoScale: Bool)
     
 #if DEBUG
     func setStateLabelText(with state: DocumentViewState)

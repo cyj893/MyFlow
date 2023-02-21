@@ -207,6 +207,10 @@ extension DocumentViewController: DocumentViewDelegate {
         present(navigationController, animated: true, completion: nil)
     }
     
+    func setAutoScale(_ autoScale: Bool) {
+        pdfView.autoScales = autoScale
+    }
+    
 #if DEBUG
     func setStateLabelText(with state: DocumentViewState) {
         stateLabel.text = "\(state)"
