@@ -58,6 +58,7 @@ extension SettingsView {
     private func configure() {
         view.backgroundColor = MyColor.pageSheetBackground
         
+        playModeSettingView.delegate = self
 #if DEBUG
         scrollView.backgroundColor = .systemOrange.withAlphaComponent(0.3)
         moveStrategySettingView.backgroundColor = .systemCyan.withAlphaComponent(0.3)
@@ -89,3 +90,11 @@ extension SettingsView {
     }
 }
 
+
+extension SettingsView: PlayModeSettingDelegate {
+    func showVcWithFullScreen(_ vc: UIViewController) {
+        vc.modalPresentationStyle = .fullScreen
+        
+        self.present(vc, animated: true, completion: nil)
+    }
+}
