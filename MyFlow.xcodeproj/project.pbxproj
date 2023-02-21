@@ -41,6 +41,7 @@
 		AF8EDF8D282E3F7B00CCFF19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8EDF8B282E3F7B00CCFF19 /* LaunchScreen.storyboard */; };
 		AF91FB2529A3CA1300E161AC /* SettingStackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB2429A3CA1300E161AC /* SettingStackCell.swift */; };
 		AF91FB2F29A3E21600E161AC /* ToggleableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB2E29A3E21600E161AC /* ToggleableButton.swift */; };
+		AF91FB3129A4EFBB00E161AC /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB3029A4EFBB00E161AC /* UIImage+.swift */; };
 		AF98A383283291560035601D /* comic_andy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF98A382283291560035601D /* comic_andy.ttf */; };
 		AF98A385283291620035601D /* Fonarto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF98A384283291620035601D /* Fonarto.ttf */; };
 		AF98A387283297810035601D /* Fonarto XT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF98A386283297810035601D /* Fonarto XT.ttf */; };
@@ -136,6 +137,7 @@
 		AF8EDF8E282E3F7B00CCFF19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF91FB2429A3CA1300E161AC /* SettingStackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingStackCell.swift; sourceTree = "<group>"; };
 		AF91FB2E29A3E21600E161AC /* ToggleableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleableButton.swift; sourceTree = "<group>"; };
+		AF91FB3029A4EFBB00E161AC /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		AF98A382283291560035601D /* comic_andy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = comic_andy.ttf; sourceTree = "<group>"; };
 		AF98A384283291620035601D /* Fonarto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fonarto.ttf; sourceTree = "<group>"; };
 		AF98A386283297810035601D /* Fonarto XT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fonarto XT.ttf"; sourceTree = "<group>"; };
@@ -363,6 +365,8 @@
 				AFEC944C296C923D00B5BEBF /* PdfView+.swift */,
 				AF1B76D32986C399002D9BAE /* URL+.swift */,
 				AF3D083029A1187600C26566 /* UITapGestureRecognizer+.swift */,
+				AF91FB2229A3C34500E161AC /* UIStackView+.swift */,
+				AF91FB3029A4EFBB00E161AC /* UIImage+.swift */,
 			);
 			path = MyExtensions;
 			sourceTree = "<group>";
@@ -815,6 +819,7 @@
 				AF3D083D29A119B700C26566 /* RadioButton.swift in Sources */,
 				AFC8E24C29334C8A009F9EC9 /* MovingArea.swift in Sources */,
 				AF91FB2F29A3E21600E161AC /* ToggleableButton.swift in Sources */,
+				AF91FB3129A4EFBB00E161AC /* UIImage+.swift in Sources */,
 				AF2A9ACA28615C2200D0BB24 /* DeleteCommand.swift in Sources */,
 				AFC8E25529335DCD009F9EC9 /* MyNavigationViewModelInterface.swift in Sources */,
 				AFC95BA8282EB4D3006E9773 /* UIButton+.swift in Sources */,
