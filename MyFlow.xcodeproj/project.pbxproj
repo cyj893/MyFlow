@@ -44,6 +44,7 @@
 		AF91FB2129A357DC00E161AC /* VerticalLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB2029A357DC00E161AC /* VerticalLineView.swift */; };
 		AF91FB2329A3C34500E161AC /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB2229A3C34500E161AC /* UIStackView+.swift */; };
 		AF91FB2529A3CA1300E161AC /* SettingStackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB2429A3CA1300E161AC /* SettingStackCell.swift */; };
+		AF91FB2729A3DFFE00E161AC /* AnimatableGradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB2629A3DFFE00E161AC /* AnimatableGradientBackground.swift */; };
 		AF91FB2F29A3E21600E161AC /* ToggleableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB2E29A3E21600E161AC /* ToggleableButton.swift */; };
 		AF91FB3129A4EFBB00E161AC /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB3029A4EFBB00E161AC /* UIImage+.swift */; };
 		AF98A383283291560035601D /* comic_andy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF98A382283291560035601D /* comic_andy.ttf */; };
@@ -144,6 +145,7 @@
 		AF91FB2029A357DC00E161AC /* VerticalLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalLineView.swift; sourceTree = "<group>"; };
 		AF91FB2229A3C34500E161AC /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		AF91FB2429A3CA1300E161AC /* SettingStackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingStackCell.swift; sourceTree = "<group>"; };
+		AF91FB2629A3DFFE00E161AC /* AnimatableGradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableGradientBackground.swift; sourceTree = "<group>"; };
 		AF91FB2E29A3E21600E161AC /* ToggleableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleableButton.swift; sourceTree = "<group>"; };
 		AF91FB3029A4EFBB00E161AC /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		AF98A382283291560035601D /* comic_andy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = comic_andy.ttf; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				AF58AF7129A13D2F00EFD8A4 /* AnimatableView.swift */,
+				AF91FB2629A3DFFE00E161AC /* AnimatableGradientBackground.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -874,6 +877,7 @@
 				AFEC944B296C422B00B5BEBF /* SceneDelegate.swift in Sources */,
 				AFC8E2482933439F009F9EC9 /* UndoRedoArea.swift in Sources */,
 				AFC8E24F29335431009F9EC9 /* MyNavigationViewModel.swift in Sources */,
+				AF91FB2729A3DFFE00E161AC /* AnimatableGradientBackground.swift in Sources */,
 				AF3D083729A118F000C26566 /* MoveStrategySettingView.swift in Sources */,
 				AFCDB59C29332B0400E22DEA /* UIView+.swift in Sources */,
 				AF2F1A11293DB5B90005E4B9 /* MainViewModel.swift in Sources */,
