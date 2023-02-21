@@ -5,7 +5,7 @@
 //  Created by Yujin Cha on 2023/02/19.
 //
 
-import Foundation
+import UIKit
 
 
 @propertyWrapper
@@ -29,6 +29,8 @@ extension UserDefaults {
     enum Keys: String {
         case moveStrategy = "MoveStrategy"
         case playModeAutoScale = "PlayModeAutoScale"
+        case playModeTapAreaAxis = "PlayModeTapAreaAxis"
+        case playModeTapAreaLength = "PlayModeTapAreaLength"
     }
     
     @UserDefault(key: Keys.moveStrategy.rawValue, defaultValue: MoveStrategyType.useScrollView.rawValue)
@@ -37,4 +39,11 @@ extension UserDefaults {
     
     @UserDefault(key: Keys.playModeAutoScale.rawValue, defaultValue: false)
     static var playModeAutoScale: Bool
+    
+    @UserDefault(key: Keys.playModeTapAreaAxis.rawValue, defaultValue: PlayModeState.TapAreaAxis.horizontal.rawValue)
+    static var playModeTapAreaAxis: Int
+    
+    @UserDefault(key: Keys.playModeTapAreaLength.rawValue, defaultValue: UIScreen.main.bounds.width / 2)
+    static var playModeTapAreaLength: Double
+    
 }
