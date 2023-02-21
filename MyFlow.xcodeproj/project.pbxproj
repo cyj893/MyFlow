@@ -45,6 +45,7 @@
 		AF91FB2329A3C34500E161AC /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB2229A3C34500E161AC /* UIStackView+.swift */; };
 		AF91FB2529A3CA1300E161AC /* SettingStackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB2429A3CA1300E161AC /* SettingStackCell.swift */; };
 		AF91FB2729A3DFFE00E161AC /* AnimatableGradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB2629A3DFFE00E161AC /* AnimatableGradientBackground.swift */; };
+		AF91FB2929A3E06700E161AC /* PlayModeTapAreaSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB2829A3E06700E161AC /* PlayModeTapAreaSettingView.swift */; };
 		AF91FB2F29A3E21600E161AC /* ToggleableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB2E29A3E21600E161AC /* ToggleableButton.swift */; };
 		AF91FB3129A4EFBB00E161AC /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91FB3029A4EFBB00E161AC /* UIImage+.swift */; };
 		AF98A383283291560035601D /* comic_andy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF98A382283291560035601D /* comic_andy.ttf */; };
@@ -146,6 +147,7 @@
 		AF91FB2229A3C34500E161AC /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		AF91FB2429A3CA1300E161AC /* SettingStackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingStackCell.swift; sourceTree = "<group>"; };
 		AF91FB2629A3DFFE00E161AC /* AnimatableGradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableGradientBackground.swift; sourceTree = "<group>"; };
+		AF91FB2829A3E06700E161AC /* PlayModeTapAreaSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayModeTapAreaSettingView.swift; sourceTree = "<group>"; };
 		AF91FB2E29A3E21600E161AC /* ToggleableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleableButton.swift; sourceTree = "<group>"; };
 		AF91FB3029A4EFBB00E161AC /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		AF98A382283291560035601D /* comic_andy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = comic_andy.ttf; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 			isa = PBXGroup;
 			children = (
 				AFCBEFC429A28098005FD84B /* PlayModeSettingView.swift */,
+				AF91FB2829A3E06700E161AC /* PlayModeTapAreaSettingView.swift */,
 			);
 			path = PlayModeSettingView;
 			sourceTree = "<group>";
@@ -812,6 +815,7 @@
 				AF8EDF85282E3F7A00CCFF19 /* Document.swift in Sources */,
 				AFC95BA4282E6E49006E9773 /* MyNavigationView.swift in Sources */,
 				AF1B76D42986C399002D9BAE /* URL+.swift in Sources */,
+				AF91FB2929A3E06700E161AC /* PlayModeTapAreaSettingView.swift in Sources */,
 				AF91FB2529A3CA1300E161AC /* SettingStackCell.swift in Sources */,
 				AFC8E25329335DAF009F9EC9 /* MyNavigationViewDelegate.swift in Sources */,
 				AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */,
@@ -863,6 +867,7 @@
 				AF8EDF7F282E3F7A00CCFF19 /* AppDelegate.swift in Sources */,
 				AFEC9450296EEF8000B5BEBF /* MyLogger.swift in Sources */,
 				AFAB47C02847A0830034515A /* AddCommand.swift in Sources */,
+				AFCBEFC529A28098005FD84B /* PlayModeSettingView.swift in Sources */,
 				AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */,
 				AFC8E2572933686E009F9EC9 /* UIControl+.swift in Sources */,
 				AF255AA1283E809E00747FF3 /* UIDevice+.swift in Sources */,
