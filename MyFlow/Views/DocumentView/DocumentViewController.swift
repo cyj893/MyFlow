@@ -21,7 +21,7 @@ final class DocumentViewController: UIViewController {
     var stateLabel = UILabel()
 #endif
     
-    var viewModel: DocumentViewModel?
+    var viewModel: DocumentViewModel
     
     var restoreInfo: DocumentTabInfo?
     
@@ -29,7 +29,11 @@ final class DocumentViewController: UIViewController {
     
     init(viewModel: DocumentViewModel) {
         self.viewModel = viewModel
+        self.pdfView.document = viewModel.pdfDocument
+        
         super.init(nibName: nil, bundle: nil)
+        
+        setMoveStrategy()
         
         configure()
     }
@@ -49,7 +53,7 @@ final class DocumentViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         if let documentTabInfo = restoreInfo {
-            logger.log("\(viewModel?.key?.lastPathComponent ?? "nil") Restore Info: scaleFactor \(documentTabInfo.scaleFactor) offset \(documentTabInfo.offset)")
+            logger.log("\(viewModel.key.lastPathComponent) Restore Info: scaleFactor \(documentTabInfo.scaleFactor) offset \(documentTabInfo.offset)")
             pdfView.scaleFactor = documentTabInfo.scaleFactor
             if let pdfScrollView = pdfView.scrollView {
                 pdfScrollView.setContentOffset(documentTabInfo.offset, animated: false)
@@ -59,8 +63,7 @@ final class DocumentViewController: UIViewController {
     }
     
     func close() {
-        viewModel?.clear()
-        viewModel = nil
+        viewModel.clear()
     }
     
 }
@@ -85,11 +88,13 @@ extension DocumentViewController {
     }
     
     private func configure() {
-        title = viewModel?.document?.fileURL.lastPathComponent
-        viewModel?.delegate = self
+        title = viewModel.document.fileURL.lastPathComponent
+        viewModel.delegate = self
         
         addTapGesture()
         addPanGesture()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setMoveStrategy), name: NSNotification.Name(UserDefaults.Keys.moveStrategy.rawValue), object: nil)
     }
     
     fileprivate func setPdfView() {
@@ -117,16 +122,22 @@ extension DocumentViewController {
     }
 #endif
     
-    fileprivate func getMoveStrategy() -> MoveStrategy {
-        do {
-            return try UseScrollView(pdfView: pdfView)
-        } catch let e as PdfError {
-            logger.log("Fail to UseScrollView: \(e.localizedDescription)", .info)
-            // TODO: Aleart Error
-            return UseGo(vc: self)
-        } catch {
-            // TODO: Aleart Unexpected Error
-            return UseGo(vc: self)
+    @objc fileprivate func setMoveStrategy() {
+        let type = MoveStrategyType(rawValue: UserDefaults.moveStrategy)!
+        switch type {
+        case .useGo:
+            viewModel.moveStrategy = UseGo(vc: self)
+        case .useScrollView:
+            do {
+                viewModel.moveStrategy = try UseScrollView(pdfView: pdfView)
+            } catch let e as PdfError {
+                logger.log("Fail to UseScrollView: \(e.localizedDescription)", .info)
+                // TODO: Aleart Error
+                viewModel.moveStrategy = UseGo(vc: self)
+            } catch {
+                // TODO: Aleart Unexpected Error
+                viewModel.moveStrategy = UseGo(vc: self)
+            }
         }
     }
 }
@@ -135,7 +146,7 @@ extension DocumentViewController {
 // MARK: Actions
 extension DocumentViewController {
     func endPlayModeButtonAction() {
-        viewModel?.changeState(to: .normal)
+        viewModel.changeState(to: .normal)
     }
 }
 
@@ -156,7 +167,7 @@ extension DocumentViewController {
     @objc func setTapGesture(_ recognizer: UITapGestureRecognizer) {
         let location = recognizer.location(in: pdfView)
         
-        viewModel?.tapGestureRecognized(location: location, pdfView: pdfView)
+        viewModel.tapGestureRecognized(location: location, pdfView: pdfView)
     }
     
     @objc func setPanGesture(_ recognizer: UIPanGestureRecognizer) {
@@ -167,11 +178,11 @@ extension DocumentViewController {
             logger.log("Begin pan gesture")
             
         case .changed:
-            viewModel?.panGestureChanged(location: location, pdfView: pdfView)
+            viewModel.panGestureChanged(location: location, pdfView: pdfView)
             
         case .ended, .cancelled, .failed:
             logger.log("End pan gesture")
-            viewModel?.panGestureEnded()
+            viewModel.panGestureEnded()
             
         default:
             break
@@ -182,11 +193,6 @@ extension DocumentViewController {
 
 // MARK: DocumentViewDelegate
 extension DocumentViewController: DocumentViewDelegate {
-    func setDocument(with pdfDocument: PDFDocument) {
-        self.pdfView.document = pdfDocument
-        viewModel?.moveStrategy = getMoveStrategy()
-    }
-    
     func showAddPointsModalView(_ viewController: UIViewController) {
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.modalPresentationStyle = .pageSheet
@@ -199,6 +205,10 @@ extension DocumentViewController: DocumentViewDelegate {
             // Fallback on earlier versions
         }
         present(navigationController, animated: true, completion: nil)
+    }
+    
+    func setAutoScale(_ autoScale: Bool) {
+        pdfView.autoScales = autoScale
     }
     
 #if DEBUG

@@ -8,6 +8,12 @@
 import UIKit
 import PDFKit
 
+
+enum MoveStrategyType: Int {
+    case useScrollView
+    case useGo
+}
+
 protocol MoveStrategy {
     func move(to point: PDFAnnotation)
     func moveAfter(to height: CGFloat)

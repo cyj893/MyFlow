@@ -8,10 +8,13 @@
 import UIKit
 
 struct MyOffset {
+    static let padding:Double = 16.0
+    static let smallPadding:Double = 8.0
+    
     static let betweenIconGroup:Double = 30.0
     static let betweenIcon:Double = 15.0
     
-    static let navigationViewHeight: CGFloat = 100.0
+    static let navigationViewHeight: CGFloat = 130.0
     
     static var topPadding: CGFloat {
         let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
@@ -20,8 +23,9 @@ struct MyOffset {
 }
 
 struct AnimateDuration {
-    static let fast:TimeInterval = 0.2
-    static let normal:TimeInterval = 0.4
+    static let veryFast: TimeInterval = 0.2
+    static let fast: TimeInterval = 0.3
+    static let normal: TimeInterval = 0.4
 }
 
 struct GradientColor {
@@ -51,6 +55,7 @@ struct MyColor {
     static let tabCell = UIColor(named: "tabCellColor")!
     static let tabCellSelected = UIColor(named: "tabCellSelectedColor")!
     static let separator = UIColor(named: "separatorColor")!
+    static let shadow = UIColor(named: "shadowColor")!
 }
 
 struct MyFont {
