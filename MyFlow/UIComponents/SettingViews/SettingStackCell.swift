@@ -22,12 +22,16 @@ final class SettingStackCell: UIView {
     
     /// The title of the cell.
     let title: String
+    /// The additional description of the cell.
+    var body: String?
     
     lazy var label = UILabel()
     var typeView: UIView
+    lazy var bodyLabel = UILabel()
     
-    init(title: String, type: CellType) {
+    init(title: String, body: String? = nil, type: CellType) {
         self.title = title
+        self.body = body
         
         switch type {
         case .toggleable(let isSelected):
@@ -81,15 +85,21 @@ extension SettingStackCell {
     private func addSubviews() {
         addSubview(label)
         addSubview(typeView)
+        
+        if let _ = body {
+            addSubview(bodyLabel)
+        }
     }
     
     private func setViews() {
         setLabel()
         setTypeView()
+        setBodyLabelIfNeeded()
         
 #if DEBUG
         label.backgroundColor = .systemPink.withAlphaComponent(0.3)
         typeView.backgroundColor = .systemBlue.withAlphaComponent(0.3)
+        bodyLabel.backgroundColor = .systemOrange.withAlphaComponent(0.3)
 #endif
     }
     
@@ -98,15 +108,32 @@ extension SettingStackCell {
             $0.text = title
             $0.setSeconderyHeaderStyle()
         }.snp.makeConstraints { make in
-            make.left.top.bottom.equalToSuperview().inset(MyOffset.padding)
+            make.left.top.equalToSuperview().inset(MyOffset.padding)
         }
     }
     
     private func setTypeView() {
         typeView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(label)
             make.right.equalToSuperview().inset(MyOffset.padding)
             make.left.equalTo(label.snp.right).offset(MyOffset.padding)
         }
     }
+    
+    private func setBodyLabelIfNeeded() {
+        if let body = body {
+            bodyLabel.then {
+                $0.text = body
+                $0.setBodyStyle()
+            }.snp.makeConstraints { make in
+                make.left.right.bottom.equalToSuperview().inset(MyOffset.padding)
+                make.top.equalTo(label.snp.bottom).offset(MyOffset.padding)
+            }
+        } else {
+            label.snp.makeConstraints { make in
+                make.bottom.equalToSuperview().inset(MyOffset.padding)
+            }
+        }
+    }
+    
 }
