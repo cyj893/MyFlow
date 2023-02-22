@@ -25,17 +25,8 @@ extension UserActivityHelper {
         return userActivity
     }
     
-    private static func getBookmark(from url: URL?) -> Data? {
-        guard let url = url else {
-            logger.log("url is nil", .error)
-            return nil
-        }
+    private static func getBookmark(from url: URL) -> Data? {
         do {
-            guard url.startAccessingSecurityScopedResource() else {
-                logger.log("startAccessingSecurityScopedResource error: \(url.lastPathComponent)", .error)
-                return nil
-            }
-            defer { url.stopAccessingSecurityScopedResource() }
             let bookmarkData = try url.bookmarkData(options: .minimalBookmark, includingResourceValuesForKeys: nil, relativeTo: nil)
             return bookmarkData
         } catch let error {
@@ -54,6 +45,7 @@ extension UserActivityHelper {
               let yOffsets = activity.userInfo?["yOffsets"] as? [CGFloat],
               let scaleFactors = activity.userInfo?["scaleFactors"] as? [CGFloat],
               let nowIndex = activity.userInfo?["nowIndex"] as? Int else {
+            logger.log("Fail to read userInfo")
             return nil
         }
         
@@ -76,15 +68,12 @@ extension UserActivityHelper {
     private static func getURL(from bookmark: Data) -> URL? {
         do {
             var isStale = false
-            var url = try URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale)
+            let url = try URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale)
             if isStale {
                 logger.log("Bookmark(\(url.lastPathComponent)) is stale")
-                let updatedBookmark = try url.bookmarkData()
-                url = try URL(resolvingBookmarkData: updatedBookmark, bookmarkDataIsStale: &isStale)
+                _ = try url.bookmarkData()
             }
-            if FileManager.default.fileExists(atPath: url.encodedPath) {
-                return url
-            }
+            return url
         } catch let error {
             logger.log("getURL from bookmark: \(error.localizedDescription)", .error)
         }

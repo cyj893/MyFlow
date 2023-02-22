@@ -8,5 +8,6 @@
 
 protocol MyNavigationViewModelInterface {
     func backButtonAction()
+    func settingsButtonAction()
     func playButtonAction()
 }

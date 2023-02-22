@@ -26,12 +26,14 @@ final class MainViewController: UIViewController {
 #endif
     
     // MARK: LifeCycle
-    init(initialVC: DocumentViewController? = nil) {
+    init(initialURL: URL? = nil) {
         super.init(nibName: nil, bundle: nil)
         
         viewModel.delegate = self
-        if let initialVC = initialVC {
-            viewModel.openDocument(initialVC)
+        if let initialURL = initialURL {
+            viewModel.openDocument(with: initialURL) { [unowned self] in
+                myNavigationView.tabsAdaptor.reloadData()
+            }
         }
         myNavigationView.tabsAdaptor.dataSource = viewModel
     }
@@ -183,7 +185,7 @@ extension MainViewController {
     }
     
     private func showDocumentView(with vc: DocumentViewController) {
-        logger.log("showDocumentView \(vc.viewModel?.key?.lastPathComponent ?? "nil")")
+        logger.log("showDocumentView \(vc.viewModel.key.lastPathComponent)")
         addChild(vc)
         vc.view.frame = documentArea.bounds
         documentArea.addSubview(vc.view)
@@ -198,6 +200,13 @@ extension MainViewController: MainViewDelegate {
         dismiss(animated: true)
     }
     
+    func showSettings() {
+        let settingVC = SettingsView()
+        settingVC.modalPresentationStyle = .formSheet
+        
+        self.present(settingVC, animated: true, completion: nil)
+    }
+    
     func playModeStart() {
         hideNavi()
         endPlayModeButton.isHidden = false
@@ -205,7 +214,7 @@ extension MainViewController: MainViewDelegate {
     
     func updateDocumentView(with vc: DocumentViewController, info: DocumentTabInfo) {
         if let beforeState = myNavigationView.viewModel.currentVM?.nowState?.state {
-            vc.viewModel?.changeState(to: beforeState)
+            vc.viewModel.changeState(to: beforeState)
         }
         myNavigationView.viewModel.currentVM = vc.viewModel
         
