@@ -20,6 +20,13 @@ final class SettingStackCell: UIView {
         case withIcon(String)
     }
     
+    enum State {
+        case activated
+        case disabled
+    }
+    
+    var state: State = .activated
+    
     /// The title of the cell.
     let title: String
     /// The additional description of the cell.
@@ -60,11 +67,32 @@ final class SettingStackCell: UIView {
 }
 
 
+// MARK: State
+extension SettingStackCell {
+    /// Update the state.
+    func setState(with state: State) {
+        self.state = state
+        
+        switch state {
+        case .activated:
+            UIView.animate(withDuration: AnimateDuration.fast, delay: 0) { [unowned self] in
+                alpha = 1.0
+            }
+        case .disabled:
+            UIView.animate(withDuration: AnimateDuration.fast, delay: 0) { [unowned self] in
+                alpha = 0.5
+            }
+        }
+    }
+}
+
+
 // MARK: Action
 extension SettingStackCell {
     /// Add a tap action to the cell.
     func addTapAction(action: @escaping () -> ()) {
-        addGestureRecognizer(UITapGestureRecognizerWithClosure {
+        addGestureRecognizer(UITapGestureRecognizerWithClosure { [unowned self] in
+            if state == .disabled { return }
             action()
         })
     }
@@ -72,6 +100,7 @@ extension SettingStackCell {
     /// If the CellType is .togglable, the toggle action is performed on cells.
     func addToggleAction(action: @escaping (Bool) -> ()) {
         addGestureRecognizer(UITapGestureRecognizerWithClosure { [unowned self] in
+            if state == .disabled { return }
             guard let toggleButton = typeView as? ToggleableButton else { return }
             toggleButton.toggle()
             action(toggleButton.isSelected)
@@ -81,6 +110,7 @@ extension SettingStackCell {
     /// Can determine the toggle state based on the current toggle state.
     func addConditionalToggleAction(action: @escaping (Bool) -> (Bool)) {
         addGestureRecognizer(UITapGestureRecognizerWithClosure { [unowned self] in
+            if state == .disabled { return }
             guard let toggleButton = typeView as? ToggleableButton else { return }
             if action(toggleButton.isSelected) {
                 toggleButton.select()
