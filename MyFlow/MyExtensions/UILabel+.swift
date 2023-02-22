@@ -25,7 +25,7 @@ extension UILabel {
     
     func setBodyStyle() {
         font = .systemFont(ofSize: 16, weight: .medium)
-        textColor = MyColor.icon
+        textColor = MyColor.icon.withAlphaComponent(0.9)
         numberOfLines = 0
         textAlignment = .left
     }
