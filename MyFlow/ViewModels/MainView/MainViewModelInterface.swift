@@ -9,7 +9,7 @@ import Foundation
 
 
 protocol MainViewModelInterface {
-    func openDocument(with url: URL, completion: (() -> ())?)
+    func openDocument(_ vc: DocumentViewController)
     func getNowDocumentViewController() -> DocumentViewController?
     func changeCurrentDocumentState(to state: DocumentViewState)
     

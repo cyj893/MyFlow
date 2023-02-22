@@ -108,11 +108,6 @@ struct AddPointsState: DocumentViewStateInterface {
 
 /// Play mode. At this state, user can move to previous point with touching left side and next point with toucing right side.
 struct PlayModeState: DocumentViewStateInterface {
-    enum TapAreaAxis: Int {
-        case horizontal
-        case vertical
-    }
-
     private(set) var state: DocumentViewState = .playMode
     
     private(set) weak var vm: DocumentViewModel?
@@ -121,23 +116,12 @@ struct PlayModeState: DocumentViewStateInterface {
     func tapProcess(location: CGPoint, pdfView: PDFView) {
         guard let vm = vm else { return }
         
-        let axis = UserDefaults.playModeTapAreaAxis
-        let length = UserDefaults.playModeTapAreaLength
-        switch TapAreaAxis(rawValue: axis) ?? .horizontal {
-        case .horizontal:
-            if location.x < length {
-                vm.moveToPrevPoint()
-            }
-            else {
-                vm.moveToNextPoint()
-            }
-        case .vertical:
-            if location.y < length {
-                vm.moveToPrevPoint()
-            }
-            else {
-                vm.moveToNextPoint()
-            }
+        let halfWidth = UIScreen.main.bounds.width / 2
+        if location.x < halfWidth {
+            vm.moveToPrevPoint()
+        }
+        else {
+            vm.moveToNextPoint()
         }
     }
     

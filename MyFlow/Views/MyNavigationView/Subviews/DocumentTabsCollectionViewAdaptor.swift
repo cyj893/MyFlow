@@ -54,10 +54,6 @@ final class DocumentTabsCollectionViewAdaptor: NSObject {
         
         collectionView.register(TabCell.self, forCellWithReuseIdentifier: "TabCell")
     }
-    
-    func reloadData() {
-        collectionView.reloadData()
-    }
 }
 
 

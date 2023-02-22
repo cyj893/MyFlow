@@ -42,16 +42,11 @@ class AddPointsModalViewController: UIViewController {
     lazy var cancelButton = UIButton().then {
         $0.setTitle("Cancel", for: .normal)
         $0.setTitleColor(.red, for: .normal)
-        var config = UIButton.Configuration.plain()
-        config.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
-        $0.configuration = config
+        $0.contentEdgeInsets = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
     }
     lazy var addPointsButton = UIButton().then {
         $0.setTitle("Add Points", for: .normal)
-        $0.setTitleColor(MyColor.icon, for: .normal)
-        var config = UIButton.Configuration.plain()
-        config.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
-        $0.configuration = config
+        $0.contentEdgeInsets = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
     }
     
     
