@@ -77,6 +77,28 @@ extension SettingStackCell {
             action(toggleButton.isSelected)
         })
     }
+    
+    /// Can determine the toggle state based on the current toggle state.
+    func addConditionalToggleAction(action: @escaping (Bool) -> (Bool)) {
+        addGestureRecognizer(UITapGestureRecognizerWithClosure { [unowned self] in
+            guard let toggleButton = typeView as? ToggleableButton else { return }
+            if action(toggleButton.isSelected) {
+                toggleButton.select()
+            } else {
+                toggleButton.deselect()
+            }
+        })
+    }
+    
+    /// Can update toggle state independent of action.
+    func updateToggleState(with value: Bool) {
+        guard let toggleButton = typeView as? ToggleableButton else { return }
+        if value {
+            toggleButton.select()
+        } else {
+            toggleButton.deselect()
+        }
+    }
 }
 
 
