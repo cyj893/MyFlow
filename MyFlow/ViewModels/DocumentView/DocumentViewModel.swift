@@ -11,15 +11,19 @@ import PDFKit
 final class DocumentViewModel: NSObject, PDFDocumentDelegate {
     let logger = MyLogger(category: String(describing: DocumentViewModel.self))
     
-    var key: URL {
-        document.fileURL
+    var key: URL? {
+        document?.fileURL
     }
     
     
     weak var delegate: DocumentViewDelegate?
     
-    var document: UIDocument
-    var pdfDocument: PDFDocument?
+    var document: UIDocument?
+    var pdfDocument: PDFDocument? {
+        didSet {
+            delegate?.setDocument(with: pdfDocument!)
+        }
+    }
     
     var nowState: DocumentViewStateInterface? {
         willSet {
@@ -35,7 +39,7 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
     var moveStrategy: MoveStrategy?
     
     
-    init(delegate: DocumentViewDelegate? = nil, document: Document) async throws {
+    init(delegate: DocumentViewDelegate? = nil, document: Document) {
         self.delegate = delegate
         self.document = document
         
@@ -43,7 +47,8 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
         
         nowState = NormalState(vm: self)
         
-        try await openDocument()
+        openDocument()
+        
     }
     
     func clear() {
@@ -56,12 +61,13 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
             return
         }
         
-        guard let pdfDocument = pdfDocument else {
-            logger.log("Cant' savePointsInfos \(key.lastPathComponent): pdfDocument is nil", .error)
+        guard let document = document,
+              let pdfDocument = pdfDocument else {
+            logger.log("Cant' savePointsInfos \(key?.lastPathComponent ?? ""): document or pdfDocument is nil", .error)
             return
         }
         
-        logger.log("savePointsInfos \(key.lastPathComponent)")
+        logger.log("savePointsInfos \(key?.lastPathComponent ?? "")")
         FileHelper.shared.writePointsFile(absoluteString: document.fileURL.absoluteString,
                                           pointsInfos: pointHelper.getPointsInfos(in: pdfDocument))
         
@@ -72,40 +78,32 @@ final class DocumentViewModel: NSObject, PDFDocumentDelegate {
 
 // MARK: Prepare
 extension DocumentViewModel {
-    func openDocument() async throws {
-        let isSuccess = await document.open()
-        
-        if isSuccess {
-            try openSuccess()
-        } else {
-            try openFail()
-        }
-    }
-    
-    func openSuccess() throws {
-        logger.log("Success to read file: \(document.fileURL.lastPathComponent)")
-        
-        guard let pdfDocument = PDFDocument(url: document.fileURL) else {
-            logger.log("Fail to get pdf file: \(document.fileURL.absoluteString)", .error)
-            throw PdfError.cannotFindDocument
-        }
-        self.pdfDocument = pdfDocument
-        pdfDocument.delegate = self
-        if !pdfDocument.allowsCommenting {
-            // TODO: presenting an message to the user.
-            logger.log("This file cannot be commented", .info)
-        }
-        
-        if let pointsInfos = FileHelper.shared.readPointsFileIfExist(absoluteString: document.fileURL.absoluteString) {
-            pointsInfos.forEach { info in
-                pointHelper.addPoint(info.height, pdfDocument.page(at: info.page)!)
+    func openDocument() {
+        document?.open(completionHandler: { [self] (success) in
+            if success {
+                logger.log("Success to read file: \(self.document?.fileURL.lastPathComponent ?? "nil")")
+                
+                self.pdfDocument = PDFDocument(url: self.document!.fileURL)
+                guard let pdfDocument = self.pdfDocument else {
+                    return
+                }
+                pdfDocument.delegate = self
+                if pdfDocument.allowsCommenting == false {
+                    // TODO: presenting an message to the user.
+                    logger.log("This file cannot be commented", .info)
+                }
+                
+                if let pointsInfos = FileHelper.shared.readPointsFileIfExist(absoluteString: document!.fileURL.absoluteString) {
+                    pointsInfos.forEach { info in
+                        pointHelper.addPoint(info.height, pdfDocument.page(at: info.page)!)
+                    }
+                }
             }
-        }
-    }
-    
-    func openFail() throws {
-        logger.log("Fail to read file: \(document.fileURL.absoluteString)", .error)
-        throw PdfError.cannotFindDocument
+            else {
+                logger.log("Fail to read file: \(self.document?.fileURL.absoluteString ?? "nil")", .error)
+                // TODO: presenting an error message to the user.
+            }
+        })
     }
     
 }
@@ -220,17 +218,15 @@ extension DocumentViewModel: DocumentViewModelInterface {
         pointHelper.redo()
     }
     
-    func playButtonAction() -> Bool {
+    func playButtonAction() {
         logger.log("Start play mode")
         if pointHelper.getPointsCount() == 0 {
             logger.log("No point to move, Show AddPointsModalView")
             delegate?.showAddPointsModalView(getAddPointsModalView())
-            return false
+            return
         }
-        delegate?.setAutoScale(UserDefaults.playModeAutoScale)
         moveToPoint(at: 0)
         nowState = PlayModeState(vm: self)
-        return true
     }
     
     func showAddPointsModalView() {

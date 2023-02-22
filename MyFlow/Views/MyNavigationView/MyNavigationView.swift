@@ -15,8 +15,6 @@ class MyNavigationView: UIView {
     
     private let backButton = UIButton()
     
-    private let settingsButton = UIButton()
-    
     private let undoRedoArea = UndoRedoArea()
     private let pointsArea = PointsArea()
     private let movingArea = MovingArea()
@@ -49,7 +47,6 @@ class MyNavigationView: UIView {
 extension MyNavigationView {
     private func addSubviews() {
         addSubview(backButton)
-        addSubview(settingsButton)
         addSubview(playButton)
         
         addSubview(movingArea)
@@ -77,9 +74,6 @@ extension MyNavigationView {
         backButton.addAction { [unowned self] in
             self.viewModel.backButtonAction()
         }
-        settingsButton.addAction { [unowned self] in
-            self.viewModel.settingsButtonAction()
-        }
         playButton.addAction { [unowned self] in
             self.viewModel.playButtonAction()
         }
@@ -99,16 +93,11 @@ extension MyNavigationView {
     
     fileprivate func setButtons() {
         setBackButton()
-        setSettingsButton()
         setPlayButton()
         setAreas()
-        
-        settingsButton.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).inset(MyOffset.betweenIcon)
-        }
         [backButton, playButton].forEach {
             $0.snp.makeConstraints { make in
-                make.bottom.equalTo(tabsAdaptor.collectionView.snp.top).offset(-MyOffset.betweenIcon)
+                make.centerY.equalToSuperview()
             }
         }
     }
@@ -118,14 +107,6 @@ extension MyNavigationView {
             $0.setIconStyle(systemName: "chevron.left")
         }.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(MyOffset.betweenIcon)
-        }
-    }
-    
-    fileprivate func setSettingsButton() {
-        settingsButton.then {
-            $0.setIconStyle(systemName: "gearshape")
-        }.snp.makeConstraints {
-            $0.trailing.equalToSuperview().offset(-MyOffset.betweenIcon)
         }
     }
     
