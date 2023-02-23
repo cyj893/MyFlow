@@ -107,7 +107,7 @@ struct AddPointsState: DocumentViewStateInterface {
 }
 
 /// Play mode. At this state, user can move to previous point with touching left side and next point with toucing right side.
-struct PlayModeState: DocumentViewStateInterface {
+class PlayModeState: DocumentViewStateInterface {
     enum TapAreaAxis: Int {
         case horizontal
         case vertical
@@ -116,6 +116,20 @@ struct PlayModeState: DocumentViewStateInterface {
     private(set) var state: DocumentViewState = .playMode
     
     private(set) weak var vm: DocumentViewModel?
+    
+    
+    var trueDepthHelper: TrueDepthHelper?
+    var isFarAway = false
+    
+    init(vm: DocumentViewModel? = nil) {
+        self.vm = vm
+        
+        if UserDefaults.useTrueDepth {
+            trueDepthHelper = TrueDepthHelper()
+            trueDepthHelper?.delegate = self
+        }
+    }
+    
     
     /// Move to previous point with touching left side and next point with toucing right side.
     func tapProcess(location: CGPoint, pdfView: PDFView) {
@@ -147,6 +161,19 @@ struct PlayModeState: DocumentViewStateInterface {
             break
         default:
             MyLogger.log("UndefinedState: from \(String(describing: self)) to \(next)", .error)
+        }
+    }
+}
+
+extension PlayModeState: TrueDepthHelperDelegate {
+    func depthDataAverageOutput(_ average: Float) {
+        if average > UserDefaults.trueDepthThreshold && !isFarAway {
+            isFarAway = true
+        } else if average < UserDefaults.trueDepthThreshold && isFarAway {
+            isFarAway = false
+            DispatchQueue.main.async { [weak self] in
+                self?.vm?.moveToNextPoint()
+            }
         }
     }
 }
