@@ -31,6 +31,8 @@ extension UserDefaults {
         case playModeAutoScale = "PlayModeAutoScale"
         case playModeTapAreaAxis = "PlayModeTapAreaAxis"
         case playModeTapAreaLength = "PlayModeTapAreaLength"
+        case useTrueDepth = "useTrueDepth"
+        case trueDepthThreshold = "trueDepthThreshold"
     }
     
     @UserDefault(key: Keys.moveStrategy.rawValue, defaultValue: MoveStrategyType.useScrollView.rawValue)
@@ -45,5 +47,11 @@ extension UserDefaults {
     
     @UserDefault(key: Keys.playModeTapAreaLength.rawValue, defaultValue: UIScreen.main.bounds.width / 2)
     static var playModeTapAreaLength: Double
+    
+    @UserDefault(key: Keys.useTrueDepth.rawValue, defaultValue: false)
+    static var useTrueDepth: Bool
+    
+    @UserDefault(key: Keys.trueDepthThreshold.rawValue, defaultValue: 80.0)
+    static var trueDepthThreshold: Float
     
 }
