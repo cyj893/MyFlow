@@ -62,6 +62,7 @@
 		AFAB47C02847A0830034515A /* AddCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47BF2847A0830034515A /* AddCommand.swift */; };
 		AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C52847B26B0034515A /* MoveCommand.swift */; };
 		AFAB47C82847BC050034515A /* PointHelperMemento.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C72847BC050034515A /* PointHelperMemento.swift */; };
+		AFBAB8D329A60DB00025A0E7 /* AlertMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBAB8D229A60DB00025A0E7 /* AlertMaker.swift */; };
 		AFC7A329299CC0DA008E906D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC7A328299CC0DA008E906D /* SettingsView.swift */; };
 		AFC8E24629333A4A009F9EC9 /* NowPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E24529333A4A009F9EC9 /* NowPointView.swift */; };
 		AFC8E2482933439F009F9EC9 /* UndoRedoArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E2472933439F009F9EC9 /* UndoRedoArea.swift */; };
@@ -165,6 +166,7 @@
 		AFAB47BF2847A0830034515A /* AddCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommand.swift; sourceTree = "<group>"; };
 		AFAB47C52847B26B0034515A /* MoveCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCommand.swift; sourceTree = "<group>"; };
 		AFAB47C72847BC050034515A /* PointHelperMemento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelperMemento.swift; sourceTree = "<group>"; };
+		AFBAB8D229A60DB00025A0E7 /* AlertMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMaker.swift; sourceTree = "<group>"; };
 		AFC7A328299CC0DA008E906D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AFC8E24529333A4A009F9EC9 /* NowPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPointView.swift; sourceTree = "<group>"; };
 		AFC8E2472933439F009F9EC9 /* UndoRedoArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoRedoArea.swift; sourceTree = "<group>"; };
@@ -600,6 +602,7 @@
 				AF1B76D52986C3DE002D9BAE /* UserActivityHelper */,
 				AF65F78E292E4E4D0005D9AF /* FileHelper */,
 				AFD6DE342833FFFF00E9FA5E /* PointHelper */,
+				AFBAB8D229A60DB00025A0E7 /* AlertMaker.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -875,6 +878,7 @@
 				AF58533929A744A500C7D6B0 /* UIApplication+.swift in Sources */,
 				AFC8E2572933686E009F9EC9 /* UIControl+.swift in Sources */,
 				AF255AA1283E809E00747FF3 /* UIDevice+.swift in Sources */,
+				AFBAB8D329A60DB00025A0E7 /* AlertMaker.swift in Sources */,
 				AF98A38C2832A6590035601D /* UIFont+.swift in Sources */,
 				AFC8E24A293345F2009F9EC9 /* PointsArea.swift in Sources */,
 				AFCDB59A293284A500E22DEA /* MainViewDelegate.swift in Sources */,
