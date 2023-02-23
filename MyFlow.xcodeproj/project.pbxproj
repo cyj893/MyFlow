@@ -63,6 +63,7 @@
 		AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C52847B26B0034515A /* MoveCommand.swift */; };
 		AFAB47C82847BC050034515A /* PointHelperMemento.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C72847BC050034515A /* PointHelperMemento.swift */; };
 		AFBAB8D329A60DB00025A0E7 /* AlertMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBAB8D229A60DB00025A0E7 /* AlertMaker.swift */; };
+		AFBAB8D629A60EBE0025A0E7 /* TrueDepthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBAB8D529A60EBE0025A0E7 /* TrueDepthHelper.swift */; };
 		AFC7A329299CC0DA008E906D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC7A328299CC0DA008E906D /* SettingsView.swift */; };
 		AFC8E24629333A4A009F9EC9 /* NowPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E24529333A4A009F9EC9 /* NowPointView.swift */; };
 		AFC8E2482933439F009F9EC9 /* UndoRedoArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E2472933439F009F9EC9 /* UndoRedoArea.swift */; };
@@ -167,6 +168,7 @@
 		AFAB47C52847B26B0034515A /* MoveCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCommand.swift; sourceTree = "<group>"; };
 		AFAB47C72847BC050034515A /* PointHelperMemento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelperMemento.swift; sourceTree = "<group>"; };
 		AFBAB8D229A60DB00025A0E7 /* AlertMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMaker.swift; sourceTree = "<group>"; };
+		AFBAB8D529A60EBE0025A0E7 /* TrueDepthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueDepthHelper.swift; sourceTree = "<group>"; };
 		AFC7A328299CC0DA008E906D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AFC8E24529333A4A009F9EC9 /* NowPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPointView.swift; sourceTree = "<group>"; };
 		AFC8E2472933439F009F9EC9 /* UndoRedoArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoRedoArea.swift; sourceTree = "<group>"; };
@@ -429,6 +431,14 @@
 			path = Memento;
 			sourceTree = "<group>";
 		};
+		AFBAB8D429A60EB10025A0E7 /* TrueDepthHelper */ = {
+			isa = PBXGroup;
+			children = (
+				AFBAB8D529A60EBE0025A0E7 /* TrueDepthHelper.swift */,
+			);
+			path = TrueDepthHelper;
+			sourceTree = "<group>";
+		};
 		AFC7A327299CC0CD008E906D /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -596,6 +606,7 @@
 		AFEC944E296EEF6400B5BEBF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				AFBAB8D429A60EB10025A0E7 /* TrueDepthHelper */,
 				AFCBEFBD29A250D8005FD84B /* UserDefaultsHelper */,
 				AF8936BB28367FD2001031FC /* MyError.swift */,
 				AFEC944F296EEF8000B5BEBF /* MyLogger.swift */,
@@ -835,6 +846,7 @@
 				AF58AF7929A1F24B00EFD8A4 /* RadioButtonShape.swift in Sources */,
 				AF1B76D22986A414002D9BAE /* UserActivityHelper.swift in Sources */,
 				AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */,
+				AFBAB8D629A60EBE0025A0E7 /* TrueDepthHelper.swift in Sources */,
 				AF3D083129A1187600C26566 /* UITapGestureRecognizer+.swift in Sources */,
 				AFAB47B728477E060034515A /* PointCommand.swift in Sources */,
 				AFCBEFBF29A250E9005FD84B /* UserDefaultsHelper.swift in Sources */,
