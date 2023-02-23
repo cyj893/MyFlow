@@ -11,7 +11,7 @@ import SnapKit
 
 
 protocol PlayModeSettingDelegate: NSObject {
-    func showVcWithFullScreen(_ vc: UIViewController)
+    func present(_ vc: UIViewController)
 }
 
 
@@ -81,7 +81,8 @@ extension PlayModeSettingView {
         }
         tapAreaLabel.addTapAction { [unowned self] in
             let vc = PlayModeTapAreaSettingView()
-            self.delegate?.showVcWithFullScreen(vc)
+            vc.modalPresentationStyle = .fullScreen
+            self.delegate?.present(vc)
         }
         
 #if DEBUG
