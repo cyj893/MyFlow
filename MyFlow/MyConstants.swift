@@ -17,8 +17,7 @@ struct MyOffset {
     static let navigationViewHeight: CGFloat = 130.0
     
     static var topPadding: CGFloat {
-        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-        return window?.safeAreaInsets.top ?? 0
+        return UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
     }
 }
 

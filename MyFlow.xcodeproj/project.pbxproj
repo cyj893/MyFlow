@@ -24,6 +24,7 @@
 		AF3D083729A118F000C26566 /* MoveStrategySettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083629A118F000C26566 /* MoveStrategySettingView.swift */; };
 		AF3D083B29A1198500C26566 /* RadioButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083A29A1198500C26566 /* RadioButtons.swift */; };
 		AF3D083D29A119B700C26566 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083C29A119B700C26566 /* RadioButton.swift */; };
+		AF58533929A744A500C7D6B0 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58533829A744A500C7D6B0 /* UIApplication+.swift */; };
 		AF58AF7229A13D2F00EFD8A4 /* AnimatableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7129A13D2F00EFD8A4 /* AnimatableView.swift */; };
 		AF58AF7529A13D6B00EFD8A4 /* SettingViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7429A13D6B00EFD8A4 /* SettingViewStyle.swift */; };
 		AF58AF7729A13DD200EFD8A4 /* ExpandableSettingViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7629A13DD200EFD8A4 /* ExpandableSettingViewStyle.swift */; };
@@ -124,6 +125,7 @@
 		AF3D083629A118F000C26566 /* MoveStrategySettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveStrategySettingView.swift; sourceTree = "<group>"; };
 		AF3D083A29A1198500C26566 /* RadioButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtons.swift; sourceTree = "<group>"; };
 		AF3D083C29A119B700C26566 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		AF58533829A744A500C7D6B0 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		AF58AF7129A13D2F00EFD8A4 /* AnimatableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableView.swift; sourceTree = "<group>"; };
 		AF58AF7429A13D6B00EFD8A4 /* SettingViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewStyle.swift; sourceTree = "<group>"; };
 		AF58AF7629A13DD200EFD8A4 /* ExpandableSettingViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableSettingViewStyle.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 				AF3D083029A1187600C26566 /* UITapGestureRecognizer+.swift */,
 				AF91FB2229A3C34500E161AC /* UIStackView+.swift */,
 				AF91FB3029A4EFBB00E161AC /* UIImage+.swift */,
+				AF58533829A744A500C7D6B0 /* UIApplication+.swift */,
 			);
 			path = MyExtensions;
 			sourceTree = "<group>";
@@ -869,6 +872,7 @@
 				AFAB47C02847A0830034515A /* AddCommand.swift in Sources */,
 				AFCBEFC529A28098005FD84B /* PlayModeSettingView.swift in Sources */,
 				AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */,
+				AF58533929A744A500C7D6B0 /* UIApplication+.swift in Sources */,
 				AFC8E2572933686E009F9EC9 /* UIControl+.swift in Sources */,
 				AF255AA1283E809E00747FF3 /* UIDevice+.swift in Sources */,
 				AF98A38C2832A6590035601D /* UIFont+.swift in Sources */,
