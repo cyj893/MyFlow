@@ -62,6 +62,7 @@
 		AFAB47C02847A0830034515A /* AddCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47BF2847A0830034515A /* AddCommand.swift */; };
 		AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C52847B26B0034515A /* MoveCommand.swift */; };
 		AFAB47C82847BC050034515A /* PointHelperMemento.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C72847BC050034515A /* PointHelperMemento.swift */; };
+		AFB458B829A6456C00FF310D /* TrueDepthThresholdSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB458B729A6456C00FF310D /* TrueDepthThresholdSettingView.swift */; };
 		AFBAB8D329A60DB00025A0E7 /* AlertMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBAB8D229A60DB00025A0E7 /* AlertMaker.swift */; };
 		AFBAB8D629A60EBE0025A0E7 /* TrueDepthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBAB8D529A60EBE0025A0E7 /* TrueDepthHelper.swift */; };
 		AFC7A329299CC0DA008E906D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC7A328299CC0DA008E906D /* SettingsView.swift */; };
@@ -167,6 +168,7 @@
 		AFAB47BF2847A0830034515A /* AddCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommand.swift; sourceTree = "<group>"; };
 		AFAB47C52847B26B0034515A /* MoveCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCommand.swift; sourceTree = "<group>"; };
 		AFAB47C72847BC050034515A /* PointHelperMemento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelperMemento.swift; sourceTree = "<group>"; };
+		AFB458B729A6456C00FF310D /* TrueDepthThresholdSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueDepthThresholdSettingView.swift; sourceTree = "<group>"; };
 		AFBAB8D229A60DB00025A0E7 /* AlertMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMaker.swift; sourceTree = "<group>"; };
 		AFBAB8D529A60EBE0025A0E7 /* TrueDepthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueDepthHelper.swift; sourceTree = "<group>"; };
 		AFC7A328299CC0DA008E906D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 			children = (
 				AFCBEFC429A28098005FD84B /* PlayModeSettingView.swift */,
 				AF91FB2829A3E06700E161AC /* PlayModeTapAreaSettingView.swift */,
+				AFB458B729A6456C00FF310D /* TrueDepthThresholdSettingView.swift */,
 			);
 			path = PlayModeSettingView;
 			sourceTree = "<group>";
@@ -906,6 +909,7 @@
 				AF3D083729A118F000C26566 /* MoveStrategySettingView.swift in Sources */,
 				AFCDB59C29332B0400E22DEA /* UIView+.swift in Sources */,
 				AF2F1A11293DB5B90005E4B9 /* MainViewModel.swift in Sources */,
+				AFB458B829A6456C00FF310D /* TrueDepthThresholdSettingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
