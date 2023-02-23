@@ -23,6 +23,7 @@ extension PlayModeSettingView {
     static let tapAreaTitle = "Set Tap Area"
     static let trueDepthTitle = "Move to Next Point with Head Bowing"
     static let trueDepthBody = "You can move to the next point by lowering your head(get closer to the camera) and raising your head(move away from camera).\nA TrueDepth camera must be available."
+    static let trueDepthSensitivityTitle = "Set Head Bowing Detection Sensitivity"
     
 }
 
@@ -45,6 +46,8 @@ final class PlayModeSettingView: UIView, ExpandableSettingViewStyle {
     var trueDepthLabel = SettingStackCell(title: PlayModeSettingView.trueDepthTitle,
                                           body: PlayModeSettingView.trueDepthBody,
                                           type: .toggleable(UserDefaults.useTrueDepth))
+    var trueDepthSensitivityLabel = SettingStackCell(title: PlayModeSettingView.trueDepthSensitivityTitle,
+                                                     type: .withIcon("chevron.right"))
     
     
     init() {
@@ -68,7 +71,7 @@ final class PlayModeSettingView: UIView, ExpandableSettingViewStyle {
 extension PlayModeSettingView {
     private func addSubviews() {
         content.addSubview(stackView)
-        [autoScaleLabel, tapAreaLabel, trueDepthLabel].forEach { subview in
+        [autoScaleLabel, tapAreaLabel, trueDepthLabel, trueDepthSensitivityLabel].forEach { subview in
             stackView.addArrangedSubviewWithDivider(subview)
         }
         stackView.arrangedSubviews.forEach { subview in
@@ -83,6 +86,10 @@ extension PlayModeSettingView {
     }
     
     private func configure() {
+        if !UserDefaults.useTrueDepth {
+            trueDepthSensitivityLabel.setState(with: .disabled)
+        }
+        
         autoScaleLabel.addToggleAction { isSelected in
             UserDefaults.playModeAutoScale = isSelected
         }
@@ -94,11 +101,13 @@ extension PlayModeSettingView {
         trueDepthLabel.addConditionalToggleAction { [unowned self] nowState in
             if nowState { // The user does not want to use
                 UserDefaults.useTrueDepth = false
+                trueDepthSensitivityLabel.setState(with: .disabled)
                 return false
             }
             switch AVCaptureDevice.authorizationStatus(for: .video) {
             case .authorized: // The user has previously granted access to the camera
                 UserDefaults.useTrueDepth = true
+                trueDepthSensitivityLabel.setState(with: .activated)
                 return true
             case .notDetermined: // The user has not yet been presented with the option to grant access
                 AVCaptureDevice.requestAccess(for: .video, completionHandler: { [weak self] granted in
@@ -109,11 +118,18 @@ extension PlayModeSettingView {
                         }
                     }
                 })
+                trueDepthSensitivityLabel.setState(with: .disabled)
                 return false
             default: // The user has previously denied access
                 delegate?.present(AlertMaker.trueDepthAlert())
+                trueDepthSensitivityLabel.setState(with: .disabled)
                 return false
             }
+        }
+        trueDepthSensitivityLabel.addTapAction { [unowned self] in
+            let vc = TrueDepthThresholdSettingView()
+            vc.modalPresentationStyle = .fullScreen
+            self.delegate?.present(vc)
         }
 #if DEBUG
         titleLabel.backgroundColor = .systemCyan
