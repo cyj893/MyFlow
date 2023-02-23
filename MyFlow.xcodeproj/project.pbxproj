@@ -24,6 +24,7 @@
 		AF3D083729A118F000C26566 /* MoveStrategySettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083629A118F000C26566 /* MoveStrategySettingView.swift */; };
 		AF3D083B29A1198500C26566 /* RadioButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083A29A1198500C26566 /* RadioButtons.swift */; };
 		AF3D083D29A119B700C26566 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083C29A119B700C26566 /* RadioButton.swift */; };
+		AF58533929A744A500C7D6B0 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58533829A744A500C7D6B0 /* UIApplication+.swift */; };
 		AF58AF7229A13D2F00EFD8A4 /* AnimatableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7129A13D2F00EFD8A4 /* AnimatableView.swift */; };
 		AF58AF7529A13D6B00EFD8A4 /* SettingViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7429A13D6B00EFD8A4 /* SettingViewStyle.swift */; };
 		AF58AF7729A13DD200EFD8A4 /* ExpandableSettingViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7629A13DD200EFD8A4 /* ExpandableSettingViewStyle.swift */; };
@@ -61,6 +62,9 @@
 		AFAB47C02847A0830034515A /* AddCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47BF2847A0830034515A /* AddCommand.swift */; };
 		AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C52847B26B0034515A /* MoveCommand.swift */; };
 		AFAB47C82847BC050034515A /* PointHelperMemento.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB47C72847BC050034515A /* PointHelperMemento.swift */; };
+		AFB458B829A6456C00FF310D /* TrueDepthThresholdSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB458B729A6456C00FF310D /* TrueDepthThresholdSettingView.swift */; };
+		AFBAB8D329A60DB00025A0E7 /* AlertMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBAB8D229A60DB00025A0E7 /* AlertMaker.swift */; };
+		AFBAB8D629A60EBE0025A0E7 /* TrueDepthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBAB8D529A60EBE0025A0E7 /* TrueDepthHelper.swift */; };
 		AFC7A329299CC0DA008E906D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC7A328299CC0DA008E906D /* SettingsView.swift */; };
 		AFC8E24629333A4A009F9EC9 /* NowPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E24529333A4A009F9EC9 /* NowPointView.swift */; };
 		AFC8E2482933439F009F9EC9 /* UndoRedoArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC8E2472933439F009F9EC9 /* UndoRedoArea.swift */; };
@@ -124,6 +128,7 @@
 		AF3D083629A118F000C26566 /* MoveStrategySettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveStrategySettingView.swift; sourceTree = "<group>"; };
 		AF3D083A29A1198500C26566 /* RadioButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtons.swift; sourceTree = "<group>"; };
 		AF3D083C29A119B700C26566 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		AF58533829A744A500C7D6B0 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		AF58AF7129A13D2F00EFD8A4 /* AnimatableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableView.swift; sourceTree = "<group>"; };
 		AF58AF7429A13D6B00EFD8A4 /* SettingViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewStyle.swift; sourceTree = "<group>"; };
 		AF58AF7629A13DD200EFD8A4 /* ExpandableSettingViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableSettingViewStyle.swift; sourceTree = "<group>"; };
@@ -163,6 +168,9 @@
 		AFAB47BF2847A0830034515A /* AddCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommand.swift; sourceTree = "<group>"; };
 		AFAB47C52847B26B0034515A /* MoveCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCommand.swift; sourceTree = "<group>"; };
 		AFAB47C72847BC050034515A /* PointHelperMemento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelperMemento.swift; sourceTree = "<group>"; };
+		AFB458B729A6456C00FF310D /* TrueDepthThresholdSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueDepthThresholdSettingView.swift; sourceTree = "<group>"; };
+		AFBAB8D229A60DB00025A0E7 /* AlertMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMaker.swift; sourceTree = "<group>"; };
+		AFBAB8D529A60EBE0025A0E7 /* TrueDepthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueDepthHelper.swift; sourceTree = "<group>"; };
 		AFC7A328299CC0DA008E906D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AFC8E24529333A4A009F9EC9 /* NowPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPointView.swift; sourceTree = "<group>"; };
 		AFC8E2472933439F009F9EC9 /* UndoRedoArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoRedoArea.swift; sourceTree = "<group>"; };
@@ -391,6 +399,7 @@
 				AF3D083029A1187600C26566 /* UITapGestureRecognizer+.swift */,
 				AF91FB2229A3C34500E161AC /* UIStackView+.swift */,
 				AF91FB3029A4EFBB00E161AC /* UIImage+.swift */,
+				AF58533829A744A500C7D6B0 /* UIApplication+.swift */,
 			);
 			path = MyExtensions;
 			sourceTree = "<group>";
@@ -422,6 +431,14 @@
 				AFAB47C72847BC050034515A /* PointHelperMemento.swift */,
 			);
 			path = Memento;
+			sourceTree = "<group>";
+		};
+		AFBAB8D429A60EB10025A0E7 /* TrueDepthHelper */ = {
+			isa = PBXGroup;
+			children = (
+				AFBAB8D529A60EBE0025A0E7 /* TrueDepthHelper.swift */,
+			);
+			path = TrueDepthHelper;
 			sourceTree = "<group>";
 		};
 		AFC7A327299CC0CD008E906D /* SettingsView */ = {
@@ -486,6 +503,7 @@
 			children = (
 				AFCBEFC429A28098005FD84B /* PlayModeSettingView.swift */,
 				AF91FB2829A3E06700E161AC /* PlayModeTapAreaSettingView.swift */,
+				AFB458B729A6456C00FF310D /* TrueDepthThresholdSettingView.swift */,
 			);
 			path = PlayModeSettingView;
 			sourceTree = "<group>";
@@ -591,12 +609,14 @@
 		AFEC944E296EEF6400B5BEBF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				AFBAB8D429A60EB10025A0E7 /* TrueDepthHelper */,
 				AFCBEFBD29A250D8005FD84B /* UserDefaultsHelper */,
 				AF8936BB28367FD2001031FC /* MyError.swift */,
 				AFEC944F296EEF8000B5BEBF /* MyLogger.swift */,
 				AF1B76D52986C3DE002D9BAE /* UserActivityHelper */,
 				AF65F78E292E4E4D0005D9AF /* FileHelper */,
 				AFD6DE342833FFFF00E9FA5E /* PointHelper */,
+				AFBAB8D229A60DB00025A0E7 /* AlertMaker.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -829,6 +849,7 @@
 				AF58AF7929A1F24B00EFD8A4 /* RadioButtonShape.swift in Sources */,
 				AF1B76D22986A414002D9BAE /* UserActivityHelper.swift in Sources */,
 				AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */,
+				AFBAB8D629A60EBE0025A0E7 /* TrueDepthHelper.swift in Sources */,
 				AF3D083129A1187600C26566 /* UITapGestureRecognizer+.swift in Sources */,
 				AFAB47B728477E060034515A /* PointCommand.swift in Sources */,
 				AFCBEFBF29A250E9005FD84B /* UserDefaultsHelper.swift in Sources */,
@@ -869,8 +890,10 @@
 				AFAB47C02847A0830034515A /* AddCommand.swift in Sources */,
 				AFCBEFC529A28098005FD84B /* PlayModeSettingView.swift in Sources */,
 				AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */,
+				AF58533929A744A500C7D6B0 /* UIApplication+.swift in Sources */,
 				AFC8E2572933686E009F9EC9 /* UIControl+.swift in Sources */,
 				AF255AA1283E809E00747FF3 /* UIDevice+.swift in Sources */,
+				AFBAB8D329A60DB00025A0E7 /* AlertMaker.swift in Sources */,
 				AF98A38C2832A6590035601D /* UIFont+.swift in Sources */,
 				AFC8E24A293345F2009F9EC9 /* PointsArea.swift in Sources */,
 				AFCDB59A293284A500E22DEA /* MainViewDelegate.swift in Sources */,
@@ -886,6 +909,7 @@
 				AF3D083729A118F000C26566 /* MoveStrategySettingView.swift in Sources */,
 				AFCDB59C29332B0400E22DEA /* UIView+.swift in Sources */,
 				AF2F1A11293DB5B90005E4B9 /* MainViewModel.swift in Sources */,
+				AFB458B829A6456C00FF310D /* TrueDepthThresholdSettingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1065,7 +1089,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.9;
+				MARKETING_VERSION = 1.6.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chayujin.MyFlow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1096,7 +1120,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.9;
+				MARKETING_VERSION = 1.6.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chayujin.MyFlow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

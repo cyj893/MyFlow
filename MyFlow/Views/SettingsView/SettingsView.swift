@@ -92,9 +92,7 @@ extension SettingsView {
 
 
 extension SettingsView: PlayModeSettingDelegate {
-    func showVcWithFullScreen(_ vc: UIViewController) {
-        vc.modalPresentationStyle = .fullScreen
-        
+    func present(_ vc: UIViewController) {
         self.present(vc, animated: true, completion: nil)
     }
 }

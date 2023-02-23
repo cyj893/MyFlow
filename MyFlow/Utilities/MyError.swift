@@ -42,3 +42,29 @@ extension PdfError: LocalizedError {
         }
     }
 }
+
+
+enum TrueDepthError: Error {
+    case cannotFindVideoDevice
+    case cannotCreateVideoInput(Error)
+    case cannotAddVideoInputToSession
+    case cannotAddDepthDataOutputToSession
+    case cannotLockDeviceForConfiguration(Error)
+}
+
+extension TrueDepthError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .cannotFindVideoDevice:
+            return NSLocalizedString("Cannot find video device.", comment: "")
+        case .cannotCreateVideoInput(let error):
+            return NSLocalizedString("Cannot create video input: \(error.localizedDescription)", comment: "")
+        case .cannotAddVideoInputToSession:
+            return NSLocalizedString("Cannot add video input to the session.", comment: "")
+        case .cannotAddDepthDataOutputToSession:
+            return NSLocalizedString("Cannot add depth data output to the session.", comment: "")
+        case .cannotLockDeviceForConfiguration(let error):
+            return NSLocalizedString("Cannot lock device for configuration: \(error.localizedDescription)", comment: "")
+        }
+    }
+}
