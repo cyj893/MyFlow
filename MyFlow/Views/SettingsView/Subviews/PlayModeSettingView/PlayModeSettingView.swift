@@ -12,7 +12,7 @@ import SnapKit
 import AVFoundation
 
 
-protocol PlayModeSettingDelegate: NSObject {
+protocol PlayModeSettingDelegate: AnyObject {
     func present(_ vc: UIViewController)
 }
 

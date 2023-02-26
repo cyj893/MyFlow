@@ -7,7 +7,7 @@
 
 import PDFKit
 
-protocol DocumentViewModelInterface: NSObject {
+protocol DocumentViewModelInterface: AnyObject {
     /// Changes the state.
     ///
     /// - Parameter to state: the state to move to.

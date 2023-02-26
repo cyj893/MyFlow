@@ -7,7 +7,7 @@
 
 import PDFKit
 
-protocol DocumentViewDelegate: NSObject {
+protocol DocumentViewDelegate: AnyObject {
     func showAddPointsModalView(_ viewController: UIViewController)
     func setAutoScale(_ autoScale: Bool)
     
