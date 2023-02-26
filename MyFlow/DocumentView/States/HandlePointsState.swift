@@ -32,6 +32,28 @@ struct HandlePointsState: DocumentViewStateInterface {
         vm.pointHelper.selectPoint(annotation)
     }
     
+    func panGestureBegan(location: CGPoint, pdfView: PDFView) { }
+    
+    func panGestureChanged(location: CGPoint, pdfView: PDFView) {
+        guard let vm = vm else { return }
+        
+        guard let page = pdfView.page(for: location, nearest: true) else { return }
+        let convertedLocation = pdfView.convert(location, to: page)
+        
+        guard let _ = vm.pointHelper.getNowSelectedPoint() else { return }
+        if pdfView.frame.height - location.y < pdfView.frame.height * 0.2 {
+            vm.moveStrategy?.moveAfter(to: pdfView.frame.height * 0.2 + 100)
+        }
+        vm.pointHelper.movePoint(Int(convertedLocation.y), page)
+    }
+    
+    func panGestureEnded(location: CGPoint, pdfView: PDFView) {
+        guard let vm = vm else { return }
+        
+        guard let _ = vm.pointHelper.getNowSelectedPoint() else { return }
+        vm.pointHelper.endMove()
+    }
+    
     func completion(next: DocumentViewState) {
         switch next {
         case .normal:

@@ -176,13 +176,14 @@ extension DocumentViewController {
         switch recognizer.state {
         case .began:
             logger.log("Begin pan gesture")
+            viewModel.panGestureBegan(location: location, pdfView: pdfView)
             
         case .changed:
             viewModel.panGestureChanged(location: location, pdfView: pdfView)
             
         case .ended, .cancelled, .failed:
             logger.log("End pan gesture")
-            viewModel.panGestureEnded()
+            viewModel.panGestureEnded(location: location, pdfView: pdfView)
             
         default:
             break
