@@ -25,10 +25,6 @@ struct AddPointsState: DocumentViewStateInterface {
         vm.pointHelper.addPoint(Int(convertedLocation.y), page)
     }
     
-    func panGestureBegan(location: CGPoint, pdfView: PDFView) { }
-    func panGestureChanged(location: CGPoint, pdfView: PDFView) { }
-    func panGestureEnded(location: CGPoint, pdfView: PDFView) { }
-    
     func completion(next: DocumentViewState) {
         switch next {
         case .normal:

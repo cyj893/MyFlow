@@ -25,3 +25,11 @@ protocol DocumentViewStateInterface {
     
     func completion(next: DocumentViewState)
 }
+
+extension DocumentViewStateInterface {
+    
+    func panGestureBegan(location: CGPoint, pdfView: PDFView) { }
+    func panGestureChanged(location: CGPoint, pdfView: PDFView) { }
+    func panGestureEnded(location: CGPoint, pdfView: PDFView) { }
+    
+}
