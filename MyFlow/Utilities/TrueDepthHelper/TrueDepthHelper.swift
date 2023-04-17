@@ -162,28 +162,23 @@ extension TrueDepthHelper {
         if session.canAddOutput(depthDataOutput) {
             session.addOutput(depthDataOutput)
             depthDataOutput.isFilteringEnabled = false
-            if let connection = depthDataOutput.connection(with: .depthData) {
-                connection.isEnabled = true
-            } else {
-                logger.log("No AVCaptureConnection", .info)
-            }
         } else {
             throw TrueDepthError.cannotAddDepthDataOutputToSession
         }
     }
     
     private func setFormat(_ videoDevice: AVCaptureDevice) throws {
-        let depthFormats = videoDevice.activeFormat.supportedDepthDataFormats
-        let filtered = depthFormats.filter({
-            CMFormatDescriptionGetMediaSubType($0.formatDescription) == kCVPixelFormatType_DepthFloat16
-        })
-        let selectedFormat = filtered.max(by: { first, second in
-            CMVideoFormatDescriptionGetDimensions(first.formatDescription).width < CMVideoFormatDescriptionGetDimensions(second.formatDescription).width
-        })
+        let format = videoDevice.activeFormat.supportedDepthDataFormats
+            .filter {
+                CMFormatDescriptionGetMediaSubType($0.formatDescription) == kCVPixelFormatType_DepthFloat16
+            }
+            .max(by: { first, second in
+                CMVideoFormatDescriptionGetDimensions(first.formatDescription).width < CMVideoFormatDescriptionGetDimensions(second.formatDescription).width
+            })
         
         do {
             try videoDevice.lockForConfiguration()
-            videoDevice.activeDepthDataFormat = selectedFormat
+            videoDevice.activeDepthDataFormat = format
             videoDevice.unlockForConfiguration()
         } catch {
             throw TrueDepthError.cannotLockDeviceForConfiguration(error)
@@ -259,9 +254,11 @@ extension TrueDepthHelper: AVCaptureDepthDataOutputDelegate {
         assert(kCVPixelFormatType_DepthFloat16 == CVPixelBufferGetPixelFormatType(depthFrame))
         CVPixelBufferLockBaseAddress(depthFrame, .readOnly)
         for row in (0..<height) {
-            let rowData = CVPixelBufferGetBaseAddress(depthFrame)! + row * CVPixelBufferGetBytesPerRow(depthFrame)
+            let rowData = (CVPixelBufferGetBaseAddress(depthFrame)!
+                           + row * CVPixelBufferGetBytesPerRow(depthFrame))
+                .assumingMemoryBound(to: Float16.self)
             for col in (0..<width) {
-                let f = Float(rowData.assumingMemoryBound(to: Float16.self)[col])
+                let f = Float(rowData[col])
                 if !f.isNaN {
                     sum += Double(f)
                 }

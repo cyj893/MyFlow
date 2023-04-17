@@ -8,7 +8,7 @@
 import UIKit
 
 
-protocol DocumentTabsCollectionDataSource: NSObjectProtocol {
+protocol DocumentTabsCollectionDataSource: AnyObject {
     func numberOfItems() -> Int
     func getSelectedIndex() -> Int
     func setSelectedIndex(with index: Int)

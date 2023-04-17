@@ -18,7 +18,7 @@
 		AF2A9ACA28615C2200D0BB24 /* DeleteCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2A9AC928615C2200D0BB24 /* DeleteCommand.swift */; };
 		AF2F1A11293DB5B90005E4B9 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F1A10293DB5B90005E4B9 /* MainViewModel.swift */; };
 		AF2F1A15294B379A0005E4B9 /* MainViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F1A14294B379A0005E4B9 /* MainViewModelInterface.swift */; };
-		AF3C3F972843C0C2007ED4F9 /* DocumentViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */; };
+		AF3C3F972843C0C2007ED4F9 /* PlayModeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C3F962843C0C2007ED4F9 /* PlayModeState.swift */; };
 		AF3D083129A1187600C26566 /* UITapGestureRecognizer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083029A1187600C26566 /* UITapGestureRecognizer+.swift */; };
 		AF3D083529A118BD00C26566 /* MoveStrategyAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083429A118BD00C26566 /* MoveStrategyAnimationView.swift */; };
 		AF3D083729A118F000C26566 /* MoveStrategySettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D083629A118F000C26566 /* MoveStrategySettingView.swift */; };
@@ -31,6 +31,9 @@
 		AF58AF7929A1F24B00EFD8A4 /* RadioButtonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7829A1F24B00EFD8A4 /* RadioButtonShape.swift */; };
 		AF58AF7B29A1F3A400EFD8A4 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7A29A1F3A400EFD8A4 /* UILabel+.swift */; };
 		AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF65F78F292E4E5F0005D9AF /* FileHelper.swift */; };
+		AF77AC9029AB48F9007CC495 /* NormalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF77AC8F29AB48F9007CC495 /* NormalState.swift */; };
+		AF77AC9229AB4913007CC495 /* HandlePointsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF77AC9129AB4913007CC495 /* HandlePointsState.swift */; };
+		AF77AC9429AB4929007CC495 /* AddPointsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF77AC9329AB4929007CC495 /* AddPointsState.swift */; };
 		AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8936B92836655C001031FC /* PointBuilder.swift */; };
 		AF8936BC28367FD2001031FC /* MyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8936BB28367FD2001031FC /* MyError.swift */; };
 		AF8EDF7F282E3F7A00CCFF19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8EDF7E282E3F7A00CCFF19 /* AppDelegate.swift */; };
@@ -122,7 +125,7 @@
 		AF2A9AC928615C2200D0BB24 /* DeleteCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCommand.swift; sourceTree = "<group>"; };
 		AF2F1A10293DB5B90005E4B9 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		AF2F1A14294B379A0005E4B9 /* MainViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelInterface.swift; sourceTree = "<group>"; };
-		AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewState.swift; sourceTree = "<group>"; };
+		AF3C3F962843C0C2007ED4F9 /* PlayModeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayModeState.swift; sourceTree = "<group>"; };
 		AF3D083029A1187600C26566 /* UITapGestureRecognizer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+.swift"; sourceTree = "<group>"; };
 		AF3D083429A118BD00C26566 /* MoveStrategyAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveStrategyAnimationView.swift; sourceTree = "<group>"; };
 		AF3D083629A118F000C26566 /* MoveStrategySettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveStrategySettingView.swift; sourceTree = "<group>"; };
@@ -135,6 +138,9 @@
 		AF58AF7829A1F24B00EFD8A4 /* RadioButtonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonShape.swift; sourceTree = "<group>"; };
 		AF58AF7A29A1F3A400EFD8A4 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		AF65F78F292E4E5F0005D9AF /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
+		AF77AC8F29AB48F9007CC495 /* NormalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalState.swift; sourceTree = "<group>"; };
+		AF77AC9129AB4913007CC495 /* HandlePointsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlePointsState.swift; sourceTree = "<group>"; };
+		AF77AC9329AB4929007CC495 /* AddPointsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointsState.swift; sourceTree = "<group>"; };
 		AF8936B92836655C001031FC /* PointBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointBuilder.swift; sourceTree = "<group>"; };
 		AF8936BB28367FD2001031FC /* MyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyError.swift; sourceTree = "<group>"; };
 		AF8EDF7B282E3F7A00CCFF19 /* MyFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -521,7 +527,10 @@
 			isa = PBXGroup;
 			children = (
 				AFCDB58C29326E6C00E22DEA /* DocumentViewStateInterface.swift */,
-				AF3C3F962843C0C2007ED4F9 /* DocumentViewState.swift */,
+				AF77AC8F29AB48F9007CC495 /* NormalState.swift */,
+				AF77AC9129AB4913007CC495 /* HandlePointsState.swift */,
+				AF77AC9329AB4929007CC495 /* AddPointsState.swift */,
+				AF3C3F962843C0C2007ED4F9 /* PlayModeState.swift */,
 			);
 			path = States;
 			sourceTree = "<group>";
@@ -844,6 +853,7 @@
 				AFAB47B9284795780034515A /* PointMemento.swift in Sources */,
 				AFC8E25B2933826D009F9EC9 /* TabCell.swift in Sources */,
 				AF255AA3283E843A00747FF3 /* AddPointsModalViewController.swift in Sources */,
+				AF77AC9029AB48F9007CC495 /* NormalState.swift in Sources */,
 				AF91FB2129A357DC00E161AC /* VerticalLineView.swift in Sources */,
 				AFC7A329299CC0DA008E906D /* SettingsView.swift in Sources */,
 				AF58AF7929A1F24B00EFD8A4 /* RadioButtonShape.swift in Sources */,
@@ -857,7 +867,7 @@
 				AF98A38A2832A6380035601D /* String+.swift in Sources */,
 				AFAB47C82847BC050034515A /* PointHelperMemento.swift in Sources */,
 				AF8EDF83282E3F7A00CCFF19 /* DocumentViewController.swift in Sources */,
-				AF3C3F972843C0C2007ED4F9 /* DocumentViewState.swift in Sources */,
+				AF3C3F972843C0C2007ED4F9 /* PlayModeState.swift in Sources */,
 				AFCDB5972932735C00E22DEA /* MainViewController.swift in Sources */,
 				AFC8E24629333A4A009F9EC9 /* NowPointView.swift in Sources */,
 				AF91FB2329A3C34500E161AC /* UIStackView+.swift in Sources */,
@@ -865,6 +875,7 @@
 				AF58AF7729A13DD200EFD8A4 /* ExpandableSettingViewStyle.swift in Sources */,
 				AF1B76D72986C3F1002D9BAE /* MyUserActivity.swift in Sources */,
 				AFCDB58F29326EB100E22DEA /* DocumentViewDelegate.swift in Sources */,
+				AF77AC9229AB4913007CC495 /* HandlePointsState.swift in Sources */,
 				AF3D083D29A119B700C26566 /* RadioButton.swift in Sources */,
 				AFC8E24C29334C8A009F9EC9 /* MovingArea.swift in Sources */,
 				AF91FB2F29A3E21600E161AC /* ToggleableButton.swift in Sources */,
@@ -893,6 +904,7 @@
 				AF58533929A744A500C7D6B0 /* UIApplication+.swift in Sources */,
 				AFC8E2572933686E009F9EC9 /* UIControl+.swift in Sources */,
 				AF255AA1283E809E00747FF3 /* UIDevice+.swift in Sources */,
+				AF77AC9429AB4929007CC495 /* AddPointsState.swift in Sources */,
 				AFBAB8D329A60DB00025A0E7 /* AlertMaker.swift in Sources */,
 				AF98A38C2832A6590035601D /* UIFont+.swift in Sources */,
 				AFC8E24A293345F2009F9EC9 /* PointsArea.swift in Sources */,

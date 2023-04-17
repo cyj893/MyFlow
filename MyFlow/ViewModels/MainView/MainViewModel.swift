@@ -15,7 +15,7 @@ struct DocumentTabInfo {
     var scaleFactor: CGFloat = 1.0
 }
 
-final class MainViewModel: NSObject {
+final class MainViewModel {
     
     let logger = MyLogger(category: String(describing: MainViewController.self))
     

@@ -10,7 +10,7 @@ import Then
 import SnapKit
 
 
-protocol RadioButtonDelegate: NSObject {
+protocol RadioButtonDelegate: AnyObject {
     func selected(_ id: Int)
 }
 

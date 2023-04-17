@@ -16,6 +16,20 @@ enum DocumentViewState {
 
 protocol DocumentViewStateInterface {
     var state: DocumentViewState { get }
+    
     func tapProcess(location: CGPoint, pdfView: PDFView)
+    
+    func panGestureBegan(location: CGPoint, pdfView: PDFView)
+    func panGestureChanged(location: CGPoint, pdfView: PDFView)
+    func panGestureEnded(location: CGPoint, pdfView: PDFView)
+    
     func completion(next: DocumentViewState)
+}
+
+extension DocumentViewStateInterface {
+    
+    func panGestureBegan(location: CGPoint, pdfView: PDFView) { }
+    func panGestureChanged(location: CGPoint, pdfView: PDFView) { }
+    func panGestureEnded(location: CGPoint, pdfView: PDFView) { }
+    
 }

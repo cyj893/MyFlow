@@ -10,7 +10,7 @@ import Then
 import SnapKit
 
 
-final class RadioButtons: NSObject {
+final class RadioButtons {
     var buttons: [RadioButton] = []
     private let selectAction: (Int) -> ()
     
@@ -20,8 +20,6 @@ final class RadioButtons: NSObject {
          size: RadioButtonShape.Size = .middle,
          selectAction: @escaping (Int) -> ()) {
         self.selectAction = selectAction
-        
-        super.init()
         
         labels.enumerated().forEach { (id, label) in
             let button = contents.isEmpty ? RadioButton(id: id, label: label, size: size)

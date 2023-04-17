@@ -8,7 +8,7 @@
 import Foundation
 
 
-protocol MainViewDelegate: NSObject {
+protocol MainViewDelegate: AnyObject {
     /// Dismiss `MainView`.
     func dismiss()
     

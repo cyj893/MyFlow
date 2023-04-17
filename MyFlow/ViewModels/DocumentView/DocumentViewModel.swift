@@ -118,17 +118,16 @@ extension DocumentViewModel {
         nowState?.tapProcess(location: location, pdfView: pdfView)
     }
     
+    func panGestureBegan(location: CGPoint, pdfView: PDFView) {
+        nowState?.panGestureBegan(location: location, pdfView: pdfView)
+    }
+    
     func panGestureChanged(location: CGPoint, pdfView: PDFView) {
-        guard let page = pdfView.page(for: location, nearest: true) else { return }
-        let convertedLocation = pdfView.convert(location, to: page)
-        
-        guard let _ = pointHelper.getNowSelectedPoint() else { return }
-        if pdfView.frame.height - location.y < pdfView.frame.height * 0.2 {
-            logger.log("autoScroll")
-            moveStrategy?.moveAfter(to: pdfView.frame.height * 0.2 + 100)
-        }
-        // logger.log("move point to \(convertedLocation)")
-        pointHelper.movePoint(Int(convertedLocation.y), page)
+        nowState?.panGestureChanged(location: location, pdfView: pdfView)
+    }
+    
+    func panGestureEnded(location: CGPoint, pdfView: PDFView) {
+        nowState?.panGestureEnded(location: location, pdfView: pdfView)
     }
     
     private func moveToPoint(at index: Int) {
@@ -143,11 +142,6 @@ extension DocumentViewModel {
             // TODO: Aleart Unexpected Error
             logger.log("Unexpected error: \(error.localizedDescription)", .error)
         }
-    }
-    
-    func panGestureEnded() {
-        guard let _ = pointHelper.getNowSelectedPoint() else { return }
-        pointHelper.endMove()
     }
     
 }

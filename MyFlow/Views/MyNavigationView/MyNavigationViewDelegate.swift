@@ -8,7 +8,7 @@
 import Foundation
 
 
-protocol MyNavigationViewDelegate: NSObject {
+protocol MyNavigationViewDelegate: AnyObject {
     var tabsAdaptor: DocumentTabsCollectionViewAdaptor { get }
     
     func toggleHandlePointButton()
