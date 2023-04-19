@@ -8,6 +8,15 @@
 import UIKit
 
 
+struct HaveColorConstants {
+    static let spacing: CGFloat = 16.0
+    static let cellWidth: CGFloat = 30.0
+    static let cellRadius: CGFloat = 5.0
+    static let selectedBorderOffset: CGFloat = 3.0
+    static let borderWidth: CGFloat = 1.0
+}
+
+
 protocol HaveColor: ToolSettings, AnyObject {
     var colorRadioButtons: RadioButtons? { get set }
     
@@ -17,57 +26,49 @@ protocol HaveColor: ToolSettings, AnyObject {
 
 extension HaveColor {
     func getColorSetting() -> UIView {
-        let views = getCells()
-        let radioButtonComponents = getRadioButtonComponents(with: views)
-        
-        colorRadioButtons = RadioButtons(with: radioButtonComponents, defaultID: DynamicUserDefaults.toolColorSelectedIndexSetting.get(id)) { [unowned self] index in
+        colorRadioButtons = RadioButtons(with: getRadioButtonComponents(with: getCells()), defaultID: DynamicUserDefaults.toolColorSelectedIndexSetting.get(id)) { [unowned self] index in
             DynamicUserDefaults.toolColorSelectedIndexSetting.set(id, index)
         }
         
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 8.0
+        stackView.spacing = HaveColorConstants.spacing
         
         colorRadioButtons?.buttons.forEach { subview in
-            stackView.addArrangedSubview(subview)
-        }
-        
-        stackView.arrangedSubviews.forEach { subview in
             subview.snp.makeConstraints { make in
-                make.width.height.equalTo(30.0)
+                make.width.height.equalTo(HaveColorConstants.cellWidth)
             }
+            stackView.addArrangedSubview(subview)
         }
         
         return stackView
     }
     
     private func getCells() -> [UIView] {
-        var views = [UIView]()
-        for i in MyDrawingTool.defaultColors.indices {
-            views.append(makeDefaultCell(i))
-        }
-        views.append(makeColorWell())
-        return views
+        return MyDrawingTool.defaultColors.indices.map { makeDefaultCell($0) } + [makeColorWell()]
     }
     
     private func getRadioButtonComponents(with views: [UIView]) -> [RadioComponetWrapperView] {
         return views.enumerated().map { (index, subview) in
-            let radioComponent = RadioComponetWrapperView(id: index, subview: subview) { [unowned self] in
-                if 0..<4 ~= index {
-                    DynamicUserDefaults.toolColorSetting.set(id, MyDrawingTool.defaultColors[index])
-                } else {
-                    DynamicUserDefaults.toolColorSetting.set(id, DynamicUserDefaults.toolColorwellSetting.get(id))
-                }
+            return RadioComponetWrapperView(id: index, subview: subview) { [unowned self] in
+                DynamicUserDefaults.toolColorSetting.set(id,
+                                                         0..<4 ~= index
+                                                         ? MyDrawingTool.defaultColors[index]
+                                                         : DynamicUserDefaults.toolColorwellSetting.get(id))
                 DynamicUserDefaults.toolColorSelectedIndexSetting.set(id, index)
-                subview.layer.offsetBorder(frame: CGRect(origin: .zero, size: CGSize(width: 30.0, height: 30.0)), borderOffset: 3.0, cornerRadius: 5.0)
+                subview.layer.offsetBorder(frame: CGRect(origin: .zero,
+                                                         size: CGSize(width: HaveColorConstants.cellWidth,
+                                                                      height: HaveColorConstants.cellWidth)),
+                                           borderOffset: HaveColorConstants.selectedBorderOffset,
+                                           borderWidth: HaveColorConstants.borderWidth,
+                                           cornerRadius: HaveColorConstants.cellRadius)
             } deselectClosure: {
-                for sublayer in subview.layer.sublayers ?? [] {
+                subview.layer.sublayers?.forEach { sublayer in
                     if sublayer.name == "offsetBorder" {
                         sublayer.removeFromSuperlayer()
                     }
                 }
             }
-            return radioComponent
         }
     }
     
@@ -77,8 +78,8 @@ extension HaveColor {
         colorWell.selectedColor = UIColor(rgb: DynamicUserDefaults.toolColorwellSetting.get(id))
         colorWell.supportsAlpha = false
         colorWell.addAction(for: .valueChanged) { [unowned self] in
-            DynamicUserDefaults.toolColorwellSetting.set(id, colorWell.selectedColor?.toInt() ?? 0)
-            DynamicUserDefaults.toolColorSetting.set(id, colorWell.selectedColor?.toInt() ?? 0)
+            DynamicUserDefaults.toolColorwellSetting.set(self.id, colorWell.selectedColor?.toInt() ?? 0)
+            DynamicUserDefaults.toolColorSetting.set(self.id, colorWell.selectedColor?.toInt() ?? 0)
         }
         return colorWell
     }
@@ -86,9 +87,9 @@ extension HaveColor {
     private func makeDefaultCell(_ index: Int) -> UIView {
         let cell = UIView()
         cell.backgroundColor = UIColor(rgb: MyDrawingTool.defaultColors[index])
-        cell.layer.cornerRadius = 5.0
+        cell.layer.cornerRadius = HaveColorConstants.cellRadius
         cell.layer.borderColor = MyColor.icon.cgColor
-        cell.layer.borderWidth = 1.0
+        cell.layer.borderWidth = HaveColorConstants.borderWidth
         return cell
     }
     
