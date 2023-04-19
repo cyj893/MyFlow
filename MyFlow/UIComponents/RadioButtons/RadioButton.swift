@@ -113,7 +113,7 @@ extension RadioButton {
 }
 
 
-extension RadioButton {
+extension RadioButton: RadioComponent {
     func select() {
         isSelected = true
         buttonShape.select()
