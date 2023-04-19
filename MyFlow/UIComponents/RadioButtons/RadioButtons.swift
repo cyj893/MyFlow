@@ -11,8 +11,22 @@ import SnapKit
 
 
 final class RadioButtons {
-    var buttons: [RadioButton] = []
+    var buttons: [RadioComponent] = []
     private let selectAction: (Int) -> ()
+    
+    init(with buttons: [RadioComponent],
+         defaultID: Int,
+         selectAction: @escaping (Int) -> ()) {
+        self.selectAction = selectAction
+        
+        buttons.enumerated().forEach { (id, button) in
+            button.delegate = self
+            if id == defaultID {
+                button.select()
+            }
+        }
+        self.buttons = buttons
+    }
     
     init(labels: [String],
          with contents: [UIView] = [],
