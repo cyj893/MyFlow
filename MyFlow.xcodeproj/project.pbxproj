@@ -98,6 +98,7 @@
 		AFCEA36829F01BC500AD438D /* DynamicUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36729F01BC500AD438D /* DynamicUserDefaults.swift */; };
 		AFCEA36A29F01CC500AD438D /* HaveWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36929F01CC500AD438D /* HaveWidth.swift */; };
 		AFCEA36C29F01CD200AD438D /* HaveOpacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36B29F01CD200AD438D /* HaveOpacity.swift */; };
+		AFCEA36E29F0294100AD438D /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36D29F0294100AD438D /* CALayer+.swift */; };
 		AFD6DE322833B99800E9FA5E /* PointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD6DE312833B99800E9FA5E /* PointHelper.swift */; };
 		AFE6C78D28487DD4003C4580 /* MyPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE6C78C28487DD4003C4580 /* MyPDFView.swift */; };
 		AFEC944B296C422B00B5BEBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEC944A296C422B00B5BEBF /* SceneDelegate.swift */; };
@@ -215,6 +216,7 @@
 		AFCEA36729F01BC500AD438D /* DynamicUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicUserDefaults.swift; sourceTree = "<group>"; };
 		AFCEA36929F01CC500AD438D /* HaveWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveWidth.swift; sourceTree = "<group>"; };
 		AFCEA36B29F01CD200AD438D /* HaveOpacity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveOpacity.swift; sourceTree = "<group>"; };
+		AFCEA36D29F0294100AD438D /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
 		AFD6DE312833B99800E9FA5E /* PointHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelper.swift; sourceTree = "<group>"; };
 		AFE6C78C28487DD4003C4580 /* MyPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPDFView.swift; sourceTree = "<group>"; };
 		AFEC944A296C422B00B5BEBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 				AF91FB2229A3C34500E161AC /* UIStackView+.swift */,
 				AF91FB3029A4EFBB00E161AC /* UIImage+.swift */,
 				AF58533829A744A500C7D6B0 /* UIApplication+.swift */,
+				AFCEA36D29F0294100AD438D /* CALayer+.swift */,
 			);
 			path = MyExtensions;
 			sourceTree = "<group>";
@@ -962,6 +965,7 @@
 				AFC8E24F29335431009F9EC9 /* MyNavigationViewModel.swift in Sources */,
 				AF91FB2729A3DFFE00E161AC /* AnimatableGradientBackground.swift in Sources */,
 				AFCEA36229F0185000AD438D /* ToolSettings.swift in Sources */,
+				AFCEA36E29F0294100AD438D /* CALayer+.swift in Sources */,
 				AF3D083729A118F000C26566 /* MoveStrategySettingView.swift in Sources */,
 				AFCDB59C29332B0400E22DEA /* UIView+.swift in Sources */,
 				AF2F1A11293DB5B90005E4B9 /* MainViewModel.swift in Sources */,
