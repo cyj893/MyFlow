@@ -92,6 +92,7 @@
 		AFCDB59A293284A500E22DEA /* MainViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB599293284A500E22DEA /* MainViewDelegate.swift */; };
 		AFCDB59C29332B0400E22DEA /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB59B29332B0400E22DEA /* UIView+.swift */; };
 		AFCEA35F29F0180C00AD438D /* DrawingTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA35E29F0180C00AD438D /* DrawingTool.swift */; };
+		AFCEA36229F0185000AD438D /* ToolSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36129F0185000AD438D /* ToolSettings.swift */; };
 		AFCEA36629F019D800AD438D /* RadioComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36529F019D800AD438D /* RadioComponent.swift */; };
 		AFD6DE322833B99800E9FA5E /* PointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD6DE312833B99800E9FA5E /* PointHelper.swift */; };
 		AFE6C78D28487DD4003C4580 /* MyPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE6C78C28487DD4003C4580 /* MyPDFView.swift */; };
@@ -204,6 +205,7 @@
 		AFCDB599293284A500E22DEA /* MainViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewDelegate.swift; sourceTree = "<group>"; };
 		AFCDB59B29332B0400E22DEA /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		AFCEA35E29F0180C00AD438D /* DrawingTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingTool.swift; sourceTree = "<group>"; };
+		AFCEA36129F0185000AD438D /* ToolSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolSettings.swift; sourceTree = "<group>"; };
 		AFCEA36529F019D800AD438D /* RadioComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioComponent.swift; sourceTree = "<group>"; };
 		AFD6DE312833B99800E9FA5E /* PointHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelper.swift; sourceTree = "<group>"; };
 		AFE6C78C28487DD4003C4580 /* MyPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPDFView.swift; sourceTree = "<group>"; };
@@ -571,8 +573,17 @@
 			isa = PBXGroup;
 			children = (
 				AFCEA35E29F0180C00AD438D /* DrawingTool.swift */,
+				AFCEA36029F0183E00AD438D /* ToolSettings */,
 			);
 			path = DrawingTools;
+			sourceTree = "<group>";
+		};
+		AFCEA36029F0183E00AD438D /* ToolSettings */ = {
+			isa = PBXGroup;
+			children = (
+				AFCEA36129F0185000AD438D /* ToolSettings.swift */,
+			);
+			path = ToolSettings;
 			sourceTree = "<group>";
 		};
 		AFD6DE342833FFFF00E9FA5E /* PointHelper */ = {
@@ -934,6 +945,7 @@
 				AFC8E2482933439F009F9EC9 /* UndoRedoArea.swift in Sources */,
 				AFC8E24F29335431009F9EC9 /* MyNavigationViewModel.swift in Sources */,
 				AF91FB2729A3DFFE00E161AC /* AnimatableGradientBackground.swift in Sources */,
+				AFCEA36229F0185000AD438D /* ToolSettings.swift in Sources */,
 				AF3D083729A118F000C26566 /* MoveStrategySettingView.swift in Sources */,
 				AFCDB59C29332B0400E22DEA /* UIView+.swift in Sources */,
 				AF2F1A11293DB5B90005E4B9 /* MainViewModel.swift in Sources */,
