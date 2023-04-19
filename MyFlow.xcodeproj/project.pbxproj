@@ -99,6 +99,7 @@
 		AFCEA36A29F01CC500AD438D /* HaveWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36929F01CC500AD438D /* HaveWidth.swift */; };
 		AFCEA36C29F01CD200AD438D /* HaveOpacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36B29F01CD200AD438D /* HaveOpacity.swift */; };
 		AFCEA36E29F0294100AD438D /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36D29F0294100AD438D /* CALayer+.swift */; };
+		AFCEA37029F029F600AD438D /* RadioComponetWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36F29F029F600AD438D /* RadioComponetWrapperView.swift */; };
 		AFD6DE322833B99800E9FA5E /* PointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD6DE312833B99800E9FA5E /* PointHelper.swift */; };
 		AFE6C78D28487DD4003C4580 /* MyPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE6C78C28487DD4003C4580 /* MyPDFView.swift */; };
 		AFEC944B296C422B00B5BEBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEC944A296C422B00B5BEBF /* SceneDelegate.swift */; };
@@ -217,6 +218,7 @@
 		AFCEA36929F01CC500AD438D /* HaveWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveWidth.swift; sourceTree = "<group>"; };
 		AFCEA36B29F01CD200AD438D /* HaveOpacity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveOpacity.swift; sourceTree = "<group>"; };
 		AFCEA36D29F0294100AD438D /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
+		AFCEA36F29F029F600AD438D /* RadioComponetWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioComponetWrapperView.swift; sourceTree = "<group>"; };
 		AFD6DE312833B99800E9FA5E /* PointHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelper.swift; sourceTree = "<group>"; };
 		AFE6C78C28487DD4003C4580 /* MyPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPDFView.swift; sourceTree = "<group>"; };
 		AFEC944A296C422B00B5BEBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				AF3D083A29A1198500C26566 /* RadioButtons.swift */,
 				AF3D083C29A119B700C26566 /* RadioButton.swift */,
 				AF58AF7829A1F24B00EFD8A4 /* RadioButtonShape.swift */,
+				AFCEA36F29F029F600AD438D /* RadioComponetWrapperView.swift */,
 			);
 			path = RadioButtons;
 			sourceTree = "<group>";
@@ -947,6 +950,7 @@
 				AFAB47C02847A0830034515A /* AddCommand.swift in Sources */,
 				AFCBEFC529A28098005FD84B /* PlayModeSettingView.swift in Sources */,
 				AFF8DA80282F65F8005F0DED /* MyConstants.swift in Sources */,
+				AFCEA37029F029F600AD438D /* RadioComponetWrapperView.swift in Sources */,
 				AF58533929A744A500C7D6B0 /* UIApplication+.swift in Sources */,
 				AFC8E2572933686E009F9EC9 /* UIControl+.swift in Sources */,
 				AF255AA1283E809E00747FF3 /* UIDevice+.swift in Sources */,
