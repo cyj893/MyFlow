@@ -93,8 +93,11 @@
 		AFCDB59C29332B0400E22DEA /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDB59B29332B0400E22DEA /* UIView+.swift */; };
 		AFCEA35F29F0180C00AD438D /* DrawingTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA35E29F0180C00AD438D /* DrawingTool.swift */; };
 		AFCEA36229F0185000AD438D /* ToolSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36129F0185000AD438D /* ToolSettings.swift */; };
+		AFCEA36429F0187200AD438D /* HaveColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36329F0187200AD438D /* HaveColor.swift */; };
 		AFCEA36629F019D800AD438D /* RadioComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36529F019D800AD438D /* RadioComponent.swift */; };
 		AFCEA36829F01BC500AD438D /* DynamicUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36729F01BC500AD438D /* DynamicUserDefaults.swift */; };
+		AFCEA36A29F01CC500AD438D /* HaveWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36929F01CC500AD438D /* HaveWidth.swift */; };
+		AFCEA36C29F01CD200AD438D /* HaveOpacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCEA36B29F01CD200AD438D /* HaveOpacity.swift */; };
 		AFD6DE322833B99800E9FA5E /* PointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD6DE312833B99800E9FA5E /* PointHelper.swift */; };
 		AFE6C78D28487DD4003C4580 /* MyPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE6C78C28487DD4003C4580 /* MyPDFView.swift */; };
 		AFEC944B296C422B00B5BEBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEC944A296C422B00B5BEBF /* SceneDelegate.swift */; };
@@ -207,8 +210,11 @@
 		AFCDB59B29332B0400E22DEA /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		AFCEA35E29F0180C00AD438D /* DrawingTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingTool.swift; sourceTree = "<group>"; };
 		AFCEA36129F0185000AD438D /* ToolSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolSettings.swift; sourceTree = "<group>"; };
+		AFCEA36329F0187200AD438D /* HaveColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveColor.swift; sourceTree = "<group>"; };
 		AFCEA36529F019D800AD438D /* RadioComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioComponent.swift; sourceTree = "<group>"; };
 		AFCEA36729F01BC500AD438D /* DynamicUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicUserDefaults.swift; sourceTree = "<group>"; };
+		AFCEA36929F01CC500AD438D /* HaveWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveWidth.swift; sourceTree = "<group>"; };
+		AFCEA36B29F01CD200AD438D /* HaveOpacity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveOpacity.swift; sourceTree = "<group>"; };
 		AFD6DE312833B99800E9FA5E /* PointHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointHelper.swift; sourceTree = "<group>"; };
 		AFE6C78C28487DD4003C4580 /* MyPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPDFView.swift; sourceTree = "<group>"; };
 		AFEC944A296C422B00B5BEBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -585,6 +591,9 @@
 			isa = PBXGroup;
 			children = (
 				AFCEA36129F0185000AD438D /* ToolSettings.swift */,
+				AFCEA36329F0187200AD438D /* HaveColor.swift */,
+				AFCEA36929F01CC500AD438D /* HaveWidth.swift */,
+				AFCEA36B29F01CD200AD438D /* HaveOpacity.swift */,
 			);
 			path = ToolSettings;
 			sourceTree = "<group>";
@@ -876,6 +885,7 @@
 				AF91FB2529A3CA1300E161AC /* SettingStackCell.swift in Sources */,
 				AFC8E25329335DAF009F9EC9 /* MyNavigationViewDelegate.swift in Sources */,
 				AF8936BA2836655C001031FC /* PointBuilder.swift in Sources */,
+				AFCEA36A29F01CC500AD438D /* HaveWidth.swift in Sources */,
 				AFCDB59229326ED500E22DEA /* DocumentViewModelInterface.swift in Sources */,
 				AF3D083B29A1198500C26566 /* RadioButtons.swift in Sources */,
 				AFAB47B9284795780034515A /* PointMemento.swift in Sources */,
@@ -889,6 +899,7 @@
 				AF1B76D22986A414002D9BAE /* UserActivityHelper.swift in Sources */,
 				AFAB47C62847B26B0034515A /* MoveCommand.swift in Sources */,
 				AFBAB8D629A60EBE0025A0E7 /* TrueDepthHelper.swift in Sources */,
+				AFCEA36429F0187200AD438D /* HaveColor.swift in Sources */,
 				AF3D083129A1187600C26566 /* UITapGestureRecognizer+.swift in Sources */,
 				AFAB47B728477E060034515A /* PointCommand.swift in Sources */,
 				AFCBEFBF29A250E9005FD84B /* UserDefaultsHelper.swift in Sources */,
@@ -917,6 +928,7 @@
 				AFC95BA8282EB4D3006E9773 /* UIButton+.swift in Sources */,
 				AF58AF7229A13D2F00EFD8A4 /* AnimatableView.swift in Sources */,
 				AF8EDF81282E3F7A00CCFF19 /* DocumentBrowserViewController.swift in Sources */,
+				AFCEA36C29F01CD200AD438D /* HaveOpacity.swift in Sources */,
 				AFED0CC82844C25400FD177D /* MoveStrategy.swift in Sources */,
 				AFEC944D296C923D00B5BEBF /* PdfView+.swift in Sources */,
 				AFE6C78D28487DD4003C4580 /* MyPDFView.swift in Sources */,
