@@ -65,3 +65,6 @@ struct MyFont {
     static let sizePointNum = "012345678".sizeOfString(font: MyFont.pointNum!)
 }
 
+struct MyDrawingTool {
+    static let defaultColors = [UIColor.black.toInt()!, UIColor.blue.toInt()!, UIColor.red.toInt()!, UIColor.green.toInt()!]
+}
