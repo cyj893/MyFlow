@@ -32,6 +32,7 @@
 		AF58AF7B29A1F3A400EFD8A4 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58AF7A29A1F3A400EFD8A4 /* UILabel+.swift */; };
 		AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF65F78F292E4E5F0005D9AF /* FileHelper.swift */; };
 		AF66424E2A2F5352009F67D1 /* ThumbnailCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF66424D2A2F5352009F67D1 /* ThumbnailCellView.swift */; };
+		AF6642502A2F5373009F67D1 /* ThumbnailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF66424F2A2F5373009F67D1 /* ThumbnailCollectionView.swift */; };
 		AF77AC9029AB48F9007CC495 /* NormalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF77AC8F29AB48F9007CC495 /* NormalState.swift */; };
 		AF77AC9229AB4913007CC495 /* HandlePointsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF77AC9129AB4913007CC495 /* HandlePointsState.swift */; };
 		AF77AC9429AB4929007CC495 /* AddPointsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF77AC9329AB4929007CC495 /* AddPointsState.swift */; };
@@ -149,6 +150,7 @@
 		AF58AF7A29A1F3A400EFD8A4 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		AF65F78F292E4E5F0005D9AF /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		AF66424D2A2F5352009F67D1 /* ThumbnailCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCellView.swift; sourceTree = "<group>"; };
+		AF66424F2A2F5373009F67D1 /* ThumbnailCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCollectionView.swift; sourceTree = "<group>"; };
 		AF77AC8F29AB48F9007CC495 /* NormalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalState.swift; sourceTree = "<group>"; };
 		AF77AC9129AB4913007CC495 /* HandlePointsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlePointsState.swift; sourceTree = "<group>"; };
 		AF77AC9329AB4929007CC495 /* AddPointsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointsState.swift; sourceTree = "<group>"; };
@@ -656,6 +658,7 @@
 				AF255AA2283E843A00747FF3 /* AddPointsModalViewController.swift */,
 				AF255AA4283E95C900747FF3 /* ThumbnailCell.swift */,
 				AF66424D2A2F5352009F67D1 /* ThumbnailCellView.swift */,
+				AF66424F2A2F5373009F67D1 /* ThumbnailCollectionView.swift */,
 			);
 			path = AddPointsModalView;
 			sourceTree = "<group>";
@@ -920,6 +923,7 @@
 				AFCEA36829F01BC500AD438D /* DynamicUserDefaults.swift in Sources */,
 				AF3C3F972843C0C2007ED4F9 /* PlayModeState.swift in Sources */,
 				AFCDB5972932735C00E22DEA /* MainViewController.swift in Sources */,
+				AF6642502A2F5373009F67D1 /* ThumbnailCollectionView.swift in Sources */,
 				AFC8E24629333A4A009F9EC9 /* NowPointView.swift in Sources */,
 				AF91FB2329A3C34500E161AC /* UIStackView+.swift in Sources */,
 				AFCDB58D29326E6C00E22DEA /* DocumentViewStateInterface.swift in Sources */,
