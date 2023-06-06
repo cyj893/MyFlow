@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import PDFKit
+import SwiftUI
+
 
 /// ModalView that user can select pages to add points on the top.
 class AddPointsModalViewController: UIViewController {
@@ -31,13 +33,7 @@ class AddPointsModalViewController: UIViewController {
     }
     
     /// CollectionView containing thumbnails. User can select pages from it.
-    lazy var thumbnailCollectionView:UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout.init()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumLineSpacing = 20
-        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
-        return UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
-    }()
+    var thumbnailCollectionView: UIHostingController<ThumbnailCollectionView>?
     
     lazy var cancelButton = UIButton().then {
         $0.setTitle("Cancel", for: .normal)
@@ -61,11 +57,13 @@ class AddPointsModalViewController: UIViewController {
         view.backgroundColor = MyColor.pageSheetBackground
         
         getPdfThumbnails()
+        thumbnailCollectionView = UIHostingController(rootView: CollectionSwiftUI(thumbnails: thumbnails))
+        thumbnailCollectionView = UIHostingController(rootView: ThumbnailCollectionView(thumbnails: thumbnails))
         
         view.addSubview(thumbnailLabel)
         setThumbnailLabel()
         
-        view.addSubview(thumbnailCollectionView)
+        view.addSubview(thumbnailCollectionView!.view)
         setThumbnailCollectionView()
         
         view.addSubview(cancelButton)
@@ -112,17 +110,9 @@ class AddPointsModalViewController: UIViewController {
         }
     }
     
-    /// Set `thumbnailCollectionView`'s preferences and constraints.
+    /// Set `thumbnailCollectionView`'s constraints.
     fileprivate func setThumbnailCollectionView() {
-        thumbnailCollectionView.delegate = self
-        thumbnailCollectionView.dataSource = self
-        
-        thumbnailCollectionView.backgroundColor = MyColor.thumbnailViewBackground
-        
-        thumbnailCollectionView.showsHorizontalScrollIndicator = true
-        thumbnailCollectionView.register(ThumbnailCell.classForCoder(), forCellWithReuseIdentifier: "ThumbnailCell")
-        
-        thumbnailCollectionView.snp.makeConstraints {
+        thumbnailCollectionView!.view.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(thumbnailLabel.snp.bottom).offset(10)
             $0.height.equalTo(maxHeight + 40)
@@ -164,61 +154,6 @@ class AddPointsModalViewController: UIViewController {
             pointHelper.addPoint(Int(pageSize.height), page)
         }
         dismiss(animated: true, completion: nil)
-    }
-    
-}
-
-extension AddPointsModalViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let index = indexPath.item
-        return thumbnails[index].size
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return thumbnails.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let index = indexPath.item
-        let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: "ThumbnailCell", for: indexPath) as! ThumbnailCell
-        cell.thumbnailView.image = thumbnails[index]
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let index = indexPath.item
-        if let nowIndex = orders.firstIndex(of: index) {
-            orders.remove(at: nowIndex)
-            updateOrder(pageIdx: index, order: nil, collectionView)
-            for i in nowIndex..<orders.count {
-                updateOrder(pageIdx: orders[i], order: i+1, collectionView)
-            }
-        }
-        else {
-            orders.append(index)
-            updateOrder(pageIdx: index, order: orders.count, collectionView)
-        }
-    }
-    
-    /// When user select or deselect the cell, set cell's selection by `order`.
-    ///
-    /// If `order` is `nil`, deselection mode.
-    ///
-    /// - Parameters:
-    ///   - pageIdx: Index of cell to change.
-    ///   - order: Order of selected cell. If `order` is `nil`, deselect cell.
-    ///   - collectionView: collectionView containing the thumbnail cell.
-    func updateOrder(pageIdx: Int, order: Int?, _ collectionView: UICollectionView) {
-        let indexPath = IndexPath(item: pageIdx, section: 0)
-        if let cell = collectionView.cellForItem(at: indexPath) as? ThumbnailCell {
-            if let order = order {
-                cell.select(order)
-            }
-            else {
-                cell.deSelect()
-            }
-        }
     }
     
 }
