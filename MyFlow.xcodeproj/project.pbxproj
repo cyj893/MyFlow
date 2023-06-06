@@ -32,6 +32,7 @@
 		AF65F790292E4E5F0005D9AF /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF65F78F292E4E5F0005D9AF /* FileHelper.swift */; };
 		AF66424E2A2F5352009F67D1 /* ThumbnailCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF66424D2A2F5352009F67D1 /* ThumbnailCellView.swift */; };
 		AF6642502A2F5373009F67D1 /* ThumbnailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF66424F2A2F5373009F67D1 /* ThumbnailCollectionView.swift */; };
+		AF6642552A2F708A009F67D1 /* ExpandableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6642542A2F708A009F67D1 /* ExpandableButton.swift */; };
 		AF77AC9029AB48F9007CC495 /* NormalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF77AC8F29AB48F9007CC495 /* NormalState.swift */; };
 		AF77AC9229AB4913007CC495 /* HandlePointsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF77AC9129AB4913007CC495 /* HandlePointsState.swift */; };
 		AF77AC9429AB4929007CC495 /* AddPointsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF77AC9329AB4929007CC495 /* AddPointsState.swift */; };
@@ -149,6 +150,7 @@
 		AF65F78F292E4E5F0005D9AF /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		AF66424D2A2F5352009F67D1 /* ThumbnailCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCellView.swift; sourceTree = "<group>"; };
 		AF66424F2A2F5373009F67D1 /* ThumbnailCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCollectionView.swift; sourceTree = "<group>"; };
+		AF6642542A2F708A009F67D1 /* ExpandableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableButton.swift; sourceTree = "<group>"; };
 		AF77AC8F29AB48F9007CC495 /* NormalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalState.swift; sourceTree = "<group>"; };
 		AF77AC9129AB4913007CC495 /* HandlePointsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlePointsState.swift; sourceTree = "<group>"; };
 		AF77AC9329AB4929007CC495 /* AddPointsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointsState.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 		AF3D083829A1197000C26566 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				AF6642532A2F7082009F67D1 /* SwiftUI */,
 				AF58AF7329A13D5E00EFD8A4 /* SettingViews */,
 				AF3D083E29A13D0400C26566 /* Protocols */,
 				AF3D083929A1197900C26566 /* RadioButtons */,
@@ -347,6 +350,14 @@
 				AF65F78F292E4E5F0005D9AF /* FileHelper.swift */,
 			);
 			path = FileHelper;
+			sourceTree = "<group>";
+		};
+		AF6642532A2F7082009F67D1 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				AF6642542A2F708A009F67D1 /* ExpandableButton.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		AF8EDF72282E3F7A00CCFF19 = {
@@ -915,6 +926,7 @@
 				AF66424E2A2F5352009F67D1 /* ThumbnailCellView.swift in Sources */,
 				AF98A38A2832A6380035601D /* String+.swift in Sources */,
 				AFAB47C82847BC050034515A /* PointHelperMemento.swift in Sources */,
+				AF6642552A2F708A009F67D1 /* ExpandableButton.swift in Sources */,
 				AF8EDF83282E3F7A00CCFF19 /* DocumentViewController.swift in Sources */,
 				AFCEA36829F01BC500AD438D /* DynamicUserDefaults.swift in Sources */,
 				AF3C3F972843C0C2007ED4F9 /* PlayModeState.swift in Sources */,
