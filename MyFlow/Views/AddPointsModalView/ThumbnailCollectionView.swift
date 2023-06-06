@@ -15,11 +15,12 @@ struct ThumbnailCollectionView: View {
     private var thumbnails: [UIImage]
     
     /// Selected orders by user.
-    @State private var orders: [Int] = []
+    @Binding var orders: [Int]
     @State private var orderStates: [Int]
     
-    init(thumbnails: [UIImage]) {
+    init(thumbnails: [UIImage], orders: Binding<[Int]>) {
         self.thumbnails = thumbnails
+        self._orders = orders
         orderStates = [Int](repeating: -1, count: thumbnails.count)
     }
     
